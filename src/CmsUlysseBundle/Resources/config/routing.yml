@@ -1,0 +1,3 @@
+cms_ulysse_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: CmsUlysseBundle:Default:index }
