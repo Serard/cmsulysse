@@ -1,3 +1,8 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
+
+cms_ulysse:
+    resource: "@CmsUlysseBundle/Controller/"
+    type:     annotation
+    prefix:   /
