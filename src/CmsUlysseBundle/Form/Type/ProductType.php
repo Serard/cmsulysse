@@ -18,6 +18,7 @@ class ProductType extends  AbstractType
             ->add('name')
             ->add('description')
             ->add('file')
+            ->add('categories')
             ->add('specifications', 'collection', array(
                 'type' => new SpecificationType(),
                 'allow_add' => true,

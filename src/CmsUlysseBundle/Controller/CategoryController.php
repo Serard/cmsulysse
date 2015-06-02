@@ -9,10 +9,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("/category")
+ */
 class CategoryController extends Controller
 {
     /**
-     * @Route("/list", name="category_list")
+     * @Route("/", name="category_list")
      * @Template()
      */
     public function listAction()

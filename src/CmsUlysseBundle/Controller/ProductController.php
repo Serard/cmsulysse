@@ -9,10 +9,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("/product")
+ */
 class ProductController extends Controller
 {
     /**
-     * @Route("/product", name="product_list")
+     * @Route("/", name="product_list")
      * @Template()
      */
     public function indexAction()
@@ -25,7 +28,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/product/add", name="product_add")
+     * @Route("/add", name="product_add")
      * @Template()
      *
      */
@@ -46,16 +49,16 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/product/{id}", name="product_view")
+     * @Route("/{id}", name="product_view")
      * @Template()
      */
     public function viewAction($id)
     {
-        return array();
+
     }
 
     /**
-     * @Route("/product/delete/{id}", name="product_delete")
+     * @Route("/delete/{id}", name="product_delete")
      * @Template()
      */
     public function deleteAction($id)
@@ -71,7 +74,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/product/update/{id}")
+     * @Route("/update/{id}")
      * @Template()
      */
     public function updateAction($id)

@@ -46,6 +46,15 @@ class Product
     private $specifications;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Category")
+     * @ORM\JoinTable(name="product_category",
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
+     *      )
+     */
+    private $categories;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="picture", type="string", length=255, nullable= true)
@@ -65,6 +74,11 @@ class Product
      * @var string
      */
     private $tmpImage;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -139,6 +153,34 @@ class Product
         $this->specifications = $specifications;
 
         return $this;
+    }
+
+    /**
+     * @param Category $category
+     */
+    public function addCategory(Category $category)
+    {
+        $this->categories[] = $category;
+    }
+
+    /**
+     * Remove Categories
+     *
+     * @param Category $category
+     */
+    public function removeType(Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get Categories
+     *
+     * @return Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 
     /**

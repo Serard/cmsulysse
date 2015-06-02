@@ -3,7 +3,6 @@
 namespace CmsUlysseBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use CmsUlysseBundle\Entity\Category;
 use CmsUlysseBundle\Entity\CategoryRepository;
 
 /**
@@ -36,6 +35,11 @@ class Category
      * @ORM\JoinColumn(name="categ_up", referencedColumnName="id", nullable=true)
      */
     private $categ_up;
+
+    public function __toString()
+    {
+        return $this->name;
+    }
 
     /**
      * Get id
@@ -70,10 +74,6 @@ class Category
         return $this->name;
     }
 
-    public function __toString()
-    {
-        return $this->getName();
-    }
 
     /**
      * Set categ_up
