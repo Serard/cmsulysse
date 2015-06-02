@@ -7,6 +7,9 @@ dev     : correspond à la branche de dev
 master version : v0.0
 
 
+dev version    : dev-v0.0.2
+gestion categories
+
 dev version    : dev-v0.0.1
 fos_userbundle+entity
 
