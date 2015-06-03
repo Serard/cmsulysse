@@ -9,9 +9,14 @@
             <li>
                 <h1>{{ category.id }}</h1>
                 <h2>{{ category.name }}</h2>
+                <p>
+                    <a href="{{ path('category_update', {'id': category.id}) }}">Modifier</a>
+                    <a href="{{ path('category_delete', {'id': category.id}) }}">Supprimer</a>
+                </p>
                 <ul>
                     {% for categ_down in categs_down %}
                         {% if  categ_down.categup.id == category.id %}
+                            {% set down = categ_down.id %}
                             <li>{{ categ_down.name }}</li>
                             <p>
                                 <a href="{{ path('category_update', {'id': categ_down.id}) }}">Modifier</a>
@@ -20,10 +25,6 @@
                         {% endif %}
                     {% endfor %}
                 </ul>
-                <p>
-                    <a href="{{ path('category_update', {'id': category.id}) }}">Modifier</a>
-                    <a href="{{ path('category_delete', {'id': category.id}) }}">Supprimer</a>
-                </p>
             </li>
         {% endfor %}
     </ul>
