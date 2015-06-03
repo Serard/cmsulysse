@@ -59,9 +59,9 @@ class User extends BaseUser
     /**
     * @var string
     *
-    * @ORM\Column(name="country", type="string", length=255)
+    * @ORM\Column(name="city", type="string", length=255)
     */
-    private $country;
+    private $city;
 
     /**
      * @var string
@@ -165,21 +165,24 @@ class User extends BaseUser
         return $this->lastname;
     }
 
+
     /**
-     * @param string $lastname
+     * @param $lastname
+     * @return $this
      */
     public function setLastname($lastname)
     {
         $this->lastname = $lastname;
+
+        return $this;
     }
 
     /**
-     * Set firstname
      *
      * @param string $firstname
      * @return User
      */
-    public function setFistname($firstname)
+    public function setFirstname($firstname)
     {
         $this->firstname = $firstname;
 
@@ -197,26 +200,26 @@ class User extends BaseUser
     }
 
     /**
-     * Set country
+     * Set city
      *
-     * @param string $country
+     * @param string $city
      * @return User
      */
-    public function setCountry($country)
+    public function setCity($city)
     {
-        $this->country = $country;
+        $this->city= $city;
 
         return $this;
     }
 
     /**
-     * Get country
+     * Get city
      *
      * @return string 
      */
-    public function getCountry()
+    public function getCity()
     {
-        return $this->country;
+        return $this->city;
     }
 
     /**
@@ -237,5 +240,9 @@ class User extends BaseUser
         return $this;
     }
 
+    public function setEmail($email){
+        parent::setEmail($email);
+        $this->setUsername($email);
+    }
 
 }

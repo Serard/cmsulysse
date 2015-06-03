@@ -12,7 +12,6 @@ class RegistrationType extends BaseType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', null, array('label' => 'Speudo'))
             ->add('email', 'email', array('label' => 'Email'))
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
@@ -22,15 +21,15 @@ class RegistrationType extends BaseType
                 'invalid_message' => 'fos_user.password.mismatch',
                 'required' => false
             ))
-
             ->add('lastname', null, array('label' => 'Nom'))
             ->add('firstname', null, array('label' => 'Prénom'))
-
             ->add('address', null, array('label' => 'Adresse'))
             ->add('postal_code', null, array('label' => 'CP'))
-            ->add('country', null, array('label' => 'Ville'))
+            ->add('city', null, array('label' => 'City'))
             ->add('tel', null, array('label' => 'Téléphone'))
-
+            ->add('is_active', null, array(
+                'data' => '1'
+            ))
             ->add('btn', 'submit', array('label' => 'Modifier'))
         ;
 
