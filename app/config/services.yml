@@ -7,3 +7,8 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    ulysse_user_registration:
+         class: CmsUlysseBundle\Form\Type\RegistrationType
+         arguments: [%fos_user.model.user.class%]
+         tags:
+            -  { name: form.type }

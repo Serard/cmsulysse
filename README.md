@@ -6,6 +6,12 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.11
+register + login with email
+
+dev version    : dev-v0.0.10
+upload + ProductType
+
 dev version    : dev-v0.0.9
 delete cacaaa de pascal
 
