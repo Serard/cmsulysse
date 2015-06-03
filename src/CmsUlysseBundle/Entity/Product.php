@@ -46,9 +46,18 @@ class Product
     private $specifications;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Category")
+     * @ORM\JoinTable(name="product_category",
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id")}
+     *      )
+     */
+    private $categories;
+
+    /**
      * @var string
      *
-     * @ORM\Column(name="picture", type="string", length=255, nullable= true)
+     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      */
     private $picture;
 
@@ -66,10 +75,21 @@ class Product
      */
     private $tmpImage;
 
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+        $this->specifications = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -92,7 +112,7 @@ class Product
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -115,7 +135,7 @@ class Product
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -142,6 +162,34 @@ class Product
     }
 
     /**
+     * @param Category $category
+     */
+    public function addCategory(Category $category)
+    {
+        $this->categories[] = $category;
+    }
+
+    /**
+     * Remove Categories
+     *
+     * @param Category $category
+     */
+    public function removeCategory(Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get Categories
+     *
+     * @return Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
      * Set picture
      *
      * @param string $picture
@@ -157,7 +205,7 @@ class Product
     /**
      * Get picture
      *
-     * @return string 
+     * @return string
      */
     public function getPicture()
     {
@@ -166,16 +214,16 @@ class Product
 
     public function setFile(UploadedFile $file = null)
     {
-        if (null === $this->getFile()) {
-            return;
+        $this->file = $file;
+
+        if (isset($this->picture)) {
+            $this->tmpImage = $this->picture;
+            $this->picture = null;
+        } else {
+            $this->picture = 'création';
         }
 
-        $this->getFile()->move($this->getUploadRootDir(), $this->getPicture());
-
-        if (isset($this->tmpImage)) {
-            unlink($this->getUploadDir().'/'.$this->tmpImage);
-            $this->tmpImage = null;
-        }
+        return $this;
     }
 
 
@@ -191,8 +239,8 @@ class Product
     public function preUpload()
     {
         if (null !== $this->getFile()) {
-            $picture = sha1(uniqid('img_'));
-            $this->setPicture($picture . '.' . $this->getFile()->guessExtension());
+            $image = sha1(uniqid('img_'));
+            $this->setPicture($image . '.' . $this->getFile()->guessExtension());
         }
     }
 
@@ -213,6 +261,7 @@ class Product
             $this->tmpImage = null;
         }
     }
+
 
     /**
      * @ORM\PostRemove()
@@ -242,12 +291,12 @@ class Product
 
     protected function getUploadRootDir()
     {
-        // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
-        return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
+        return __DIR__ . '/../../../web/' . $this->getUploadDir();
     }
+
 
     protected function getUploadDir()
     {
-        return 'uploads/pictures';
+        return 'upload/pictures/products';
     }
 }

@@ -2,16 +2,16 @@
 
 namespace CmsUlysseBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use CmsUlysseBundle\Entity\CategoryRepository;
 
 /**
- * Category
+ * State
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="CategoryRepository")
+ * @ORM\Entity(repositoryClass="CmsUlysseBundle\Entity\StateRepository")
  */
-class Category
+class State
 {
     /**
      * @var integer
@@ -30,16 +30,10 @@ class Category
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Category")
-     *
-     * @ORM\JoinColumn(name="categ_up", referencedColumnName="id", nullable=true)
+     * @ORM\OneToMany(targetEntity="Product", mappedBy="state", cascade={"persist"})
      */
-    private $categ_up;
+    private $commands;
 
-    public function __toString()
-    {
-        return $this->name;
-    }
 
     /**
      * Get id
@@ -55,7 +49,7 @@ class Category
      * Set name
      *
      * @param string $name
-     * @return Category
+     * @return State
      */
     public function setName($name)
     {
@@ -74,27 +68,22 @@ class Category
         return $this->name;
     }
 
-
     /**
-     * Set categ_up
-     *
-     * @param Category $categUp
-     * @return Category
+     * @return mixed
      */
-    public function setCategUp(Category $categUp = null)
+    public function getCommands()
     {
-        $this->categ_up = $categUp;
-
-        return $this;
+        return $this->commands;
     }
 
     /**
-     * Get categ_up
-     *
-     * @return Category
+     * @param $commands
+     * @return $this
      */
-    public function getCategUp()
+    public function setSpecifications(ArrayCollection $commands)
     {
-        return $this->categ_up;
+        $this->commands = $commands;
+
+        return $this;
     }
 }

@@ -11,6 +11,7 @@
         <img width="300px" src="{{ asset(product.getWebPath())}}" alt="" />
 
         <a href="{{ path('product_view', {'id': product.id}) }}">Voir</a>
+        <a href="{{ path('product_update', {'id': product.id}) }}">Modifier</a>
         <a href="{{ path('product_delete', {'id': product.id}) }}">Supprimer</a>
 
     {% endfor %}

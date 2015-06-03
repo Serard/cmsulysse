@@ -12,4 +12,42 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    public function findCategsUp()
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->where('c.categ_up is null')
+           ->orderBy('c.id', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findCategsDown()
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->where('c.categ_up is not null')
+           ->orderBy('c.categ_up', 'ASC');
+
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findCategsUpForm()
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->where('c.categ_up is null')
+           ->orderBy('c.id', 'ASC');
+
+        return $qb;
+    }
+
+    public function findCategsDownForm()
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->where('c.categ_up is not null')
+            ->orderBy('c.categ_up', 'ASC');
+
+
+        return $qb;
+    }
+
 }

@@ -31,9 +31,37 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="text")
+     * @ORM\Column(name="lastname", type="string", length=255)
      */
-    private $adress;
+    private $lastname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstname", type="string", length=255)
+     */
+    private $firstname;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="text")
+     */
+    private $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="postalCode", type="string", length=255)
+     */
+    private $postalCode;
+
+    /**
+    * @var string
+    *
+    * @ORM\Column(name="country", type="string", length=255)
+    */
+    private $country;
 
     /**
      * @var string
@@ -49,20 +77,6 @@ class User extends BaseUser
      */
     private $isActive;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="fristname", type="string", length=255)
-     */
-    private $fristname;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255)
-     */
-    private $country;
-
 
     /**
      * Get id
@@ -75,26 +89,26 @@ class User extends BaseUser
     }
 
     /**
-     * Set adress
+     * Set address
      *
-     * @param string $adress
+     * @param string $address
      * @return User
      */
-    public function setAdress($adress)
+    public function setAddress($address)
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * Get adress
+     * Get address
      *
      * @return string 
      */
-    public function getAdress()
+    public function getAddress()
     {
-        return $this->adress;
+        return $this->address;
     }
 
     /**
@@ -144,26 +158,42 @@ class User extends BaseUser
     }
 
     /**
-     * Set fristname
+     * @return string
+     */
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    /**
+     * @param string $lastname
+     */
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    /**
+     * Set firstname
      *
-     * @param string $fristname
+     * @param string $firstname
      * @return User
      */
-    public function setFristname($fristname)
+    public function setFistname($firstname)
     {
-        $this->fristname = $fristname;
+        $this->firstname = $firstname;
 
         return $this;
     }
 
     /**
-     * Get fristname
+     * Get firstname
      *
      * @return string 
      */
-    public function getFristname()
+    public function getFirstname()
     {
-        return $this->fristname;
+        return $this->firstname;
     }
 
     /**
@@ -188,4 +218,24 @@ class User extends BaseUser
     {
         return $this->country;
     }
+
+    /**
+     * @return string
+     */
+    public function getPostalCode()
+    {
+        return $this->postalCode;
+    }
+
+    /**
+     * @param $postalCode
+     * @return $this
+     */
+    public function setPostalCode($postalCode)
+    {
+        $this->postalCode = $postalCode;
+        return $this;
+    }
+
+
 }
