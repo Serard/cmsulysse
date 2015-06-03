@@ -209,16 +209,16 @@ class Product
 
     public function setFile(UploadedFile $file = null)
     {
-        if (null === $this->getFile()) {
-            return;
+        $this->file = $file;
+
+        if (isset($this->picture)) {
+            $this->tmpImage = $this->picture;
+            $this->picture = null;
+        } else {
+            $this->picture = 'création';
         }
 
-        $this->getFile()->move($this->getUploadRootDir(), $this->getPicture());
-
-        if (isset($this->tmpImage)) {
-            unlink($this->getUploadDir().'/'.$this->tmpImage);
-            $this->tmpImage = null;
-        }
+        return $this;
     }
 
 
@@ -234,8 +234,8 @@ class Product
     public function preUpload()
     {
         if (null !== $this->getFile()) {
-            $picture = sha1(uniqid('img_'));
-            $this->setPicture($picture . '.' . $this->getFile()->guessExtension());
+            $image = sha1(uniqid('img_'));
+            $this->setPicture($image . '.' . $this->getFile()->guessExtension());
         }
     }
 
@@ -248,7 +248,6 @@ class Product
         if (null === $this->getFile()) {
             return;
         }
-
         $this->getFile()->move($this->getUploadRootDir(), $this->getPicture());
 
         if (isset($this->tmpImage)) {
@@ -256,6 +255,7 @@ class Product
             $this->tmpImage = null;
         }
     }
+
 
     /**
      * @ORM\PostRemove()
@@ -285,12 +285,12 @@ class Product
 
     protected function getUploadRootDir()
     {
-        // le chemin absolu du répertoire où les documents uploadés doivent être sauvegardés
-        return __DIR__ . '/../../../../../web/' . $this->getUploadDir();
+        return __DIR__ . '/../../../web/' . $this->getUploadDir();
     }
+
 
     protected function getUploadDir()
     {
-        return 'uploads/pictures';
+        return 'upload/pictures/products';
     }
 }

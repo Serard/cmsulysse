@@ -47,7 +47,7 @@ class CategoryRepository extends EntityRepository
             ->orderBy('c.categ_up', 'ASC');
 
 
-        return $qb->getQuery()->getResult();
+        return $qb;
     }
 
 }
