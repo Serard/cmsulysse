@@ -78,5 +78,16 @@ class ProductController extends Controller
     {
         return array();
     }
+    /**
+     * @Route("/search")
+     * @Template()
+     */
+    public function searchAction(Request $request)
+    {
+        //$research = $_POST['suguest'];
+
+        //retrun $id;
+    }
+
 
 }

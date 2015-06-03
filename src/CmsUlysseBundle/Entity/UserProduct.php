@@ -25,13 +25,13 @@ class UserProduct
      * @ORM\ManyToOne(targetEntity="CmsUlysseBundle\Entity\User", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $userId;
+    private $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="CmsUlysseBundle\Entity\Product", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $productId;
+    private $product;
 
     /**
      * @var float
@@ -64,9 +64,9 @@ class UserProduct
      * @param \CmsUlysseBundle\Entity\User|int $userId
      * @return UserProduct
      */
-    public function setUserId(User $userId)
+    public function setUser(User $userId)
     {
-        $this->userId = $userId;
+        $this->user = $userId;
 
         return $this;
     }
@@ -76,9 +76,9 @@ class UserProduct
      *
      * @return integer 
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->userId;
+        return $this->user;
     }
 
     /**
@@ -87,9 +87,9 @@ class UserProduct
      * @param \CmsUlysseBundle\Entity\Product|int $productId
      * @return UserProduct
      */
-    public function setProductId(Product $productId)
+    public function setProduct(Product $productId)
     {
-        $this->productId = $productId;
+        $this->product = $productId;
 
         return $this;
     }
