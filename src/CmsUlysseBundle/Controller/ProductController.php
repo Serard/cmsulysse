@@ -3,16 +3,20 @@
 namespace CmsUlysseBundle\Controller;
 
 use CmsUlysseBundle\Entity\Product;
+use CmsUlysseBundle\Entity\Specification;
 use CmsUlysseBundle\Form\Type\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @Route("/product")
+ */
 class ProductController extends Controller
 {
     /**
-     * @Route("/product", name="product_list")
+     * @Route("/", name="product_list")
      * @Template()
      */
     public function indexAction()
@@ -25,7 +29,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/product/add", name="product_add")
+     * @Route("/add", name="product_add")
      * @Template()
      *
      */
@@ -36,6 +40,9 @@ class ProductController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $product = $form->getData();
+            foreach($product->getSpecifications() as $specification){
+                $specification->setProduct($product);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
@@ -46,16 +53,22 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/product/{id}", name="product_view")
+     * @Route("/{id}", name="product_view")
      * @Template()
      */
     public function viewAction($id)
     {
-        return array();
+        $manager = $this->getDoctrine()->getManager();
+        $repo = $manager->getRepository('CmsUlysseBundle:Product');
+        $product = $repo->find($id);
+
+        return array(
+            'product' => $product
+        );
     }
 
     /**
-     * @Route("/product/delete/{id}", name="product_delete")
+     * @Route("/delete/{id}", name="product_delete")
      * @Template()
      */
     public function deleteAction($id)
@@ -71,7 +84,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/product/update/{id}")
+     * @Route("/update/{id}")
      * @Template()
      */
     public function updateAction($id)
