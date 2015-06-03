@@ -57,7 +57,7 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(name="picture", type="string", length=255, nullable= true)
+     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      */
     private $picture;
 
@@ -81,10 +81,15 @@ class Product
         $this->specifications = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -107,7 +112,7 @@ class Product
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -130,7 +135,7 @@ class Product
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -200,7 +205,7 @@ class Product
     /**
      * Get picture
      *
-     * @return string 
+     * @return string
      */
     public function getPicture()
     {
@@ -248,6 +253,7 @@ class Product
         if (null === $this->getFile()) {
             return;
         }
+
         $this->getFile()->move($this->getUploadRootDir(), $this->getPicture());
 
         if (isset($this->tmpImage)) {
