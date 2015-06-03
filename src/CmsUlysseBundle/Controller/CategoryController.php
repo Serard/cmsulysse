@@ -22,21 +22,9 @@ class CategoryController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('CmsUlysseBundle:Category');
-        $repocategories = $repo->findAll();
-        $categories = array();
-        $i = 0;
-        $j = 0;
-        foreach ($repocategories as $category) {
-            $repocategs_down = $repo->findBy(array('categ_up' => $category->getId()));
-            foreach ($repocategs_down as $categ_down) {
-                $categs_down[$j] = $categ_down;
-                $j++;
-            }
-            if ($repocategs_down) {
-                $categories[$i] = $category;
-            }
-            $i++;
-        }
+        $categories  = $repo->findCategsUp();
+        $categs_down = $repo->findCategsDown();
+
         return array(
                 'categories'  => $categories,
                 'categs_down' => $categs_down
@@ -104,8 +92,17 @@ class CategoryController extends Controller
         $repo = $em->getRepository('CmsUlysseBundle:Category');
         $category = $repo->find($request->get('id'));
 
+        $categs_down = $repo->findBy(array('categ_up' => $category->getId()));
+        foreach ($categs_down as $categ_down) {
+            $categ_down->setCategUp(null);
+            $em->persist($categ_down);
+            $em->flush();
+        }
+
         $em->remove($category);
         $em->flush();
+
+
 
         return $this->redirect($this->generateUrl('category_list'));
     }
