@@ -6,6 +6,9 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.6
+add command/state update product
+
 dev version    : dev-v0.0.5
 link product/category
 
