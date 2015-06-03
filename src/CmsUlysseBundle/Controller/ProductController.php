@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     /**
      * @Route("/add", name="product_add")
-     * @Template()
+     * @Template("CmsUlysseBundle:Product:form.html.twig")
      *
      */
     public function addAction(Request $request)
@@ -76,6 +76,11 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('CmsUlysseBundle:Product');
         $product= $repo->find($id);
+
+        $specifications = $em->getRepository('CmsUlysseBundle:Specification')->findByProduct($product);
+        foreach($specifications as $specification){
+            $em->remove($specification);
+        }
         $em->remove($product);
         $em->flush();
 
@@ -84,12 +89,29 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/update/{id}")
-     * @Template()
+     * @Route("/update/{id}", name="product_update")
+     * @Template("CmsUlysseBundle:Product:form.html.twig")
      */
-    public function updateAction($id)
+    public function updateAction(Request $request)
     {
-        return array();
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('CmsUlysseBundle:Product');
+        $product = $repo->find($request->get('id'));
+        $specifications = $em->getRepository('CmsUlysseBundle:Specification')->findByProduct($product);
+
+        $form = $this->createForm(new ProductType(),$product);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($form->getData());
+            $em->flush();
+            return $this->redirect($this->generateUrl('product_list'));
+        }
+        return array(
+            'form' => $form->createView(),
+            'specifications' => $specifications
+        );
     }
 
 }
