@@ -66,6 +66,9 @@ class CategoryController extends Controller
         $category = $repo->find($request->get('id'));
 
         $form = $this->createForm(new CategoryType(), $category);
+        if ($category->getCategUp() === null) {
+            $form->add('categ_up', 'hidden');
+        }
         $form->add('btn', 'submit', array('label' => 'Modifier'));
         $form->handleRequest($request);
 
