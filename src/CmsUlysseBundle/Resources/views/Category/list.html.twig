@@ -1,0 +1,31 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Catégories{% endblock %}
+
+{% block body %}
+    <h1>Liste des catégories</h1>
+    <ul>
+        {% for category in categories %}
+            <li>
+                <h1>{{ category.id }}</h1>
+                <h2>{{ category.name }}</h2>
+                <ul>
+                    {% for categ_down in categs_down %}
+                        {% if  categ_down.categup.id == category.id %}
+                            <li>{{ categ_down.name }}</li>
+                            <p>
+                                <a href="{{ path('category_update', {'id': categ_down.id}) }}">Modifier</a>
+                                <a href="{{ path('category_delete', {'id': categ_down.id}) }}">Supprimer</a>
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+                <p>
+                    <a href="{{ path('category_update', {'id': category.id}) }}">Modifier</a>
+                    <a href="{{ path('category_delete', {'id': category.id}) }}">Supprimer</a>
+                </p>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('category_add') }}"> Ajouter une catégorie</a>
+{% endblock %}

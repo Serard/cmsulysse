@@ -1,0 +1,82 @@
+<?php
+
+namespace CmsUlysseBundle\Controller;
+
+use CmsUlysseBundle\Entity\Product;
+use CmsUlysseBundle\Form\Type\ProductType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
+
+class ProductController extends Controller
+{
+    /**
+     * @Route("/product", name="product_list")
+     * @Template()
+     */
+    public function indexAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('CmsUlysseBundle:Product');
+        $products = $repository->findAll();
+
+        return array('products' => $products);
+    }
+
+    /**
+     * @Route("/product/add", name="product_add")
+     * @Template()
+     *
+     */
+    public function addAction(Request $request)
+    {
+        $form = $this->createForm(new ProductType(), new Product());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $product = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($product);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('product_list'));
+        }
+        return array('form' => $form->createView());
+    }
+
+    /**
+     * @Route("/product/{id}", name="product_view")
+     * @Template()
+     */
+    public function viewAction($id)
+    {
+        return array();
+    }
+
+    /**
+     * @Route("/product/delete/{id}", name="product_delete")
+     * @Template()
+     */
+    public function deleteAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('CmsUlysseBundle:Product');
+        $product= $repo->find($id);
+        $em->remove($product);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl("product_list"));
+
+    }
+
+    /**
+     * @Route("/product/update/{id}")
+     * @Template()
+     */
+    public function updateAction($id)
+    {
+        return array();
+    }
+
+}
