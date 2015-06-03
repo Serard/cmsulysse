@@ -78,6 +78,7 @@ class Product
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+        $this->specifications = new ArrayCollection();
     }
 
     /**
@@ -168,7 +169,7 @@ class Product
      *
      * @param Category $category
      */
-    public function removeType(Category $category)
+    public function removeCategory(Category $category)
     {
         $this->categories->removeElement($category);
     }

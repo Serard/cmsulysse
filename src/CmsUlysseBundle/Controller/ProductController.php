@@ -3,6 +3,7 @@
 namespace CmsUlysseBundle\Controller;
 
 use CmsUlysseBundle\Entity\Product;
+use CmsUlysseBundle\Entity\Specification;
 use CmsUlysseBundle\Form\Type\ProductType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -39,6 +40,9 @@ class ProductController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $product = $form->getData();
+            foreach($product->getSpecifications() as $specification){
+                $specification->setProduct($product);
+            }
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);
             $em->flush();
@@ -54,7 +58,13 @@ class ProductController extends Controller
      */
     public function viewAction($id)
     {
+        $manager = $this->getDoctrine()->getManager();
+        $repo = $manager->getRepository('CmsUlysseBundle:Product');
+        $product = $repo->find($id);
 
+        return array(
+            'product' => $product
+        );
     }
 
     /**

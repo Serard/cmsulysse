@@ -40,7 +40,7 @@ class Specification
      * @var Product
      *
      * @ORM\ManyToOne(targetEntity="Product" ,inversedBy="specifications")
-     * @ORM\JoinColumn(name="product_id_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     private $product;
 
