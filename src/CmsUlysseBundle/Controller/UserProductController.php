@@ -43,3 +43,24 @@ class ProductController extends Controller
 
         return array('form' => $form->createView());
     }
+
+    /**
+     * @Route("/user/vente/new", name="user_product_add")
+     * @Template()
+     */
+    public function addAction(Request $request)
+    {
+        $form = $this->createForm(new ProductType(), new UserProduct());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userProduct = $form->getData();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($userProduct);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('user_product_list'));
+        }
+
+        return array('form' => $form->createView());
+    }
