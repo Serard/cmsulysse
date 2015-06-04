@@ -113,5 +113,16 @@ class ProductController extends Controller
             'specifications' => $specifications
         );
     }
+    /**
+     * @Route("/search")
+     * @Template()
+     */
+    public function searchAction(Request $request)
+    {
+        //$research = $_POST['suguest'];
+
+        //retrun $id;
+    }
+
 
 }

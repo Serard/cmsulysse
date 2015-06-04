@@ -4,17 +4,89 @@
 
 {% block body %}
 <h1>Welcome to the Product:index page</h1>
+    <section>
+        <header>
+            <input type="text" placeholder="search" class="search">
+            <a href="{{ path('product_add') }}" class="create">+</a>
+        </header>
+        {% for product in products %}
+        <article id="{{ product.id }}" class="card">
+                <img width="300px" src="{{ asset(product.getWebPath())}}" alt="" class="circle"/>
+                <h2>{{ product.name }}</h2>
+            <a href="{{ path('product_view', {'id': product.id}) }}" class="zoom">Voir</a>
+        </article>
 
-    {% for product in products %}
-        <h3>{{ product.name }}</h3>
-        <h4>{{ product.description }}</h4>
-        <img width="300px" src="{{ asset(product.getWebPath())}}" alt="" />
 
-        <a href="{{ path('product_view', {'id': product.id}) }}">Voir</a>
-        <a href="{{ path('product_update', {'id': product.id}) }}">Modifier</a>
-        <a href="{{ path('product_delete', {'id': product.id}) }}">Supprimer</a>
+        {% endfor %}
 
-    {% endfor %}
+    </section>
+    <script>
+        /**$('search').val();
+        /* Product/
+        var url1;
+        var data1;
 
-    <a href="{{ path('product_add') }}" class="btn btn-template-main"> Ajouter un nouveau produit</a>
+        var url2;
+        var data2;
+
+        var url3;
+        var data4;
+
+        var msgCookie;
+
+        var step1=$.post( url,data, function(responce1) {
+            console.log( responce1 + " success step 1/3" );
+        })
+                .done(function() {
+                    console.log( "lancement de l'enregistrement de step" );
+
+
+
+                })
+                .fail(function() {
+                    console.log( "error  step 1/3" );
+                });
+
+
+
+    function postAj(url,data){
+        $.post( url,data, function(responce) {
+            console.log( responce + " success step 2/3" );
+        })
+    }
+
+     function step(url,data){
+         if(data1 !=''){
+             postAj(url1,data1)
+                     .done(function() {
+                    })
+                     .fail(function() {
+                         console.log( "error  step 2/3" );
+                     });
+         }
+     }
+            $.post( url,data, function(responce2) {
+            console.log( responce2 + " success step 2/3" );
+        })
+                .done(function() {
+                    console.log( "lancement de l'enregistrement de step" );
+                })
+                .fail(function() {
+                    console.log( "error  step 2/3" );
+                });
+
+    var step3=$.post( url3,data3, function(responce) {
+            console.log( responce + " success  step 3/3" );
+        })
+                .done(function() {
+                    msgCookie="success full";
+                    console.log( "return path" );
+                })
+                .fail(function() {
+                    console.log( "error  step 1/3" );
+                });
+                */
+
+    </script>
+
 {% endblock %}
