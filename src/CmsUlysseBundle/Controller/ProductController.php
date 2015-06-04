@@ -21,7 +21,6 @@ class ProductController extends Controller
      */
     public function indexAction()
     {
-        var_dump('toto');
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CmsUlysseBundle:Product');
         $products = $repository->findAll();
