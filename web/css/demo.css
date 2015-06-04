@@ -1,0 +1,111 @@
+.intl-tel-input * {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    /* line-height: 1.5;*/
+}
+
+.intl-tel-input{
+    clear: both;
+}
+.intl-tel-input li.country{
+    margin:0px ;
+}
+.intl-tel-input .hide {
+    display: none;
+}
+
+.intl-tel-input input{
+    height: 17px !important;
+    margin: 0 !important;
+    padding: 6px 12px !important;
+    font-family: inherit;
+    /*font-size: 100%;*/
+    color: inherit;
+}
+
+.intl-tel-input input[disabled],.intl-tel-input button[disabled] {
+    background-color: #eee;
+}
+
+.intl-tel-input input, .flag-dropdown,.intl-tel-input select,.arrowParent {
+    border: 1px solid #545454;
+}
+
+.intl-tel-input input, .intl-tel-input select {
+    width: 140px;
+}
+
+.intl-tel-input ::-webkit-input-placeholder {
+    color: #BBB;
+}
+
+.intl-tel-input ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #BBB;
+    opacity: 1;
+}
+.intl-tel-input :-ms-input-placeholder {
+    color: #BBB;
+}
+
+/*custom*/
+label#tel{
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+}
+.arrowParent
+{
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    width: 13px;
+    background: #CCC;
+    height: 17px !important;
+    margin-top: -4px;
+    padding: 0px;
+    position: absolute;
+    top:0 !important;
+    right: -56px !important;
+    z-index:-1;
+}
+#popDispoRecorder .arrowParent{
+    margin-top: -4px;
+}
+.intl-tel-input .flag-dropdown {
+    height:17px !important; /*ie8*/
+    /* height: calc(100% - 2px) !important;*/
+}
+.intl-tel-input .flag-dropdown .selected-flag{
+    width: 65px;
+}
+.codeCountry {
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    position: absolute;
+    top: 0px;
+    margin-left:18px;
+    /*height: 17px;
+    margin-top: -1px;*/
+    height: 14px;
+    margin-top: -2px;
+}
+.intl-tel-input .selected-flag .arrowParent .arrow {
+    position: relative;
+    top: 50%;
+    margin-top: -2px;
+    left: 3px;
+    width: 0px;
+    height: 0px;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+    border-top: 6px solid #555;
+}
+.flash{background: #fff5f5;}
+.intl-tel-input{ margin-left:5px;}
+.intl-tel-input input{ padding: 0!important;margin-left: 80px !important;padding-left: 6px !important; padding-top: 2px !important; }
+.intl-tel-input .selected-flag {padding-left:0 !important;}
+.intl-tel-input .country-list .country{
+    padding: 10px 1px 10px 3px;
+}

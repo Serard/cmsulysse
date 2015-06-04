@@ -6,6 +6,12 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.12
+update user
+
+dev version    : dev-v0.0.11
+register + login with email
+
 dev version    : dev-v0.0.10
 upload + ProductType
 
