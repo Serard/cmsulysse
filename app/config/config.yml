@@ -82,6 +82,7 @@ swiftmailer:
 
 # fos_user Configuration
 fos_user:
+    use_username_form_type: false
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: CmsUlysseBundle\Entity\User

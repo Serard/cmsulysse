@@ -16,11 +16,12 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductController extends Controller
 {
     /**
-     * @Route("/", name="product_list")
+     * @Route("", name="product_list")
      * @Template()
      */
     public function indexAction()
     {
+        var_dump('toto');
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CmsUlysseBundle:Product');
         $products = $repository->findAll();

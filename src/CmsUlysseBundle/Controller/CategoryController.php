@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 class CategoryController extends Controller
 {
     /**
-     * @Route("/", name="category_list")
+     * @Route("", name="category_list")
      * @Template()
      */
     public function listAction()

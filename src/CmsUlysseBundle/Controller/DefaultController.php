@@ -3,11 +3,25 @@
 namespace CmsUlysseBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+/**
+ * @Route("")
+ */
 class DefaultController extends Controller
 {
-    public function indexAction($name)
+    /**
+     * @Route("", name="home")
+     * @Template()
+     */
+    public function indexAction()
     {
-        return $this->render('CmsUlysseBundle:Default:index.html.twig', array('name' => $name));
+        $securityContext = $this->container->get('security.context');
+        if (! $securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirect($this->generateUrl('fos_user_security_login'));
+        }
+        return array(
+        );
     }
 }
