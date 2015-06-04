@@ -1,0 +1,24 @@
+<header>
+    <section class="title header">
+        <div>
+            <h1>{{ site.name }}<h1>
+            {%  if  site.logo is not null && site.logo != '' %}
+                <figure id="logo" style="background: {{ path('site_logo') }};background-repeat: no-repeat;background-size: contain;"></figure>
+            {% endif %}
+        </div>
+        <h2>{{ slogan }}</h2>
+    </section>
+    {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+        <span class="icon user"><a href=""></a>
+            <div id="confUser">
+                <a href="{{ path('user_updated') }}" class=""></a>
+                <a href="{{ path('user_command') }}" class=""></a>
+                <a href="{{ path('vente_user') }}" class=""></a>
+            </div>
+        </span>
+        <a href="" class="icon panier"></a>
+    {% else %}
+        <a href="" class="signin">sign in</a>
+        <a href="" class="signup">sign up</a>
+    {% endif %}
+</header>

@@ -4,17 +4,27 @@
 
 {% block body %}
 <h1>Welcome to the Product:index page</h1>
+    <section>
+        <header>
+            <input type="text" placeholder="search" class="search">
+            <a href="{{ path('product_add') }}" class="create">+</a>
+        </header>
+        {% for product in products %}
+        <article id="{{ product.id }}" class="card">
+            <a href="{{ path('') }}">
+                <img width="300px" src="{{ asset(product.getWebPath())}}" alt="" class="circle"/>
+                <h2>{{ product.name }}</h2>
+            </a>
+            <a href="{{ path('product_view', {'id': product.id}) }}" class="zoom">Voir</a>
+        </article>
 
-    {% for product in products %}
-        <h3>{{ product.name }}</h3>
-        <h4>{{ product.description }}</h4>
-        <img width="300px" src="{{ asset(product.getWebPath())}}" alt="" />
 
-        <a href="{{ path('product_view', {'id': product.id}) }}">Voir</a>
-        <a href="{{ path('product_update', {'id': product.id}) }}">Modifier</a>
-        <a href="{{ path('product_delete', {'id': product.id}) }}">Supprimer</a>
+        {% endfor %}
 
-    {% endfor %}
+    </section>
+    <script>
 
-    <a href="{{ path('product_add') }}" class="btn btn-template-main"> Ajouter un nouveau produit</a>
+
+    </script>
+
 {% endblock %}

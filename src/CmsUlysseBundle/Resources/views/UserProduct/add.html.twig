@@ -1,0 +1,61 @@
+
+{% extends "::base.html.twig" %}
+
+{% block title %}CmsUlysseBundle:Product:add{% endblock %}
+
+{% block body %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
+        var collectionHolder = $('ul.specifications');
+
+        var $addSpecLink = $('<a href="#">Ajouter une specification</a>');
+        var $newLinkLi = $('<li></li>').append($addSpecLink);
+
+        jQuery(document).ready(function() {
+            collectionHolder.append($newLinkLi);
+            console.log(collectionHolder);
+            $addSpecLink.on('click', function(e) {
+                e.preventDefault();
+                addSpecForm(collectionHolder, $newLinkLi);
+            });
+        });
+
+        function addSpecForm(collectionHolder, $newLinkLi) {
+            var prototype = collectionHolder.attr('data-prototype');
+
+            var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
+
+<h1>Welcome to the Product:add page</h1>
+
+           <form action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form">
+            <section>
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name) }}
+            </section>
+            <section>
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description) }}
+            </section>
+            <section>
+                {{ form_label(form.file) }}
+                {{ form_widget(form.file) }}
+            </section>
+            <section>
+                <ul class="specifications" data-prototype="{{ form_widget(form.specifications.vars.prototype)|e }}">
+                    {% for specification in form.specifications %}
+                        <li>{{ form_row(specification.name) }}</li>
+                        <li>{{ form_row(specification.content) }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+
+               {{ form_rest(form) }}
+
+    </form>
+
+
+{% endblock %}
