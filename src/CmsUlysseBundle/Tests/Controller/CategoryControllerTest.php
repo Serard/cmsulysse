@@ -4,7 +4,7 @@ namespace CmsUlysseBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class CategoryControllerControllerTest extends WebTestCase
+class CategoryControllerTest extends WebTestCase
 {
     public function testList()
     {

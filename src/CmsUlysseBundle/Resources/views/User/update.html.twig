@@ -4,4 +4,13 @@
 
 {% block body %}
 <h1>Welcome to the User:update page</h1>
+    {% for label,messages in app.session.flashbag.all %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {{ form(form) }}
+    <a href="{{ path('user_homepage') }}"> Retour</a>
 {% endblock %}
