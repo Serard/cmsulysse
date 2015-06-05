@@ -1,12 +1,6 @@
 <header>
     <section class="title header">
-        <div>
-            <h1>{{ site.name }}<h1>
-            {%  if  site.logo is not null and site.logo != '' %}
-                <figure id="logo" style="background: {{ path('site_logo') }};background-repeat: no-repeat;background-size: contain;"></figure>
-            {% endif %}
-        </div>
-        <h2>{{ slogan }}</h2>
+
         {% if site is defined and site %}
             <div>
                 <h1>{{ site.name }}</h1>
@@ -23,6 +17,7 @@
         <h2>Le super slogan d'ulysse</h2>
 
     </section>
+
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
         <span class="icon user"><a href="">User</a>
             <div id="confUser">

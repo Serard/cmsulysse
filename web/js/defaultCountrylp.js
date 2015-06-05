@@ -1,6 +1,7 @@
 
 
     var input = $("#fos_user_registration_form_tel");
+    var pays = 'fr';
 
     input.intlTelInput({
         //autoFormat: true,//??

@@ -31,13 +31,9 @@
         {% block javascripts %}{% endblock javascripts%}
 
         {% javascripts
-
-        'js/jquery.1.9.1.min.js'
-        'js/iconMenu.js',
-        'js/defaultCountrylp.js',
-        'js/intlTellnput.js',
-        'js/utils.js'
-        output='js/compiled/app.js' %}
+            'js/iconMenu.js'
+            'js/api_google_map/autocomplete.js'
+            output='js/compiled/app.js' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
 
