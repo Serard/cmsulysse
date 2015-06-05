@@ -6,7 +6,6 @@
             {{ form_row(form.is_active) }}
         </section>
 
-
         {{ form_rest(form) }}
         {{ form_row(form.postal_code, {
             'attr': {
@@ -14,12 +13,7 @@
             }
         })
         }}
-        {{ form_row(form.tel, {
-            'attr': {
-            'pattern' : '^((\+|00)33\s?|0)[1-9](\s?\d{2}){4}$'
-            }
-        })
-        }}
+
         <div>
             <input type="submit" value="Envoyer" class="btn btn-template-main"/>
         </div>
