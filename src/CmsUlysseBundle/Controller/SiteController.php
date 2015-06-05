@@ -11,10 +11,21 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class SiteController
  * @package CmsUlysseBundle\Controller
- * @Route("/configuration/site")
+ * @Route("/admin/configuration")
  */
 class SiteController extends Controller
 {
+    /**
+     * @return array
+     */
+    public function indexAction(){
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('CmsUlysseBundle:Site');
+        $site = $repository->findOneBy(array());
+
+        return array('site' => $site);
+    }
+
     /**
      * @Route("", name="config_view")
      * @Template()

@@ -39,9 +39,15 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->get('security.context')->getToken()->getUser();
             $product = $form->getData();
+
             foreach($product->getSpecifications() as $specification){
                 $specification->setProduct($product);
+            }
+            foreach($product->getUserProducts() as $userProduct){
+                $userProduct->setProduct($product);
+                $userProduct->setUser($user);
             }
             $em = $this->getDoctrine()->getManager();
             $em->persist($product);

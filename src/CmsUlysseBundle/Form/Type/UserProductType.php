@@ -17,7 +17,6 @@ class UserProductType extends  AbstractType
         return  $builder
             ->add('price')
             ->add('qty')
-            ->add('btn', 'submit', array('label' => 'Valider'))
             ;
     }
 

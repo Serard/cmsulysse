@@ -5,6 +5,7 @@ namespace CmsUlysseBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -22,11 +23,6 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * @var string
@@ -53,6 +49,11 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="postalCode", type="string", length=255)
+     * @Assert\Regex(
+     *     pattern= "/^[0-9]{5,5}$/",
+     *     match=true,
+     *     message="Rentrer un code postal correct"
+     * )
      */
     private $postalCode;
 
@@ -67,6 +68,11 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="tel", type="string", length=255)
+     * @Assert\Regex(
+     *     pattern= "/^((\+|00)33\s?|0)[1-9](\s?\d{2}){4}$/",
+     *     match=true,
+     *     message="Rentrer un numéro de téléphone correct"
+     * )
      */
     private $tel;
 
@@ -77,6 +83,10 @@ class User extends BaseUser
      */
     private $isActive;
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Get id

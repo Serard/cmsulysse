@@ -11,7 +11,7 @@
         </header>
         {% for product in products %}
         <article id="{{ product.id }}" class="card">
-            <a href="{{ path('') }}">
+
                 <img width="300px" src="{{ asset(product.getWebPath())}}" alt="" class="circle"/>
                 <h2>{{ product.name }}</h2>
             </a>
@@ -23,7 +23,6 @@
 
     </section>
     <script>
-
 
     </script>
 

@@ -41,9 +41,9 @@ class UserProduct
     private $price;
 
     /**
-     * @var boolean
+     * @var integer
      *
-     * @ORM\Column(name="Qty", type="boolean")
+     * @ORM\Column(name="Qty", type="integer")
      */
     private $qty;
 
@@ -82,26 +82,19 @@ class UserProduct
     }
 
     /**
-     * Set productId
-     *
-     * @param \CmsUlysseBundle\Entity\Product|int $productId
-     * @return UserProduct
+     * @return mixed
      */
-    public function setProduct(Product $productId)
+    public function getProduct()
     {
-        $this->product = $productId;
-
-        return $this;
+        return $this->product;
     }
 
     /**
-     * Get productId
-     *
-     * @return integer 
+     * @param mixed $product
      */
-    public function getProductId()
+    public function setProduct(Product $product)
     {
-        return $this->productId;
+        $this->product = $product;
     }
 
     /**

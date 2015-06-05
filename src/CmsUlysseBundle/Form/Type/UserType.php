@@ -24,7 +24,9 @@ class UserType extends AbstractType
                 'required' => false
             ))
             ->add('adress', null, array('label' => 'Adresse'))
-            ->add('tel', null, array('label' => 'Téléphone'))
+            ->add('tel', null, array(
+                'label' => 'Téléphone'
+            ))
             ->add('btn', 'submit', array('label' => 'Modifier'))
         ;
 
