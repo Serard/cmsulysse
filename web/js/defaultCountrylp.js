@@ -1,6 +1,6 @@
 
 
-    var input = $("#mobile-number");
+    var input = $("#fos_user_registration_form_tel");
 
     input.intlTelInput({
         //autoFormat: true,//??
