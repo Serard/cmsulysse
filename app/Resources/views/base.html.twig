@@ -3,9 +3,20 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
 
+        {% stylesheets
+            'css/style.css'
+            filter='cssrewrite' output='css/compiled/app.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        {% block stylesheets %}
+            <style>
+
+
+            </style>
         {% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
@@ -16,6 +27,14 @@
         {% block footer %}
             {%  include ':include:footer.html.twig' %}
         {% endblock footer %}
+
         {% block javascripts %}{% endblock javascripts%}
+
+        {% javascripts
+        'js/iconMenu.js'
+        output='js/compiled/app.js' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
     </body>
 </html>

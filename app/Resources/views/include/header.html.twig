@@ -2,7 +2,7 @@
     <section class="title header">
         <div>
             <h1>{{ site.name }}<h1>
-            {%  if  site.logo is not null && site.logo != '' %}
+            {%  if  site.logo is not null and site.logo != '' %}
                 <figure id="logo" style="background: {{ path('site_logo') }};background-repeat: no-repeat;background-size: contain;"></figure>
             {% endif %}
         </div>
