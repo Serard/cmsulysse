@@ -3,11 +3,10 @@
     <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form-group">
 
         <fieldset>
-            {{ form_row(form.email) }}
-            {{ form_row(form.plainPassword) }}
             {{ form_row(form.lastname) }}
             {{ form_row(form.firstname) }}
-            {{ form_row(form.tel) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.plainPassword) }}
         </fieldset>
         <fieldset>
             <div class="form-group">
@@ -19,27 +18,66 @@
             </div>
         </fieldset>
         <fieldset class="disabled">
-            {{ form_row(form.address) }}
-            {{ form_row(form.postal_code) }}
-            {{ form_row(form.city) }}
+            {{ form_row(form.street_number, { 'id': 'street_number'}) }}
+            {{ form_row(form.address, { 'id': 'route'}) }}
+            {{ form_row(form.city, { 'id': 'locality'}) }}
+            {{ form_row(form.administrative_area, { 'id': 'administrative_area_level_1'}) }}
+            {{ form_row(form.postal_code, { 'id': 'postal_code'}) }}
+            {{ form_row(form.country, { 'id': 'country'}) }}
+            {{ form_row(form.tel) }}
+
         </fieldset>
-
-        <section style="display:none">
-            {{ form_row(form.is_active) }}
-        </section>
-
+        <fieldset>
+            <section style="display:none">
+                {{ form_row(form.is_active) }}
+            </section>
             {{ form_rest(form) }}
-
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src='/js/intlTellnput.js'></script>
-        <script src="/js/utils.js"></script>
-        <script>
-            var utilsScriptUrl = '/js/utils.js';
-        </script>
-        <script src="/js/defaultCountrylp.js"></script>
-
-        <div>
-            <input type="submit" value="Envoyer" class="btn btn-template-main"/>
-        </div>
+            <div>
+                <input type="submit" value="Envoyer" class="btn btn-template-main"/>
+            </div>
+        </fieldset>
     </form>
 {% endblock body %}
+
+{% block javascripts %}
+    <!-- Include Google Maps JS API -->
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDiLbha2ADV-c4IjSgjFFCj01FcwrOHteI"></script>
+    <!-- Custom JS code to bind to Autocomplete API -->
+    <script src="/js/api_google_map/autocomplete.js"></script>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src='/js/intlTellnput.js'></script>
+    <script>
+        var allCountriesA;
+    </script>
+    <script src="/js/utils.js"></script>
+    <script>
+        var utilsScriptUrl = '/js/utils.js';
+    </script>
+    <script src="/js/defaultCountrylp.js"></script>
+    <script>
+        //console.log(allCountriesA);
+        var country = window.document.getElementById('country').value;
+
+        for (var i in allCountriesA) {
+            var j = allCountriesA[i][0];
+            var x = j.substring(j.indexOf(' '));
+            if (x[0] == "" || null == x[0] || typeof x[0] == "undefined" ) {
+                console.log(x);
+                console.log(x)[0];
+            } else {
+                if(x[0].toLowerCase()=='new'){
+                    var z = x[0].toLowerCase()+x[1].toLowerCase();
+                    console.log(z);
+                }else {
+                    console.log(x[0]);
+                }
+
+
+
+
+            }
+        }
+
+    </script>
+{% endblock javascripts%}

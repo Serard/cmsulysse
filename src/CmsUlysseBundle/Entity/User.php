@@ -41,6 +41,13 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="street_number", type="string", length=255)
+     */
+    private $streetNumber;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="address", type="text")
      */
     private $address;
@@ -48,14 +55,23 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="administrative_area", type="string", length=255)
+     */
+    private $administrativeArea;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="postalCode", type="string", length=255)
-     * @Assert\Regex(
-     *     pattern= "/^[0-9]{5,5}$/",
-     *     match=true,
-     *     message="Rentrer un code postal correct"
-     * )
      */
     private $postalCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255)
+     */
+    private $country;
 
     /**
     * @var string
@@ -254,5 +270,61 @@ class User extends BaseUser
         parent::setEmail($email);
         $this->setUsername($email);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAdministrativeArea()
+    {
+        return $this->administrativeArea;
+    }
+
+    /**
+     * @param mixed $administrativeArea
+     * @return $this
+     */
+    public function setAdministrativeArea($administrativeArea)
+    {
+        $this->administrativeArea = $administrativeArea;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param string $country
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStreetNumber()
+    {
+        return $this->streetNumber;
+    }
+
+    /**
+     * @param string $streetNumber
+     * @return $this
+     */
+    public function setStreetNumber($streetNumber)
+    {
+        $this->streetNumber = $streetNumber;
+        return $this;
+    }
+
+
 
 }
