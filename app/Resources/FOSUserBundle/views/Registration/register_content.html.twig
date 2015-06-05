@@ -6,26 +6,14 @@
             {{ form_row(form.is_active) }}
         </section>
 
-        {{ form_row(form.tel, {
-            'id': 'mobile-number',
-            'attr': {
-                'name' : 'phoneTel',
-                'type' : 'tel'}
-            }
-        ) }}
-
-        <!--input id="mobile-number" type="tel" name="phoneTel" value="">
-
-        <script src="/verifphone/intlTelInput.js"></script>
-        <script>
-            //variable defaultCountryIp.js
-            var pays='';
-            var utilsScriptUrl="/verifphone/utils.js";
-            var numTel='{phone}';
-        </script>
-        <script src="/verifphone/defaultCountryIp.js"></script-->
-
         {{ form_rest(form) }}
+        {{ form_row(form.postal_code, {
+            'attr': {
+                'pattern' : '^[0-9]{5,5}$'
+            }
+        })
+        }}
+
         <div>
             <input type="submit" value="Envoyer" class="btn btn-template-main"/>
         </div>

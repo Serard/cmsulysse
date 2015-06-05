@@ -7,13 +7,28 @@
             {% endif %}
         </div>
         <h2>{{ slogan }}</h2>
+        {% if site is defined and site %}
+            <div>
+                <h1>{{ site.name }}</h1>
+                {%  if  site.logo is not null and site.logo != '' %}
+                    <figure id="logo" style="background: {{ path('site_logo') }};background-repeat: no-repeat;background-size: contain;"></figure>
+                {% endif %}
+            </div>
+            <h2>{{ slogan }}</h2>
+        {% else %}
+            <div>
+                <h1>Ulysse</h1>
+            </div>
+        {% endif %}
+        <h2>Le super slogan d'ulysse</h2>
+
     </section>
     {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-        <span class="icon user"><a href=""></a>
+        <span class="icon user"><a href="">User</a>
             <div id="confUser">
-                <a href="{{ path('user_updated') }}" class=""></a>
-                <a href="{{ path('user_command') }}" class=""></a>
-                <a href="{{ path('vente_user') }}" class=""></a>
+                <a href="{#{ path('user_updated') }#}" class="">User Update</a>
+                <a href="{#{ path('user_command') }#}" class="">User Command</a>
+                <a href="{#{ path('vente_user') }#}" class="">User Vente</a>
             </div>
         </span>
         <a href="" class="icon panier"></a>

@@ -31,7 +31,12 @@
         {% block javascripts %}{% endblock javascripts%}
 
         {% javascripts
-        'js/iconMenu.js'
+
+        'js/jquery.1.9.1.min.js'
+        'js/iconMenu.js',
+        'js/defaultCountrylp.js',
+        'js/intlTellnput.js',
+        'js/utils.js'
         output='js/compiled/app.js' %}
         <script src="{{ asset_url }}"></script>
         {% endjavascripts %}

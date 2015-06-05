@@ -14,10 +14,10 @@ class CategoryType extends AbstractType
         $builder
             ->add('name', null, array('label' => 'Nom : '))
             ->add('categ_up', 'entity', array('label'    => 'Catégorie mère : ',
-                'required' => false,
-                'class'    => 'CmsUlysseBundle:Category',
-                'property' => 'name',
-                'query_builder' => function (\CmsUlysseBundle\Entity\CategoryRepository $r) {
+                                              'required' => false,
+                                              'class'    => 'CmsUlysseBundle:Category',
+                                              'property' => 'name',
+                                              'query_builder' => function (\CmsUlysseBundle\Entity\CategoryRepository $r) {
                     return $r->findCategsUpForm();
                 }))
             ->add('btn', 'submit', array('label' => 'Envoyer'));
