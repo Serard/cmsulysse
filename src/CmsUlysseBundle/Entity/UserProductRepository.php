@@ -12,4 +12,11 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserProductRepository extends EntityRepository
 {
+    public function findMarketProducts()
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->where('p.qty != 0');
+
+        return $qb->getQuery()->getResult();
+    }
 }

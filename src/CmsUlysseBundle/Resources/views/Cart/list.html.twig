@@ -1,0 +1,91 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Market{% endblock %}
+
+{% block body %}
+    <h1>Liste des produits à vendre</h1>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Prix</th>
+            <th>Quantité</th>
+            <th>Vendeur</th>
+            <th>Action</th>
+        </tr>
+        {% for userproduct in products %}
+            <tr>
+                <td id="name{{ userproduct.id }}">{{ userproduct.product.name }}</td>
+                <td id="description{{ userproduct.id }}">{{ userproduct.product.description }}</td>
+                <td id="price{{ userproduct.id }}">{{ userproduct.price }}</td>
+                <td id="stock{{ userproduct.id }}">{{ userproduct.qty }}</td>
+                <td id="seller{{ userproduct.id }}">{{ userproduct.user.lastname }} {{ userproduct.user.firstname }}</td>
+                <td><button onclick="addCart({{ userproduct.id }});">Ajouter</button></td>
+                <td id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez dépassé la quantité du produit disponible</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ path('user_cart') }}"> Mon panier</a>
+    <script>
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + "; " + expires;
+        };
+
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+            }
+            return "";
+        };
+
+        var cart = getCookie('cart')!="" ? JSON.parse(getCookie('cart')) : new Array();
+        function addCart(id){
+            var trouve = false;
+
+            var don = document.getElementById('name'+id);
+            var name = don.innerText || don.textContent;
+
+            don = document.getElementById('description'+id);
+            var description = don.innerText || don.textContent;
+
+            don = document.getElementById('price'+id);
+            var price = don.innerText || don.textContent;
+
+            don = document.getElementById('stock'+id);
+            var stock = don.innerText || don.textContent;
+            stock = parseInt(stock);
+
+            don = document.getElementById('seller'+id);
+            var seller = don.innertText || don.textContent;
+
+            for(var i = 0; i < cart.length; i++) {
+                if (cart[i].id == id) {
+                    cart[i].name        = name;
+                    cart[i].description = description;
+                    cart[i].price       = price;
+                    if (cart[i].qty < stock) {
+                        cart[i].qty = cart[i].qty + 1;
+                    } else {
+                        document.getElementById('errorqty'+id).style.display="block";
+                    }
+                    cart[i].stock  = stock;
+                    cart[i].seller = seller;
+                    trouve = true;
+                }
+            }
+
+            if (!trouve) {
+                cart.push({id: id, name: name, description: description, price: price, qty: 1, stock: stock, seller: seller});
+            }
+
+            setCookie('cart',JSON.stringify(cart),3);
+        };
+    </script>
+{% endblock %}

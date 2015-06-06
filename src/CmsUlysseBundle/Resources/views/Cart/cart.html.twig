@@ -1,0 +1,101 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Cart{% endblock %}
+
+{% block body %}
+    <h1>Mon panier</h1>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Prix Unitaire</th>
+            <th>Quantité</th>
+            <th>Vendeur</th>
+            <th>Total</th>
+        </tr>
+        {% for userproduct in products %}
+            <tr>
+                <td id="name{{ userproduct.id }}">{{ userproduct.name }}</td>
+                <td id="description{{ userproduct.id }}">{{ userproduct.description }}</td>
+                <td id="price{{ userproduct.id }}">{{ userproduct.price }}</td>
+                <td><input id="qty{{ userproduct.id }}" type="number" value="{{ userproduct.qty }}" onclick="updateCart({{ userproduct.id }});"/></td>
+                <td id="stock{{ userproduct.id }}" style="display:none;">{{ userproduct.stock }}</td>
+                <td id="seller{{ userproduct.id }}">{{ userproduct.seller }}</td>
+                <td></td>
+                <td id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez dépassé la quantité du produit disponible</td>
+            </tr>
+        {% endfor %}
+    </table>
+{#    <div id="order" style="display:none;">
+        {{ form(form) }} formulaire de validation de la commande (à rajouter après développement de l'entité Command CommandProduct...
+    </div>#}
+    <button onclick="formOrder();">Commander</button>
+    <a href="{{ path('market_cart') }}">Retour</a>
+    <script>
+        var cart = getCookie('cart')!="" ? JSON.parse(getCookie('cart')) : new Array();
+
+        for(var i = 0; i < cart.length; i++) {
+            updateCart(cart[i].id);
+            console.log(cart);
+        }
+
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays*24*60*60*1000));
+            var expires = "expires="+d.toUTCString();
+            document.cookie = cname + "=" + cvalue + "; " + expires;
+
+        };
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1);
+                if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+            }
+            return "";
+
+        };
+        function updateCart(id){
+            var don = document.getElementById('name'+id);
+            var name = don.innerText || don.textContent;
+
+            don = document.getElementById('description'+id);
+            var description = don.innerText || don.textContent;
+
+            don = document.getElementById('price'+id);
+            var price = don.innerText || don.textContent;
+
+            var qty = document.getElementById('qty'+id).value;
+            qty = parseInt(qty);
+
+            don = document.getElementById('stock'+id);
+            var stock = don.innerText || don.textContent;
+            stock = parseInt(stock);
+
+            don = document.getElementById('seller'+id);
+            var seller = don.innertText || don.textContent;
+
+            for(var i = 0; i < cart.length; i++) {
+                if (cart[i].id == id) {
+                    cart[i].name        = name;
+                    cart[i].description = description;
+                    cart[i].price       = price;
+                    if (qty > stock) {
+                        console.log('error');
+                        document.getElementById('errorqty'+id).style.display="block";
+                    } else {
+                        console.log('no error');
+                        cart[i].qty = qty;
+                        document.getElementById('errorqty'+id).style.display="none";
+                    }
+                    cart[i].stock  = stock;
+                    cart[i].seller = seller;
+                }
+            }
+
+            setCookie('cart',JSON.stringify(cart),3);
+        };
+    </script>
+{% endblock %}

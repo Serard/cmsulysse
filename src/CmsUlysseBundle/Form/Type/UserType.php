@@ -13,8 +13,8 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', 'email', array('label' => 'Email'))
-            ->add('userlastname', null, array('label' => 'Nom'))
-            ->add('userfirstname', null, array('label' => 'Prénom'))
+            ->add('lastname', null, array('label' => 'Nom'))
+            ->add('firstname', null, array('label' => 'Prénom'))
             ->add('plainPassword', 'repeated', array(
                 'type' => 'password',
                 'options' => array('translation_domain' => 'FOSUserBundle'),
@@ -23,10 +23,10 @@ class UserType extends AbstractType
                 'invalid_message' => 'fos_user.password.mismatch',
                 'required' => false
             ))
-            ->add('adress', null, array('label' => 'Adresse'))
-            ->add('tel', null, array(
-                'label' => 'Téléphone'
-            ))
+            ->add('address', null, array('label' => 'Adresse'))
+            ->add('postal_code', null, array('label' => 'Code postal'))
+            ->add('city', null, array('label' => 'Ville'))
+            ->add('tel', null, array('label' => 'Téléphone'))
             ->add('btn', 'submit', array('label' => 'Modifier'))
         ;
 
@@ -36,7 +36,7 @@ class UserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Easy\Bundle\VentesBundle\Entity\User'
+            'data_class' => 'CmsUlysseBundle\Entity\User'
         ));
     }
 

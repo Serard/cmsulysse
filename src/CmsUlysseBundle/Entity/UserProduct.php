@@ -36,16 +36,23 @@ class UserProduct
     /**
      * @var float
      *
-     * @ORM\Column(name="Price", type="float")
+     * @ORM\Column(name="price", type="float")
      */
     private $price;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="Qty", type="integer")
+     * @ORM\Column(name="qty", type="integer")
      */
     private $qty;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="state", type="boolean"))
+     */
+    private $state;
 
 
     /**
@@ -59,22 +66,22 @@ class UserProduct
     }
 
     /**
-     * Set userId
+     * Set user
      *
-     * @param \CmsUlysseBundle\Entity\User|int $userId
+     * @param \CmsUlysseBundle\Entity\User $product
      * @return UserProduct
      */
-    public function setUser(User $userId)
+    public function setUser(User $user)
     {
-        $this->user = $userId;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get userId
+     * Get user
      *
-     * @return integer 
+     * @return User
      */
     public function getUser()
     {
@@ -82,19 +89,26 @@ class UserProduct
     }
 
     /**
-     * @return mixed
-     */
-    public function getProduct()
-    {
-        return $this->product;
-    }
-
-    /**
-     * @param mixed $product
+     * Set product
+     *
+     * @param \CmsUlysseBundle\Entity\Product $product
+     * @return UserProduct
      */
     public function setProduct(Product $product)
     {
         $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 
     /**
@@ -123,7 +137,7 @@ class UserProduct
     /**
      * Set qty
      *
-     * @param boolean $qty
+     * @param integer $qty
      * @return UserProduct
      */
     public function setQty($qty)
@@ -136,10 +150,33 @@ class UserProduct
     /**
      * Get qty
      *
-     * @return boolean 
+     * @return integer
      */
     public function getQty()
     {
         return $this->qty;
+    }
+
+    /**
+     * Set state
+     *
+     * @param boolean $state
+     * @return UserProduct
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return boolean
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 }
