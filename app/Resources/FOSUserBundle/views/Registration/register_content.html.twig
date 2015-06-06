@@ -56,27 +56,24 @@
     </script>
     <script src="/js/defaultCountrylp.js"></script>
     <script>
-        //console.log(allCountriesA);
         var country = window.document.getElementById('country').value;
+        // console.log(country.toLowerCase().trim());
 
+        var countryList = [];
         for (var i in allCountriesA) {
-            var j = allCountriesA[i][0];
-            var x = j.substring(j.indexOf(' '));
-            if (x[0] == "" || null == x[0] || typeof x[0] == "undefined" ) {
-                console.log(x);
-                console.log(x)[0];
+            var x = allCountriesA[i]
+            var j = x[0].substring(0, x[0].indexOf('('));
+
+            if ( null == j || "" == j || typeof j == "undefined"){
+                countryName = x[0].toLowerCase().trim();
             } else {
-                if(x[0].toLowerCase()=='new'){
-                    var z = x[0].toLowerCase()+x[1].toLowerCase();
-                    console.log(z);
-                }else {
-                    console.log(x[0]);
-                }
-
-
-
-
+                countryName = j.toLowerCase().trim();
             }
+            countryList.push([countryName, allCountriesA[i][1]]);
+        }
+
+        for (var i in countryList) {
+            //console.log(countryList[i]);
         }
 
     </script>
