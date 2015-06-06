@@ -18,7 +18,8 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new CmsUlysseBundle\CmsUlysseBundle(),
-            new FOS\UserBundle\FOSUserBundle()
+            new FOS\UserBundle\FOSUserBundle(),
+            new FOS\MessageBundle\FOSMessageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
