@@ -13,18 +13,31 @@
             <th>Vendeur</th>
             <th>Total</th>
         </tr>
+        {% set totaux = 0 %}
         {% for userproduct in products %}
             <tr>
+                {% set total = 0 %}
                 <td id="name{{ userproduct.id }}">{{ userproduct.name }}</td>
                 <td id="description{{ userproduct.id }}">{{ userproduct.description }}</td>
                 <td id="price{{ userproduct.id }}">{{ userproduct.price }}</td>
-                <td><input id="qty{{ userproduct.id }}" type="number" value="{{ userproduct.qty }}" onclick="updateCart({{ userproduct.id }});"/></td>
+                <td><input id="qty{{ userproduct.id }}" type="number" value="{{ userproduct.qty }}" min="0" max="{{ userproduct.stock }}" onclick="updateCart({{ userproduct.id }});"/></td>
                 <td id="stock{{ userproduct.id }}" style="display:none;">{{ userproduct.stock }}</td>
                 <td id="seller{{ userproduct.id }}">{{ userproduct.seller }}</td>
-                <td></td>
-                <td id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez dépassé la quantité du produit disponible</td>
+                <td id="total{{ userproduct.id }}">
+{#                    {% set total = total + (userproduct.qty * userproduct.price) %}{{ total }}
+                    {% set totaux = totaux + total %}#}
+                </td>
+                <td id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez atteind la quantité maximum de ce produit</td>
             </tr>
         {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td id="totaux">{#{{ totaux }}#}</td>
+        </tr>
     </table>
 {#    <div id="order" style="display:none;">
         {{ form(form) }} formulaire de validation de la commande (à rajouter après développement de l'entité Command CommandProduct...
@@ -36,7 +49,6 @@
 
         for(var i = 0; i < cart.length; i++) {
             updateCart(cart[i].id);
-            console.log(cart);
         }
 
         function setCookie(cname, cvalue, exdays) {
@@ -46,6 +58,7 @@
             document.cookie = cname + "=" + cvalue + "; " + expires;
 
         };
+
         function getCookie(cname) {
             var name = cname + "=";
             var ca = document.cookie.split(';');
@@ -57,6 +70,7 @@
             return "";
 
         };
+
         function updateCart(id){
             var don = document.getElementById('name'+id);
             var name = don.innerText || don.textContent;
@@ -77,25 +91,36 @@
             don = document.getElementById('seller'+id);
             var seller = don.innertText || don.textContent;
 
+            var totaux = 0;
+
             for(var i = 0; i < cart.length; i++) {
+                var total = 0;
                 if (cart[i].id == id) {
                     cart[i].name        = name;
                     cart[i].description = description;
                     cart[i].price       = price;
-                    if (qty > stock) {
-                        console.log('error');
+                    if (qty >= stock) {
+                        if (qty == stock) {
+                            cart[i].qty = qty;
+                        }
                         document.getElementById('errorqty'+id).style.display="block";
                     } else {
-                        console.log('no error');
                         cart[i].qty = qty;
                         document.getElementById('errorqty'+id).style.display="none";
                     }
                     cart[i].stock  = stock;
                     cart[i].seller = seller;
+                    total = cart[i].price * cart[i].qty;
+                    document.getElementById('total'+id).innerHTML = total;
                 }
+                totaux = totaux + (cart[i].qty * cart[i].price);
             }
+            document.getElementById('totaux').innerHTML = totaux;
 
             setCookie('cart',JSON.stringify(cart),3);
         };
+
+
+
     </script>
 {% endblock %}

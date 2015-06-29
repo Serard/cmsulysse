@@ -54,6 +54,19 @@ class UserProduct
      */
     private $state;
 
+    /**
+     * @ORM\OneToMany(targetEntity="CommandUserProduct", mappedBy="product", cascade={"persist"})
+     */
+    private $commands;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->commands       = new ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -178,5 +191,37 @@ class UserProduct
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Add commands
+     *
+     * @param CommandUserProduct $commands
+     */
+    public function addCommand(CommandUserProduct $commands)
+    {
+        $this->commands[] = $commands;
+
+        return $this;
+    }
+
+    /**
+     * Remove commands
+     *
+     * @param CommandUserProduct $commands
+     */
+    public function removeCommand(CommandUserProduct $commands)
+    {
+        $this->commands->removeElement($commands);
+    }
+
+    /**
+     *  Get commands
+     *
+     * @return Collection
+     */
+    public function getCommands()
+    {
+        return $this->commands;
     }
 }
