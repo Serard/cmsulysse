@@ -21,7 +21,7 @@
                 <td id="stock{{ userproduct.id }}">{{ userproduct.qty }}</td>
                 <td id="seller{{ userproduct.id }}">{{ userproduct.user.lastname }} {{ userproduct.user.firstname }}</td>
                 <td><button onclick="addCart({{ userproduct.id }});">Ajouter</button></td>
-                <td id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez dépassé la quantité du produit disponible</td>
+                <td id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez atteind la quantité maximum de ce produit</td>
             </tr>
         {% endfor %}
     </table>
