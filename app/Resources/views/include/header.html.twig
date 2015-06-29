@@ -17,18 +17,25 @@
         <h2>Le super slogan d'ulysse</h2>
 
     </section>
+    <section class="menu header">
+        {#% if is_granted("IS_AUTHENTICATED_REMEMBERED")%#}
+        <span class="icon user"><a href=""><i class="fa fa-user fa-lg"></i></a>
+            <div id="confUser" class="iconZoom on">
+                <div class="triangleA"></div>
+                <div class="triangleB"></div>
+                <div class="list-group card">
+                    <a class="list-group-item" href="#"><i class="fa fa-home fa-fw"></i>&nbsp; info</a>
+                    <a class="list-group-item" href="#"><i class="fa fa-book fa-fw"></i>&nbsp; command</a>
+                    <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; sell</a>
+                    <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
+                </div>
 
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-        <span class="icon user"><a href="">User</a>
-            <div id="confUser">
-                <a href="{#{ path('user_updated') }#}" class="">User Update</a>
-                <a href="{#{ path('user_command') }#}" class="">User Command</a>
-                <a href="{#{ path('vente_user') }#}" class="">User Vente</a>
             </div>
         </span>
         <a href="" class="icon panier"></a>
-    {% else %}
+        {#% else %#}
         <a href="" class="signin">sign in</a>
         <a href="" class="signup">sign up</a>
-    {% endif %}
+        {#% endif %#}
+    </section>
 </header>
