@@ -16,9 +16,15 @@
     </div>
 {% endfor %}
 
-<h3>reply</h3>
+<h3>Répondre</h3>
 
 <form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
+
+    <div>
+        {{ form_label(form.body, "Message") }}
+        {{ form_widget(form.body) }}
+        {{ form_errors(form.body) }}
+    </div>
     {{ form_widget(form) }}
 
     <input type="submit" />

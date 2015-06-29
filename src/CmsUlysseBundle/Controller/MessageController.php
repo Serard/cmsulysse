@@ -15,39 +15,6 @@ class MessageController extends BaseController
 {
 
     /**
-     * @Route("", name="cms_messagerie")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        $provider = $this->getProvider();
-        $threads = $provider->getInboxThreads();
-
-      /*  return $this->container->get('templating')->renderResponse('FOSMessageBundle:Message:inbox.html.twig', array(
-            'threads' => $threads
-        ));
-
-       /* $composer = $this->get('fos_message.composer');
-        $message = $composer->newThread()
-            ->setSender($this->getUser())
-            ->addRecipient($this->getUser())
-            ->setSubject('myThread')
-            ->setBody('cest le body de mon test')
-            ->getMessage();
-
-        $sender = $this->get('fos_message.sender');
-        $sender->send($message);
-
-        $provider = $this->get('fos_message.provider');
-
-        $nbUnread = $provider->getNbUnreadMessages();*/
-
-        return array(
-            'threads' => $threads,
-        );
-    }
-
-    /**
      * @Route("", name="cms_messagerie_inbox")
      * @Template()
      */
@@ -70,7 +37,7 @@ class MessageController extends BaseController
         $threads = $this->getProvider()->getSentThreads();
 
         if ($message = $formHandler->process($form)) {
-            return new RedirectResponse($this->container->get('router')->generate('fos_message_thread_view', array(
+            return new RedirectResponse($this->container->get('router')->generate('cms_messagerie_thread_view', array(
                 'threadId' => $message->getThread()->getId()
             )));
         }
@@ -94,7 +61,7 @@ class MessageController extends BaseController
 
     /**
      * @Route("/new", name="cms_messagerie_thread_new")
-     * @Template()
+     * @Template("CmsUlysseBundle:Message:newThread.html.twig")
      */
     public function newThreadAction()
     {
@@ -102,19 +69,19 @@ class MessageController extends BaseController
         $formHandler = $this->container->get('fos_message.new_thread_form.handler');
 
         if ($message = $formHandler->process($form)) {
-            return new RedirectResponse($this->container->get('router')->generate('fos_message_thread_view', array(
+            return new RedirectResponse($this->container->get('router')->generate('cms_messagerie_thread_view', array(
                 'threadId' => $message->getThread()->getId()
             )));
         }
 
-        return $this->container->get('templating')->renderResponse('FOSMessageBundle:Message:newThread.html.twig', array(
+        return array(
             'form' => $form->createView(),
             'data' => $form->getData()
-        ));
+        );
     }
 
     /**
-     * @Route("/threads", name="cms_messagerie_thread_view")
+     * @Route("/{threadId}/threads", name="cms_messagerie_thread_view")
      * @Template()
      */
     public function threadAction($threadId)
@@ -124,15 +91,15 @@ class MessageController extends BaseController
         $formHandler = $this->container->get('fos_message.reply_form.handler');
 
         if ($message = $formHandler->process($form)) {
-            return new RedirectResponse($this->container->get('router')->generate('fos_message_thread_view', array(
+            return new RedirectResponse($this->container->get('router')->generate('cms_messagerie_thread_view', array(
                 'threadId' => $message->getThread()->getId()
             )));
         }
 
-        return $this->container->get('templating')->renderResponse('FOSMessageBundle:Message:thread.html.twig', array(
+        return array(
             'form' => $form->createView(),
             'thread' => $thread
-        ));
+        );
     }
 
     /**
@@ -170,10 +137,10 @@ class MessageController extends BaseController
         $query = $this->container->get('fos_message.search_query_factory')->createFromRequest();
         $threads = $this->container->get('fos_message.search_finder')->find($query);
 
-        return $this->container->get('templating')->renderResponse('FOSMessageBundle:Message:search.html.twig', array(
+        return array(
             'query' => $query,
             'threads' => $threads
-        ));
+        );
     }
 
 }

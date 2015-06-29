@@ -2,8 +2,8 @@
 
 {% block fos_message_content %}
 
-<h2>{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</h2>
+<h2>Messages Envoyés</h2>
 
-{% include 'CmsUlysse:Message:threads_list.html.twig' with {'threads': threads} %}
+{% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
 
 {% endblock %}
