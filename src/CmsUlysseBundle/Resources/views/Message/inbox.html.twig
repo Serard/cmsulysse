@@ -1,0 +1,11 @@
+{% extends ':include:message_layout.html.twig' %}
+
+{% block fos_message_content %}
+
+<h2>inbox</h2>
+
+<a href="{{ url('cms_messagerie_thread_new' )}}">send_new</a>
+
+{% include 'CmsUlysse:Message:threads_list.html.twig' with {'threads': threads} %}
+
+{% endblock %}

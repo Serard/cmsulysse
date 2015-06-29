@@ -18,9 +18,9 @@
             <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
             <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
 
-            <button class="btn btn-primary btn-lg btn-block" type="submit" >{{ 'security.login.submit'|trans }}</button>
             <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
         </form>
+        <!--a href="{#{ path('fos_user_resetting_request') }#}">Mot de passe oublié</a-->
     {% endblock fos_user_content %}
 
 {% endblock body %}

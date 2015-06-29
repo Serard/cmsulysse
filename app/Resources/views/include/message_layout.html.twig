@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}" />
+    <title> Messagerie </title>
+</head>
+
+<body>
+
+<h1>{% trans from 'FOSMessageBundle' %}messenger{% endtrans %}</h1>
+
+<ul>
+    <li><a href="{{ url('cms_messagerie_inbox') }}">inbox</a></li>
+    <li><a href="{{ url('cms_messagerie_sent') }}">sent</a></li>
+    <li><a href="{{ url('cms_messagerie_deleted') }}">deleted</a></li>
+</ul>
+
+{% block fos_message_content %}{% endblock %}
+
+</body>
+</html>
