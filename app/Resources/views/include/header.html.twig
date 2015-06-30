@@ -24,12 +24,12 @@
                 <div class="triangleA"></div>
                 <div class="triangleB"></div>
                 <div class="list-group card">
-                    <a class="list-group-item" href="#"><i class="fa fa-home fa-fw"></i>&nbsp; info</a>
-                    <a class="list-group-item" href="#"><i class="fa fa-book fa-fw"></i>&nbsp; command</a>
-                    <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; sell</a>
+                    <a class="list-group-item" href="{#{ path('user_updated') }#}"><i class="fa fa-home fa-fw"></i>&nbsp; info</a>
+                    <a class="list-group-item" href="{#{ path('user_command') }#}"><i class="fa fa-book fa-fw"></i>&nbsp; command</a>
+                    <a class="list-group-item" href="{#{ path('vente_user') }#}"><i class="fa fa-pencil fa-fw"></i>&nbsp; sell</a>
                     <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
+                    <a href="{{ path('cms_messagerie_inbox') }}">Messagerie</a>
                 </div>
-
             </div>
         </span>
         <a href="" class="icon panier"></a>

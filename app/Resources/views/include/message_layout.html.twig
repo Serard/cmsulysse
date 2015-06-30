@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset={{ _charset }}" />
+    <title> Messagerie </title>
+</head>
+
+<body>
+
+<h1>Messagerie</h1>
+
+<ul>
+    <li><a href="{{ url('cms_messagerie_inbox') }}">Boite de réception</a></li>
+    <li><a href="{{ url('cms_messagerie_sent') }}">Messages Envoyés</a></li>
+    <li><a href="{{ url('cms_messagerie_deleted') }}">Archives</a></li>
+</ul>
+
+{% block fos_message_content %}{% endblock %}
+
+</body>
+</html>

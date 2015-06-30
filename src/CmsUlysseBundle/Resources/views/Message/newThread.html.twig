@@ -1,0 +1,30 @@
+{% extends ':include:message_layout.html.twig' %}
+
+{% block fos_message_content %}
+
+<h2>Nouveau Message</h2>
+
+<form action="{{ url('cms_messagerie_thread_new') }}" method="post">
+
+    <div>
+        {{ form_label(form.recipient, "UserName") }}
+        {{ form_widget(form.recipient) }}
+        {{ form_errors(form.recipient) }}
+    </div>
+    <div>
+        {{ form_label(form.subject, "Objet") }}
+        {{ form_widget(form.subject) }}
+        {{ form_errors(form.subject) }}
+    </div>
+    <div>
+        {{ form_label(form.body, "Message") }}
+        {{ form_widget(form.body) }}
+        {{ form_errors(form.body) }}
+    </div>
+
+    {{ form_widget(form) }}
+
+    <input type="submit" />
+</form>
+
+{% endblock %}
