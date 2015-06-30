@@ -12,10 +12,25 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserProductRepository extends EntityRepository
 {
-    public function findMarketProducts()
+    public function findSearchProducts($search, $category = null)
     {
-        $qb = $this->createQueryBuilder('p');
-        $qb->where('p.qty != 0');
+        $qb = $this->createQueryBuilder('u');
+        $qb->join('u.product', 'p')
+            ->addSelect('p')
+            ->leftJoin('p.categories', 'c')
+            ->addSelect('c')
+            ->where('p.name LIKE :search')
+            ->orWhere('p.description LIKE :search')
+            ->setParameter('search', '%'.$search.'%');
+
+        if ($category === null) {
+            $qb->orWhere('c.name LIKE :search');
+
+        } else {
+            $qb->andWhere("c.id = :category")
+               ->setParameter('category', $category);
+        }
+
 
         return $qb->getQuery()->getResult();
     }

@@ -5,13 +5,12 @@
 {% block body %}
     <input type="search" placeholder="search" id="search" name="search"/>
     <select>
-        <option>TOUS</option>
+        <optgroup>Choisissez une catégorie pour affiner votre recherche</optgroup>
         {% for category in categories %}
-            <option class="optgroup">{{ category.name }}</option>
-            {{ category.name }}
+        <optgroup>{{ category.name }}</optgroup>
             {% for categ_down in categs_down %}
                 {% if  categ_down.categup.id == category.id %}
-                    <option>{{ categ_down.name }}</option>
+                <option>{{ categ_down.name }}</option>
                 {% endif %}
             {% endfor %}
         {% endfor %}
@@ -108,8 +107,8 @@
             setCookie('cart',JSON.stringify(cart),3);
         };
 
+        var url = '{{ path('search_cart') }}';
 
-        var url  = '{{ path('search_cart') }}';
 
         var search = {};
         search.attribute = document.getElementById('search');

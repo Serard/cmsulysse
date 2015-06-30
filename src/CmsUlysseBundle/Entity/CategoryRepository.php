@@ -31,6 +31,15 @@ class CategoryRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function findDownLevel($category)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->where('c.categ_up = :category')
+           ->setParameter('category', $category);
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function findCategsUpForm()
     {
         $qb = $this->createQueryBuilder('c');
