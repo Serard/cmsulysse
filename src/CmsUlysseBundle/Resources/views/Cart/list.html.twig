@@ -5,13 +5,13 @@
 {% block body %}
     <input type="search" placeholder="search" id="search" name="search"/>
     <select>
-        <option>TOUS</option>
+        <option id="TOUS" name="0">TOUS</option>
         {% for category in categories %}
-            <option class="optgroup">{{ category.name }}</option>
+            <option id="{{ category.name }}" name="{{ category.id }}" class="optgroup">{{ category.name }}</option>
             {{ category.name }}
             {% for categ_down in categs_down %}
                 {% if  categ_down.categup.id == category.id %}
-                    <option>{{ categ_down.name }}</option>
+                    <option id="{{ categ_down.name }}" name="{{ categ_down.id }}">{{ categ_down.name }}</option>
                 {% endif %}
             {% endfor %}
         {% endfor %}
@@ -109,7 +109,8 @@
         };
 
 
-        var url  = '{{ path('search_cart') }}';
+        var url      = '{{ path('search_cart') }}';
+        var redirUrl = '{{ path('market_cart') }}';
 
         var search = {};
         search.attribute = document.getElementById('search');
@@ -137,6 +138,16 @@
             data.search= search.attribute.value;
             search.request(data);
         });
+
+        $('select').change(function(){
+            var category = $("select option:selected").text();
+            var id = document.getElementById(category).getAttribute("name");
+            if (id == "0") {
+                location.href=redirUrl;
+            } else {
+                location.href=redirUrl+'category/'+id;
+            }
+        })
 
     </script>
 {% endblock %}

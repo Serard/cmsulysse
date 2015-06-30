@@ -5,12 +5,21 @@
 {% block body %}
     <input type="search" placeholder="search" id="search" name="search"/>
     <select>
-        <optgroup>Choisissez une catégorie pour affiner votre recherche</optgroup>
+        <option id="TOUS" name="0">TOUS</option>
         {% for category in categories %}
-        <optgroup>{{ category.name }}</optgroup>
+            {% if (app.session.get('category') == category.id) %}
+                <option id="{{ category.name }}" name="{{ category.id }}" class="optgroup" selected>{{ category.name }}</option>
+            {% else %}
+                <option id="{{ category.name }}" name="{{ category.id }}" class="optgroup">{{ category.name }}</option>
+            {% endif %}
+            {{ category.name }}
             {% for categ_down in categs_down %}
                 {% if  categ_down.categup.id == category.id %}
-                <option>{{ categ_down.name }}</option>
+                    {% if (app.session.get('category') == categ_down.id)%}
+                        <option id="{{ categ_down.name }}" name="{{ categ_down.id }}" selected>{{ categ_down.name }}</option>
+                    {% else %}
+                        <option id="{{ categ_down.name }}" name="{{ categ_down.id }}">{{ categ_down.name }}</option>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         {% endfor %}
@@ -107,7 +116,8 @@
             setCookie('cart',JSON.stringify(cart),3);
         };
 
-        var url = '{{ path('search_cart') }}';
+        var url      = '{{ path('search_cart') }}';
+        var redirUrl = '{{ path('market_cart') }}';
 
 
         var search = {};
@@ -137,5 +147,14 @@
             search.request(data);
         });
 
+        $('select').change(function(){
+            var category = $("select option:selected").text();
+            var id = document.getElementById(category).getAttribute("name");
+            if (id == "0") {
+                location.href=redirUrl;
+            } else {
+                location.href=redirUrl+'category/'+id;
+            }
+        })
     </script>
 {% endblock %}
