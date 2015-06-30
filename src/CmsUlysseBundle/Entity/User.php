@@ -3,8 +3,10 @@
 namespace CmsUlysseBundle\Entity;
 
 
+use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -12,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="CmsUlysseBundle\Entity\UserRepository")
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
     /**
      * @var integer
@@ -22,11 +24,6 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * @var string
@@ -45,6 +42,13 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="street_number", type="string", length=255)
+     */
+    private $streetNumber;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="address", type="text")
      */
     private $address;
@@ -52,9 +56,23 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(name="administrative_area", type="string", length=255)
+     */
+    private $administrativeArea;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="postalCode", type="string", length=255)
      */
     private $postalCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255)
+     */
+    private $country;
 
     /**
     * @var string
@@ -67,6 +85,11 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="tel", type="string", length=255)
+     * @Assert\Regex(
+     *     pattern= "/^((\+|00)33\s?|0)[1-9](\s?\d{2}){4}$/",
+     *     match=true,
+     *     message="Rentrer un numéro de téléphone correct"
+     * )
      */
     private $tel;
 
@@ -77,6 +100,10 @@ class User extends BaseUser
      */
     private $isActive;
 
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Get id
@@ -244,5 +271,61 @@ class User extends BaseUser
         parent::setEmail($email);
         $this->setUsername($email);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getAdministrativeArea()
+    {
+        return $this->administrativeArea;
+    }
+
+    /**
+     * @param mixed $administrativeArea
+     * @return $this
+     */
+    public function setAdministrativeArea($administrativeArea)
+    {
+        $this->administrativeArea = $administrativeArea;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * @param string $country
+     * @return $this
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStreetNumber()
+    {
+        return $this->streetNumber;
+    }
+
+    /**
+     * @param string $streetNumber
+     * @return $this
+     */
+    public function setStreetNumber($streetNumber)
+    {
+        $this->streetNumber = $streetNumber;
+        return $this;
+    }
+
+
 
 }

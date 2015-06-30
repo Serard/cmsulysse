@@ -55,6 +55,11 @@ class Product
     private $categories;
 
     /**
+     * @ORM\OneToMany(targetEntity="UserProduct", mappedBy="product", cascade={"persist"})
+     */
+    private $usersProducts;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="picture", type="string", length=255, nullable=true)
@@ -77,7 +82,8 @@ class Product
 
     public function __construct()
     {
-        $this->categories     = new ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->usersProducts = new ArrayCollection();
         $this->specifications = new ArrayCollection();
     }
 
@@ -187,6 +193,34 @@ class Product
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * @param UserProduct $userProduct
+     */
+    public function addUserProduct(UserProduct $userProduct)
+    {
+        $this->usersProducts[] = $userProduct;
+    }
+
+    /**
+     * Remove UserProducts
+     *
+     * @param UserProduct $userProduct
+     */
+    public function removeUserProduct(UserProduct $userProduct)
+    {
+        $this->usersProducts->removeElement($userProduct);
+    }
+
+    /**
+     * Get UserProducts
+     *
+     * @return Collection
+     */
+    public function getUserProducts()
+    {
+        return $this->usersProducts;
     }
 
     /**

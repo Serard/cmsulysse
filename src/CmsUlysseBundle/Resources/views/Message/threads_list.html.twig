@@ -1,0 +1,75 @@
+<table>
+
+    <thead>
+        <tr>
+            <th>Object</th>
+            <th>Heure</th>
+            <th>Date</th>
+            <th>Messages</th>
+            <th>Dernier Message</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% if threads %}
+        {% for thread in threads %}
+            <tr>
+                <td>
+                    <a href="{{ url('cms_messagerie_thread_view', {'threadId': thread.id}) }}">
+                        {{ thread.subject }}
+                    </a>
+
+                    {% if not fos_message_is_read(thread) %}
+                        (new)
+                    {% endif %}
+                </td>
+                <td>
+                    {{ thread.createdBy }}
+                </td>
+                <td>
+                    {{ thread.createdAt|date }}
+                </td>
+                <td>
+                    {{ thread.messages|length }}
+                </td>
+                <td>
+                    {% if thread.lastMessage %}
+                        <a href="{{ url('cms_messagerie_thread_view', {'threadId': thread.id}) }}#message_{{ thread.lastMessage.id }}" title="{% trans from 'FOSMessageBundle' %}goto_last{% endtrans %}">
+                            →
+                        </a>
+                        {% trans with {'%date%': thread.lastMessage.createdAt|date} from 'FOSMessageBundle' %}on{% endtrans %}
+                        <br />
+                        {% trans with {'%sender%': thread.lastMessage.sender|e } from 'FOSMessageBundle' %}by{% endtrans %}
+                    {% else %}
+                        ----
+                    {% endif %}
+                </td>
+                <td>
+                    {% if fos_message_can_delete_thread(thread) %}
+                        {% if fos_message_deleted_by_participant(thread) %}
+                            {% set formAction %}{{ url('cms_messagerie_thread_undelete', {'threadId': thread.id}) }}{% endset %}
+                            {% set submitValue %}retirer de l'archive{% endset %}
+                        {% else %}
+                            {% set formAction %}{{ url('cms_messagerie_thead_delete', {'threadId': thread.id}) }}{% endset %}
+                            {% set submitValue %}archivé{% endset %}
+                        {% endif %}
+                        <form action="{{ formAction }}" method="post">
+                                <input type="submit" value="{{ submitValue }}" />
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="6">
+                no_thread.
+            </td>
+        </tr>
+    {% endif %}
+
+    </tbody>
+
+</table>

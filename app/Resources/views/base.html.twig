@@ -3,7 +3,20 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+
+        {% stylesheets
+            'css/style.css'
+            filter='cssrewrite' output='css/compiled/app.css' %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+
+        {% block stylesheets %}
+            <style>
+
+
+            </style>
+        {% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% javascripts output="js/compiled/main.js"
         "js/jquery-2.1.4.min.js" %}
@@ -11,7 +24,21 @@
         {% endjavascripts %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block header %}
+            {%  include ':include:header.html.twig' %}
+        {% endblock header %}
+        {% block body %}{% endblock body %}
+        {% block footer %}
+            {%  include ':include:footer.html.twig' %}
+        {% endblock footer %}
+
+        {% block javascripts %}{% endblock javascripts%}
+
+        {% javascripts
+            'js/iconMenu.js'
+            output='js/compiled/app.js' %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+
     </body>
 </html>

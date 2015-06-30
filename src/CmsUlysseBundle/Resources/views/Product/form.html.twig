@@ -4,7 +4,6 @@
 
 {% block body %}
 
-
 <h1 xmlns="http://www.w3.org/1999/html">Welcome to the Product:add page</h1>
     <form action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form">
         <section>
@@ -21,15 +20,19 @@
         </section>
         <section>
             <ul class="specifications" data-prototype="{{ form_widget(form.specifications.vars.prototype)|e }}">
-                   {# itère sur chaque spec existantes #}
+                {# itère sur chaque spec existantes #}
                 {% for specification in form.specifications %}
                     <li>{{ form_row(specification.name) }}</li>
                     <li>{{ form_row(specification.content) }}</li>
                 {% endfor %}
             </ul>
         </section>
+        <section>
+            {{ form_widget(form.user_products.vars.prototype) }}
+        </section>
         <section style="display:none" class="spec">
             {{ form_row(form.specifications) }}
+            {{ form_row(form.user_products) }}
         </section>
         {{ form_rest(form) }}
     </form>
@@ -39,6 +42,7 @@
     <script>
         var collectionHolder = $('ul.specifications');
         var $addSpecLink = $('<a href="#">Ajouter une specification</a>');
+
         var $newLinkLi = $('<li></li>').append($addSpecLink);
         jQuery(document).ready(function() {
             collectionHolder.append($newLinkLi);

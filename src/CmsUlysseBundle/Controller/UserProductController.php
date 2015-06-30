@@ -8,13 +8,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductController extends Controller
+class UserProductController extends Controller
 {
     /**
      * @Route("/user/product/", name="user_product_list")
      * @Template()
      */
-    public function indexAction()
+    public function indexUsuerAction()
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CmsUlysseBundle:UserProduct');
@@ -22,45 +22,4 @@ class ProductController extends Controller
 
         return array('products' => $UserProducts);
     }
-
-    /**
-     * @Route("/user/product/add", name="user_product_add")
-     * @Template()
-     */
-    public function addAction(Request $request)
-    {
-        $form = $this->createForm(new ProductType(), new UserProduct());
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userProduct = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($userProduct);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('user_product_list'));
-        }
-
-        return array('form' => $form->createView());
-    }
-
-    /**
-     * @Route("/user/vente/new", name="user_product_add")
-     * @Template()
-     */
-    public function addAction(Request $request)
-    {
-        $form = $this->createForm(new ProductType(), new UserProduct());
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $userProduct = $form->getData();
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($userProduct);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('user_product_list'));
-        }
-
-        return array('form' => $form->createView());
-    }
+}

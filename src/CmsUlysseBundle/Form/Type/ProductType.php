@@ -31,6 +31,11 @@ class ProductType extends  AbstractType
                 'allow_add' => true,
                 'by_reference' => false,
                 ))
+            ->add('user_products', 'collection', array(
+                'type' =>   new UserProductType(),
+                'allow_add' => true,
+                'by_reference' => false,
+            ))
             ->add('btn', 'submit', array('label' => 'Valider'))
             ;
     }

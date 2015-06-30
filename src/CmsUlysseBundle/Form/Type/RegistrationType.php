@@ -23,14 +23,16 @@ class RegistrationType extends BaseType
             ))
             ->add('lastname', null, array('label' => 'Nom'))
             ->add('firstname', null, array('label' => 'Prénom'))
+            ->add('street_number')
             ->add('address', null, array('label' => 'Adresse'))
-            ->add('postal_code', null, array('label' => 'CP'))
             ->add('city', null, array('label' => 'City'))
+            ->add('administrative_area')
+            ->add('postal_code', null, array('label' => 'CP'))
+            ->add('country')
             ->add('tel', null, array('label' => 'Téléphone'))
             ->add('is_active', 'hidden', array(
                 'data' => '1'
             ))
-            ->add('btn', 'submit', array('label' => 'Modifier'))
         ;
 
         return $builder;
