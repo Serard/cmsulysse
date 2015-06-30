@@ -27,7 +27,7 @@ class RegistrationType extends BaseType
             ->add('postal_code', null, array('label' => 'CP'))
             ->add('city', null, array('label' => 'City'))
             ->add('tel', null, array('label' => 'Téléphone'))
-            ->add('is_active', null, array(
+            ->add('is_active', 'hidden', array(
                 'data' => '1'
             ))
             ->add('btn', 'submit', array('label' => 'Modifier'))

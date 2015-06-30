@@ -6,6 +6,12 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.14
+cookie cart
+
+dev version    : dev-v0.0.13
+addPanier
+
 dev version    : dev-v0.0.12
 update user
 

@@ -2,6 +2,7 @@
 
 namespace CmsUlysseBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -66,13 +67,6 @@ class Command
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="createdAt", type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
      * @ORM\Column(name="sendAt", type="datetime")
      */
     private $sendAt;
@@ -85,6 +79,18 @@ class Command
     */
     private $state;
 
+    /**
+     * @ORM\OneToMany(targetEntity="CommandUserProduct", mappedBy="command", cascade={"persist"})
+     */
+    private $products;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -235,29 +241,6 @@ class Command
     }
 
     /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Command
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime 
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
      * Set sendAt
      *
      * @param \DateTime $sendAt
@@ -299,5 +282,38 @@ class Command
     public function getState()
     {
         return $this->state;
+    }
+
+    /**
+     * Add products
+     *
+     * @param CommandUserProduct $products
+     * @return Command
+     */
+    public function addProduct(CommandUserProduct $products)
+    {
+        $this->products[] = $products;
+
+        return $this;
+    }
+
+    /**
+     * Remove products
+     *
+     * @param CommandUserProduct $products
+     */
+    public function removeProduct(CommandUserProduct $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Get products
+     *
+     * @return Collection
+     */
+    public function getProducts()
+    {
+        return $this->products;
     }
 }

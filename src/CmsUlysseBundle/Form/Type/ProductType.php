@@ -19,7 +19,7 @@ class ProductType extends  AbstractType
             ->add('description')
             ->add('file')
             ->add('categories', 'entity', array('label'    => 'Catégories : ',
-                'required' => false,
+                'required' => true,
                 'class'    => 'CmsUlysseBundle:Category',
                 'property' => 'name',
                 'query_builder' => function (\CmsUlysseBundle\Entity\CategoryRepository $r) {
