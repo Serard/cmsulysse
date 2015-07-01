@@ -6,6 +6,9 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.17
+search bar with categories
+
 dev version    : dev-v0.0.16
 messagerie
 
