@@ -2,6 +2,8 @@
 
 namespace CmsUlysseBundle\Controller;
 
+use CmsUlysseBundle\Entity\Thread;
+use CmsUlysseBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -69,8 +71,20 @@ class MessageController extends BaseController
         $formHandler = $this->container->get('fos_message.new_thread_form.handler');
 
         if ($message = $formHandler->process($form)) {
+
+            $threadId = $message->getThread()->getId();
+
+            $thread = $message->getThread();
+            $user = $thread->getCreatedBy();
+            $body = $thread->getFirstMessage();
+            $subject = $thread->getSubject();
+            $receipients = $thread->getOtherParticipants($user);
+            $receipient = $receipients[0];
+            $this->contactAdmin($user, $subject,$body);
+            $this->mailNewThread($user, $receipient, $subject, $body);
+
             return new RedirectResponse($this->container->get('router')->generate('cms_messagerie_thread_view', array(
-                'threadId' => $message->getThread()->getId()
+                'threadId' => $threadId
             )));
         }
 
@@ -141,6 +155,18 @@ class MessageController extends BaseController
             'query' => $query,
             'threads' => $threads
         );
+    }
+
+    public function mailNewThread(User $user, User $recipient, $subject, $body)
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject($subject)
+            ->setFrom($user->getEmail())
+            ->setTo($recipient->getEmail())
+            ->setBody("Body or not body !!! ");
+
+        $this->container->get('mailer')->send($message);
+        return $this;
     }
 
 }

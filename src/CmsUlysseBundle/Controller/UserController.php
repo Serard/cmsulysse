@@ -2,6 +2,7 @@
 
 namespace CmsUlysseBundle\Controller;
 
+use CmsUlysseBundle\Entity\User;
 use CmsUlysseBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -53,6 +54,25 @@ class UserController extends Controller
     {
         return array(
 
-            );    }
+            );
+    }
 
+    public function contactAction(User $user, $subject, $body)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('CmsUlysseBundle:User');
+        $usersAdmin = $repo->findUsersByRole();
+
+        foreach($usersAdmin as $admin){
+            $message = \Swift_Message::newInstance()
+                ->setSubject($subject)
+                ->setFrom($user->getEmail())
+                ->setTo($admin->getEmail())
+                ->setBody($body);
+
+            $this->get('mailer')->send($message);
+        }
+
+        return $this;
+    }
 }
