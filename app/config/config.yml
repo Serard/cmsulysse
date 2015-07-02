@@ -31,6 +31,8 @@ framework:
     fragments:       ~
     http_method_override: true
     translator: ~
+    serializer:
+        enabled: true
 
 # Twig Configuration
 twig:

@@ -11,4 +11,5 @@
 /bin/
 /web/upload/
 /composer.phar
+/app/SymfonyRequirements.php
 .idea

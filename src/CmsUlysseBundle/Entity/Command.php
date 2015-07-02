@@ -72,6 +72,13 @@ class Command
     private $sendAt;
 
     /**
+     * @var float
+     *
+     * @ORM\Column(name="amount", type="float", precision = 2)
+     */
+    private $amount;
+
+    /**
     * @var State
     *
     * @ORM\ManyToOne(targetEntity="State" ,inversedBy="state")
@@ -264,6 +271,29 @@ class Command
     }
 
     /**
+     * Set amount
+     *
+     * @param float $amount
+     * @return Command
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return float
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
      * @param State $state
      * @return $this
      */
@@ -277,7 +307,7 @@ class Command
     /**
      * Get state
      *
-     * @return string 
+     * @return State
      */
     public function getState()
     {
