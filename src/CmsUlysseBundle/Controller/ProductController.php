@@ -58,6 +58,9 @@ class ProductController extends Controller
         return array('form' => $form->createView());
     }
 
+
+
+
     /**
      * @Route("/{id}", name="product_view")
      * @Template()

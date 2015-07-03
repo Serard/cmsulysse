@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends Controller
 {
+
     /**
      * @Route("/user/update", name="user_update")
      * @Template()
