@@ -23,6 +23,12 @@ class Command
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="CmsUlysseBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="lastname", type="string", length=255)
@@ -39,9 +45,9 @@ class Command
     /**
      * @var string
      *
-     * @ORM\Column(name="adress", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255)
      */
-    private $adress;
+    private $address;
 
     /**
      * @var integer
@@ -56,13 +62,6 @@ class Command
      * @ORM\Column(name="city", type="string", length=255)
      */
     private $city;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="country", type="string", length=255)
-     */
-    private $country;
 
     /**
      * @var \DateTime
@@ -89,7 +88,7 @@ class Command
     /**
      * @ORM\OneToMany(targetEntity="CommandUserProduct", mappedBy="command", cascade={"persist"})
      */
-    private $products;
+    private $commandUserProducts;
 
     /**
      * Constructor
@@ -107,6 +106,24 @@ class Command
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param $user
+     * @return $this
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+        return $this;
     }
 
     /**
@@ -156,14 +173,14 @@ class Command
     }
 
     /**
-     * Set adress
+     * Set address
      *
-     * @param string $adress
+     * @param string $address
      * @return Command
      */
-    public function setAdress($adress)
+    public function setAddress($address)
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
@@ -173,7 +190,7 @@ class Command
      *
      * @return string 
      */
-    public function getAdress()
+    public function getAddress()
     {
         return $this->adress;
     }
@@ -222,29 +239,6 @@ class Command
     public function getCity()
     {
         return $this->city;
-    }
-
-    /**
-     * Set country
-     *
-     * @param string $country
-     * @return Command
-     */
-    public function setCountry($country)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return string 
-     */
-    public function getCountry()
-    {
-        return $this->country;
     }
 
     /**
@@ -346,4 +340,5 @@ class Command
     {
         return $this->products;
     }
+
 }
