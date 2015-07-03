@@ -6,6 +6,9 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.20
+add command
+
 dev version    : dev-v0.0.19
 add account gmail bde
 
