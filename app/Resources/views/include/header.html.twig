@@ -19,8 +19,8 @@
     </section>
     <section class="menu header">
         {#% if is_granted("IS_AUTHENTICATED_REMEMBERED")%#}
-        <span class="icon user"><a href=""><i class="fa fa-user fa-lg"></i></a>
-            <div id="confUser" class="iconZoom on">
+        <span class="icon user"><a ><i class="fa fa-user fa-lg"></i></a>
+            <div id="confUser" class="iconZoom off">
                 <div class="triangleA"></div>
                 <div class="triangleB"></div>
                 <div class="list-group card">
@@ -32,10 +32,21 @@
                 </div>
             </div>
         </span>
-        <a href="" class="icon panier"></a>
+        <span class="icon panier"><a ><i class="fa fa-shopping-cart"></i></a>
+            <div id="confUser" class="iconZoom off">
+                <div class="triangleA"></div>
+                <div class="triangleB"></div>
+                <div class="list-group card">
+                </div>
+            </div>
+        </span>
         {#% else %#}
         <a href="" class="signin">sign in</a>
         <a href="" class="signup">sign up</a>
         {#% endif %#}
     </section>
+    <script>
+        $('.iconZoom').click(function(){ this.className=(this.className=='iconZoom on')?this.className='iconZoom off':this.className='iconZoom on'});
+    </script>
+
 </header>

@@ -1,7 +1,7 @@
 
 {% block body %}
     <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form-group">
-
+        <h2>Inscription</h2>
         <fieldset>
             {{ form_row(form.lastname) }}
             {{ form_row(form.firstname) }}
@@ -24,8 +24,10 @@
             {{ form_row(form.administrative_area, { 'id': 'administrative_area_level_1'}) }}
             {{ form_row(form.postal_code, { 'id': 'postal_code'}) }}
             {{ form_row(form.country, { 'id': 'country'}) }}
-            {{ form_row(form.tel) }}
 
+        </fieldset>
+        <fieldset>
+            {{ form_row(form.tel) }}
         </fieldset>
         <fieldset>
             <section style="display:none">
@@ -40,12 +42,13 @@
 {% endblock body %}
 
 {% block javascripts %}
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include Google Maps JS API -->
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDiLbha2ADV-c4IjSgjFFCj01FcwrOHteI"></script>
     <!-- Custom JS code to bind to Autocomplete API -->
     <script src="/js/api_google_map/autocomplete.js"></script>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src='/js/intlTellnput.js'></script>
     <script>
         var allCountriesA;
@@ -56,25 +59,7 @@
     </script>
     <script src="/js/defaultCountrylp.js"></script>
     <script>
-        var country = window.document.getElementById('country').value;
-        // console.log(country.toLowerCase().trim());
 
-        var countryList = [];
-        for (var i in allCountriesA) {
-            var x = allCountriesA[i]
-            var j = x[0].substring(0, x[0].indexOf('('));
-
-            if ( null == j || "" == j || typeof j == "undefined"){
-                countryName = x[0].toLowerCase().trim();
-            } else {
-                countryName = j.toLowerCase().trim();
-            }
-            countryList.push([countryName, allCountriesA[i][1]]);
-        }
-
-        for (var i in countryList) {
-            console.log(countryList[i]);
-        }
 
     </script>
 {% endblock javascripts%}
