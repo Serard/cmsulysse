@@ -24,9 +24,8 @@
                 <td id="stock{{ userproduct.id }}" style="display:none;">{{ userproduct.stock }}</td>
                 <td id="seller{{ userproduct.id }}">{{ userproduct.seller }}</td>
                 <td id="total{{ userproduct.id }}">
-{#                    {% set total = total + (userproduct.qty * userproduct.price) %}{{ total }}
-                    {% set totaux = totaux + total %}#}
                 </td>
+                <td><input type="button" onclick="deleteCart({{ userproduct.id }});" value="Supprimer"/></td>
                 <td id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez atteind la quantité maximum de ce produit</td>
             </tr>
         {% endfor %}
@@ -36,7 +35,7 @@
             <td></td>
             <td></td>
             <td></td>
-            <td id="totaux">{#{{ totaux }}#}</td>
+            <td id="totaux"></td>
         </tr>
     </table>
 {#    <div id="order" style="display:none;">
@@ -49,7 +48,7 @@
 
         for(var i = 0; i < cart.length; i++) {
             updateCart(cart[i].id);
-        }
+        };
 
         function setCookie(cname, cvalue, exdays) {
             var d = new Date();
@@ -70,6 +69,8 @@
             return "";
 
         };
+
+        var urlCart = '{{ path('user_cart') }}';
 
         function updateCart(id){
             var don = document.getElementById('name'+id);
@@ -118,6 +119,17 @@
             document.getElementById('totaux').innerHTML = totaux;
 
             setCookie('cart',JSON.stringify(cart),3);
+        };
+
+        function deleteCart(id) {
+            for(var i = 0; i < cart.length; i++) {
+                if (cart[i].id == id) {
+                    cart.splice(i,1);
+                }
+            }
+            setCookie('cart',JSON.stringify(cart),3);
+            location.href=urlCart;
+
         };
 
 

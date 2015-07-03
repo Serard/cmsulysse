@@ -18,7 +18,10 @@
         {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <script src="//"></script>
+        {% javascripts output="js/compiled/main.js"
+        "js/jquery-2.1.4.min.js" %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
     </head>
     <body>
         {% block header %}

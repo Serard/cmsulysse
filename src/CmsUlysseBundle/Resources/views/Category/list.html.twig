@@ -15,7 +15,6 @@
                 <ul>
                     {% for categ_down in categs_down %}
                         {% if  categ_down.categup.id == category.id %}
-                            {% set down = categ_down.id %}
                             <li>{{ categ_down.name }}</li>
                             <p>
                                 <a href="{{ path('category_update', {'id': categ_down.id}) }}">Modifier</a>

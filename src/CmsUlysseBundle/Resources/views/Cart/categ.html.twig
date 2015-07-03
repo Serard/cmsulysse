@@ -7,11 +7,19 @@
     <select>
         <option id="TOUS" name="0">TOUS</option>
         {% for category in categories %}
-            <option id="{{ category.name }}" name="{{ category.id }}" class="optgroup">{{ category.name }}</option>
+            {% if (app.session.get('category') == category.id) %}
+                <option id="{{ category.name }}" name="{{ category.id }}" class="optgroup" selected>{{ category.name }}</option>
+            {% else %}
+                <option id="{{ category.name }}" name="{{ category.id }}" class="optgroup">{{ category.name }}</option>
+            {% endif %}
             {{ category.name }}
             {% for categ_down in categs_down %}
                 {% if  categ_down.categup.id == category.id %}
-                    <option id="{{ categ_down.name }}" name="{{ categ_down.id }}">{{ categ_down.name }}</option>
+                    {% if (app.session.get('category') == categ_down.id)%}
+                        <option id="{{ categ_down.name }}" name="{{ categ_down.id }}" selected>{{ categ_down.name }}</option>
+                    {% else %}
+                        <option id="{{ categ_down.name }}" name="{{ categ_down.id }}">{{ categ_down.name }}</option>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         {% endfor %}
@@ -108,9 +116,9 @@
             setCookie('cart',JSON.stringify(cart),3);
         };
 
-
         var url      = '{{ path('search_cart') }}';
         var redirUrl = '{{ path('market_cart') }}';
+
 
         var search = {};
         search.attribute = document.getElementById('search');
@@ -148,6 +156,5 @@
                 location.href=redirUrl+'category/'+id;
             }
         })
-
     </script>
 {% endblock %}
