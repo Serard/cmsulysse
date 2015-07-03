@@ -17,19 +17,36 @@
         <h2>Le super slogan d'ulysse</h2>
 
     </section>
-
-    {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-        <span class="icon user"><a href="">User</a>
-            <div id="confUser">
-                <a href="{#{ path('user_updated') }#}" class="">User Update</a>
-                <a href="{#{ path('user_command') }#}" class="">User Command</a>
-                <a href="{#{ path('vente_user') }#}" class="">User Vente</a>
-                <a href="{{ path('cms_messagerie_inbox') }}">Messagerie</a>
+    <section class="menu header">
+        {#% if is_granted("IS_AUTHENTICATED_REMEMBERED")%#}
+        <span class="icon user"><a ><i class="fa fa-user fa-lg"></i></a>
+            <div id="confUser" class="iconZoom off">
+                <div class="triangleA"></div>
+                <div class="triangleB"></div>
+                <div class="list-group card">
+                    <a class="list-group-item" href="{#{ path('user_updated') }#}"><i class="fa fa-home fa-fw"></i>&nbsp; info</a>
+                    <a class="list-group-item" href="{#{ path('user_command') }#}"><i class="fa fa-book fa-fw"></i>&nbsp; command</a>
+                    <a class="list-group-item" href="{#{ path('vente_user') }#}"><i class="fa fa-pencil fa-fw"></i>&nbsp; sell</a>
+                    <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
+                    <a href="{{ path('cms_messagerie_inbox') }}">Messagerie</a>
+                </div>
             </div>
         </span>
-        <a href="" class="icon panier"></a>
-    {% else %}
+        <span class="icon panier"><a ><i class="fa fa-shopping-cart"></i></a>
+            <div id="confUser" class="iconZoom off">
+                <div class="triangleA"></div>
+                <div class="triangleB"></div>
+                <div class="list-group card">
+                </div>
+            </div>
+        </span>
+        {#% else %#}
         <a href="" class="signin">sign in</a>
         <a href="" class="signup">sign up</a>
-    {% endif %}
+        {#% endif %#}
+    </section>
+    <script>
+        $('.iconZoom').click(function(){ this.className=(this.className=='iconZoom on')?this.className='iconZoom off':this.className='iconZoom on'});
+    </script>
+
 </header>
