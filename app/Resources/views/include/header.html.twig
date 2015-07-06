@@ -18,8 +18,8 @@
 
     </section>
     <section class="menu header">
-        {#% if is_granted("IS_AUTHENTICATED_REMEMBERED")%#}
-        <span class="icon user"><a ><i class="fa fa-user fa-lg"></i></a>
+        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+        <span class="icon user"><a style="width:100%;height:100%;display:inline-block"><i class="fa fa-user fa-lg"></i></a>
             <div id="confUser" class="iconZoom off">
                 <div class="triangleA"></div>
                 <div class="triangleB"></div>
@@ -31,22 +31,22 @@
                     <a href="{{ path('cms_messagerie_inbox') }}">Messagerie</a>
                 </div>
             </div>
-        </span>
-        <span class="icon panier"><a ><i class="fa fa-shopping-cart"></i></a>
+        </span><span class="descriptIcon">user</span>
+        {% else %}
+        <span class="icon user"><a href="{#{ path('user_updated') }#}" style="width:100%;height:100%;display:inline-block"><i class="fa fa-user fa-lg"></i></a></span>
+        <span class="descriptIcon">connexion</span>
+        {% endif %}
+
+        <span class='other'></span>
+
+        <span class="icon panier"><a  style="width:100%;height:100%;display:inline-block"><i class="fa fa-shopping-cart"></i></a>
             <div id="confUser" class="iconZoom off">
                 <div class="triangleA"></div>
                 <div class="triangleB"></div>
                 <div class="list-group card">
                 </div>
             </div>
-        </span>
-        {#% else %#}
-        <a href="" class="signin">sign in</a>
-        <a href="" class="signup">sign up</a>
-        {#% endif %#}
+        </span><span class="descriptIcon">panier</span>
     </section>
-    <script>
-        $('.iconZoom').click(function(){ this.className=(this.className=='iconZoom on')?this.className='iconZoom off':this.className='iconZoom on'});
-    </script>
 
 </header>

@@ -16,9 +16,7 @@
 }
 header{
     width:100%;
-    /*height:140px;*/
     border-bottom: 1px solid #A8A8A8;
-
 }
 .title.header,
 .menu.header
@@ -65,7 +63,7 @@ header{
     width: 180px;
     top: 44px;
     margin-left: -131px;/*ie8*/
-    margin-left: calc( ( -180px + 18px ) / 2 );
+    margin-left: calc((-180px + 15px) / 2);
     z-index: 999;
 }
 .card{
@@ -122,6 +120,7 @@ a{
     background: #333;
     font-size: 14pt;
     margin:2px 35px;
+    cursor:pointer;
 }
 .icon>a>i.fa {
     color:white;

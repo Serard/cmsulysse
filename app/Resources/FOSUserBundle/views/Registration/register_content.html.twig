@@ -41,8 +41,6 @@
 {% endblock body %}
 
 {% block javascripts %}
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include Google Maps JS API -->
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDiLbha2ADV-c4IjSgjFFCj01FcwrOHteI"></script>
     <!-- Custom JS code to bind to Autocomplete API -->
@@ -59,6 +57,7 @@
     <script src="/js/defaultCountrylp.js"></script>
     <script>
 
+        verifPhone(10);
 
     </script>
 {% endblock javascripts%}

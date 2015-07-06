@@ -1,14 +1,11 @@
-$.getJSON("/admin/LangueRecorder.php", function(responce){
-    //console.log(responce);
-    pays=responce.DefaultPays;
-    listPays=responce.listePays;
+    listPays=['us', 'gb', 'jp', 'ca', 'fr'];
 
     var input = $("#mobile-number");
 
     input.intlTelInput({
-    //laautoFormat: true,//??
+    //autoFormat: true,//??
     //autoHideDialCode: true,//??
-    defaultCountry: pays,//pays de la local
+    defaultCountry: paysGeoLocISO,//pays de la local
     //nationalMode: true,
     numberType: "MOBILE",//??
     //onlyCountries: ['us', 'gb', 'jp', 'ca', 'cn'], //avoir si on l'applique
@@ -25,4 +22,3 @@ $.getJSON("/admin/LangueRecorder.php", function(responce){
             idNum.value         = numTel;
             showValid.className = 'valid';
     }
-});

@@ -1,5 +1,5 @@
 /*definition de l'url de l'image et de la taille */
-.intl-tel-input .flag{width:16px;height:11px;background:url("/V2/img/verifphone/flags.png")}
+.intl-tel-input .flag{width:16px;height:11px;background:url("../img/verifphone/flags.png")}
 
 /*position du background en fonction du pays*/
 .intl-tel-input .ad{background-position:-16px 0}
