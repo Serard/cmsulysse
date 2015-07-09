@@ -1,9 +1,9 @@
 /**
 *create by Navière Pascal
 */
-@import url("demo.css");
-@import url("intlTellnput.css");
-@import url("css/font-awesome.min.css");
+@import url("../../../css/demo.css");
+@import url("../../../css/intlTellnput.css");
+@import url("../../../css/css/font-awesome.min.css");
 @import url(http://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab);
 
 * {

@@ -4,11 +4,13 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
 
-        {% stylesheets
-            'css/style.css'
-            filter='cssrewrite' output='css/compiled/app.css' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        {% block style %}
+            {% stylesheets
+                'css/style.css'
+                filter='cssrewrite' output='css/compiled/app.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
 
         {% block stylesheets %}
             <style>
@@ -34,11 +36,16 @@
 
         {% block javascripts %}{% endblock javascripts%}
 
-        {% javascripts
-            'js/iconMenu.js'
-            output='js/compiled/app.js' %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+        {% block modal %}
+        {% endblock %}
+
+        {% block javas %}
+            {% javascripts
+                'js/iconMenu.js'
+                output='js/compiled/app.js' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
 
     </body>
 </html>

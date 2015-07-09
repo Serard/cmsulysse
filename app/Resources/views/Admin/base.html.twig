@@ -1,0 +1,119 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Admin{% endblock %}
+
+{% block style %}
+    {% stylesheets output="css/compiled/main.css" filter="cssrewrite"
+        'bundles/admin/css/bootstrap.min.css'
+        'bundles/admin/css/styles.css'
+        'bundles/masonry/css/styles.css' %}
+        <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+{% endblock %}
+
+{% block header %}
+    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Admin</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"> Admin <span class="caret"></span></a>
+                        <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                            <li><a href="#">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <a href="#"><strong> Tools</strong></a>
+                <hr>
+
+                <ul class="nav nav-stacked">
+                    <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Settings</a>
+                        <ul class="nav nav-stacked collapse in" id="userMenu">
+                            <li class="active"> <a href="#"></i> Home</a></li>
+                            <li><a href="#"> Messagerie</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#menu2"> Products</a>
+                        <ul class="nav nav-stacked collapse" id="menu2">
+                            <li><a href="{{ path('index_admin') }}">Nouveaux Produits</a>
+                            </li>
+                            <li><a href="{{ path('product_admin') }}">Liste des produits</a>
+                            </li>
+                            <li><a href="#">Produits Phares</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <hr>
+                <a href="#"><strong>Statistiques</strong></a>
+                <hr>
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="nav-header"></li>
+                    <li><a href="#">Toto</a></li>
+                </ul>
+                <hr>
+            </div>
+            <div class="col-sm-9">
+                {% block body_content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+    <footer class="text-center">This Bootstrap 3 dashboard layout is compliments of <a href="http://www.bootply.com/85850"><strong>Bootply.com</strong></a></footer>
+{% endblock %}
+
+{% block modal %}
+    <div class="modal" id="addWidgetModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Add Widget</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Add a widget stuff here..</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <a href="#" class="btn btn-primary">Save changes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javas %}
+    <script src=""></script>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+    {% javascripts output="js/compiled/main.js"
+        'bundles/admin/js/scripts.js'
+        'bundles/admin/js/bootstrap.min.js'
+        'bundles/masonry/masonry.min.js'
+        'bundles/masonry/js/main.js'%}
+        <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}

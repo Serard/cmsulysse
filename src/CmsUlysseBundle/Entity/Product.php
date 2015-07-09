@@ -67,6 +67,13 @@ class Product
     private $picture;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="valid", type="boolean")
+     */
+    private $valid;
+
+    /**
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"image/jpg", "image/jpeg", "image/png", "image/gif"},
@@ -222,6 +229,26 @@ class Product
     {
         return $this->usersProducts;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getValid()
+    {
+        return $this->valid;
+    }
+
+    /**
+     * @param $valid
+     * @return $this
+     */
+    public function setValid($valid)
+    {
+        $this->valid = $valid;
+
+        return $this;
+    }
+
 
     /**
      * Set picture

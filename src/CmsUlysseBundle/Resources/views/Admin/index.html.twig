@@ -1,0 +1,23 @@
+{% extends ":Admin:base.html.twig" %}
+
+{% set title = context %}
+
+{% block body_content %}
+    <a href="#"><strong>{{ title }}</strong></a>
+    <hr>
+
+    <div class="btn-group btn-group-justified">
+        {% for category in categories %}
+            <a id="select_categ" href="#{{ category }}" class="btn btn-primary col-sm-3">
+                {{ category }}
+            </a>
+        {% endfor %}
+    </div>
+
+    <hr>
+    <div class="grid js-masonry">
+        {% for product in products %}
+            {{ include('CmsUlysseBundle:Admin:_product.html.twig' , { 'product' :product }) }}
+        {% endfor %}
+    </div>
+{% endblock %}
