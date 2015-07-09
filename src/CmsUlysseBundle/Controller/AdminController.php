@@ -59,11 +59,25 @@ class AdminController extends Controller
         return $this->redirectToRoute('index_admin');
     }
 
+    /**
+     * @Route("/settings/home", name="settings_home_admin")
+     * @Template()
+     */
+    public function settingsAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('CmsUlysseBundle:Site');
+        $site = $repository->findOneBy(array());
+
+        return array('site' => $site);
+    }
 
     public function getReposProduct()
     {
         $em = $this->getDoctrine()->getManager();
         return ($em->getRepository('CmsUlysseBundle:Product'));
     }
+
+
 
 }
