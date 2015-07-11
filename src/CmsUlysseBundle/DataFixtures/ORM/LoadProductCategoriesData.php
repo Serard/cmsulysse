@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadProductCategories extends AbstractFixture implements OrderedFixtureInterface
+class LoadProductCategoriesData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}

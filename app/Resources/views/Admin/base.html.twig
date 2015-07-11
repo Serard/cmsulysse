@@ -44,19 +44,6 @@
                 <a href="#"><strong> Tools</strong></a>
                 <hr>
                 <ul class="nav nav-stacked">
-                    <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Settings</a>
-                        <ul class="nav nav-stacked collapse in" id="userMenu">
-                            <li class="active">
-                                <a href="{{ path('settings_home_admin') }}"></i> Home</a>
-                            </li>
-                            <li>
-                                <a href="#">Modules</a>
-                            </li>
-                            <li>
-                                <a href="#">Messagerie</a>
-                            </li>
-                        </ul>
-                    </li>
                     <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#menu2"> Products</a>
                         <ul class="nav nav-stacked collapse" id="menu2">
                             <li>
@@ -83,13 +70,26 @@
                             </li>
                         </ul>
                     </li>
+                    <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Settings</a>
+                        <ul class="nav nav-stacked collapse" id="userMenu">
+                            <li class="active">
+                                <a href="{{ path('settings_home_admin') }}"></i> Home</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('modules_admin') }}">Modules</a>
+                            </li>
+                            <li>
+                                <a href="#">Messagerie</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
                 <hr>
                 <a href="#"><strong>Statistiques</strong></a>
                 <hr>
                 <ul class="nav nav-pills nav-stacked">
                     <li class="nav-header"></li>
-                    <li><a href="#">Toto</a></li>
+                    <li><a href="#">Ventes</a></li>
                 </ul>
                 <hr>
             </div>

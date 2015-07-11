@@ -1,0 +1,35 @@
+{% extends ":Admin:base.html.twig" %}
+
+{% block body_content %}
+    <a href="#"><strong>Modules</strong></a>
+    <hr>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Slideshow</h4></div>
+        <div class="panel-body">
+        Activé:
+            <a href="{{ path('slider_admin') }}" class="btn btn-primary">Modifier</a>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Produits Phare</h4></div>
+        <div class="panel-body">
+            Activé:
+            Validé:
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Community Manager</h4></div>
+        <div class="panel-body">
+            Activé:
+            Validé:
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Messagerie</h4></div>
+        <div class="panel-body">
+            Activé:
+            Validé:
+        </div>
+    </div>
+{% endblock %}

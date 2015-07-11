@@ -1,0 +1,78 @@
+{% extends ":Admin:base.html.twig" %}
+
+{% block body_content %}
+<a href="#"><strong>Slider</strong></a>
+<hr>
+    <div class="col-lg-6">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+            <ol class="carousel-indicators">
+                {% set j = 0 %}
+                {% for picture in pictures %}
+                    <li  {% if j == 0 %}class="active"{% endif %} data-target="#myCarousel" data-slide-to="{{ j }}"></li>
+                    {% set j = j+1 %}
+                {% endfor %}
+            </ol>
+
+            <div class="carousel-inner" role="listbox">
+                {% set j = 0 %}
+                {% for picture in pictures %}
+                    <div class="item{% if j == 0 %} active{% endif %}">
+                        <img style="height: 350px;" src="{{ asset(picture.getWebPath())}}" />
+                    </div>
+                    {% set j = j+1 %}
+                {% endfor %}
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <form action="{{ path('slider_admin') }}" method="POST" {{ form_enctype(form) }} class="form">
+            <section>
+                {{ form_row(form.name) }}
+            </section>
+            <section>
+                <ul class="pictures" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e }}">
+                    {% for picture in form.pictures %}
+                        <li>{{ form_row(picture.file) }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+            {{ form_rest(form) }}
+        </form>
+        {{ form(form) }}
+    </div>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <script>
+        var collectionHolder = $('ul.pictures');
+        var $addSpecLink = $('<a href="#">Ajouter une picture</a>');
+
+        var $newLinkLi = $('<li></li>').append($addSpecLink);
+        jQuery(document).ready(function() {
+            collectionHolder.append($newLinkLi);
+            $addSpecLink.on('click', function(e) {
+                e.preventDefault();
+                addSpecForm(collectionHolder, $newLinkLi);
+            });
+        });
+        function addSpecForm(collectionHolder, $newLinkLi) {
+            var prototype = collectionHolder.attr('data-prototype');
+            var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+            var $newFormLi = $('<li></li>').append(newForm);
+            $newLinkLi.before($newFormLi);
+        }
+    </script>
+
+{% endblock %}

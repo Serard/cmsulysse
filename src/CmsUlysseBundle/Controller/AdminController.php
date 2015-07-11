@@ -2,6 +2,8 @@
 
 namespace CmsUlysseBundle\Controller;
 
+use CmsUlysseBundle\Entity\Slider;
+use CmsUlysseBundle\Form\Type\SliderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -46,16 +48,44 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/settings/home", name="settings_home_admin")
-     * @Template()
+     * @Route("/modules", name="modules_admin")
+     * @Template("CmsUlysseBundle:Admin:Module/index.html.twig")
      */
-    public function settingsAction()
+    public function modulesAction()
+    {
+
+        return array();
+    }
+
+    /**
+     * @Route("/slider", name="slider_admin")
+     * @Template("CmsUlysseBundle:Admin:Module/slide.html.twig")
+     */
+    public function sliderAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('CmsUlysseBundle:Site');
-        $site = $repository->findOneBy(array());
+        $repo = $em->getRepository('CmsUlysseBundle:Slider');
+        $slider = $repo->findOneBy(array(), null, 1);
 
-        return array('site' => $site);
+        $form = $this->createForm(new SliderType(), $slider);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $slider = $form->getData();
+
+            foreach($slider->getPictures() as $picture){
+                $picture->setSlider($slider);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($slider);
+            $em->flush();
+        }
+
+        return array(
+            'pictures' => $slider->getPictures(),
+            'form' => $form->createView()
+        );
     }
 
     /**
@@ -71,6 +101,7 @@ class AdminController extends Controller
 
         return $this->redirectToRoute('index_admin');
     }
+
     public function getReposProduct()
     {
         $em = $this->getDoctrine()->getManager();

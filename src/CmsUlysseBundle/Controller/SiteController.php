@@ -11,26 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class SiteController
  * @package CmsUlysseBundle\Controller
- * @Route("/admin/configuration")
+ * @Route("/settings")
  */
 class SiteController extends Controller
 {
     /**
-     * @return array
+     * @Route("/home", name="settings_home_admin")
+     * @Template("CmsUlysseBundle:Admin:Site/view.html.twig")
      */
-    public function indexAction(){
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('CmsUlysseBundle:Site');
-        $site = $repository->findOneBy(array());
-
-        return array('site' => $site);
-    }
-
-    /**
-     * @Route("", name="config_view")
-     * @Template()
-     */
-    public function viewAction()
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CmsUlysseBundle:Site');
@@ -40,8 +29,8 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/add", name="config_add")
-     * @Template("CmsUlysseBundle:Site:form.html.twig")
+     * @Route("/add", name="settings_add_admin")
+     * @Template("CmsUlysseBundle:Admin:Site/form.html.twig")
      */
     public function addAction(Request $request)
     {
@@ -52,7 +41,7 @@ class SiteController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($form->getData());
             $em->flush();
-            return $this->redirect($this->generateUrl('config_view'));
+            return $this->redirect($this->generateUrl('settings_home_admin'));
         }
         return array(
             'form' => $form->createView()
@@ -60,8 +49,8 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/update", name="config_update")
-     * @Template("CmsUlysseBundle:Site:form.html.twig")
+     * @Route("/update", name="settings_update_admin")
+     * @Template("CmsUlysseBundle:Admin:Site/form.html.twig")
      */
     public function updateAction(Request $request)
     {
@@ -76,7 +65,7 @@ class SiteController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($form->getData());
             $em->flush();
-            return $this->redirect($this->generateUrl('config_view'));
+            return $this->redirect($this->generateUrl('settings_home_admin'));
         }
         return array(
             'form' => $form->createView()
