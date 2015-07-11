@@ -6,6 +6,9 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.22
+add fixtures load for demo
+
 dev version    : dev-v0.0.21
 add interface admin
 
