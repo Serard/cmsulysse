@@ -2,6 +2,7 @@
 
 namespace CmsUlysseBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -81,7 +82,7 @@ class UserProduct
     /**
      * Set user
      *
-     * @param \CmsUlysseBundle\Entity\User $product
+     * @param \CmsUlysseBundle\Entity\User $user
      * @return UserProduct
      */
     public function setUser(User $user)

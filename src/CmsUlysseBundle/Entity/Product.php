@@ -183,6 +183,14 @@ class Product
     }
 
     /**
+     * @param Specification $specification
+     */
+    public function addSpecification(Specification $specification)
+    {
+        $this->specifications[] = $specification;
+    }
+
+    /**
      * Remove Categories
      *
      * @param Category $category

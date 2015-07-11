@@ -46,20 +46,6 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/product/{id}", name="valid_product_admin")
-     * @Template()
-     */
-    public function validProductAction($id)
-    {
-        $product = $this->getReposProduct()->find($id);
-
-        $product->setValid(true);
-        $this->getDoctrine()->getManager()->flush();
-
-        return $this->redirectToRoute('index_admin');
-    }
-
-    /**
      * @Route("/settings/home", name="settings_home_admin")
      * @Template()
      */
@@ -72,12 +58,22 @@ class AdminController extends Controller
         return array('site' => $site);
     }
 
+    /**
+     * @Route("/product/{id}", name="valid_product_admin")
+     * @Template()
+     */
+    public function validProductAction($id)
+    {
+        $product = $this->getReposProduct()->find($id);
+
+        $product->setValid(true);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('index_admin');
+    }
     public function getReposProduct()
     {
         $em = $this->getDoctrine()->getManager();
         return ($em->getRepository('CmsUlysseBundle:Product'));
     }
-
-
-
 }

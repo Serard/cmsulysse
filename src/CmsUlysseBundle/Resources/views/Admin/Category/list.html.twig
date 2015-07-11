@@ -1,0 +1,30 @@
+{% extends ":Admin:base.html.twig" %}
+
+{% block title %}Catégories{% endblock %}
+
+{% block body_content %}
+    <h1>Liste des catégories</h1>
+    <ul>
+        {% for category in categories %}
+            <li>
+                <h1>{{ category.id }}</h1>
+                <h2>{{ category.name }}</h2>
+                <p>
+                    <a href="{{ path('categ_update_admin', {'id': category.id}) }}">Modifier</a>
+                </p>
+                <ul>
+                    {% for categ_down in categs_down %}
+                        {% if  categ_down.categup.id == category.id %}
+                            <li>{{ categ_down.name }}</li>
+                            <p>
+                                <a href="{{ path('categ_update_admin', {'id': categ_down.id}) }}">Modifier</a>
+                                <a href="{{ path('category_delete', {'id': categ_down.id}) }}">Supprimer</a>
+                            </p>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ path('categ_add_admin') }}"> Ajouter une catégorie</a>
+{% endblock %}
