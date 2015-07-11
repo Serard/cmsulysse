@@ -6,6 +6,9 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.24
+add module slider
+
 dev version    : dev-v0.0.23
 add fixtures load for demo
 
