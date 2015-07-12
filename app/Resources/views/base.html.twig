@@ -2,11 +2,16 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-
+        <title>{% block title %}CmsUlysse{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         {% block style %}
             {% stylesheets
                 'css/style.css'
+                'css/style2.css'
+                'css/form.css'
+                'css/megamenu.css'
+                'css/fwslider.css'
+                'http://fonts.googleapis.com/css?family=Exo+2'
                 filter='cssrewrite' output='css/compiled/app.css' %}
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
@@ -21,8 +26,18 @@
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% javascripts output="js/compiled/main.js"
-        "js/jquery-2.1.4.min.js" %}
+        "js/jquery-2.1.4.min.js"
+        %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
+
+        <script type="text/javascript" src="js/megamenu.js"></script>
+        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/css3-mediaqueries.js"></script>
+        <script src="js/fwslider.js"></script>
+        <!--end slider -->
+        <script src="js/jquery.easydropdown.js"></script>
+
         {% endjavascripts %}
         <script>
             /*global variable*/
