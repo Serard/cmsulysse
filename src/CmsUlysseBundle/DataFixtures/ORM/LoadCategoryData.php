@@ -82,8 +82,6 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
                 'name' => 'Romans',
                 'categUp' => $this->getReference('category-Livre'),
             ),
-
-
             array(
                 'name' => 'Science Fiction',
                 'categUp' => $this->getReference('category-Livre'),

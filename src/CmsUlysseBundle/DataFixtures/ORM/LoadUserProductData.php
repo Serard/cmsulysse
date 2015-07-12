@@ -8,7 +8,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Inflector\Inflector;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadUserProductCategories extends AbstractFixture implements OrderedFixtureInterface
+class LoadUserProductData extends AbstractFixture implements OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -42,6 +42,42 @@ class LoadUserProductCategories extends AbstractFixture implements OrderedFixtur
                 'user' => $this->getReference('stephane.erard@free.fr'),
                 'price' => 650,
                 'qty' => 4,
+                'state' => true,
+            ),
+            array(
+                'product' => $this->getReference('product-Iphone 5 S'),
+                'user' => $this->getReference('stephane.erard@free.fr'),
+                'price' => 200,
+                'qty' => 0,
+                'state' => true,
+            ),
+            array(
+                'product' => $this->getReference('product-Iphone 6'),
+                'user' => $this->getReference('stephane.erard@free.fr'),
+                'price' => 800,
+                'qty' => 18,
+                'state' => true,
+            ),
+            array(
+                'product' => $this->getReference('product-Un amour de jeunesse'),
+                'user' => $this->getReference('pascalou@gmail.com'),
+                'price' => 19.99,
+                'qty' => 18,
+                'state' => true,
+            ),
+            array(
+                'product' => $this->getReference('product-Les filles au chocolat'),
+                'user' => $this->getReference('pascalou@gmail.com'),
+                'price' => 16,
+                'qty' => 2,
+                'state' => true,
+            ),
+
+            array(
+                'product' => $this->getReference('product-La boite à musique'),
+                'user' => $this->getReference('pascalou@gmail.com'),
+                'price' => 11,
+                'qty' => 6,
                 'state' => true,
             ),
         );

@@ -31,6 +31,26 @@ class LoadProductCategoriesData extends AbstractFixture implements OrderedFixtur
                 'product' => $this->getReference('product-Iphone 4'),
                 'category' => $this->getReference('category-Apple'),
             ),
+            array(
+                'product' => $this->getReference('product-Iphone 5 S'),
+                'category' => $this->getReference('category-Apple'),
+            ),
+            array(
+                'product' => $this->getReference('product-Iphone 6'),
+                'category' => $this->getReference('category-Apple'),
+            ),
+            array(
+                'product' => $this->getReference('product-Un amour de jeunesse'),
+                'category' => $this->getReference('category-Romans'),
+            ),
+            array(
+                'product' => $this->getReference('product-Les filles au chocolat'),
+                'category' => $this->getReference('category-Romans'),
+            ),
+            array(
+                'product' => $this->getReference('product-La boite à musique'),
+                'category' => $this->getReference('category-Policier'),
+            ),
         );
 
         $this->persistProductCategory($productCategories, $manager);
@@ -58,6 +78,6 @@ class LoadProductCategoriesData extends AbstractFixture implements OrderedFixtur
      */
     public function getOrder()
     {
-        return 4;
+        return 5;
     }
 }

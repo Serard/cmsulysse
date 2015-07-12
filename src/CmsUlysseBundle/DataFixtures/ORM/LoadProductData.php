@@ -48,6 +48,22 @@ class LoadProductData  extends AbstractFixture implements OrderedFixtureInterfac
                  de haute qualité et un écran incurvé pour une meilleure prise en main',
                 'valid' => false,
             ),
+            array(
+                'name' => 'Un amour de jeunesse',
+                'description' => "d'après l'histoire de maxence et margot",
+                'valid' => false,
+            ),
+            array(
+                'name' => 'Les filles au chocolat',
+                'description' => "Tome 6 => Coeur Cookue",
+                'valid' => false,
+            ),
+            array(
+                'name' => 'La boite à musique',
+                'description' => "de Mary Higgins Clark",
+                'valid' => false,
+            ),
+
         );
 
         $this->persistProduct($products, $manager);
