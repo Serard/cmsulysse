@@ -9,7 +9,7 @@
     <a href="{{ path('product_add') }}"> Ajouter un nouveau produit en vente</a>
 
     {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('config_view') }}">Config du site</a>
+        <a href="{{ path('index_admin') }}">Config du site</a>
     {% endif %}
 {% endblock %}
 
