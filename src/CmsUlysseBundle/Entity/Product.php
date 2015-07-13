@@ -368,4 +368,17 @@ class Product
     {
         return 'upload/pictures/products';
     }
+    public function getMinPrice()
+    {
+        $minPrice = 0;
+
+        foreach($this->usersProducts as $userProduct){
+            if($minPrice === 0 || $userProduct->getPrice()>$minPrice){
+                $minPrice = $userProduct->getPrice();
+                $id = $userProduct->getId();
+            }
+        }
+
+        return array('price'=>$minPrice,'id'=>$id);
+    }
 }

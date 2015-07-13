@@ -1,0 +1,26 @@
+<div class="menu">
+    <ul class="megamenu skyblue">
+        <li class="active grid"><a href="/">Home</a></li>
+
+        {% for category in categories %}
+            <li><a class="color{{ category.id }}" href="#">{{ category.name }}</a>
+                <div class="megapanel">
+                    <div class="row">
+                        <div class="col1">
+                            <div class="h_nav">
+                                <h4></h4>
+                                <ul>
+                                    {% for categ_down in categs_down %}
+                                        {% if  categ_down.categup.id == category.id %}
+                                            <li>{{ categ_down.name }}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
