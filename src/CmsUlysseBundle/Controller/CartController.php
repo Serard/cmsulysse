@@ -187,12 +187,14 @@ class CartController extends Controller
             foreach ($products as $product) {
                 $dbproduct = $repo->find($product->id);
                 if ($dbproduct) {
-                    $product->name        = $dbproduct->getProduct()->getName();
+                    $product->name = $dbproduct->getProduct()->getName();
                     $product->description = $dbproduct->getProduct()->getDescription();
-                    $product->price       = $dbproduct->getPrice();
-                    $product->stock       = $dbproduct->getQty();
-                    $product->seller      = $dbproduct->getUser()->getFirstname().' '.$dbproduct->getUser()->getLastName();
+                    $product->price = $dbproduct->getPrice();
+                    $product->stock = $dbproduct->getQty();
+                    $product->seller = $dbproduct->getUser()->getFirstname() . ' ' . $dbproduct->getUser()->getLastName();
                 }
+            }
+        }
         $user = $this->get('security.context')->getToken()->getUser();
 
         $userType = new CommandType();

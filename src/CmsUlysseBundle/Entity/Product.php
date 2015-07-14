@@ -189,13 +189,6 @@ class Product
         $this->categories[] = $category;
     }
 
-    /**
-     * @param Specification $specification
-     */
-    public function addSpecification(Specification $specification)
-    {
-        $this->specifications[] = $specification;
-    }
 
     /**
      * Remove Categories
