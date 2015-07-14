@@ -1,0 +1,36 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Valider{% endblock %}
+
+{% block body %}
+    <h1>Valider les produits</h1>
+    <table>
+        <tr>
+            <th>Produit</th>
+            <th>Spécifications</th>
+        </tr>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>
+                    <ul>
+                        {% for specification in product.specifications %}
+                            <li>{{ specification.name }} : {{ specification.content }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <form action="{{ path('product_validate') }}" method="POST">
+                        <input type="hidden" name="id" value="{{ product.id }}">
+                        <input type="submit" value="Valider">
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    <script>
+
+    </script>
+
+{% endblock %}

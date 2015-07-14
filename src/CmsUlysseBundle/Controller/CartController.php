@@ -176,11 +176,13 @@ class CartController extends Controller
         if ($products) {
             foreach ($products as $product) {
                 $dbproduct = $repo->find($product->id);
-                $product->name        = $dbproduct->getProduct()->getName();
-                $product->description = $dbproduct->getProduct()->getDescription();
-                $product->price       = $dbproduct->getPrice();
-                $product->stock       = $dbproduct->getQty();
-                $product->seller      = $dbproduct->getUser()->getFirstname().' '.$dbproduct->getUser()->getLastName();
+                if ($dbproduct) {
+                    $product->name        = $dbproduct->getProduct()->getName();
+                    $product->description = $dbproduct->getProduct()->getDescription();
+                    $product->price       = $dbproduct->getPrice();
+                    $product->stock       = $dbproduct->getQty();
+                    $product->seller      = $dbproduct->getUser()->getFirstname().' '.$dbproduct->getUser()->getLastName();
+                }
             }
         }
 

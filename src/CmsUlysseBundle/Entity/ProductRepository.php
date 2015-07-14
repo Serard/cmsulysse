@@ -12,4 +12,19 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    public function findNoValidate()
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->where('p.isValid = 0');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findValidate()
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->where('p.isValid = 1');
+
+        return $qb->getQuery()->getResult();
+    }
 }

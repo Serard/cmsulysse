@@ -5,7 +5,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProductType extends  AbstractType
+class AdminProductType extends  AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -30,13 +30,8 @@ class ProductType extends  AbstractType
                 'type' => new SpecificationType(),
                 'allow_add' => true,
                 'by_reference' => false,
-                ))
-            ->add('user_products', 'collection', array(
-                'type' =>   new UserProductType(),
-                'allow_add' => true,
-                'by_reference' => false,
             ))
-            ->add('isValid', 'hidden', array('label' => 'Validé : ', 'required' => false, 'data' => 0))
+            ->add('isValid', null, array('label' => 'Validé : ', 'required' => false))
             ->add('btn', 'submit', array('label' => 'Valider'))
             ;
     }

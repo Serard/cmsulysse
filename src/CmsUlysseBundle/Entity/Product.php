@@ -69,6 +69,7 @@ class Product
     /**
      * @Assert\File(
      *     maxSize = "1024k",
+     *
      *     mimeTypes = {"image/jpg", "image/jpeg", "image/png", "image/gif"},
      *     mimeTypesMessage = "Choisissez un fichier image valide"
      * )
@@ -79,6 +80,13 @@ class Product
      * @var string
      */
     private $tmpImage;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_valid", type="boolean", nullable=false)
+     */
+    private $isValid;
 
     public function __construct()
     {
@@ -156,15 +164,14 @@ class Product
         return $this->specifications;
     }
 
-    /**
-     * @param $specifications
-     * @return $this
-     */
-    public function setSpecifications(ArrayCollection $specifications)
+    public function addSpecification(Specification $specification)
     {
-        $this->specifications = $specifications;
+        $this->specifications[] = $specification;
+    }
 
-        return $this;
+    public function removeSpecification(Specification $specification)
+    {
+        $this->specifications->removeElement($specification);
     }
 
     /**
@@ -244,6 +251,28 @@ class Product
     public function getPicture()
     {
         return $this->picture;
+    }
+
+    /**
+     * Set isValid
+     *
+     * @param boolean $isValid
+     * @return Product
+     */
+    public function setIsValid($isValid)
+    {
+        $this->isValid = $isValid;
+        return $this;
+    }
+
+    /**
+     * Get isValid
+     *
+     * @return boolean
+     */
+    public function getIsValid()
+    {
+        return $this->isValid;
     }
 
     public function setFile(UploadedFile $file = null)
