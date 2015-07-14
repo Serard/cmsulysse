@@ -6,6 +6,7 @@ namespace CmsUlysseBundle\Entity;
 use FOS\MessageBundle\Model\ParticipantInterface;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Util\SecureRandom;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -16,6 +17,17 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User extends BaseUser implements ParticipantInterface
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $generator = new SecureRandom();
+
+        $this->enabled = true;
+        $this->expired = false;
+        $this->roles = array('ROLE_USER');
+        $this->salt = hash('sha256', $generator->nextBytes(64));
+    }
     /**
      * @var integer
      *
@@ -99,11 +111,6 @@ class User extends BaseUser implements ParticipantInterface
      * @ORM\Column(name="isActive", type="boolean")
      */
     private $isActive;
-
-    public function __construct()
-    {
-        parent::__construct();
-    }
 
     /**
      * Get id
@@ -326,6 +333,18 @@ class User extends BaseUser implements ParticipantInterface
         return $this;
     }
 
+
+    public function getSalt()
+    {
+        return $this->expiresAt;
+    }
+
+    public function setSalt($salt)
+    {
+        $this->salt= $salt;
+
+        return $this;
+    }
 
 
 }

@@ -10,13 +10,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/category")
+ * @Route("/admin/category")
  */
 class CategoryController extends Controller
 {
     /**
-     * @Route("/", name="category_list")
-     * @Template()
+     * @Route("/", name="categ_admin")
+     * @Template("CmsUlysseBundle:Admin:Category/list.html.twig")
      */
     public function listAction()
     {
@@ -32,8 +32,8 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/add", name="category_add")
-     * @Template("CmsUlysseBundle:Category:form.html.twig")
+     * @Route("/categories/add", name="categ_add_admin")
+     * @Template("CmsUlysseBundle:Admin:Category/form.html.twig")
      */
     public function addAction(Request $request)
     {
@@ -46,7 +46,7 @@ class CategoryController extends Controller
             $em->persist($form->getData());
             $em->flush();
 
-            return $this->redirect($this->generateUrl('category_list'));
+            return $this->redirect($this->generateUrl('categ_admin'));
         }
 
         return array(
@@ -56,8 +56,8 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/update/{id}", name="category_update")
-     * @Template("CmsUlysseBundle:Category:form.html.twig")
+     * @Route("/update/{id}", name="categ_update_admin")
+     * @Template("CmsUlysseBundle:Admin:Category/form.html.twig")
      */
     public function updateAction(Request $request)
     {
@@ -76,7 +76,7 @@ class CategoryController extends Controller
             $em->persist($form->getData());
             $em->flush();
 
-            return $this->redirect($this->generateUrl('category_list'));
+            return $this->redirect($this->generateUrl('categ_admin'));
         }
 
         return array(
@@ -107,7 +107,7 @@ class CategoryController extends Controller
 
 
 
-        return $this->redirect($this->generateUrl('category_list'));
+        return $this->redirect($this->generateUrl('categ_admin'));
     }
 
 }

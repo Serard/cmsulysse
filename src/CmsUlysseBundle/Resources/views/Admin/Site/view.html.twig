@@ -1,0 +1,28 @@
+{% extends ":Admin:base.html.twig" %}
+
+{% block body_content %}
+    <a href="#"><strong>Modules</strong></a>
+    <hr>
+
+    {% if site is defined and site is not null %}
+
+        <h1>Name</h1>{{ site.name }}
+        <h3>Slogan</h3>{{ site.slogan }}
+        <p> Theme Color: {{ site.themeColor }}</p>
+        <p> Position Menu: {{ site.positionMenu }}</p>
+        <p>corps Colonne: {{ site.corpsColonnes }}</p>
+
+
+        <p>
+            image background:
+            <img width="300px" src="{{ asset(site.getWebPath())}}" alt="" />
+        </p>
+        <a href="{{ path("settings_update_admin") }}">Modifier la configuration</a>
+    {% else %}
+
+        Pas encore de configuration
+        <a href="{{ path("settings_add_admin") }}">Ajouter une configuration du site</a>
+
+    {% endif %}
+
+{% endblock %}

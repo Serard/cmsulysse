@@ -3,3 +3,25 @@
 */
 @import url("demo.css");
 @import url("intlTellnput.css");
+@import url("css/font-awesome.min.css");
+@import url(http://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab);
+
+.icon{
+    display:inline-block;
+    vertical-align: middle;
+    border-radius: 50%;
+    width:35px;
+    height:35px;
+    box-sizing: padding-box;
+    background: #7DB122;
+    font-size: 14pt;
+    margin:2px 35px;
+}
+.icon>a>i.fa {
+    color:white;
+    display:inline-block;
+    margin:auto;
+    text-align: center;
+    width: 100%;
+    padding-top: 8px;
+}

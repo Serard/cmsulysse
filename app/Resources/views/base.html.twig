@@ -2,13 +2,20 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-
-        {% stylesheets
-            'css/style.css'
-            filter='cssrewrite' output='css/compiled/app.css' %}
-            <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
+        <title>{% block title %}CmsUlysse{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        {% block style %}
+            {% stylesheets
+                'css/style.css'
+                'css/style2.css'
+                'css/form.css'
+                'css/megamenu.css'
+                'css/fwslider.css'
+                'http://fonts.googleapis.com/css?family=Exo+2'
+                filter='cssrewrite' output='css/compiled/app.css' %}
+                <link rel="stylesheet" href="{{ asset_url }}" />
+            {% endstylesheets %}
+        {% endblock %}
 
         {% block stylesheets %}
             <style>
@@ -19,9 +26,183 @@
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% javascripts output="js/compiled/main.js"
-        "js/jquery-2.1.4.min.js" %}
+        "js/jquery-2.1.4.min.js"
+        %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
+
+        <script type="text/javascript" src="js/megamenu.js"></script>
+        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+        <script src="js/jquery-ui.min.js"></script>
+        <script src="js/css3-mediaqueries.js"></script>
+        <script src="js/fwslider.js"></script>
+        <!--end slider -->
+        <script src="js/jquery.easydropdown.js"></script>
+
         {% endjavascripts %}
+        <script>
+            /*global variable*/
+            var villeGeoLoc;
+            var paysGeoLoc;
+            var paysGeoLocISO;
+            var attrMenuHeader='.menu.header .other';
+            var beginPos='<span class="icon geoloc"><a><i class="fa fa-map-marker fa-lg"></i></a></span><span class="descriptIcon">';
+            var endPos='</span>';
+            var GlobalOpenMenu='';
+
+            /*cookie*/
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                d.setTime(d.getTime() + (exdays*24*60*60*1000));
+                var expires = "expires="+d.toUTCString();
+                document.cookie = cname + "=" + cvalue + "; " + expires;
+
+            }
+
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for(var i=0; i<ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0)==' ') c = c.substring(1);
+                    if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+                }
+                return "";
+
+            }
+            /*position*/
+            function PositionAttribut(position)
+            {
+                this.latitude=position.coords.latitude;
+                this.longitude=position.coords.longitude;
+                this.accuracy=position.coords.accuracy;
+                this.altitude=position.coords.altitude;
+                this.altitudeAccuracy=position.coords.altitudeAccuracy;
+                this.heading=position.coords.heading;
+                this.speed=position.coords.speed;
+                this.timestamp=position.timestamp;
+            }
+            function printScreen(){
+                this.attr=attrMenuHeader;
+                this.content=beginPos+villeGeoLoc+'/'+paysGeoLoc+endPos;
+                console.log('test : '+this.attr +' , '+ this.content);
+                this.affiche=$(this.attr).html(this.content);
+            }
+            function GoogleApi(latitude,longitude)
+            {
+
+                var dataRequest;
+
+                this.output='json';
+                this.urlApi='https://maps.googleapis.com/maps/api/geocode/'+this.output+'?latlng=';
+                this.latitude=latitude;
+                this.longitude=longitude;
+                this.url=this.urlApi+this.latitude+','+this.longitude;
+                this.requestJson=function(){
+                    $.get(this.url, function(data){
+                        //console.log(data);
+                        for (var i = 0; i < data.results.length; i++)
+                        {
+                            for (var z = 0; z< data.results[i].types.length; z++)
+                            {
+                                if(data.results[i].types[z] == 'locality'){
+
+                                    for (var y = 0; y < data.results[i].address_components.length;y++)
+                                    {
+                                        for (var x = 0; x < data.results[i].address_components[y].types.length;x++){
+                                            if( data.results[i].address_components[y].types[x] =='locality')
+                                            {
+                                                console.log('#' +i+ '#'+ z  + ' ' + data.results[i].address_components[y].long_name );
+                                                setCookie('villeGeoLoc',data.results[i].address_components[y].long_name,3);
+                                            }
+                                        }
+
+                                    }
+                                }
+                                if(data.results[i].types[z] == 'country'){
+                                    for (var y = 0; y < data.results[i].address_components.length;y++)
+                                    {
+                                        console.log('#' +i+ '#'+ z  + ' ' + data.results[i].address_components[y].long_name + ': ' + data.results[i].address_components[y].short_name);
+
+                                        setCookie('paysGeoLoc',data.results[i].address_components[y].long_name,3);
+                                        setCookie('paysGeoLocISO',data.results[i].address_components[y].short_name,3);
+                                    }
+                                }
+                            }
+                        }
+                    })
+                            .success(function(data){
+                                villeGeoLoc = getCookie('villeGeoLoc');
+                                paysGeoLoc = getCookie('paysGeoLoc');
+                                paysGeoLocISO =getCookie('paysGeoLocISO');
+                            })
+                            .complete(function(data){
+                                console.log('complited');
+                                printScreen();
+                            });
+
+                };
+            }
+
+            var Geoloc={
+                options : {
+                    enableHighAccuracy  : true,
+                    timeout             : 5000,
+                    maximumAge          : 0
+                },
+                success :function(pos)
+                {
+                    this.attributs = new PositionAttribut(pos);
+                    this.geoApi = new GoogleApi(this.attributs.latitude, this.attributs.longitude);
+                    this.geoApi.requestJson();
+                },
+                error:function(err)
+                {
+                    console.warn('ERROR(' + err.code + '): ' + err.message);
+                },
+                geoPos:function(c){
+                    navigator.geolocation.getCurrentPosition(this.success, this.error, this.options);
+                }
+            };
+            /* init Geo */
+            var whereAmI=Geoloc;
+
+            /*affiche Geo*/
+            if(navigator.geolocation){
+                whereAmI.geoPos();
+            }
+
+            /* icon menu */
+            function GlobalOpenMenuInit(){
+                if(GlobalOpenMenu!='' && x!=GlobalOpenMenu){
+                    GlobalOpenMenu.className='iconZoom off';
+                }
+            }
+
+            $('document').ready(function(){
+
+
+                $(attrMenuHeader).click(function(){
+                    whereAmI.geoPos();
+                    GlobalOpenMenu.className='iconZoom off';
+                    GlobalOpenMenu='';
+                    //console.log('ok geoPos again');
+                });
+
+                $('.icon a').click(function(){
+                    x = $(this).parents('.icon').find( "div.iconZoom")[0];
+
+                    GlobalOpenMenuInit();
+
+                    x.className=(x.className=='iconZoom off')?'iconZoom on':'iconZoom off';
+                    //console.log(x);
+                    //console.log(GlobalOpenMenu );
+
+                    GlobalOpenMenu = x;
+                })
+
+            });
+
+        </script>
     </head>
     <body>
         {% block header %}
@@ -34,11 +215,16 @@
 
         {% block javascripts %}{% endblock javascripts%}
 
-        {% javascripts
-            'js/iconMenu.js'
-            output='js/compiled/app.js' %}
-        <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
+        {% block modal %}
+        {% endblock %}
+
+        {% block javas %}
+            {% javascripts
+                'js/iconMenu.js'
+                output='js/compiled/app.js' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
 
     </body>
 </html>

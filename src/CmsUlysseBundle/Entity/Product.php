@@ -67,6 +67,13 @@ class Product
     private $picture;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="valid", type="boolean")
+     */
+    private $valid;
+
+    /**
      * @Assert\File(
      *     maxSize = "1024k",
      *
@@ -183,6 +190,14 @@ class Product
     }
 
     /**
+     * @param Specification $specification
+     */
+    public function addSpecification(Specification $specification)
+    {
+        $this->specifications[] = $specification;
+    }
+
+    /**
      * Remove Categories
      *
      * @param Category $category
@@ -229,6 +244,26 @@ class Product
     {
         return $this->usersProducts;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getValid()
+    {
+        return $this->valid;
+    }
+
+    /**
+     * @param $valid
+     * @return $this
+     */
+    public function setValid($valid)
+    {
+        $this->valid = $valid;
+
+        return $this;
+    }
+
 
     /**
      * Set picture
@@ -361,5 +396,18 @@ class Product
     protected function getUploadDir()
     {
         return 'upload/pictures/products';
+    }
+    public function getMinPrice()
+    {
+        $minPrice = 0;
+
+        foreach($this->usersProducts as $userProduct){
+            if($minPrice === 0 || $userProduct->getPrice()>$minPrice){
+                $minPrice = $userProduct->getPrice();
+                $id = $userProduct->getId();
+            }
+        }
+
+        return array('price'=>$minPrice,'id'=>$id);
     }
 }

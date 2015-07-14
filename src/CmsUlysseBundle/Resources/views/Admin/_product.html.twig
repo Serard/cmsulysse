@@ -1,0 +1,19 @@
+<div class="grid-item{% for categ in product.categories %} {{ categ }}{% endfor %}">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4>{{ product.name }}</h4>
+        </div>
+        <div class="panel-body">
+            <p>Description: {{ product.description }}</p>
+            {% if product.specifications | length > 0  %}
+                <p>Specifications:</p>
+                {% for spec in product.specifications %}
+                    <p>{{ spec.name }} : {{ spec.content }}</p>
+                {% endfor %}
+            {% endif %}
+
+            <a class="btn btn-success" href="{{ path('valid_product_admin', {'id':product.id}) }}">Valider</a>
+            <a class="btn btn-primary"href="">Voir</a>
+        </div>
+    </div>
+</div>

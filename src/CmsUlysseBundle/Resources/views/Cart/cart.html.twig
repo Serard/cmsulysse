@@ -38,10 +38,14 @@
             <td id="totaux"></td>
         </tr>
     </table>
-    {#    <div id="order" style="display:none;">
-            {{ form(form) }} formulaire de validation de la commande (à rajouter après développement de l'entité Command CommandProduct...
-        </div>#}
-    <button onclick="formOrder();">Commander</button>
+
+    <button id="command" onclick="formOrder();">Commander</button>
+
+    <div id="order" style="display:none">
+        <h1>Adresse de Livraison:</h1>
+        {{ form(form) }}
+    </div>
+
     <a href="{{ path('market_cart') }}">Retour</a>
     <script>
         var cart = getCookie('cart')!="" ? JSON.parse(getCookie('cart')) : new Array();
@@ -132,7 +136,12 @@
 
         };
 
-
+        function formOrder(){
+            var form = document.getElementById('order');
+            var button = document.getElementById('command');
+            form.style.display = "block";
+            button.style.display = "none";
+        }
 
     </script>
 {% endblock %}

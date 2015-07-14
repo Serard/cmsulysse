@@ -6,6 +6,24 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.25
+fixtures products
+
+dev version    : dev-v0.0.24
+add module slider
+
+dev version    : dev-v0.0.23
+add fixtures load for demo
+
+dev version    : dev-v0.0.21
+add interface admin
+
+dev version    : dev-v0.0.20
+add command
+
+dev version    : dev-v0.0.19
+add account gmail bde
+
 dev version    : dev-v0.0.18
 boutton suppression cart
 

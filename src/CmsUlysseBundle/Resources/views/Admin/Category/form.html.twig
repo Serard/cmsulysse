@@ -1,0 +1,9 @@
+{% extends ":Admin:base.html.twig" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body_content %}
+    <h1>{{ title }}</h1>
+    {{ form(form) }}
+    <a href="{{ path('categ_admin') }}"> Retour</a>
+{% endblock %}

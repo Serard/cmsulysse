@@ -78,6 +78,9 @@ class ProductController extends Controller
     }
 
 
+
+
+
     /**
      * @Route("/admin/product/validate", name="product_validate")
      * @Template("CmsUlysseBundle:Product:validate.html.twig")

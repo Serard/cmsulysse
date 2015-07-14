@@ -4,8 +4,8 @@
 
 {% block body %}
 
-<h1 xmlns="http://www.w3.org/1999/html">Welcome to the Product:add page</h1>
-    <form action="" method="POST" {{ form_enctype(form) }} class="form">
+<h1>Welcome to the Product:add page</h1>
+    <form action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form">
         <section>
             {{ form_row(form.name) }}
         </section>
