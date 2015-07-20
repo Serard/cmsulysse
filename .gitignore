@@ -10,6 +10,8 @@
 /vendor/
 /bin/
 /web/upload/
+/web/css/compiled
 /composer.phar
 /app/SymfonyRequirements.php
+
 .idea
