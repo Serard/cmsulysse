@@ -93,7 +93,13 @@ class Product
      *
      * @ORM\Column(name="is_valid", type="boolean", nullable=false)
      */
-    private $isValid;
+    private $isValid=false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="commands")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
+     */
+    private $state;
 
     public function __construct()
     {
