@@ -1,5 +1,5 @@
 parameters:
-    fosub_user_provider.class: CmsUlysseBundle\services\OAuth\UserProvider
+    fosub_user_provider.class: CmsUlysseBundle\Services\OAuth\UserProvider
 
 services:
     user_fosub_provider:

@@ -67,27 +67,6 @@ class UserProvider extends BaseClass
 
         switch ($property) {
 
-            case 'linkedinId':
-                list($last_name, $first_name) = split(' ', $responseData['formattedName']);
-
-                if (isset($responseData['emailAddress'])) {
-                    $data['username'] = $responseData['emailAddress'];
-                }
-
-                if ($last_name) {
-                    $data['last_name'] = $last_name;
-                }
-
-                if ($first_name) {
-                    $data['first_name'] = $first_name;
-                }
-
-                if (isset($responseData['emailAddress'])) {
-                    $data['email'] = $responseData['emailAddress'];
-                }
-
-                break;
-
             case 'googleId':
 
                 if (isset($responseData['email'])) {
@@ -128,36 +107,10 @@ class UserProvider extends BaseClass
 
                 break;
 
-            case 'doyobuzzId':
-
-                if (isset($responseData['email'])) {
-                    $data['username'] = $responseData['email'];
-                    $data['email']    = $responseData['email'];
-                }
-
-                if (isset($responseData['lastname'])) {
-                    $data['last_name'] = $responseData['lastname'];
-                }
-
-                if (isset($responseData['firstname'])) {
-                    $data['first_name'] = $responseData['firstname'];
-                }
-
-                break;
         }
-
-       # var_dump($data);
-       # var_dump($property);
-       # var_dump($username);
-       # die;
-        //when the user is registrating
 
         $user      = $this->userManager->findUserBy(array($property => $username));
         $userEmail = $this->userManager->findUserBy(array('username' => $data['username']));
-
-        #var_dump($user);
-        #var_dump($userEmail);
-        #die;
 
         if (null != $userEmail && null === $user) {
 
@@ -191,11 +144,6 @@ class UserProvider extends BaseClass
 
             return $user;
 
-        }
-
-        if($property != 'doyobuzzId') {
-            //if user exists - go with the HWIOAuth way
-            $user = parent::loadUserByOAuthUserResponse($response);
         }
 
         $serviceName = $response->getResourceOwner()->getName();
