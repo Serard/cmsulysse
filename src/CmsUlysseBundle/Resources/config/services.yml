@@ -1,4 +1,12 @@
-services:
+#services:
 #    cms_ulysse.example:
 #        class: CmsUlysseBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+
+parameters:
+  cms_ulysse.oauth.user_provider.class: CmsUlysseBundle\services\OAuth\UserProvider
+
+services:
+  cms_ulysse.oauth.user_provider:
+    class: %cms_ulysse.oauth.user_provider.class%
+    arguments: [@fos_user.user_manager, { facebook: facebookId }]

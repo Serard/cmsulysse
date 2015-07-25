@@ -21,7 +21,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "friendsofsymfony/message-bundle": "^1.2",
         "doctrine/doctrine-fixtures-bundle": "dev-master",
-        "twig/extensions": "^1.2"
+        "twig/extensions": "^1.2",
+        "hwi/oauth-bundle": "0.4.*@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"

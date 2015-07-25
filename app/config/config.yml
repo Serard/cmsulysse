@@ -93,3 +93,12 @@ fos_message:
     db_driver: orm
     thread_class: CmsUlysseBundle\Entity\Thread
     message_class: CmsUlysseBundle\Entity\Message
+
+# Oauth
+hwi_oauth:
+  firewall_name: main
+  resource_owners:
+    facebook:
+      type: facebook
+      client_id: %oauth.facebook.id%
+      client_secret: %oauth.facebook.secret%
