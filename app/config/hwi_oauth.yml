@@ -4,7 +4,7 @@ parameters:
 services:
     user_fosub_provider:
         class: "%fosub_user_provider.class%"
-        arguments: [@fos_user.user_manager, {facebook: facebookId, google: googleId, linkedin: linkedinId, doyobuzz: doyobuzzId, djerrah: djerrahId}, @fos_user.entity_manager]
+        arguments: [@fos_user.user_manager, {facebook: facebookId}, @fos_user.entity_manager]
 
 hwi_oauth:
     firewall_name: main
@@ -16,10 +16,6 @@ hwi_oauth:
         username_iterations: 30
         properties:
             facebook: facebookId
-            google: googleId
-            linkedin: linkedinId
-            doyobuzz: doyobuzzId
-            djerrah: djerrahId
 
     resource_owners:
 
@@ -32,48 +28,3 @@ hwi_oauth:
             paths:
                 email:          email
                 profilepicture: picture.data.url
-
-        google:
-            type:                google
-            client_id:           "%api_google_id%"
-            client_secret:       "%api_google_secret%"
-            scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile http://gdata.youtube.com"
-
-        linkedin:
-            type:           linkedin
-            client_id:      "%api_linkedin_id%"
-            client_secret:  "%api_linkedin_secret%"
-            scope:          "r_fullprofile,r_emailaddress,rw_nus,r_network,rw_groups,r_contactinfo,rw_company_admin,w_messages"
-            infos_url:     "https://api.linkedin.com/v1/people/~:(id,first-name,last-name,email-address,date-of-birth,phone-numbers,main-address,headline,picture-url,languages,skills,certifications,educations,courses,volunteer,three-current-positions,recommendations-received,job-bookmarks,site-standard-profile-request)?format=json"
-
-        doyobuzz:
-            type:                oauth1
-            client_id:           "%api_doyobuzz_id%"
-            client_secret:       "%api_doyobuzz_secret%"
-            request_token_url:   http://www.doyoubuzz.com/fr/oauth/requestToken
-            access_token_url:    http://www.doyoubuzz.com/fr/oauth/accessToken
-            authorization_url:   http://www.doyoubuzz.com/fr/oauth/authorize
-            infos_url:           https://api.doyoubuzz.com/user?format=json
-            realm:               "whatever"
-            user_response_class: HWI\Bundle\OAuthBundle\OAuth\Response\PathUserResponse
-            paths:
-                identifier: id
-                nickname:   username
-                realname:   fullname
-
-        djerrah:
-            type:                oauth2
-            client_id:           "%api_djerrah_id%"
-            client_secret:       "%api_djerrah_secret%"
-            access_token_url:    http://dev.djerrah.tk/fr/oauth/v2/token
-            authorization_url:   http://dev.djerrah.tk/fr/oauth/v2/auth
-            infos_url:           http://dev.djerrah.tk/fr/profile/?format=json
-            scope:               "email"
-            user_response_class: HWI\Bundle\OAuthBundle\OAuth\Response\PathUserResponse
-            paths:
-                identifier: identifier
-                nickname:   username
-                realname:   realname
-                lastname:   lastname
-                firstname:   firstname
-                email:      email
