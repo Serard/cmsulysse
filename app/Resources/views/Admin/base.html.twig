@@ -4,9 +4,9 @@
 
 {% block style %}
     {% stylesheets output="css/compiled/main.css" filter="cssrewrite"
-        'bundles/admin/css/bootstrap.min.css'
-        'bundles/admin/css/styles.css'
-        'bundles/masonry/css/styles.css' %}
+        'css/admin/bootstrap.min.css'
+        'css/admin/styles.css'
+    %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
@@ -129,10 +129,9 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
 
     {% javascripts output="js/compiled/main.js"
-        'bundles/admin/js/scripts.js'
-        'bundles/admin/js/bootstrap.min.js'
-        'bundles/masonry/masonry.min.js'
-        'bundles/masonry/js/main.js'%}
-        <script src="{{ asset_url }}"></script>
+        'js/admin/scripts.js'
+        'js/admin/bootstrap.min.js'
+    %}
+        <script src="{ { asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

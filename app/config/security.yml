@@ -12,7 +12,16 @@ security:
 
     firewalls:
         main:
+            context: user
             pattern: ^/
+            oauth:
+                resource_owners:
+                  facebook: "/login/check-facebook"
+                login_path: /connect
+                failure_path: /connect
+                oauth_user_provider:
+                    service: user_fosub_provider
+
             form_login:
                 provider: fos_userbundle
                 csrf_provider: security.csrf.token_manager # Use form.csrf_provider instead for Symfony <2.4

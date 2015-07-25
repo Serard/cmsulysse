@@ -3,7 +3,7 @@
        <div class="top-box">
         {% for product in products %}
         <div class="col_1_of_3 span_1_of_3">
-            <a href="{{ product.minPrice.id}}">
+            <a href="{{ path('product_view', {id: product.minPrice.id}) }}">
                 <div class="inner_content clearfix">
                     <div class="product_image">
                         <img src="{{ asset(product.picture) }}" alt=""/>

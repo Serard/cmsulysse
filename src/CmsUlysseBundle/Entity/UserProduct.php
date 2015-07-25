@@ -29,7 +29,7 @@ class UserProduct
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="CmsUlysseBundle\Entity\Product", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="CmsUlysseBundle\Entity\Product", inversedBy="usersProducts" ,cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $product;

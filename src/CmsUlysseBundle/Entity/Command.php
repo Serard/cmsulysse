@@ -80,7 +80,7 @@ class Command
     /**
     * @var State
     *
-    * @ORM\ManyToOne(targetEntity="State" ,inversedBy="state")
+    * @ORM\ManyToOne(targetEntity="State" ,inversedBy="commands")
     * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
     */
     private $state;

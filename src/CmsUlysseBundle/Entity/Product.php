@@ -88,6 +88,12 @@ class Product
      */
     private $tmpImage;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="commands")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
+     */
+    private $state;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();

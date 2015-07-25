@@ -1,0 +1,30 @@
+parameters:
+    fosub_user_provider.class: CmsUlysseBundle\Services\OAuth\UserProvider
+
+services:
+    user_fosub_provider:
+        class: "%fosub_user_provider.class%"
+        arguments: [@fos_user.user_manager, {facebook: facebookId}, @fos_user.entity_manager]
+
+hwi_oauth:
+    firewall_name: main
+    connect:
+        confirmation: true
+        account_connector: user_fosub_provider
+
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook: facebookId
+
+    resource_owners:
+
+        facebook:
+            type:                facebook
+            client_id:           "%api_facebook_id%"
+            client_secret:       "%api_facebook_secret%"
+            scope:               "email,user_friends"
+            infos_url:          "https://graph.facebook.com/me?fields=id,about,age_range,gender,first_name,last_name,bio,birthday,name,email,work,website,verified,picture.type(large)"
+            paths:
+                email:          email
+                profilepicture: picture.data.url
