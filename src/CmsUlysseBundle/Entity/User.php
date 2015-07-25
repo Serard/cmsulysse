@@ -27,6 +27,7 @@ class User extends BaseUser implements ParticipantInterface
         $this->expired = false;
         $this->roles = array('ROLE_USER');
         $this->salt = hash('sha256', $generator->nextBytes(64));
+        $this->isActive = true;
     }
 
 
@@ -68,49 +69,49 @@ class User extends BaseUser implements ParticipantInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="street_number", type="string", length=255)
+     * @ORM\Column(name="street_number", type="string", length=255, nullable=true)
      */
     private $streetNumber;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="text")
+     * @ORM\Column(name="address", type="text", nullable=true)
      */
     private $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="administrative_area", type="string", length=255)
+     * @ORM\Column(name="administrative_area", type="string", length=255, nullable=true)
      */
     private $administrativeArea;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="postalCode", type="string", length=255)
+     * @ORM\Column(name="postalCode", type="string", length=255, nullable=true)
      */
     private $postalCode;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string", length=255)
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
      */
     private $country;
 
     /**
     * @var string
     *
-    * @ORM\Column(name="city", type="string", length=255)
+    * @ORM\Column(name="city", type="string", length=255, nullable=true)
     */
     private $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="tel", type="string", length=255)
+     * @ORM\Column(name="tel", type="string", length=255, nullable=true)
      * @Assert\Regex(
      *     pattern= "/^((\+|00)33\s?|0)[1-9](\s?\d{2}){4}$/",
      *     match=true,
