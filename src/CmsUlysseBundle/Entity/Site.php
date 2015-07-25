@@ -98,6 +98,14 @@ class Site
      */
     private $slider;
 
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="slideActive", type="boolean")
+     */
+    private $slideActive;
+
     /**
      * @var bool
      *
@@ -436,7 +444,23 @@ class Site
         return $this;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isSlideActive()
+    {
+        return $this->slideActive;
+    }
 
+    /**
+     * @param boolean $slideActive
+     * @return $this
+     */
+    public function setSlideActive($slideActive)
+    {
+        $this->slideActive = $slideActive;
 
+        return $this;
+    }
 
 }

@@ -1,11 +1,28 @@
-{% extends ':include:message_layout.html.twig' %}
+{% set context = is_granted('ROLE_ADMIN') ?  ":Admin:base.html.twig" :  ':include:message_layout.html.twig' %}
+{% extends context %}
 
-{% block fos_message_content %}
+{% if is_granted('ROLE_ADMIN')  %}
 
-<h2>Boite de Réception</h2>
+    {% block body_content %}
+        <a href="#"><strong>Boite de Réception</strong></a>
 
-<a href="{{ url('cms_messagerie_thread_new' )}}">Nouveau Message</a>
+        <hr>
+        <a class="btn-primary btn" href="{{ url('cms_messagerie_thread_new' )}}">Nouveau Message</a>
+        <hr>
+        {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+    {% endblock %}
 
-{% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+{% else %}
 
-{% endblock %}
+    {% block fos_message_content %}
+
+        <h2>Boite de Réception</h2>
+        <a href="{{ url('cms_messagerie_thread_new' )}}">Nouveau Message</a>
+        {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+
+    {% endblock %}
+
+{% endif %}
+
+
+

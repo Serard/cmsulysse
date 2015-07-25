@@ -2,6 +2,8 @@
 
 namespace CmsUlysseBundle\Controller;
 
+use CmsUlysseBundle\Entity\Product;
+use CmsUlysseBundle\Entity\Site;
 use CmsUlysseBundle\Entity\Slider;
 use CmsUlysseBundle\Form\Type\SliderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -53,8 +55,11 @@ class AdminController extends Controller
      */
     public function modulesAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('CmsUlysseBundle:Site');
+        $site = $repository->findOneBy(array());
 
-        return array();
+        return array('site' => $site);
     }
 
     /**
@@ -92,10 +97,8 @@ class AdminController extends Controller
      * @Route("/product/{id}", name="valid_product_admin")
      * @Template()
      */
-    public function validProductAction($id)
+    public function validProductAction(Product $product)
     {
-        $product = $this->getReposProduct()->find($id);
-
         $product->setValid(true);
         $this->getDoctrine()->getManager()->flush();
 
@@ -107,4 +110,29 @@ class AdminController extends Controller
         $em = $this->getDoctrine()->getManager();
         return ($em->getRepository('CmsUlysseBundle:Product'));
     }
+
+    /**
+     * @Route("/config/slide/{id}/edit", name="active_best_product_admin")
+     * @Template()
+     */
+    public function activeSlider(Site $site)
+    {
+        $site->setSlideActive(!$site->isSlideActive());
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('modules_admin');
+    }
+
+    /**
+     * @Route("/config/bestProduct/{id}/edit", name="active_best_product_admin")
+     * @Template()
+     */
+    public function activeBestProductAction(Site $site)
+    {
+        $site->setBestProduct(!$site->getBestProduct());
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('modules_admin');
+    }
+
 }

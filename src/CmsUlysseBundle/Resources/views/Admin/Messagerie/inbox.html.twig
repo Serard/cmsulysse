@@ -1,0 +1,11 @@
+{% if is_granted('ROLE_ADMIN')  %}
+    {% extends ":Admin:base.html.twig" %}
+
+    {% block body_content %}
+        <a href="#"><strong>Boite de Réception</strong></a>
+
+        <hr>
+    {% endblock %}
+{% else %}
+{% endif %}
+

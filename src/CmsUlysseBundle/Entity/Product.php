@@ -88,13 +88,6 @@ class Product
      */
     private $tmpImage;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_valid", type="boolean", nullable=false)
-     */
-    private $isValid;
-
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -257,6 +250,10 @@ class Product
         return $this;
     }
 
+    public function isValid()
+    {
+        return $this->valid;
+    }
 
     /**
      * Set picture
@@ -279,28 +276,6 @@ class Product
     public function getPicture()
     {
         return $this->picture;
-    }
-
-    /**
-     * Set isValid
-     *
-     * @param boolean $isValid
-     * @return Product
-     */
-    public function setIsValid($isValid)
-    {
-        $this->isValid = $isValid;
-        return $this;
-    }
-
-    /**
-     * Get isValid
-     *
-     * @return boolean
-     */
-    public function getIsValid()
-    {
-        return $this->isValid;
     }
 
     public function setFile(UploadedFile $file = null)

@@ -28,19 +28,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/admin/product", name="product_admin")
-     * @Template()
-     */
-    public function listAction()
-    {
-        $em = $this->getDoctrine()->getManager();
-        $repository = $em->getRepository('CmsUlysseBundle:Product');
-        $products = $repository->findAll();
-
-        return array('products' => $products);
-    }
-
-    /**
      * @Route("/product/add", name="product_add")
      * @Template("CmsUlysseBundle:Product:form.html.twig")
      *
@@ -76,10 +63,6 @@ class ProductController extends Controller
         }
         return array('form' => $form->createView());
     }
-
-
-
-
 
     /**
      * @Route("/admin/product/validate", name="product_validate")

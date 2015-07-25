@@ -1,30 +1,61 @@
-{% extends ':include:message_layout.html.twig' %}
+{% set context = is_granted('ROLE_ADMIN') ?  ":Admin:base.html.twig" :  ':include:message_layout.html.twig' %}
+{% extends context %}
 
-{% block fos_message_content %}
+{% if is_granted('ROLE_ADMIN')  %}
+    {% block body_content %}
+        <a href="#"><strong>Nouveau Message</strong></a>
 
-<h2>Nouveau Message</h2>
+        <hr>
+        <form action="{{ url('cms_messagerie_thread_new') }}" method="post">
 
-<form action="{{ url('cms_messagerie_thread_new') }}" method="post">
+            <div class="form-group">
+                {{ form_label(form.recipient, "UserName") }}
+                {{ form_widget(form.recipient) }}
+                {{ form_errors(form.recipient) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.subject, "Objet") }}
+                {{ form_widget(form.subject) }}
+                {{ form_errors(form.subject) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(form.body, "Message") }}
+                {{ form_widget(form.body) }}
+                {{ form_errors(form.body) }}
+            </div>
 
-    <div>
-        {{ form_label(form.recipient, "UserName") }}
-        {{ form_widget(form.recipient) }}
-        {{ form_errors(form.recipient) }}
-    </div>
-    <div>
-        {{ form_label(form.subject, "Objet") }}
-        {{ form_widget(form.subject) }}
-        {{ form_errors(form.subject) }}
-    </div>
-    <div>
-        {{ form_label(form.body, "Message") }}
-        {{ form_widget(form.body) }}
-        {{ form_errors(form.body) }}
-    </div>
+            {{ form_widget(form) }}
 
-    {{ form_widget(form) }}
+            <input type="submit" />
+        </form>
+    {% endblock %}
+{% else %}
+    {% block fos_message_content %}
 
-    <input type="submit" />
-</form>
+    <h2>Nouveau Message</h2>
 
-{% endblock %}
+    <form action="{{ url('cms_messagerie_thread_new') }}" method="post">
+
+        <div>
+            {{ form_label(form.recipient, "UserName") }}
+            {{ form_widget(form.recipient) }}
+            {{ form_errors(form.recipient) }}
+        </div>
+        <div>
+            {{ form_label(form.subject, "Objet") }}
+            {{ form_widget(form.subject) }}
+            {{ form_errors(form.subject) }}
+        </div>
+        <div>
+            {{ form_label(form.body, "Message") }}
+            {{ form_widget(form.body) }}
+            {{ form_errors(form.body) }}
+        </div>
+
+        {{ form_widget(form) }}
+
+        <input type="submit" />
+    </form>
+
+    {% endblock %}
+{% endif %}

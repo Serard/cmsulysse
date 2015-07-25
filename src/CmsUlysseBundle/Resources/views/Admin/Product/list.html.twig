@@ -1,11 +1,9 @@
 {% extends ":Admin:base.html.twig" %}
 
-{% set title = context %}
-
 {% block body_content %}
-    <a href="#"><strong>{{ title }}</strong></a>
-
+    <a href="#"><strong> Produits mis en Vente</strong></a>
     <hr>
+
     <div class="grid js-masonry">
         {% for product in products %}
             {{ include('CmsUlysseBundle:Admin:_product.html.twig' , { 'product' :product }) }}
