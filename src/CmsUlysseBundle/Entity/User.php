@@ -360,5 +360,28 @@ class User extends BaseUser implements ParticipantInterface
         return $this;
     }
 
+    /**
+     * @param Array
+     *
+     * @return $this
+     */
+    public function setFBGOData($data)
+    {
+
+        if (isset($data['email'])) {
+            $this->setUsername($data['email']);
+            $this->setEmail($data['email']);
+        }
+
+        if (isset($data['first_name'])) {
+            $this->firstname = $data['first_name'];
+        }
+
+        if (isset($data['last_name'])) {
+            $this->lastname = $data['last_name'];
+        }
+
+        return $this;
+    }
 
 }
