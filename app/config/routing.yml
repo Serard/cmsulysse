@@ -13,3 +13,39 @@ fos_user:
 fos_message:
     resource: "@FOSMessageBundle/Resources/config/routing.xml"
     prefix: /messenger
+
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /login
+    requirements:
+        _scheme:  https|http
+        _locale: en|fr
+    defaults:
+        _locale: fr
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /connect
+    requirements:
+        _scheme:  https|http
+        _locale: en|fr
+    defaults:
+        _locale: fr
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /login
+    requirements:
+        _scheme:  https|http
+        _locale: en|fr
+    defaults:
+        _locale: fr
+
+facebook_login:
+    pattern: /login/check-facebook
+    requirements:
+        _scheme:  https|http
+        _locale: en|fr
+    defaults:
+        _locale: fr

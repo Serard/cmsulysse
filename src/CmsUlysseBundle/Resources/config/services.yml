@@ -4,7 +4,7 @@
 #        arguments: [@service_id, "plain_value", %parameter%]
 
 parameters:
-  cms_ulysse.oauth.user_provider.class: CmsUlysseBundle\services\OAuth\UserProvider
+  cms_ulysse.oauth.user_provider.class: CmsUlysseBundle\Services\OAuth\UserProvider
 
 services:
   cms_ulysse.oauth.user_provider:

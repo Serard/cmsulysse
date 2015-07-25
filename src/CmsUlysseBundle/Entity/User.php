@@ -29,7 +29,18 @@ class User extends BaseUser implements ParticipantInterface
         $this->salt = hash('sha256', $generator->nextBytes(64));
     }
 
+
+    /**
+     * @var $facebookId
+     * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
+     */
     protected $facebookId;
+
+    /**
+     * @var $facebookAccessToken
+     * @ORM\Column(name="facebook_access_token", type="string", length=255, nullable=true)
+     */
+    protected $facebookAccessToken;
 
     /**
      * @var integer

@@ -1,6 +1,6 @@
 <?php
 
-namespace CmsUlysseBundle\services\OAuth;
+namespace CmsUlysseBundle\Services\OAuth;
 
 use FOS\UserBundle\Model\UserInterface as FOSUserInterface;
 
