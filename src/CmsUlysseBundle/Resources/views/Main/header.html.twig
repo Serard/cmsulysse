@@ -1,0 +1,77 @@
+<div class=" header header-bottom">
+    <div class="wrap">
+        <div class="header-bottom-left">
+            <div class="logo">
+                    <h1 style="font-size: 24pt;">{{ site.name }}</h1>
+                    {# if  logo is not null and logo != '' #}
+                <!--figure id="logo" style="background: {#{ path('site_logo') }#};background-repeat: no-repeat;background-size: contain;"></figure-->
+                {# if endif #}
+                <h2>{{ site.slogan }}</h2>
+
+            </div>
+
+            {%  block menu %}
+                {%  render(controller('CmsUlysseBundle:Menu:list')) %}
+            {%  endblock menu %}
+        </div>
+
+
+
+
+
+    <div class="header-bottom-right">
+
+
+        <div class="search">
+            <input type="text" name="s" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+            <input type="submit" value="Subscribe" id="submit" name="submit">
+            <div id="response"> </div>
+        </div>
+
+
+        <div class="tag-list">
+
+
+            <ul class="icon1 sub-icon1 profile_img">
+                <li><span class="active-icon icon geoloc"><a><i class="fa fa-user fa-lg"></i></a></span>
+                    <ul class="sub-icon1 list">
+                        <li><h3>user</h3></li>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+                            <li><a class="list-group-item" href="{#{ path('user_updated') }#}">&nbsp; info</a></li>
+                            <li><a class="list-group-item" href="{#{ path('user_command') }#}">&nbsp; command</a></li>
+                            <li><a class="list-group-item" href="{#{ path('vente_user') }#}">&nbsp; sell</a></li>
+                            <li><a class="list-group-item" href="#">&nbsp; Settings</a></li>
+                            <li><a href="{{ path('cms_messagerie_inbox') }}">&nbsp; Messagerie</a></li>
+                            <li><a href="">Déconnexion</a></li>
+                        {%  else %}
+                            <li><center><a class="btn btn-primary btn-large" href="{{ path('fos_user_security_login') }}">Log In</a></center></li>
+                            <li><center><a class="btn btn-primary btn-large" href="{{ path('fos_user_registration_register') }}">Sign Up</a></center></li>
+                            <li><center>~~ or ~~</center></li>
+                            <li>
+                                <center>
+                                    <a class="btn btn-primary btn-large" href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" alt="{{ 'registration.facebook.submit'|trans }}">
+                                            facebook
+                                    </a>
+                                </center>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+            <ul><li><a href="#">User</a></li></ul>
+            <ul><li><span class='other'></span></li></ul>
+            <ul class="icon1 sub-icon1 profile_img">
+                <li><span class="active-icon icon geoloc"><a><i class="fa fa-shopping-cart fa-lg"></i></a></span>
+                    <ul class="sub-icon1 list">
+                        <li><h3>No Products</h3><a href=""></a></li>
+                        <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul><li><a href="#">Cart(0)</a></li></ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+</div>
+</div>

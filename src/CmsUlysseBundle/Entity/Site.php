@@ -63,9 +63,9 @@ class Site
      *
      * @ORM\Column(name="corps_colonnes", type="integer")
      * @Assert\Regex(
-     *     pattern= "/^[1-3]{1}$/",
+     *     pattern= "/^[1-4]{1}$/",
      *     match=true,
-     *     message="Ce doit être compris entre 1 et 3"
+     *     message="Ce doit être compris entre 1 et 4"
      * )
      */
     private $corpsColonnes;

@@ -5,15 +5,20 @@
 {% block body %}
 
 {#paginator#}
-{#hwi-oauth-bundle#}
 
     {# include 'CmsUlysseBundle:Main:slider.html.twig' with { 'slides': slides } only  #}
-<section class="main">
+<section class="body">
     <div class="wrap">
         <div class="section group">
-            <div class="cont span_2_of_3">
+            <div class="colonneA">
+                testL
+            </div>
+            <div class="colonneB">
                 {%  include 'CmsUlysseBundle:Main:featuredProducts.html.twig' with { 'category': products } only  %}
                 {%  include 'CmsUlysseBundle:Main:newProducts.html.twig' with { 'category': products } only  %}
+            </div>
+            <div class="colonneC">
+                testR
             </div>
         </div>
     </div>
