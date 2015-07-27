@@ -4,6 +4,7 @@ $('.grid').masonry({
 
 });
 
+console.log('charger');
 jQuery(function($){
 
     var blocDiv = $('#grid');
