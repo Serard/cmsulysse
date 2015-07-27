@@ -77,14 +77,20 @@ body{
 	padding:2% 0;
 }
 .logo{
-	float:left;
-	margin-right: 6.6%;
+	/*float:left;
+	margin-right: 6.6%;*/
+    display: inline-block;
+    overflow: hidden;
+    width: calc(100% - 58% - 12%);
+    vertical-align: middle;
 }
 /*--menu--*/
 /* dCodes Framework:(c) TemplateAccess */
 .menu{
-	float:left;
-	margin-top: 6px;
+    display: inline-block;
+    vertical-align: middle;
+	/*float:none;*/
+	/*margin-top: 6px;*/
 }
 /* start menu */
 .h_nav h4{
@@ -117,21 +123,27 @@ body{
 	text-decoration:underline;
 }
 .header-bottom-left{
-	float:left;
+	/*float:left;*/
 	width: 58%;
+    display: inline-block;
 	margin-top:10px;
+    vertical-align: middle;
 }
 .header-bottom-right{
-	float:right;
-	width:calc(100% - 58%);
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+	width:calc(100% - 58% - 4px);
 	margin-top:10px;
 }
 .search {
 	background:#fff;
 	border: 1px solid #ddd;
-	position: relative;
-	float:left;
-	margin:6px 20px 0 0;
+	/*position: relative;
+	float:left;*/
+    display: inline-block;
+    vertical-align: middle;
+	margin:0px 0 0 2px;
 }
 .search input[type="text"] {
 	border: none;
@@ -166,7 +178,9 @@ body{
 	position:relative;
 }
 .tag-list{
-	float:left;
+    vertical-align: middle;
+    display: inline-block;
+	/*float:left;*/
 }
 /* create_btn */
 .create_btn{

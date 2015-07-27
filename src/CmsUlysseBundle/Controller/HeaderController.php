@@ -148,22 +148,22 @@ class HeaderController extends Controller
 
             //'middle&left'
             case 2 :
-                $style .= ".colonneA{display:block;width: 250px;}";
-                $style .= ".colonneB{display:block;width:calc(100% - 250px);}";
+                $style .= ".colonneA{display:inline-block;vertical-align:top;width: 250px;height:100%;}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - 250px - 4px);}";
                 $style .= ".colonneC{display:none;}";
                 break;
 
             //'middle&right'
             case 3 :
                 $style .= ".colonneA{display:none;}";
-                $style .= ".colonneB{display:block;width:calc(100% - (100% / 4);}";
-                $style .= ".colonneC{display:block;width:calc(100%  / 4);}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - (100% / 4) - 4px);}";
+                $style .= ".colonneC{display:inline-block;vertical-align:top;width:calc(100%  / 4);}";
                 break;
 
             default:
-                $style .= ".colonneA{display:block;width: 250px;}";
-                $style .= ".colonneB{display:block;width:calc(100% - 250px - ((100% - 250px) / 4) );}";
-                $style .= ".colonneC{display:block;width:calc((100% - 250px) / 4);}";
+                $style .= ".colonneA{display:inline-block;vertical-align:top;width: 250px;height:100%}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - 250px - ((100% - 250px) / 4) ) - 8px);}";
+                $style .= ".colonneC{display:inline-block;vertical-align:top;width:calc((100% - 250px) / 4);}";
                 break;
         }
         /* custom style header*/
@@ -201,10 +201,14 @@ class HeaderController extends Controller
         $style.= trim($settings_background_img_body)==''?'':'background-image:'.$settings_background_img_body.';background-repeat:no-repeat;background-size:cover;';
         $style.=trim($color_text_body)==''?'':'color:'.$color_text_body.';';
         $style.='}';
+        $style.='h2.head{';
+        $style.=trim($color_text_body)==''?'':'color:'.$color_text_body.';';
+        $style.='}';
 
-        /* custom style body */
+
+        /* custom style head top */
         $background_color_top='';
-        $background_color_top=($background_color_top == '' && $global_color != '')? hex2rgba($background_color_top,$global_color,true,'#96E8FC'):$background_color_top;
+        $background_color_top=($background_color_top == '' && $global_color != '')? hex2rgba($background_color_top,$global_color,true):$background_color_top;
         $background_color_top=(trim($background_color_top)==''||strtoupper($background_color_top[0])=='R')?$background_color_top:hex2rgba($background_color_top);
 
         $settings_background_img_top='';
@@ -251,6 +255,10 @@ class HeaderController extends Controller
         $color_icon=($color_icon == '' && $global_color != '')? hex2rgba($color_icon,$global_color,false):$color_icon;
         $color_icon=(trim($color_icon)==''||strtoupper($color_icon[0])=='R')?$color_icon:hex2rgba($color_icon);
 
+        $background_iconC='';
+        $background_iconC=($background_iconC == '' && $global_color != '')? hex2rgba($background_iconC,$global_color,true, '#7DB122'):$background_iconC;
+        $background_iconC=(trim($background_iconC)==''||strtoupper($background_iconC[0])=='R')?$background_iconC:hex2rgba($background_iconC);
+
 
         $style.='.header .icon  a  i.fa{';
         $style.= trim($color_icon)==''?'':'color:'.$color_icon.';';
@@ -258,18 +266,24 @@ class HeaderController extends Controller
         $style.='.icon{';
         $style.= trim($background_icon)==''?'':'background:'.$background_icon.';';
         $style.='}';
+        $style.='.card .icon{';
+        $style.= trim($background_iconC)==''?'':'background:'.$background_iconC.' url(../../../images/cart2.png) no-repeat scroll 2px 0px;';
+        $style.='}';
+        $style.='.card span.actual{';
+        $style.= trim($background_iconC)==''?'':'color:'.$background_iconC.';';
+        $style.='}';
 
 
         /* custom style card */
 
         $background_color_card='';
-        $background_color_card=($background_color_card == '' && $global_color != '')? hex2rgba($background_color_card,$global_color,'1'):$background_color_card;
+        $background_color_card=($background_color_card == '' && $global_color != '')? hex2rgba($background_color_card,$global_color,false):$background_color_card;
         $background_color_card=(trim($background_color_card)==''||strtoupper($background_color_card[0])=='R')?$background_color_card:hex2rgba($background_color_card);
 
         $background_img_card='';
 
         $color_text_card='';
-        $color_text_card=($color_text_card == '' && $global_color != '')? hex2rgba($color_text_card,$global_color,'2'):$color_text_card;
+        $color_text_card=($color_text_card == '' && $global_color != '')? hex2rgba($color_text_card,$global_color,true):$color_text_card;
         $color_text_card=(trim($color_text_card)==''||strtoupper($color_text_card[0])=='R')?$color_text_card:hex2rgba($color_text_card);
 
         $style.='.card{';
