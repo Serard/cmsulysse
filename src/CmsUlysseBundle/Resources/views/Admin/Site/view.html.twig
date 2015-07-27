@@ -11,16 +11,25 @@
             <li class="list-group-item"><span class="badge">{{ site.name }}</span>Titre du site</li>
             <li class="list-group-item"><span class="badge">{{ site.slogan }}</span> Slogan</li>
             <li class="list-group-item"><span class="badge" style="background:{{ site.themeColor }};">{{ site.themeColor }}</span> Thème Couleur</li>
-            <li class="list-group-item"><span class="badge">{{ site.positionMenu }}</span>Position du Menu</li>
-            <li class="list-group-item"><span class="badge">{{ site.corpsColonnes }}</span>Nombre de Colonnes</li>
+            <li class="list-group-item"><span class="badge">{{ site.positionMenu == 1 ? 'A droite de la page' : 'En haut de la page'}}</span>Position du Menu</li>
+            <li class="list-group-item">
+                <span class="badge">
+                    {% if site.corpsColonnes == 1 %}
+                        1 colonne (centrale)
+                    {% elseif site.corpsColonnes == 2 %}
+                        2 colonnes (gauche / centrale)
+                    {% elseif site.corpsColonnes == 3 %}
+                        2 colonnes (droite / centrale)
+                    {% elseif site.corpsColonnes == 4 %}
+                        3 colonnes (gauche / droite et centrale)
+                    {% endif %}
+                </span>Nombre de Colonnes</li>
 
             <li class="list-group-item">
-                {% if site.image is defined %}
-                <span class="badge">
-                    <img width="300px" src="{{ asset(site.getWebPath())}}" alt="" />
-                </span>
-                {% endif %}
                 Image du fond d'écran
+                {% if site.background is defined %}
+                    <img style="margin-left: 50px; border-radius: 10%" width="300px" src="{{ asset(site.getWebPath())}}" alt="" />
+                {% endif %}
             </li>
         </ul>
 

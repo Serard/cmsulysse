@@ -7,8 +7,8 @@
 
     <hr>
     <div class="grid js-masonry">
-        {% for product in products %}
-            {{ include('CmsUlysseBundle:Admin:_product.html.twig' , { 'product' :product }) }}
+        {% for userProduct in userProducts %}
+            {{ include('CmsUlysseBundle:Admin:_product.html.twig' , { 'product' : userProduct.product }) }}
         {% endfor %}
     </div>
 {% endblock %}

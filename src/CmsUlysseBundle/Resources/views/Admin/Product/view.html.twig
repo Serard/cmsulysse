@@ -5,34 +5,45 @@
     <hr>
     <h1 style="color: #003366">Produit : {{ product.name }}</h1>
 
-    <div class="col-lg-8">
-        <div style="color: dimgrey">
-            {{ product.description }}
-        </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div style="color: dimgrey">
+                {{ product.description }}
+            </div>
 
-        {% for picture in product.pictures %}
-            <img style="height: 200px;" src="{{ asset(picture.getWebPath())}}" />
-        {% endfor %}
-    </div>
-    <div class="col-lg-6">
-        <hr>
-        <h2 style="color: #003366">Spécifications</h2>
-
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Content</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for specification in product.specifications %}
-                <tr>
-                    <td>{{ specification.name }}</td>
-                    <td>{{ specification.content }}</td>
-                </tr>
+            {% for picture in product.pictures %}
+                <img style="height: 200px;" src="{{ asset(picture.getWebPath())}}" />
             {% endfor %}
-            </tbody>
-        </table>
+        </div>
+        <div class="well well-lg col-lg-4">
+            <p>Vendu par : toto</p>
+            <p>Au pris de : 10 euros</p>
+            <p>Quantité : 55 </p>
+            <a class="btn btn-success" href="" >Contacter</a>
+        </div>
     </div>
+
+    {% if product.specifications | length > 0  %}
+        <div class="col-lg-6">
+            <hr>
+            <h2 style="color: #003366">Spécifications</h2>
+
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Content</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for specification in product.specifications %}
+                    <tr>
+                        <td>{{ specification.name }}</td>
+                        <td>{{ specification.content }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% endif %}
 {% endblock %}

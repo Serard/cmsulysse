@@ -15,14 +15,26 @@ class SiteType extends AbstractType
             ->add('slogan')
             ->add('file')
             ->add('theme_color')
-            ->add('position_menu','checkbox', array('required' => false))
+            ->add('position_menu','choice', array(
+                'choices' => array(
+                    '0' => 'haut de la page',
+                    '1' => 'à droite de la page'),
+                'attr' => array(
+                    'class' => "form-control"
+                )))
             ->add('corps_colonnes','choice',array(
                 'choices'   => array(
-                    '1' => 'colonne centrale',
-                    '2' => 'colonnes gauche et centrale',
-                    '3' => 'colonnes droite et centrale',
-                    '4' => '3 colonnes (gauche droit et centrale)')))
-            ->add('btn', 'submit', array('label' => 'Valider'));
+                    '1' => '1 colonne (centrale)',
+                    '2' => '2 colonnes (gauche et centrale)',
+                    '3' => '2 colonnes (droite et centrale)',
+                    '4' => '3 colonnes (gauche droite et centrale)'),
+                'attr' => array(
+                    'class' => "form-control"
+                )))
+            ->add('btn', 'submit', array(
+                'label' => 'Valider',
+                'attr' => array('class' => 'btn btn-primary')
+            ));
 
         return $builder;
     }

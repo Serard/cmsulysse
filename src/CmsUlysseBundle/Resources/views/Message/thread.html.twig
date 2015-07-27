@@ -9,7 +9,7 @@
         <h3>Objet : {{ thread.subject }}</h3>
         {% for message in thread.messages %}
             <div class="well well-lg col-lg-8">
-                Envoyé par <strong>{{ message.sender|e }}</strong> le <strong>{{ message.createdAt|date }}</strong>  :
+                Envoyé par <strong>{{ message.sender.firstName }} {{ message.sender.lastName }}</strong> le <strong>{{ message.createdAt|date }}</strong>  :
 
                 <div class="messenger_thread_message_body" id="message_{{ message.id }}">
                     {{ message.body | nl2br}}
