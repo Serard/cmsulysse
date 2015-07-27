@@ -98,14 +98,6 @@ class Site
      */
     private $slider;
 
-
-    /**
-     * @var bool
-     *
-     * @ORM\Column(name="slideActive", type="boolean")
-     */
-    private $slideActive;
-
     /**
      * @var bool
      *
@@ -382,9 +374,12 @@ class Site
      */
     public function setSlider($slider)
     {
-        $this->slider = $slider;
+        return $this->slider = $slider;
+    }
 
-        return $this;
+    public function getSlider()
+    {
+        return $this->slider;
     }
 
     /**

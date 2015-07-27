@@ -5,6 +5,7 @@ namespace CmsUlysseBundle\Controller;
 use CmsUlysseBundle\Entity\Product;
 use CmsUlysseBundle\Entity\Site;
 use CmsUlysseBundle\Entity\Slider;
+use CmsUlysseBundle\Form\Type\AdminProductType;
 use CmsUlysseBundle\Form\Type\SliderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -47,6 +48,49 @@ class AdminController extends Controller
             'categories' => $categories,
             'context' => 'list_product'
         );
+    }
+
+    /**
+     * @Route("/product/add", name="product_add_admin")
+     * @Template("CmsUlysseBundle:Admin:product/form.html.twig")
+     *
+     */
+    public function productAddAction(Request $request)
+    {
+        $form = $this->createForm(new AdminProductType(), new Product());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $product = $form->getData();
+
+            foreach($product->getSpecifications()->getValues() as $specification) {
+                if ($specification->getName() === null && $specification->getContent() === null) {
+                    $product->removeSpecification($specification);
+                }
+            }
+            foreach($product->getPictures() as $picture){
+                $picture->setProduct($product);
+            }
+            foreach($product->getSpecifications() as $specification){
+                $specification->setProduct($product);
+            }
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($product);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl(''));
+        }
+        return array('form' => $form->createView(), 'onlyProduct' => true);
+    }
+
+    /**
+     * @Route("/product/{id}", name="product_view_admin")
+     * @Template("CmsUlysseBundle:Admin:product/view.html.twig")
+     */
+    public function productViewAction(Product $product)
+    {
+          return array('product' => $product);
     }
 
     /**
@@ -94,7 +138,7 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/product/{id}", name="valid_product_admin")
+     * @Route("/product/valid/{id}", name="valid_product_admin")
      * @Template()
      */
     public function validProductAction(Product $product)
@@ -112,12 +156,12 @@ class AdminController extends Controller
     }
 
     /**
-     * @Route("/config/slide/{id}/edit", name="active_best_product_admin")
+     * @Route("/config/slide/{id}/edit", name="active_slider_admin")
      * @Template()
      */
-    public function activeSlider(Site $site)
+    public function activeSliderAction(Site $site)
     {
-        $site->setSlideActive(!$site->isSlideActive());
+        $site->setSlider(!$site->getSlider());
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('modules_admin');
@@ -134,5 +178,8 @@ class AdminController extends Controller
 
         return $this->redirectToRoute('modules_admin');
     }
+
+
+
 
 }

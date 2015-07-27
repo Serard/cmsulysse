@@ -48,11 +48,12 @@ class ProductController extends Controller
                     $product->removeSpecification($specification);
                 }
             }
-
+            foreach($product->getPictures() as $picture){
+                $picture->setProduct($product);
+            }
             foreach($product->getSpecifications() as $specification){
                 $specification->setProduct($product);
             }
-
             foreach($product->getUserProducts() as $userProduct){
                 $userProduct->setProduct($product);
                 $userProduct->setUser($user);
@@ -89,37 +90,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route("/admin/product/add", name="product_admin_add")
-     * @Template("CmsUlysseBundle:Product:form.html.twig")
-     *
-     */
-    public function adminAddAction(Request $request)
-    {
-        $form = $this->createForm(new AdminProductType(), new Product());
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $product = $form->getData();
-
-            foreach($product->getSpecifications()->getValues() as $specification) {
-                if ($specification->getName() === null && $specification->getContent() === null) {
-                    $product->removeSpecification($specification);
-                }
-            }
-
-            foreach($product->getSpecifications() as $specification){
-                $specification->setProduct($product);
-            }
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($product);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('product_list'));
-        }
-        return array('form' => $form->createView(), 'onlyProduct' => true);
-    }
-
-    /**
      * @Route("/product/{id}", name="product_view")
      * @Template()
      */
@@ -153,57 +123,6 @@ class ProductController extends Controller
 
         return $this->redirect($this->generateUrl("product_list"));
 
-    }
-
-    /**
-     * @Route("/product/update/{id}", name="product_update")
-     * @Template("CmsUlysseBundle:Product:form.html.twig")
-     */
-    public function updateAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $repo = $em->getRepository('CmsUlysseBundle:Product');
-        $product = $repo->find($request->get('id'));
-        $specifications = $em->getRepository('CmsUlysseBundle:Specification')->findByProduct($product);
-
-
-        $form = $this->createForm(new AdminProductType(),$product);
-        $usersProduct = $product->getUserProducts();
-        $disabled = false;
-        foreach($usersProduct as $usersProduct) {
-            $disabled = true;
-            break;
-        }
-
-        if (!$this->get('security.context')->isGranted('ROLE_ADMIN') || $disabled) {
-            $form->add('valid', null, array('label' => 'Validé : ', 'required' => false, 'disabled' => true));
-        }
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $product = $form->getData();
-
-            foreach($product->getSpecifications()->getValues() as $specification) {
-                if ($specification->getName() === null && $specification->getContent() === null) {
-                    $product->removeSpecification($specification);
-                    $em->remove($specification);
-                }
-            }
-
-            foreach($product->getSpecifications() as $specification){
-                $specification->setProduct($product);
-            }
-
-            $em->persist($product);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('product_list'));
-        }
-        return array(
-            'form' => $form->createView(),
-            'specifications' => $specifications,
-            'onlyProduct' => true
-        );
     }
 
     /**

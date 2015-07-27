@@ -1,0 +1,41 @@
+{% extends ":Admin:base.html.twig" %}
+
+{% block body_content %}
+    <a href="#"><strong> Produit</strong></a>
+    <hr>
+    <h1 style="color: #003366">Produit : {{ product.name }}</h1>
+
+    <div class="col-lg-8">
+        <div style="color: dimgrey">
+            {{ product.description }}
+        </div>
+
+        {{ dump(product.pictures) }}
+        {% for picture in product.pictures %}
+            <div>
+                <img style="height: 350px;" src="{{ asset(picture.getWebPath())}}" />
+            </div>
+        {% endfor %}
+    </div>
+    <div class="col-lg-6">
+        <hr>
+        <h2 style="color: #003366">Spécifications</h2>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Content</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for specification in product.specifications %}
+                <tr>
+                    <td>{{ specification.name }}</td>
+                    <td>{{ specification.content }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

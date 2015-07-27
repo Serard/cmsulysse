@@ -52,7 +52,7 @@ class Picture
      * @var Product
      *
      * @ORM\ManyToOne(targetEntity="Product" ,inversedBy="pictures")
-     * @ORM\JoinColumn(name="picture_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
      */
     private $product;
 
@@ -133,6 +133,24 @@ class Picture
     }
 
     /**
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param Product $product
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
      * Set picture
      *
      * @param string $picture
@@ -144,7 +162,6 @@ class Picture
 
         return $this;
     }
-
     /**
      * Get picture
      *
@@ -237,6 +254,6 @@ class Picture
 
     protected function getUploadDir()
     {
-        return 'upload/pictures';
+        return 'upload/pictures/slider';
     }
 }
