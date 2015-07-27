@@ -148,22 +148,22 @@ class HeaderController extends Controller
 
             //'middle&left'
             case 2 :
-                $style .= ".colonneA{display:block;width: 250px;}";
-                $style .= ".colonneB{display:block;width:calc(100% - 250px);}";
+                $style .= ".colonneA{display:inline-block;vertical-align:top;width: 250px;height:100%;}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - 250px - 4px);}";
                 $style .= ".colonneC{display:none;}";
                 break;
 
             //'middle&right'
             case 3 :
                 $style .= ".colonneA{display:none;}";
-                $style .= ".colonneB{display:block;width:calc(100% - (100% / 4);}";
-                $style .= ".colonneC{display:block;width:calc(100%  / 4);}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - (100% / 4) - 4px);}";
+                $style .= ".colonneC{display:inline-block;vertical-align:top;width:calc(100%  / 4);}";
                 break;
 
             default:
-                $style .= ".colonneA{display:block;width: 250px;}";
-                $style .= ".colonneB{display:block;width:calc(100% - 250px - ((100% - 250px) / 4) );}";
-                $style .= ".colonneC{display:block;width:calc((100% - 250px) / 4);}";
+                $style .= ".colonneA{display:inline-block;vertical-align:top;width: 250px;height:100%}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - 250px - ((100% - 250px) / 4) ) - 8px);}";
+                $style .= ".colonneC{display:inline-block;vertical-align:top;width:calc((100% - 250px) / 4);}";
                 break;
         }
         /* custom style header*/
