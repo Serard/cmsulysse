@@ -2,10 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}CmsUlysse{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         {% block style %}
             {% stylesheets
+                'css/admin/bootstrap.min.css'
                 'css/style.css'
                 'css/style2.css'
                 'css/form.css'
@@ -17,12 +18,9 @@
             {% endstylesheets %}
         {% endblock %}
 
-        {% block stylesheets %}
-            <style>
-
-
-            </style>
-        {% endblock %}
+            {% block stylesheets %}
+                {%  render(controller('CmsUlysseBundle:Header:custom')) %}
+            {% endblock %}
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% javascripts output="js/compiled/main.js"
@@ -44,7 +42,7 @@
             var villeGeoLoc;
             var paysGeoLoc;
             var paysGeoLocISO;
-            var attrMenuHeader='.menu.header .other';
+            var attrMenuHeader='.tag-list .other';//'.menu.header .other';
             var beginPos='<span class="icon geoloc"><a><i class="fa fa-map-marker fa-lg"></i></a></span><span class="descriptIcon">';
             var endPos='</span>';
             var GlobalOpenMenu='';
@@ -99,7 +97,7 @@
                 this.url=this.urlApi+this.latitude+','+this.longitude;
                 this.requestJson=function(){
                     $.get(this.url, function(data){
-                        //console.log(data);
+                        console.log(data);
                         for (var i = 0; i < data.results.length; i++)
                         {
                             for (var z = 0; z< data.results[i].types.length; z++)
@@ -185,7 +183,7 @@
                     whereAmI.geoPos();
                     GlobalOpenMenu.className='iconZoom off';
                     GlobalOpenMenu='';
-                    //console.log('ok geoPos again');
+                    console.log('ok geoPos again');
                 });
 
                 $('.icon a').click(function(){
@@ -194,8 +192,8 @@
                     GlobalOpenMenuInit();
 
                     x.className=(x.className=='iconZoom off')?'iconZoom on':'iconZoom off';
-                    //console.log(x);
-                    //console.log(GlobalOpenMenu );
+                    console.log(x);
+                    console.log(GlobalOpenMenu );
 
                     GlobalOpenMenu = x;
                 })

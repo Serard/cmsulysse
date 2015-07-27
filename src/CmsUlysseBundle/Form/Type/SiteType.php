@@ -18,9 +18,10 @@ class SiteType extends AbstractType
             ->add('position_menu','checkbox', array('required' => false))
             ->add('corps_colonnes','choice',array(
                 'choices'   => array(
-                    '1' => '1 colonnes',
-                    '2' => '2 colonnes',
-                    '3' => '3 colonnes')))
+                    '1' => 'colonne centrale',
+                    '2' => 'colonnes gauche et centrale',
+                    '3' => 'colonnes droite et centrale',
+                    '4' => '3 colonnes (gauche droit et centrale)')))
             ->add('btn', 'submit', array('label' => 'Valider'));
 
         return $builder;

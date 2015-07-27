@@ -6,6 +6,12 @@
 @import url("css/font-awesome.min.css");
 @import url(http://fonts.googleapis.com/css?family=Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab);
 
+html{
+
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 .icon{
     display:inline-block;
     vertical-align: middle;
@@ -24,4 +30,34 @@
     text-align: center;
     width: 100%;
     padding-top: 8px;
+}
+.icon{
+    margin:2px 2px;
+}
+.tag-list .descriptIcon{
+    width: 115px;
+    overflow: hidden;
+    display: inline-block;
+    vertical-align: middle;
+}
+.tag-list ul{
+    display: inline-block;
+    vertical-align: middle;
+}
+.card{
+    background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+    height: 362px;
+}
+.product_image {
+    max-width: 100%;
+    height: 263px;
+    display: block;
+    border: 1px solid #F0F0F0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+p.title {
+    height: 42px;
+    overflow: hidden;
 }

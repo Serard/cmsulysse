@@ -1,99 +1,25 @@
-    <div class="header-top">
-        <div class="wrap">
-            <div class="header-top-left">
-                <div class="clear"></div>
-            </div>
-            <div class="cssmenu">
-                <ul>
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('index_admin') }}">Config du site</a></li>
-                    {% endif %}
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-                    <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
-                    {%  else %}
-                    <li><a href="{{ path('fos_user_security_login') }}">Log In</a></li> |
-                    <li><a href="{{ path('fos_user_registration_register') }}">Sign Up</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+<div class="body header-top">
+    <div class="wrap">
+        <div class="header-top-left">
             <div class="clear"></div>
         </div>
-    </div>
-
-
-
-<div class="header-bottom">
-    <div class="wrap">
-        <div class="header-bottom-left">
-            <div class="logo">
-            {% if site is defined and site %}
-
-                    <h1>{{ site.name }}</h1>
-                    {%  if  site.logo is not null and site.logo != '' %}
-                        <figure id="logo" style="background: {{ path('site_logo') }};background-repeat: no-repeat;background-size: contain;"></figure>
-                    {% endif %}
-                <h2>{{ slogan }}</h2>
-            {% else %}
-                    <h1 style="font-size: 24pt;">Ulysse</h1>
-            {% endif %}
-            <h2>Le super slogan d'ulysse</h2>
-
-            </div>
-
-                    {%  block menu %}
-                        {#  include ':include:menu.html.twig' #}
-                        {%  render(controller('CmsUlysseBundle:Menu:list')) %}
-                    {%  endblock menu %}
+        <div class="cssmenu">
+            <ul>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{ path('index_admin') }}">Config du site</a></li>
+                {% endif %}
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+                <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                {%  else %}
+                <li><a href="{{ path('fos_user_security_login') }}">Log In</a></li> |
+                <li><a href="{{ path('fos_user_registration_register') }}">Sign Up</a></li>
+                {% endif %}
+            </ul>
         </div>
-
-
-</div>
-
-
-
-<div class="header-bottom-right">
-
-
-    <div class="search">
-        <input type="text" name="s" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-        <input type="submit" value="Subscribe" id="submit" name="submit">
-        <div id="response"> </div>
-    </div>
-
-
-    <div class="tag-list">
-
-
-        <ul class="icon1 sub-icon1 profile_img">
-            <li><a class="active-icon c2" href="#"> </a>
-                <ul class="sub-icon1 list">
-                    <li><h3>user</h3></li>
-                    {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-                        <li><a class="list-group-item" href="{#{ path('user_updated') }#}">&nbsp; info</a></li>
-                        <li><a class="list-group-item" href="{#{ path('user_command') }#}">&nbsp; command</a></li>
-                        <li><a class="list-group-item" href="{#{ path('vente_user') }#}">&nbsp; sell</a></li>
-                        <li><a class="list-group-item" href="#">&nbsp; Settings</a></li>
-                        <li><a href="{{ path('cms_messagerie_inbox') }}">&nbsp; Messagerie</a></li>
-                        <li><a href="">Déconnexion</a></li>
-                    {%  else %}
-                        <li><a href="">Log In</a></li> |
-                        <li><a href="">Sign Up</a></li>
-                    {% endif %}
-                </ul>
-            </li>
-        </ul>
-        <span class='other'></span>
-        <ul class="icon1 sub-icon1 profile_img">
-            <li><a class="active-icon c2" href="#"> </a>
-                <ul class="sub-icon1 list">
-                    <li><h3>No Products</h3><a href=""></a></li>
-                    <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                </ul>
-            </li>
-        </ul>
-        <ul class="last"><li><a href="#">Cart(0)</a></li></ul>
-    </div>
-</div>
         <div class="clear"></div>
     </div>
 </div>
+
+{% block headerContent %}
+    {%  render(controller('CmsUlysseBundle:Header:list')) %}
+{% endblock %}

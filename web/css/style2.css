@@ -118,12 +118,12 @@ body{
 }
 .header-bottom-left{
 	float:left;
-	width: 62%;
+	width: 58%;
 	margin-top:10px;
 }
 .header-bottom-right{
 	float:right;
-	width:30%;
+	width:calc(100% - 58%);
 	margin-top:10px;
 }
 .search {
@@ -140,7 +140,7 @@ body{
 	font-size:0.85em;
 	font-family: 'Exo 2', sans-serif;
 	color:#777;
-	width:130px;
+	width:50px;
 	padding:7px;
 	-webkit-apperance:none;
 	margin:0;
@@ -150,7 +150,7 @@ body{
 	-o-transition: all 0.5s ease-out;
 }
 .search input[type="text"]:focus{
-	width:150px;
+	width:110px;
 }
 .search input[type="submit"] {
 	border: none;
@@ -201,8 +201,8 @@ body{
 	clear: both;
 }
 .icon1 {
-	float:left;
-	zoom:1;
+	/*float:left;
+	zoom:1;*/
 }
 .icon1 li {
 	float: left;
@@ -219,7 +219,7 @@ body{
 }
 .icon1 ul {
 	width:300px;
-	margin: 20px 0 0 0;
+	margin: 10px 0 0 0;
 	_margin: 0;
 	opacity: 0;
 	visibility: hidden;
@@ -241,7 +241,7 @@ body{
 .icon1 li:hover > ul {
 	opacity: 1;
 	visibility: visible;
-	margin: 0;
+	margin: -20px;
 	z-index: 9999;
 }
 .icon1 ul ul {
@@ -346,7 +346,7 @@ body{
 }
 ul.last{
 	float: left;
-	margin: 12px 0px 0 20px;
+	margin: 14px 0px 0px 0px;
 }
 ul.last li a{
 	color:#000;
@@ -2165,10 +2165,10 @@ ul.delivery-list li a:hover{
 		width: 240px;
 	}
 	.search input[type="text"] {
-		width: 110px;
+		width: 50px;
 	}
 	.search input[type="text"]:focus {
-		width: 132px;
+		width: 110px;
 	}
 	.like_box {
 		width: 114%;
@@ -2191,7 +2191,7 @@ ul.delivery-list li a:hover{
 		width: 47.7%;
 	}
 	.search input[type="text"]:focus {
-		width: 132px;
+		width: 110px;
 	}
 }
 @media (max-width:1024px){
@@ -2324,7 +2324,7 @@ ul.delivery-list li a:hover{
 		font-size: 1em;
 	}
 	.search input[type="text"] {
-		width: 110px;
+		width: 50px;
 	}
 	h2.m_1 {
 		font-size: 1em;
@@ -2432,7 +2432,7 @@ ul.delivery-list li a:hover{
 		font-size: 1em;
 	}
 	.search input[type="text"] {
-		width: 110px;
+		width: 50px;
 	}
 	h2.m_1 {
 		font-size: 1em;
@@ -2609,7 +2609,7 @@ ul.delivery-list li a:hover{
 		font-size: 1em;
 	}
 	.search input[type="text"] {
-		width: 110px;
+		width: 50px;
 	}
 	h2.m_1 {
 		font-size: 1em;
@@ -2776,7 +2776,7 @@ ul.delivery-list li a:hover{
 		font-size: 1em;
 	}
 	.search input[type="text"] {
-		width: 110px;
+		width: 50px;
 	}
 	h2.m_1 {
 		font-size: 1em;
