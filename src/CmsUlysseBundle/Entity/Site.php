@@ -374,9 +374,12 @@ class Site
      */
     public function setSlider($slider)
     {
-        $this->slider = $slider;
+        return $this->slider = $slider;
+    }
 
-        return $this;
+    public function getSlider()
+    {
+        return $this->slider;
     }
 
     /**
@@ -436,7 +439,23 @@ class Site
         return $this;
     }
 
+    /**
+     * @return boolean
+     */
+    public function isSlideActive()
+    {
+        return $this->slideActive;
+    }
 
+    /**
+     * @param boolean $slideActive
+     * @return $this
+     */
+    public function setSlideActive($slideActive)
+    {
+        $this->slideActive = $slideActive;
 
+        return $this;
+    }
 
 }

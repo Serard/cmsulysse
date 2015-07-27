@@ -12,8 +12,10 @@
                 {% endfor %}
             {% endif %}
 
-            <a class="btn btn-success" href="{{ path('valid_product_admin', {'id':product.id}) }}">Valider</a>
-            <a class="btn btn-primary"href="">Voir</a>
+            {% if not product.isValid %}
+                <a class="btn btn-success" href="{{ path('valid_product_admin', {'id':product.id}) }}">Valider</a>
+            {% endif %}
+            <a class="btn btn-primary"href="{{ path('product_view_admin', {'id':product.id}) }}">Voir</a>
         </div>
     </div>
 </div>

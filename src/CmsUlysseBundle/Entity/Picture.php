@@ -49,6 +49,14 @@ class Picture
     private $slider;
 
     /**
+     * @var Product
+     *
+     * @ORM\ManyToOne(targetEntity="Product" ,inversedBy="pictures")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id")
+     */
+    private $product;
+
+    /**
      * @Assert\File(
      *     maxSize = "1024k",
      *     mimeTypes = {"image/jpg", "image/jpeg", "image/png", "image/gif"},
@@ -125,6 +133,24 @@ class Picture
     }
 
     /**
+     * @return Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param Product $product
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
      * Set picture
      *
      * @param string $picture
@@ -136,7 +162,6 @@ class Picture
 
         return $this;
     }
-
     /**
      * Get picture
      *
@@ -231,5 +256,4 @@ class Picture
     {
         return 'upload/pictures/slider';
     }
-
 }

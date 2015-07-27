@@ -6,7 +6,7 @@
     {% stylesheets output="css/compiled/main.css" filter="cssrewrite"
         'css/admin/bootstrap.min.css'
         'css/admin/styles.css'
-    %}
+        'css/masonry/styles.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
 {% endblock %}
@@ -47,7 +47,10 @@
                     <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#menu2"> Products</a>
                         <ul class="nav nav-stacked collapse" id="menu2">
                             <li>
-                                <a href="{{ path('index_admin') }}">Nouveaux Produits</a>
+                                <a href="{{ path('product_add_admin') }}">Nouveau Produit</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('index_admin') }}">Les Nouveaux Produits</a>
                             </li>
                             <li>
                                 <a href="{{ path('product_admin') }}">Liste des produits</a>
@@ -60,13 +63,13 @@
                     <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#menu3">Messagerie</a>
                         <ul class="nav nav-stacked collapse" id="menu3">
                             <li>
-                                <a href="{{ path('index_admin') }}">Boite de Réception</a>
+                                <a href="{{ path('cms_messagerie_inbox') }}">Boite de Réception</a>
                             </li>
                             <li>
-                                <a href="{{ path('product_admin') }}">Reçu</a>
+                                <a href="{{ path('cms_messagerie_sent') }}">Envoyé</a>
                             </li>
                             <li>
-                                <a href="{{ path('categ_admin') }}">Archivé</a>
+                                <a href="{{ path('cms_messagerie_deleted') }}">Archivé</a>
                             </li>
                         </ul>
                     </li>
@@ -122,7 +125,6 @@
     </div>
 {% endblock %}
 
-
 {% block javas %}
     <script src=""></script>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -131,7 +133,8 @@
     {% javascripts output="js/compiled/main.js"
         'js/admin/scripts.js'
         'js/admin/bootstrap.min.js'
-    %}
-        <script src="{ { asset_url }}"></script>
+        'js/masonry/masonry.min.js'
+        'js/masonry/main.js'%}
+    <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}
