@@ -6,6 +6,9 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.27
+gestion des commandes
+
 dev version    : dev-v0.0.26
 formulaires spécifications delete javascipt
 
