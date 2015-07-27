@@ -247,6 +247,39 @@
             <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
+        <script>
+            $(function(){
+                $('.header-bottom').data('size','big');
+            });
 
+            $(window).scroll(function(){
+                if($(document).scrollTop() > 0)
+                {
+                    if($('.header-bottom').data('size') == 'big')
+                    {
+                        $('.header-bottom').data('size','small');
+                        $('.header-bottom').stop().animate({
+                            height:'120px',
+                            zIndex: 999,
+                            top:'0'
+                        },200);
+                    }
+                }
+                else
+                {
+                    if($('.header-bottom').data('size') == 'small')
+                    {
+                        $('.header-bottom').data('size','big');
+                        $('.header-bottom').stop().animate({
+                            height:'200px',
+                            zIndex: 0,
+                            top: '30px'
+                        },400);
+                    }
+                }
+            });
+
+
+        </script>
     </body>
 </html>
