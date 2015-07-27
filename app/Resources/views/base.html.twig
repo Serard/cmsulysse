@@ -19,8 +19,9 @@
         {% endblock %}
         <style>
 
-            .grid-item { width: 200px; }
-            .grid-item--width2 { width: 400px; }
+            .fwslider{
+                margin-top: 20px !important;
+            }
 
         </style>
 
@@ -212,7 +213,22 @@
         {% block header %}
             {%  include ':include:header.html.twig' %}
         {% endblock header %}
+        <section class="body">
+            {%  block slide %}{%  endblock %}
+            <div class="wrap">
+                <div class="section group">
+                    <div class="colonneA">
+                        {# render(controller('CmsUlysseBundle:Col:left')) #}
+                    </div>
+
         {% block body %}{% endblock body %}
+
+                    <div class="colonneC">
+                        {#  render(controller('CmsUlysseBundle:Col:right')) #}
+                    </div>
+                </div>
+            </div>
+        </section>
         {% block footer %}
             {%  include ':include:footer.html.twig' %}
         {% endblock footer %}
