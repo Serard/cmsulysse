@@ -1,33 +1,73 @@
-{% extends ':include:message_layout.html.twig' %}
+{% set context = is_granted('ROLE_ADMIN') ?  ":Admin:base.html.twig" :  ':include:message_layout.html.twig' %}
+{% extends context %}
 
-{% block fos_message_content %}
+{% if is_granted('ROLE_ADMIN')  %}
+    {% block body_content %}
+        <a href="#"><strong>Messagerie</strong></a>
 
-<h2>{{ thread.subject }}</h2>
+        <hr>
+        <h3>Objet : {{ thread.subject }}</h3>
+        {% for message in thread.messages %}
+            <div class="well well-lg col-lg-8">
+                Envoyé par <strong>{{ message.sender|e }}</strong> le <strong>{{ message.createdAt|date }}</strong>  :
 
-{% for message in thread.messages %}
-    <div class="messenger_thread_message">
-        <div class="messenger_thread_message_info">
-            {% trans with {'%sender%': message.sender|e, '%date%': message.createdAt|date} from 'FOSMessageBundle' %}message_info{% endtrans %}
+                <div class="messenger_thread_message_body" id="message_{{ message.id }}">
+                    {{ message.body | nl2br}}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="col-lg-8">
+            <hr>
+
+            <h3>Répondre</h3>
+
+            <form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
+
+                <div class="form-group">
+                    {{ form_label(form.body, "Message") }}
+                    {{ form_widget(form.body, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.body) }}
+                </div>
+                {{ form_widget(form) }}
+
+                <input class="btn btn-primary" type="submit" />
+            </form>
         </div>
 
-        <div class="messenger_thread_message_body" id="message_{{ message.id }}">
-            {{ message.body | nl2br}}
+    {% endblock %}
+{% else %}
+    {% block fos_message_content %}
+
+        <h3>Objet : {{ thread.subject }}</h3>
+        {% for message in thread.messages %}
+            <div class="well well-lg col-lg-8">
+                Envoyé par <strong>{{ message.sender|e }}</strong> le <strong>{{ message.createdAt|date }}</strong>  :
+
+                <div class="messenger_thread_message_body" id="message_{{ message.id }}">
+                    {{ message.body | nl2br}}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="col-lg-8">
+            <hr>
+
+            <h3>Répondre</h3>
+
+            <form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
+
+                <div class="form-group">
+                    {{ form_label(form.body, "Message") }}
+                    {{ form_widget(form.body, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.body) }}
+                </div>
+                {{ form_widget(form) }}
+
+                <input class="btn btn-primary" type="submit" />
+            </form>
         </div>
-    </div>
-{% endfor %}
 
-<h3>Répondre</h3>
+    {% endblock %}
 
-<form action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
-
-    <div>
-        {{ form_label(form.body, "Message") }}
-        {{ form_widget(form.body) }}
-        {{ form_errors(form.body) }}
-    </div>
-    {{ form_widget(form) }}
-
-    <input type="submit" />
-</form>
-
-{% endblock %}
+{% endif %}

@@ -17,6 +17,9 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('CmsUlysseBundle:Slider');
+        $slider = $repo->findOneBy(array(), null, 1);
 
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CmsUlysseBundle:Product');
@@ -37,10 +40,10 @@ class DefaultController extends Controller
             if(count($productsNewCount)) $newProducts[$category->getName()] = $productsNewCount;
         }
 
-
             return array(
                 'products' => $products,
-                'newProduct' => $newProducts
+                'newProduct' => $newProducts,
+                'slides' => $slider->getPictures()
 
             );
     }

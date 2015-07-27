@@ -1,0 +1,8 @@
+.grid-item {
+    width: 200px;
+    margin: 5px;
+}
+
+.grid-item--width2{
+    width: 400px;
+}

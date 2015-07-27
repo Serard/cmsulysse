@@ -58,7 +58,7 @@ class HeaderController extends Controller
                 $color = str_replace('#', '', $color);
                 $rgb = '';
                 for ($x=0;$x<3;$x++){
-                    $c = 255 - hexdec(substr($color,(2*$x),2));
+                    $c = 153 - hexdec(substr($color,(2*$x),2));
                     $c = ($c < 0) ? 0 : dechex($c);
                     $rgb .= (strlen($c) < 2) ? '0'.$c : $c;
                 }
@@ -168,7 +168,7 @@ class HeaderController extends Controller
         }
         /* custom style header*/
         $background_color_header='';
-        $background_color_header=($background_color_header == '' && $global_color != '')? hex2rgba($background_color_header,$global_color,false,'#FFFFFF'):$background_color_header;
+        $background_color_header=($background_color_header == '' && $global_color != '')? hex2rgba($background_color_header,$global_color,false):$background_color_header;
         $background_color_header=(trim($background_color_header)==''||strtoupper($background_color_header[0])=='R')?$background_color_header:hex2rgba($background_color_header);
 
         $background_img_header='';
@@ -191,7 +191,7 @@ class HeaderController extends Controller
         $background_color_body=($background_color_body == '' && $global_color != '')? hex2rgba($background_color_body,$global_color,true):$background_color_body;
         $background_color_body=(trim($background_color_body)==''||strtoupper($background_color_body[0])=='R')?$background_color_body:hex2rgba($background_color_body);
 
-        $settings_background_img_body='';
+        $settings_background_img_body=$siteVal['background'];
         $color_text_body='';
         $color_text_body=($color_text_body == '' && $global_color != '')? hex2rgba($color_text_body,$global_color,false):$color_text_body;
         $color_text_body=(trim($color_text_body)==''||strtoupper($color_text_body[0])=='R')?$color_text_body:hex2rgba($color_text_body);
@@ -256,7 +256,7 @@ class HeaderController extends Controller
         $color_icon=(trim($color_icon)==''||strtoupper($color_icon[0])=='R')?$color_icon:hex2rgba($color_icon);
 
         $background_iconC='';
-        $background_iconC=($background_iconC == '' && $global_color != '')? hex2rgba($background_iconC,$global_color,true, '#7DB122'):$background_iconC;
+        $background_iconC=($background_iconC == '' && $global_color != '')? hex2rgba($background_iconC,$global_color,true):$background_iconC;
         $background_iconC=(trim($background_iconC)==''||strtoupper($background_iconC[0])=='R')?$background_iconC:hex2rgba($background_iconC);
 
 

@@ -1,0 +1,93 @@
+{% extends ":Admin:base.html.twig" %}
+
+{% block body_content %}
+    <a href="#"><strong> Produits mis en Vente</strong></a>
+    <hr>
+
+    <form action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
+        <section>
+            {{ form_row(form.name) }}
+        </section>
+        <section>
+            {{ form_row(form.description) }}
+        </section>
+        <section>
+            {{ form_row(form.categories) }}
+        </section>
+        <section>
+            <ul class="specifications" data-prototype="{{ form_widget(form.specifications.vars.prototype)|e }}">
+                {# itère sur chaque spec existantes #}
+                {% set delete = 1 %}
+                {% for specification in form.specifications %}
+                    <div id="{{ delete }}">
+                        <li>{{ form_row(specification.name) }}</li>
+                        <li>{{ form_row(specification.content) }}</li>
+                        <div onclick='deleteSpecForm({{ delete }});' >Supprimer</div>
+                    </div>
+                    {% set delete = delete + 1 %}
+                {% endfor %}
+            </ul>
+        </section>
+        <section>
+            <ul class="pictures" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e }}">
+                {% for picture in form.pictures %}
+                    <li>{{ form_row(picture.file) }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        {{ form_rest(form) }}
+    </form>
+
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+<script>
+    var collectionHolder = $('ul.specifications');
+    var $addSpecLink = $('<a href="#">Ajouter une specification</a>');
+    var idadd = {{ delete }};
+
+    var $newLinkLi = $('<li></li>').append($addSpecLink);
+    jQuery(document).ready(function() {
+        collectionHolder.append($newLinkLi);
+        $addSpecLink.on('click', function(e) {
+            e.preventDefault();
+            addSpecForm(collectionHolder, $newLinkLi);
+        });
+    });
+    function addSpecForm(collectionHolder, $newLinkLi) {
+        var prototype = collectionHolder.attr('data-prototype');
+        var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+        var $newFormLi = $("<li id='"+idadd+"'></li>").append(newForm);
+        $newLinkLi.before($newFormLi);
+        var $button = $($newFormLi).append("<div onclick='deleteSpecForm("+idadd+");'>Supprimer</div>");
+        idadd++;
+    }
+
+    function deleteSpecForm(id) {
+        document.getElementById(id).remove();
+    }
+
+</script>
+<script>
+    var collectionHolderPicture = $('ul.pictures');
+    var $addPictLink = $('<a href="#">Ajouter une photo</a>');
+
+    var $newLink = $('<li></li>').append($addPictLink);
+    jQuery(document).ready(function() {
+        collectionHolderPicture.append($newLink);
+        $addPictLink.on('click', function(e) {
+            e.preventDefault();
+            addSpecForm(collectionHolderPicture, $newLink);
+        });
+    });
+    function addSpecForm(collectionHolderPicture, $newLink) {
+        var proto = collectionHolderPicture.attr('data-prototype');
+        var newFormFile = proto.replace(/__name__/g, collectionHolderPicture.children().length);
+        var $newFormLi = $('<li></li>').append(newFormFile);
+        $newLink.before($newFormLi);
+    }
+</script>
+
+{% endblock %}

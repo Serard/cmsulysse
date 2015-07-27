@@ -4,9 +4,10 @@ $('.grid').masonry({
 
 });
 
+console.log('charger');
 jQuery(function($){
 
-    var blocDiv = $('#grid-item');
+    var blocDiv = $('#grid');
     console.log(blocDiv);
 
 
@@ -16,6 +17,13 @@ jQuery(function($){
         console.log();
         blocDiv.find('.grid-item').removeClass('hidden');
         blocDiv.find('.grid-item:not(.'+cls+')').addClass('hidden');
+
+        blocDiv.masonry('reload');
+        location.hash = cls;
         e.preventDefault();
     });
+
+    if(location.hash != ''){
+        $('a[href="'+location.hash+'"]').trigger('click');
+    }
 })
