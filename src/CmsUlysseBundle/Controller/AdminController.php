@@ -79,7 +79,7 @@ class AdminController extends Controller
             $em->persist($product);
             $em->flush();
 
-            return $this->redirect($this->generateUrl(''));
+            return $this->redirect($this->generateUrl('product_admin'));
         }
         return array('form' => $form->createView(), 'onlyProduct' => true);
     }

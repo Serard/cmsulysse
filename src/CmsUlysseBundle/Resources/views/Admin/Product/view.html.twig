@@ -10,11 +10,8 @@
             {{ product.description }}
         </div>
 
-        {{ dump(product.pictures) }}
         {% for picture in product.pictures %}
-            <div>
-                <img style="height: 350px;" src="{{ asset(picture.getWebPath())}}" />
-            </div>
+            <img style="height: 200px;" src="{{ asset(picture.getWebPath())}}" />
         {% endfor %}
     </div>
     <div class="col-lg-6">

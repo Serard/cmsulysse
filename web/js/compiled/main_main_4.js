@@ -4,8 +4,6 @@ $('.grid').masonry({
 
 });
 
-jQuery(function($){
-
     var blocDiv = $('#grid');
     console.log(blocDiv);
 
@@ -25,4 +23,3 @@ jQuery(function($){
     if(location.hash != ''){
         $('a[href="'+location.hash+'"]').trigger('click');
     }
-})

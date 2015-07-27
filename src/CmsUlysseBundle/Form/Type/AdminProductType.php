@@ -35,8 +35,10 @@ class AdminProductType extends  AbstractType
                 'allow_add' => true,
                 'by_reference' => false,
             ))
-            ->add('valid', null, array('label' => 'Validé : ', 'required' => false))
-            ->add('btn', 'submit', array('label' => 'Valider'))
+            ->add('valid', null, array('label' => 'Validé : ', 'required' => false, 'data' => 1))
+            ->add('btn', 'submit', array(
+                'label' => 'Valider',
+                "attr" => array('class' => 'btn btn-primary')))
             ;
     }
 
@@ -55,6 +57,6 @@ class AdminProductType extends  AbstractType
      */
     public function getName()
     {
-        return 'product_type';
+        return 'admin_product_type';
     }
 }

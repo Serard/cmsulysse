@@ -6,28 +6,36 @@
         <a href="#"><strong>Nouveau Message</strong></a>
 
         <hr>
-        <form action="{{ url('cms_messagerie_thread_new') }}" method="post">
+        <div class="row col-lg-6">
+            <form class="form-horizontal" action="{{ url('cms_messagerie_thread_new') }}" method="post">
 
-            <div class="form-group">
-                {{ form_label(form.recipient, "UserName") }}
-                {{ form_widget(form.recipient) }}
-                {{ form_errors(form.recipient) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.subject, "Objet") }}
-                {{ form_widget(form.subject) }}
-                {{ form_errors(form.subject) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.body, "Message") }}
-                {{ form_widget(form.body) }}
-                {{ form_errors(form.body) }}
-            </div>
+                <div class="form-group">
+                    {{ form_label(form.recipient, "Email", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(form.recipient, {'attr': {'class': 'form-control'}} ) }}
+                    </div>
+                    {{ form_errors(form.recipient) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.subject, "Objet", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(form.subject, {'attr': {'class': 'form-control'}} ) }}
+                    </div>
+                    {{ form_errors(form.subject) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.body, "Message", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(form.body, {'attr': {'class': 'form-control'}} ) }}
+                    </div>
+                    {{ form_errors(form.body) }}
+                </div>
 
-            {{ form_widget(form) }}
+                {{ form_widget(form) }}
 
-            <input type="submit" />
-        </form>
+                <input class="btn btn-primary" type="submit" />
+            </form>
+        </div>
     {% endblock %}
 {% else %}
     {% block fos_message_content %}
