@@ -36,7 +36,7 @@ class ProductType extends  AbstractType
                 'allow_add' => true,
                 'by_reference' => false,
             ))
-            ->add('isValid', 'hidden', array('label' => 'Validé : ', 'required' => false, 'data' => 0))
+            ->add('valid', 'hidden', array('label' => 'Validé : ', 'required' => false, 'data' => 0))
             ->add('btn', 'submit', array('label' => 'Valider'))
             ;
     }

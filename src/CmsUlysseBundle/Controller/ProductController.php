@@ -16,6 +16,7 @@ class ProductController extends Controller
 {
     /**
      * @Route("/product", name="product_list")
+     *
      * @Template()
      */
     public function indexAction()
@@ -93,7 +94,7 @@ class ProductController extends Controller
         if ($request->getMethod() === 'POST') {
             $product = $repo->find($request->get('id'));
             if ($product) {
-                $product->setIsValid(true);
+                $product->setValid(true);
                 $em->persist($product);
                 $em->flush();
             }
@@ -193,7 +194,7 @@ class ProductController extends Controller
 
 
         if (!$this->get('security.context')->isGranted('ROLE_ADMIN') || $disabled) {
-            $form->add('isValid', null, array('label' => 'Validé : ', 'required' => false, 'disabled' => true));
+            $form->add('valid', null, array('label' => 'Validé : ', 'required' => false, 'disabled' => true));
         }
         $form->handleRequest($request);
 
@@ -222,17 +223,5 @@ class ProductController extends Controller
             'onlyProduct' => true
         );
     }
-
-    /**
-     * @Route("/product/search")
-     * @Template()
-     */
-    public function searchAction(Request $request)
-    {
-        //$research = $_POST['suguest'];
-
-        //retrun $id;
-    }
-
 
 }

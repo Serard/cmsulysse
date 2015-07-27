@@ -15,7 +15,7 @@ class ProductRepository extends EntityRepository
     public function findNoValidate()
     {
         $qb = $this->createQueryBuilder('p');
-        $qb->where('p.isValid = 0');
+        $qb->where('p.valid = 0');
 
         return $qb->getQuery()->getResult();
     }
@@ -23,7 +23,7 @@ class ProductRepository extends EntityRepository
     public function findValidate()
     {
         $qb = $this->createQueryBuilder('p');
-        $qb->where('p.isValid = 1');
+        $qb->where('p.valid = 1');
 
         return $qb->getQuery()->getResult();
     }

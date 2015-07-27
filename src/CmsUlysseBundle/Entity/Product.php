@@ -88,19 +88,6 @@ class Product
      */
     private $tmpImage;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_valid", type="boolean", nullable=false)
-     */
-    private $isValid=false;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="State", inversedBy="commands")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
-     */
-    private $state;
-
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -245,7 +232,7 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return $valid
      */
     public function getValid()
     {
@@ -254,7 +241,7 @@ class Product
 
     /**
      * @param $valid
-     * @return $this
+     * @return Product
      */
     public function setValid($valid)
     {
@@ -285,28 +272,6 @@ class Product
     public function getPicture()
     {
         return $this->picture;
-    }
-
-    /**
-     * Set isValid
-     *
-     * @param boolean $isValid
-     * @return Product
-     */
-    public function setIsValid($isValid)
-    {
-        $this->isValid = $isValid;
-        return $this;
-    }
-
-    /**
-     * Get isValid
-     *
-     * @return boolean
-     */
-    public function getIsValid()
-    {
-        return $this->isValid;
     }
 
     public function setFile(UploadedFile $file = null)
@@ -396,6 +361,7 @@ class Product
     {
         return 'upload/pictures/products';
     }
+
     public function getMinPrice()
     {
         $minPrice = 0;
