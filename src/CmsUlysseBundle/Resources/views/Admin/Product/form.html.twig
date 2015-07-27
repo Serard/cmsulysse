@@ -4,7 +4,7 @@
     <a href="#"><strong> Ajout d'un Produit</strong></a>
     <hr>
     <div class="row col-lg-8">
-        <form class="form-horizontal" action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
+        <form class="form-horizontal" action="{{ path('product_add_admin') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
             <section class="form-group">
                 <h4 style="color: #002a80">Produit</h4>
                 {{ form_label(form.name, "Nom", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}

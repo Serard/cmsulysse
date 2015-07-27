@@ -35,7 +35,7 @@ class AdminProductType extends  AbstractType
                 'allow_add' => true,
                 'by_reference' => false,
             ))
-            ->add('valid', null, array('label' => 'Validé : ', 'required' => false, 'data' => 1))
+            ->add('valid', null, array('label' => 'Validé : ', 'required' => false, 'data' => true))
             ->add('btn', 'submit', array(
                 'label' => 'Valider',
                 "attr" => array('class' => 'btn btn-primary')))

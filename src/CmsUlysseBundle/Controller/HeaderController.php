@@ -191,14 +191,14 @@ class HeaderController extends Controller
         $background_color_body=($background_color_body == '' && $global_color != '')? hex2rgba($background_color_body,$global_color,true):$background_color_body;
         $background_color_body=(trim($background_color_body)==''||strtoupper($background_color_body[0])=='R')?$background_color_body:hex2rgba($background_color_body);
 
-        $settings_background_img_body='';
+        $settings_background_img_body='/'.$site->getWebPath();
         $color_text_body='';
         $color_text_body=($color_text_body == '' && $global_color != '')? hex2rgba($color_text_body,$global_color,false):$color_text_body;
         $color_text_body=(trim($color_text_body)==''||strtoupper($color_text_body[0])=='R')?$color_text_body:hex2rgba($color_text_body);
 
         $style.='.body{';
         $style.= trim($background_color_body)==''?'':'background-color:'.$background_color_body.';';
-        $style.= trim($settings_background_img_body)==''?'':'background-image:'.$settings_background_img_body.';background-repeat:no-repeat;background-size:cover;';
+        $style.= trim($settings_background_img_body)==''?'':'background:url('.$settings_background_img_body.');background-repeat:no-repeat;background-size:cover;';
         $style.=trim($color_text_body)==''?'':'color:'.$color_text_body.';';
         $style.='}';
         $style.='h2.head{';
