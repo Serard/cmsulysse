@@ -67,6 +67,11 @@ class Product
     private $picture;
 
     /**
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="picture", cascade={"persist"})
+     */
+    private $pictures;
+
+    /**
      * @var bool
      *
      * @ORM\Column(name="valid", type="boolean")
@@ -99,6 +104,7 @@ class Product
         $this->categories = new ArrayCollection();
         $this->usersProducts = new ArrayCollection();
         $this->specifications = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function __toString()
@@ -180,6 +186,16 @@ class Product
         $this->specifications->removeElement($specification);
     }
 
+    public function addPicture(Picture $picture)
+    {
+        $this->pictures[] = $picture;
+    }
+
+    public function removePicture(Picture $picture)
+    {
+        $this->pictures->removeElement($picture);
+    }
+
     /**
      * @param Category $category
      */
@@ -187,7 +203,6 @@ class Product
     {
         $this->categories[] = $category;
     }
-
 
     /**
      * Remove Categories
@@ -262,6 +277,25 @@ class Product
     }
 
     /**
+     * @return mixed
+     */
+    public function getPictures()
+    {
+        return $this->pictures;
+    }
+
+    /**
+     * @param mixed $pictures
+     */
+    public function setPictures($pictures)
+    {
+        $this->pictures = $pictures;
+
+        return $this;
+    }
+
+
+    /**
      * Set picture
      *
      * @param string $picture
@@ -283,6 +317,7 @@ class Product
     {
         return $this->picture;
     }
+
 
     public function setFile(UploadedFile $file = null)
     {

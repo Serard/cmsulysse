@@ -17,7 +17,11 @@ class ProductType extends  AbstractType
         return  $builder
             ->add('name')
             ->add('description')
-            ->add('file')
+            ->add('pictures', 'collection', array(
+                'type' => new PictureType(),
+                'allow_add' => true,
+                'by_reference' => false,
+            ))
             ->add('categories', 'entity', array('label'    => 'Catégories : ',
                 'required' => true,
                 'class'    => 'CmsUlysseBundle:Category',
@@ -36,7 +40,7 @@ class ProductType extends  AbstractType
                 'allow_add' => true,
                 'by_reference' => false,
             ))
-            ->add('isValid', 'hidden', array('label' => 'Validé : ', 'required' => false, 'data' => 0))
+            ->add('valid', 'hidden', array('label' => 'Validé : ', 'required' => false, 'data' => 0))
             ->add('btn', 'submit', array('label' => 'Valider'))
             ;
     }

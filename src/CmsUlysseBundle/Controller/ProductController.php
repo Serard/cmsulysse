@@ -38,6 +38,7 @@ class ProductController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $user = $this->get('security.context')->getToken()->getUser();
             $product = $form->getData();
@@ -76,7 +77,7 @@ class ProductController extends Controller
         if ($request->getMethod() === 'POST') {
             $product = $repo->find($request->get('id'));
             if ($product) {
-                $product->setIsValid(true);
+                $product->setValid(true);
                 $em->persist($product);
                 $em->flush();
             }
@@ -174,9 +175,8 @@ class ProductController extends Controller
             break;
         }
 
-
         if (!$this->get('security.context')->isGranted('ROLE_ADMIN') || $disabled) {
-            $form->add('isValid', null, array('label' => 'Validé : ', 'required' => false, 'disabled' => true));
+            $form->add('valid', null, array('label' => 'Validé : ', 'required' => false, 'disabled' => true));
         }
         $form->handleRequest($request);
 

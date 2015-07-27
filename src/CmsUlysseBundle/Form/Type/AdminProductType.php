@@ -17,7 +17,11 @@ class AdminProductType extends  AbstractType
         return  $builder
             ->add('name')
             ->add('description')
-            ->add('file')
+            ->add('pictures', 'collection', array(
+                'type' => new PictureType(),
+                'allow_add' => true,
+                'by_reference' => false,
+            ))
             ->add('categories', 'entity', array('label'    => 'Catégories : ',
                 'required' => true,
                 'class'    => 'CmsUlysseBundle:Category',
@@ -31,7 +35,7 @@ class AdminProductType extends  AbstractType
                 'allow_add' => true,
                 'by_reference' => false,
             ))
-            ->add('isValid', null, array('label' => 'Validé : ', 'required' => false))
+            ->add('valid', null, array('label' => 'Validé : ', 'required' => false))
             ->add('btn', 'submit', array('label' => 'Valider'))
             ;
     }
