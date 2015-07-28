@@ -15,13 +15,17 @@ class SliderType extends  AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         return  $builder
-            ->add('name')
+            ->add('name', null, array(
+                'attr' => array('class' => 'form-control')))
             ->add('pictures', 'collection', array(
                 'type' => new PictureType(),
                 'allow_add' => true,
                 'by_reference' => false,
             ))
-            ->add('btn', 'submit', array('label' => 'Valider'))
+            ->add('btn', 'submit', array(
+                'label' => 'Valider',
+                'attr' => array('class' => 'btn btn-primary'))
+            )
             ;
     }
 

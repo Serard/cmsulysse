@@ -11,6 +11,9 @@
     {% endstylesheets %}
 {% endblock %}
 
+{% block stylesheets %}
+{% endblock %}
+
 {% block header %}
     <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
         <div class="container-fluid">
@@ -47,13 +50,13 @@
                     <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#menu2"> Products</a>
                         <ul class="nav nav-stacked collapse" id="menu2">
                             <li>
-                                <a href="{{ path('product_add_admin') }}">Nouveau Produit</a>
-                            </li>
-                            <li>
                                 <a href="{{ path('index_admin') }}">Les Nouveaux Produits</a>
                             </li>
                             <li>
                                 <a href="{{ path('product_admin') }}">Liste des produits</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('product_add_admin') }}">Ajout Produit</a>
                             </li>
                             <li>
                                 <a href="{{ path('categ_admin') }}">Catégories</a>

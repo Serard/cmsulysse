@@ -79,7 +79,7 @@ class AdminController extends Controller
             $em->persist($product);
             $em->flush();
 
-            return $this->redirect($this->generateUrl(''));
+            return $this->redirect($this->generateUrl('product_admin'));
         }
         return array('form' => $form->createView(), 'onlyProduct' => true);
     }
@@ -90,7 +90,13 @@ class AdminController extends Controller
      */
     public function productViewAction(Product $product)
     {
-          return array('product' => $product);
+        $repo = $this->getDoctrine()->getManager()->getRepository('CmsUlysseBundle:UserProduct');
+        $userProducts = $repo->findByProduct($product);
+
+        return array(
+            'product' => $product,
+            'userProducts' => $userProducts
+        );
     }
 
     /**

@@ -26,17 +26,17 @@
                     {% endif %}
                 </td>
                 <td>
-                    {{ thread.createdBy }}
+                    {{ thread.createdBy.firstName }} {{ thread.createdBy.lastName }}
                 </td>
                 <td>
-                    {{ thread.createdAt|date }}
+                    {{ thread.createdAt|date('d-m-Y H:i:s') }}
                 </td>
                 <td>
                     {{ thread.messages|length }}
                 </td>
                 <td>
                     {% if thread.lastMessage %}
-                        {{  thread.lastMessage.createdAt|date }} <br/>par {{ thread.lastMessage.sender|e }}
+                        {{  thread.lastMessage.createdAt|date('d-m-Y H:i:s') }} <br/> par {{ thread.lastMessage.sender.firstName }} {{ thread.lastMessage.sender.lastName }}
                     {% else %}
                         ----
                     {% endif %}

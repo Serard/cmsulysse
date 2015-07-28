@@ -19,23 +19,30 @@
         <tr>
             <td style="width:6%;"></td>
             <td style="width:88%; padding: 0 10px 10px 10px; font-size:18px;">
-                <center><strong>Nouveau Message de </strong> {{ message.createdBy.name }} {{ message.createdBy.firtsname }}</center>
+                <center><strong>Vous avez un nouveau Message de </strong> {{ thread.createdBy.firstName }} {{ thread.createdBy.lastName }}</center>
             </td>
             <td style="width:6%;"></td>
         </tr>
         <tr>
             <td style="width:6%;"></td>
             <td style="width:88%; padding: 0 10px 10px 10px">
-                <center>à  {{ message.createdAt }}</center>
+                <center>Envoyé le  {{ message.createdAt|date }}</center>
+            </td>
+            <td style="width:6%;"></td>
+        </tr>
+        <tr>
+            <td style="width:6%;"></td>
+            <td style="width:88%; padding: 0 10px 10px 10px">
+                <center>Objet :   {{ thread.subject }}</center>
             </td>
             <td style="width:6%;"></td>
         </tr>
 
-
         <tr>
             <td style="width:6%;"></td>
             <td style="width:88%; padding:10px">
-                <br/>  <strong ><a style="background:#427BBE;padding:2px 5px;border-radius:2px;text-decoration:none;color:white; font-size:12px;"></a></strong> {{ message.body }}
+                <br/>
+                 {{ message.body | nl2br}}
                 <br/><br/>
                 <br/><br/>
             </td>
@@ -46,6 +53,7 @@
         <tr style="background:#427BBE" bgcolor="#427BBE" width="100%">
             <td style="width:6%;"></td>
             <td style="width:88%;height:20px;">
+                Pour répondre à sa demande venez vous connecter sur votre messagerie <a href="">CmsUlysse</a>
             </td>
             <td style="width:6%;"></td>
         </tr>
@@ -55,4 +63,5 @@
             <td style="width:88%;height:25px"></td>
             <td style="width:6%;"></td>
         </tr>
-    </table></div>
+    </table>
+</div>

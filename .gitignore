@@ -11,6 +11,7 @@
 /bin/
 /web/upload/
 /web/css/compiled
+/web/js/compiled
 /composer.phar
 /app/SymfonyRequirements.php
 

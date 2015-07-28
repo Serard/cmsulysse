@@ -41,7 +41,9 @@ class ProductType extends  AbstractType
                 'by_reference' => false,
             ))
             ->add('valid', 'hidden', array('label' => 'Validé : ', 'required' => false, 'data' => 0))
-            ->add('btn', 'submit', array('label' => 'Valider'))
+            ->add('btn', 'submit', array(
+                'label' => 'Valider',
+                'attr' => array('class' => 'btn btn-primary')))
             ;
     }
 

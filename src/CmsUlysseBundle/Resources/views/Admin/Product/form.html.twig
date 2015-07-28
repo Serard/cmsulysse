@@ -1,43 +1,70 @@
 {% extends ":Admin:base.html.twig" %}
 
 {% block body_content %}
-    <a href="#"><strong> Produits mis en Vente</strong></a>
+    <a href="#"><strong> Ajout d'un Produit</strong></a>
     <hr>
+    <div class="row col-lg-8">
+        <form class="form-horizontal" action="{{ path('product_add_admin') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
+            <section class="form-group">
+                <h4 style="color: #002a80">Produit</h4>
+                {{ form_label(form.name, "Nom", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.name) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.description, "Description", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.description, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.description) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.categories, "Categories", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.categories, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.categories) }}
+            </section>
+            <section class="form-group">
+                <ul style="list-style:none;" class="pictures" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e }}">
+                    {% for picture in form.pictures %}
+                        <li>{{ form_row(picture.file) }}</li>
+                    {% endfor %}
+                </ul>
+            </section>
+            <hr>
+            <section class="form-group">
+                <h4 style="color: #002a80">Spécifications</h4>
+                <ul style="list-style:none;" class="specifications" data-prototype="{{ form_widget(form.specifications.vars.prototype)|e }}">
+                    {# itère sur chaque spec existantes #}
+                    {% set delete = 1 %}
+                    {% for specification in form.specifications %}
+                        <div id="{{ delete }}">
+                            <li>{{ form_row(specification.name) }}</li>
+                            <li>{{ form_row(specification.content) }}</li>
+                            <div onclick='deleteSpecForm({{ delete }});' >Supprimer</div>
+                        </div>
+                        {% set delete = delete + 1 %}
+                    {% endfor %}
+                </ul>
+            </section>
+            <section class="form-group">
+                {{ form_label(form.valid, "Valider", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.valid) }}
+                </div>
+                {{ form_errors(form.valid) }}
+            </section>
 
-    <form action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
-        <section>
-            {{ form_row(form.name) }}
-        </section>
-        <section>
-            {{ form_row(form.description) }}
-        </section>
-        <section>
-            {{ form_row(form.categories) }}
-        </section>
-        <section>
-            <ul class="specifications" data-prototype="{{ form_widget(form.specifications.vars.prototype)|e }}">
-                {# itère sur chaque spec existantes #}
-                {% set delete = 1 %}
-                {% for specification in form.specifications %}
-                    <div id="{{ delete }}">
-                        <li>{{ form_row(specification.name) }}</li>
-                        <li>{{ form_row(specification.content) }}</li>
-                        <div onclick='deleteSpecForm({{ delete }});' >Supprimer</div>
-                    </div>
-                    {% set delete = delete + 1 %}
-                {% endfor %}
-            </ul>
-        </section>
-        <section>
-            <ul class="pictures" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e }}">
-                {% for picture in form.pictures %}
-                    <li>{{ form_row(picture.file) }}</li>
-                {% endfor %}
-            </ul>
-        </section>
-
-        {{ form_rest(form) }}
-    </form>
+            <div style="display: none">
+                {{ form_row(form.pictures) }}
+                {{ form_row(form.specifications) }}
+            </div>
+            {{ form_rest(form) }}
+        </form>
+    </div>
 
 
 

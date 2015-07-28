@@ -11,8 +11,14 @@ class SpecificationType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name');
-        $builder->add('content');
+        $builder->add('name', null, array(
+            'attr' => array('class'=>'form-control'),
+                'label_attr' => array('class' => 'col-sm-2 control-label'))
+        );
+        $builder->add('content',null, array(
+            'attr' => array('class'=>'form-control'),
+            'label_attr' => array('class' => 'col-sm-2 control-label'))
+        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

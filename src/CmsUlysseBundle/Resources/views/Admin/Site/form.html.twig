@@ -1,8 +1,55 @@
 {% extends ":Admin:base.html.twig" %}
 
 {% block body_content %}
-    <a href="#"><strong>Modules</strong></a>
+    <a href="#"><strong>Configuration</strong></a>
     <hr>
 
-    {{ form(form) }}
+    <div class="col-lg-8">
+        <form class="form-horizontal" action="{{ path('settings_update_admin') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
+            <h4 style="color: #002a80">Configuration</h4>
+            <section class="form-group">
+                {{ form_label(form.name, "Nom", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.name, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.name) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.slogan, "Slogan", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.slogan, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.slogan) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.theme_color, "Thème Couleur", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.theme_color, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.theme_color) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.position_menu, "Position du Menu", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.position_menu ) }}
+                </div>
+                {{ form_errors(form.position_menu) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.corps_colonnes, "Colonnes", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.corps_colonnes) }}
+                </div>
+                {{ form_errors(form.corps_colonnes) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.file, "Image de fond", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.file) }}
+                </div>
+                {{ form_errors(form.file) }}
+            </section>
+            {{ form(form) }}
+        </form>
+    </div>
 {% endblock %}
