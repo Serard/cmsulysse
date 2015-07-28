@@ -27,9 +27,10 @@
 
             <li class="list-group-item">
                 Image du fond d'écran
-                {% if site.background is defined %}
+                {% if site.background is defined and if site.background != null %}
                     <img style="margin-left: 50px; border-radius: 10%" width="300px" src="{{ asset(site.getWebPath())}}" alt="" />
                 {% endif %}
+                <a class="btn btn-primary" href="{{ path('remove_background_admin', {'id': site.id }) }}">Supprimer l'image</a>
             </li>
         </ul>
 

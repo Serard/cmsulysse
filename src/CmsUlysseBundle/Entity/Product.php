@@ -3,7 +3,6 @@
 namespace CmsUlysseBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -70,34 +69,6 @@ class Product
      * @ORM\Column(name="valid", type="boolean")
      */
     private $valid;
-
-    /**
-     * @Assert\File(
-     *     maxSize = "1024k",
-     *
-     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png", "image/gif"},
-     *     mimeTypesMessage = "Choisissez un fichier image valide"
-     * )
-     */
-    private $file;
-
-    /**
-     * @var string
-     */
-    private $tmpImage;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_valid", type="boolean", nullable=false)
-     */
-    private $isValid=false;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="State", inversedBy="commands")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
-     */
-    private $state;
 
     public function __construct()
     {
