@@ -198,7 +198,7 @@ class HeaderController extends Controller
 
         $style.='.body{';
         $style.= trim($background_color_body)==''?'':'background-color:'.$background_color_body.';';
-        $style.= trim($settings_background_img_body)==''?'':'background:url('.$settings_background_img_body.');background-repeat:no-repeat;background-size:cover;';
+        $style.= trim($settings_background_img_body)==''?'':'background-image:url('.$settings_background_img_body.');background-repeat:no-repeat;background-size:cover;';
         $style.=trim($color_text_body)==''?'':'color:'.$color_text_body.';';
         $style.='}';
         $style.='h2.head{';
