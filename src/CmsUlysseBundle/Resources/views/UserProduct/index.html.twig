@@ -1,19 +1,10 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}CmsUlysseBundle:Product:index{% endblock %}
+{% block title %}Mes produits{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Product:index page</h1>
+    <h1>Mes produits</h1>
 
-    {% for product in products %}
-        <h3>{{ product.name }}</h3>
-        <h4>{{ product.description }}</h4>
-        <img width="300px" src="{{ asset(product.getWebPath())}}" alt="" />
-
-        <a href="{{ path('product_view', {'id': product.id}) }}">Voir</a>
-        <a href="{{ path('product_delete', {'id': product.id}) }}">Supprimer</a>
-
-    {% endfor %}
-
-    <a href="{{ path('product_add') }}" class="btn btn-template-main"> Ajouter un nouveau produit</a>
+    {{ include('CmsUlysseBundle:Cart:search.html.twig', {'products' : products}) }}
+    <a href="{{ path('product_list') }}" class="btn btn-template-main">Ajouter un nouveau produit</a>
 {% endblock %}
