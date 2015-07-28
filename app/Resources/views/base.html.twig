@@ -49,6 +49,13 @@
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
 
+        <script type="text/javascript" src="{{ asset('js/megamenu.js') }}"></script>
+        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('js/css3-mediaqueries.js') }}"></script>
+        <script src="{{ asset('js/fwslider.js') }}"></script>
+        <!--end slider -->
+        <script src="{{ asset('js/jquery.easydropdown.js') }}"></script>
 
         {% endjavascripts %}
         <script>
@@ -254,16 +261,10 @@
             {% javascripts
                 'js/masonry/masonry.min.js'
                 'js/masonry/main.js'
-                "js/circleMenu.min.js"
-                "js/megamenu.js"
-                "js/jquery-ui.min.js"
-                "js/css3-mediaqueries.js"
-                "js/fwslider.js"
-                "js/jquery.easydropdown.js"
+
                 output='js/compiled/app.js' %}
             <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
-            <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
         {% endblock %}
         <script>
             /* scroll header*/
@@ -285,7 +286,7 @@
                         $('#c-circle-nav').fadeIn( "slow" );
 
                         $('.tag-list').fadeOut( 100 );
-                        $('h2').fadeOut( "slow" );
+                        $('h2').fadeOut( 100 );
                         $('.menu').stop().animate({
                             marginLeft: '10%'
                         },200);
@@ -357,5 +358,7 @@
 
 
         </script>
+        <!--/* mini menu */-->
+        <script src="{{ asset('js/circleMenu.min.js') }}"></script>
     </body>
 </html>
