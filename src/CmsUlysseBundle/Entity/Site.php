@@ -322,7 +322,6 @@ class Site
         }
     }
 
-
     /**
      * @ORM\PostRemove()
      */

@@ -7,8 +7,6 @@
         <a href="#"><strong>Boite de Réception</strong></a>
 
         <hr>
-        <a class="btn-primary btn" href="{{ url('cms_messagerie_thread_new' )}}">Nouveau Message</a>
-        <hr>
         {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
     {% endblock %}
 
@@ -16,7 +14,6 @@
 
     {% block fos_message_content %}
         <h2>Boite de Réception</h2>
-        <a href="{{ url('cms_messagerie_thread_new' )}}">Nouveau Message</a>
         {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
 
     {% endblock %}

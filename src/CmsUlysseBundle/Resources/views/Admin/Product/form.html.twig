@@ -41,11 +41,11 @@
                     {# itère sur chaque spec existantes #}
                     {% set delete = 1 %}
                     {% for specification in form.specifications %}
-                        <div id="{{ delete }}">
+                        <ul id="{{ delete }}">
                             <li>{{ form_row(specification.name) }}</li>
                             <li>{{ form_row(specification.content) }}</li>
                             <div onclick='deleteSpecForm({{ delete }});' >Supprimer</div>
-                        </div>
+                        </ul>
                         {% set delete = delete + 1 %}
                     {% endfor %}
                 </ul>

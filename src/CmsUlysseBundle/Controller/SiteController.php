@@ -2,6 +2,7 @@
 
 namespace CmsUlysseBundle\Controller;
 
+use CmsUlysseBundle\Entity\Site;
 use CmsUlysseBundle\Form\Type\SiteType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -69,6 +70,23 @@ class SiteController extends Controller
         }
         return array(
             'form' => $form->createView()
+        );
+    }
+
+    /**
+     * @Route("/remove/img/{id}", name="remove_background_admin")
+     * @Template()
+     */
+    public function removeBackgroundAction(Site $site)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $site->setFile(null);
+
+        $em->persist($site);
+        $em->flush();
+
+        return $this->redirect(
+            $this->generateUrl('settings_home_admin')
         );
     }
 
