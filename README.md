@@ -6,6 +6,9 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version : dev-v1.1.0
+update admin and messagerie/contact
+
 dev version    : dev-v0.0.27
 gestion des commandes
 
