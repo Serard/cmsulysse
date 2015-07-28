@@ -12,4 +12,54 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProductRepository extends EntityRepository
 {
+    public function findNoValidate()
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->where('p.valid = 0');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findValidate()
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb->where('p.valid = 1');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findProductsByCategoryUp($category, $limit=null)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->leftJoin('p.categories', 'c')
+            ->leftJoin('c.categ_up', 'cu')
+            ->leftJoin('p.usersProducts', 'up')
+            ->andWhere("cu.id = :category or c.id =:category")
+            ->andWhere("up.id is not null")
+            ->setParameter('category', $category);
+        if($limit != null){
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findNewProductsByCategoryUp($category, $limit=null)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->leftJoin('p.categories', 'c')
+            ->leftJoin('c.categ_up', 'cu')
+            ->leftJoin('p.usersProducts', 'up')
+            ->andWhere("cu.id = :category or c.id =:category")
+            ->andWhere("up.id is not null")
+            ->addOrderBy("up.id", "DESC")
+            ->setParameter('category', $category);
+        if($limit != null){
+            $qb->setMaxResults($limit);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

@@ -1,9 +1,7 @@
-{% extends "::base.html.twig" %}
+{% extends ":Admin:base.html.twig" %}
 
-{% block title %}CmsUlysseBundle:Site:index{% endblock %}
-
-{% block body %}
-<h1>Welcome to the Site:index page</h1>
+{% block body_content %}
+    <h1>Welcome to the Site:index page</h1>
 
     {% if site is defined and site is not null %}
 
@@ -18,12 +16,11 @@
             image background:
             <img width="300px" src="{{ asset(site.getWebPath())}}" alt="" />
         </p>
-        <a href="{{ path("config_update") }}">Modifier la configuration</a>
+        <a href="{{ path("settings_update_admin") }}">Modifier la configuration</a>
     {% else %}
 
         Pas encore de configuration
-        <a href="{{ path("config_add") }}">Ajouter une configuration du site</a>
+        <a href="{{ path("settings_add_admin") }}">Ajouter une configuration du site</a>
 
     {% endif %}
-
 {% endblock %}

@@ -17,6 +17,7 @@ class UserProductType extends  AbstractType
         return  $builder
             ->add('price')
             ->add('qty')
+            ->add('state', null, array('label' => 'Neuf', 'required' => false))
             ;
     }
 

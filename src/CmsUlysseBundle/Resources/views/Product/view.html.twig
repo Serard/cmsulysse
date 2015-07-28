@@ -5,9 +5,8 @@
 {% block body %}
 <h1>Welcome to the Product:view page</h1>
 
-    <h1> {{ product.name }}</h1>
+    <h1>{{ product.name }}</h1>
     <h3>{{ product.description }}</h3>
-    <img width="300px" src="{{ asset(product.getWebPath())}}" alt="" />
 
     <h2>Spécifications</h2>
     <table>

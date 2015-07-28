@@ -1,0 +1,30 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Commande n°{{ command.id }}{% endblock %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+    <h1>Commande n°{{ command.id }}</h1>
+    <h2>Liste des produits</h2>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th>Quantité</th>
+            <th>Prix</th>
+        </tr>
+        {% for userproduct in command.products %}
+            <tr>
+                <td>{{ userproduct.product.id }}</td>
+                <td>{{ userproduct.product.product.name }}</td>
+                <td>{{ userproduct.qty }}</td>
+                <td>{{ userproduct.qty * userproduct.product.price }} €</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if title == 'Mon Achat' %}
+        <a href="{{ path('commands_user') }}" class="btn btn-info">Retour</a>
+    {% else %}
+        <a href="{{ path('commands_seller') }}" class="btn btn-info">Retour</a>
+    {% endif %}
+{% endblock %}

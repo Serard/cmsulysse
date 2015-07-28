@@ -1,0 +1,32 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Produits{% endblock %}
+
+{% block body %}
+    <h1>Liste des produits</h1>
+    <table>
+        <tr>
+            <th>Produit</th>
+            <th>Spécifications</th>
+            <th>Validé</th>
+        </tr>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>
+                    <ul>
+                        {% for specification in product.specifications %}
+                            <li>{{ specification.name }} : {{ specification.content }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>{{ product.isValid }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+    <script>
+
+    </script>
+
+{% endblock %}

@@ -63,9 +63,9 @@ class Site
      *
      * @ORM\Column(name="corps_colonnes", type="integer")
      * @Assert\Regex(
-     *     pattern= "/^[1-3]{1}$/",
+     *     pattern= "/^[1-4]{1}$/",
      *     match=true,
-     *     message="Ce doit être compris entre 1 et 3"
+     *     message="Ce doit être compris entre 1 et 4"
      * )
      */
     private $corpsColonnes;
@@ -91,6 +91,33 @@ class Site
      */
     private $tmpImage;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="slider", type="boolean")
+     */
+    private $slider;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="bestProduct", type="boolean")
+     */
+    private $bestProduct;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="cmActive", type="boolean")
+     */
+    private $cmActive;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="communityManagement", type="string")
+     */
+    private $communityManagement;
 
     public function __toString()
     {
@@ -333,5 +360,102 @@ class Site
         return 'upload/backgrounds/background';
     }
 
+    /**
+     * @return boolean
+     */
+    public function isSlider()
+    {
+        return $this->slider;
+    }
+
+    /**
+     * @param $slider
+     * @return $this
+     */
+    public function setSlider($slider)
+    {
+        return $this->slider = $slider;
+    }
+
+    public function getSlider()
+    {
+        return $this->slider;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBestProduct()
+    {
+        return $this->bestProduct;
+    }
+
+    /**
+     * @param $bestProduct
+     * @return $this
+     */
+    public function setBestProduct($bestProduct)
+    {
+        $this->bestProduct = $bestProduct;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCmActive()
+    {
+        return $this->cmActive;
+    }
+
+    /**
+     * @param $cmActive
+     * @return $this
+     */
+    public function setCmActive($cmActive)
+    {
+        $this->cmActive = $cmActive;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCommunityManagement()
+    {
+        return $this->communityManagement;
+    }
+
+    /**
+     * @param $communityManagement
+     * @return $this
+     */
+    public function setCommunityManagement($communityManagement)
+    {
+        $this->communityManagement = $communityManagement;
+
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSlideActive()
+    {
+        return $this->slideActive;
+    }
+
+    /**
+     * @param boolean $slideActive
+     * @return $this
+     */
+    public function setSlideActive($slideActive)
+    {
+        $this->slideActive = $slideActive;
+
+        return $this;
+    }
 
 }

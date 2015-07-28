@@ -4,8 +4,8 @@
 
 {% block body %}
 
-<h1 xmlns="http://www.w3.org/1999/html">Welcome to the Product:add page</h1>
-    <form action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form">
+<h1>Welcome to the Product:add page</h1>
+    <form action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
         <section>
             {{ form_row(form.name) }}
         </section>
@@ -13,26 +13,39 @@
             {{ form_row(form.description) }}
         </section>
         <section>
-            {{ form_row(form.file) }}
-        </section>
-        <section>
             {{ form_row(form.categories) }}
         </section>
         <section>
             <ul class="specifications" data-prototype="{{ form_widget(form.specifications.vars.prototype)|e }}">
                 {# itère sur chaque spec existantes #}
+                {% set delete = 1 %}
                 {% for specification in form.specifications %}
-                    <li>{{ form_row(specification.name) }}</li>
-                    <li>{{ form_row(specification.content) }}</li>
+                    <div id="{{ delete }}">
+                        <li>{{ form_row(specification.name) }}</li>
+                        <li>{{ form_row(specification.content) }}</li>
+                        <div onclick='deleteSpecForm({{ delete }});' >Supprimer</div>
+                    </div>
+                    {% set delete = delete + 1 %}
                 {% endfor %}
             </ul>
         </section>
         <section>
-            {{ form_widget(form.user_products.vars.prototype) }}
+            <ul class="pictures" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e }}">
+                {% for picture in form.pictures %}
+                    <li>{{ form_row(picture.file) }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        <section>
+            {% if onlyProduct is not defined %}
+                {{ form_widget(form.user_products.vars.prototype) }}
+            {% endif %}
         </section>
         <section style="display:none" class="spec">
             {{ form_row(form.specifications) }}
-            {{ form_row(form.user_products) }}
+            {% if onlyProduct is not defined %}
+                {{ form_row(form.user_products) }}
+            {% endif %}
         </section>
         {{ form_rest(form) }}
     </form>
@@ -42,6 +55,7 @@
     <script>
         var collectionHolder = $('ul.specifications');
         var $addSpecLink = $('<a href="#">Ajouter une specification</a>');
+        var idadd = {{ delete }};
 
         var $newLinkLi = $('<li></li>').append($addSpecLink);
         jQuery(document).ready(function() {
@@ -54,9 +68,34 @@
         function addSpecForm(collectionHolder, $newLinkLi) {
             var prototype = collectionHolder.attr('data-prototype');
             var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
-            var $newFormLi = $('<li></li>').append(newForm);
+            var $newFormLi = $("<li id='"+idadd+"'></li>").append(newForm);
             $newLinkLi.before($newFormLi);
+            var $button = $($newFormLi).append("<div onclick='deleteSpecForm("+idadd+");'>Supprimer</div>");
+            idadd++;
+        }
+
+        function deleteSpecForm(id) {
+            document.getElementById(id).remove();
+        }
+
+    </script>
+    <script>
+        var collectionHolderPicture = $('ul.pictures');
+        var $addPictLink = $('<a href="#">Ajouter une photo</a>');
+
+        var $newLink = $('<li></li>').append($addPictLink);
+        jQuery(document).ready(function() {
+            collectionHolderPicture.append($newLink);
+            $addPictLink.on('click', function(e) {
+                e.preventDefault();
+                addSpecForm(collectionHolderPicture, $newLink);
+            });
+        });
+        function addSpecForm(collectionHolderPicture, $newLink) {
+            var proto = collectionHolderPicture.attr('data-prototype');
+            var newFormFile = proto.replace(/__name__/g, collectionHolderPicture.children().length);
+            var $newFormLi = $('<li></li>').append(newFormFile);
+            $newLink.before($newFormLi);
         }
     </script>
-
 {% endblock %}

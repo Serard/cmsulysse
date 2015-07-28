@@ -1,9 +1,19 @@
-{% extends ':include:message_layout.html.twig' %}
+{% set context = is_granted('ROLE_ADMIN') ?  ":Admin:base.html.twig" :  ':include:message_layout.html.twig' %}
+{% extends context %}
 
-{% block fos_message_content %}
+{% if is_granted('ROLE_ADMIN')  %}
+    {% block body_content %}
+        <a href="#"><strong>Messages Envoyés</strong></a>
 
-<h2>Messages Envoyés</h2>
+        <hr>
+        {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+    {% endblock %}
+{% else %}
+    {% block fos_message_content %}
 
-{% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+    <h2>Messages Envoyés</h2>
 
-{% endblock %}
+    {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+
+    {% endblock %}
+{% endif %}

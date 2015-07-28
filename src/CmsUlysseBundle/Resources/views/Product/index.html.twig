@@ -11,15 +11,13 @@
         </header>
         {% for product in products %}
         <article id="{{ product.id }}" class="card">
-                <img width="300px" src="{{ asset(product.getWebPath())}}" alt="" class="circle"/>
                 <h2>{{ product.name }}</h2>
             <a href="{{ path('product_view', {'id': product.id}) }}" class="zoom">Voir</a>
         </article>
         {% endfor %}
-
     </section>
-    <script>
 
+    <script>
     </script>
 
 {% endblock %}

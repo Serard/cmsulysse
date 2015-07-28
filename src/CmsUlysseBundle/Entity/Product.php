@@ -60,15 +60,21 @@ class Product
     private $usersProducts;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
+     * @ORM\OneToMany(targetEntity="Picture", mappedBy="product", cascade={"persist"})
      */
-    private $picture;
+    private $pictures;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="valid", type="boolean")
+     */
+    private $valid;
 
     /**
      * @Assert\File(
      *     maxSize = "1024k",
+     *
      *     mimeTypes = {"image/jpg", "image/jpeg", "image/png", "image/gif"},
      *     mimeTypesMessage = "Choisissez un fichier image valide"
      * )
@@ -80,11 +86,25 @@ class Product
      */
     private $tmpImage;
 
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_valid", type="boolean", nullable=false)
+     */
+    private $isValid=false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="commands")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
+     */
+    private $state;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->usersProducts = new ArrayCollection();
         $this->specifications = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function __toString()
@@ -156,15 +176,43 @@ class Product
         return $this->specifications;
     }
 
+    public function addSpecification(Specification $specification)
+    {
+        $this->specifications[] = $specification;
+    }
+
+    public function removeSpecification(Specification $specification)
+    {
+        $this->specifications->removeElement($specification);
+    }
+
+    public function addPicture(Picture $picture)
+    {
+        $this->pictures[] = $picture;
+    }
+
     /**
-     * @param $specifications
+     * @return mixed
+     */
+    public function getPictures()
+    {
+        return $this->pictures;
+    }
+
+    /**
+     * @param $pictures
      * @return $this
      */
-    public function setSpecifications(ArrayCollection $specifications)
+    public function setPictures($pictures)
     {
-        $this->specifications = $specifications;
+        $this->pictures = $pictures;
 
         return $this;
+    }
+
+    public function removePicture(Picture $picture)
+    {
+        $this->pictures->removeElement($picture);
     }
 
     /**
@@ -224,113 +272,40 @@ class Product
     }
 
     /**
-     * Set picture
-     *
-     * @param string $picture
+     * @return $valid
+     */
+    public function getValid()
+    {
+        return $this->valid;
+    }
+
+    /**
+     * @param $valid
      * @return Product
      */
-    public function setPicture($picture)
+    public function setValid($valid)
     {
-        $this->picture = $picture;
+        $this->valid = $valid;
 
         return $this;
     }
 
-    /**
-     * Get picture
-     *
-     * @return string
-     */
-    public function getPicture()
+    public function isValid()
     {
-        return $this->picture;
+        return $this->valid;
     }
 
-    public function setFile(UploadedFile $file = null)
+    public function getMinPrice()
     {
-        $this->file = $file;
+        $minPrice = 0;
 
-        if (isset($this->picture)) {
-            $this->tmpImage = $this->picture;
-            $this->picture = null;
-        } else {
-            $this->picture = 'création';
+        foreach($this->usersProducts as $userProduct){
+            if($minPrice === 0 || $userProduct->getPrice()>$minPrice){
+                $minPrice = $userProduct->getPrice();
+                $id = $userProduct->getId();
+            }
         }
 
-        return $this;
-    }
-
-
-    public function getFile()
-    {
-        return $this->file;
-    }
-
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-    public function preUpload()
-    {
-        if (null !== $this->getFile()) {
-            $image = sha1(uniqid('img_'));
-            $this->setPicture($image . '.' . $this->getFile()->guessExtension());
-        }
-    }
-
-    /**
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-    public function upload()
-    {
-        if (null === $this->getFile()) {
-            return;
-        }
-
-        $this->getFile()->move($this->getUploadRootDir(), $this->getPicture());
-
-        if (isset($this->tmpImage)) {
-            unlink($this->getUploadDir().'/'.$this->tmpImage);
-            $this->tmpImage = null;
-        }
-    }
-
-
-    /**
-     * @ORM\PostRemove()
-     */
-    public function removeUpload()
-    {
-        if (($file = $this->getAbsolutePath())) {
-            unlink($file);
-        }
-    }
-
-    public function getAbsolutePath()
-    {
-        if (null === $this->getPicture()) {
-            return;
-        }
-        return $this->getUploadRootDir() . '/' . $this->getPicture();
-    }
-
-    public function getWebPath()
-    {
-        if (null === $this->getPicture()) {
-            return;
-        }
-        return $this->getUploadDir() . '/' . $this->getPicture();
-    }
-
-    protected function getUploadRootDir()
-    {
-        return __DIR__ . '/../../../web/' . $this->getUploadDir();
-    }
-
-
-    protected function getUploadDir()
-    {
-        return 'upload/pictures/products';
+        return array('price'=>$minPrice,'id'=>$id);
     }
 }

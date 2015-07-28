@@ -1,0 +1,28 @@
+{% for titleC, products in category %}
+    <h2 class="head">{{ titleC }}</h2>
+       <div class="top-box">
+        {% for product in products %}
+        <div class="card col_1_of_3 span_1_of_3">
+            <a href="{{ path('product_view', {id: product.minPrice.id}) }}">
+                <div class="inner_content clearfix">
+                    <div class="product_image" style="background: url();">
+                    </div>
+                    <div class="sale-box"></div>
+                    <div class="price">
+                        <div class="cart-left">
+                            <p class="title">{{ product.name }}</p>
+                            <div class="price1">
+                                <span class="actual">{{ product.minPrice.price|number_format(2, '.',',') }}</span>
+                            </div>
+                        </div>
+                        <div class="icon cart-right"></div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+    {%  endfor %}
+        <div class="clear"></div>
+    </div>
+{%  endfor %}

@@ -1,0 +1,35 @@
+{% extends ":Admin:base.html.twig" %}
+
+{% block body_content %}
+    <a href="#"><strong>Modules</strong></a>
+    <hr>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Slideshow</h4></div>
+        <div class="panel-body">
+            <p>Activé: {{ site.slider ? 'oui' : 'non' }}</p>
+            <a class="btn btn-primary" href="{{ path('active_slider_admin', {'id' : site.id}) }}">
+                {{ site.slider  ? 'Désactiver' : 'Activer' }}
+            </a>
+            <a href="{{ path('slider_admin') }}" class="btn btn-primary">Modifier</a>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Produits Phare</h4></div>
+        <div class="panel-body">
+            <p>Activé:  {{ site.bestProduct  ? 'oui' : 'non' }}</p>
+            <a class="btn btn-primary" href="{{ path('active_best_product_admin', {'id' : site.id}) }}">
+                {{ site.bestProduct  ? 'Désactiver' : 'Activer' }}
+            </a>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Community Manager</h4></div>
+        <div class="panel-body">
+            <p>Activé:  {{ site.cmActive  ? 'oui' : 'non' }}</p>
+            <a class="btn btn-primary" href="">
+                {{ site.cmActive  ? 'Désactiver' : 'Activer' }}
+            </a>
+        </div>
+    </div>
+{% endblock %}

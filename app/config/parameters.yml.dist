@@ -17,3 +17,7 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+
+    api_facebook_id: 1468320280154552
+    api_facebook_secret: 68ef7d2cbc97873ff26a625e5b2b345e

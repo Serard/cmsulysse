@@ -13,14 +13,14 @@ use Doctrine\ORM\Mapping as ORM;
 class CommandUserProduct
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Command", inversedBy="commands")
+     * @ORM\ManyToOne(targetEntity="Command", inversedBy="commandUserProducts")
      * @ORM\Id
      * @ORM\JoinColumn(name="command_id", referencedColumnName="id")
      */
     private $command;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserProduct", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="UserProduct", inversedBy="commands")
      * @ORM\Id
      * @ORM\JoinColumn(name="user_product_id", referencedColumnName="id")
      */

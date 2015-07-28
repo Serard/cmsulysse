@@ -1,0 +1,160 @@
+<div class=" header header-bottom" style="position:fixed;width: 100%;height:200px;zIndex:999;top: 30px;">
+    <div class="wrap">
+        <div class="header-bottom-left">
+            <div class="logo">
+                    <h1 style="font-size: 24pt;">{{ site.name }}</h1>
+                    {# if  logo is not null and logo != '' #}
+                <!--figure id="logo" style="background: {#{ path('site_logo') }#};background-repeat: no-repeat;background-size: contain;"></figure-->
+                {# if endif #}
+                <h2>{{ site.slogan }}</h2>
+
+            </div>
+
+            {%  block menu %}
+                {%  render(controller('CmsUlysseBundle:Menu:list')) %}
+            {%  endblock menu %}
+        </div>
+
+
+
+
+
+    <div class="header-bottom-right">
+
+
+        <div class="search">
+            <input id='search' type="text" name="s" class="textbox" placeholder="Search" >
+            <script>
+                /* search */
+
+                var search = {};
+                search.attribute = document.getElementById('search');
+                var url      = '{{ path('search_cart') }}';
+
+
+                search.request = function(data){$.post( url, data ,function(response) {
+                    document.getElementById('response').innerHTML = response;
+                })
+                        .done(function() {
+                            console.log( "second success" );
+                        })
+                        .fail(function() {
+                            console.log( "error" );
+                        })
+                        .always(function() {
+                            console.log( "complete" );
+                        })
+                        .complete(function() {
+                            console.log("second complete");
+                        });
+                };
+
+                $(search.attribute).keyup(function() {
+                    var data={};
+                    data.search= search.attribute.value;
+                    console.log(data);
+                    search.request(data);
+                });
+
+                $('select').change(function(){
+                    var category = $("select option:selected").text();
+                    var id = document.getElementById(category).getAttribute("name");
+                    if (id == "0") {
+                        location.href=redirUrl;
+                    } else {
+                        location.href=redirUrl+'category/'+id;
+                    }
+                })
+
+
+
+
+            </script>
+        </div>
+
+
+        <div class="tag-list">
+
+
+            <ul class="icon1 sub-icon1 profile_img">
+                <li><span class="active-icon icon geoloc"><a><i class="fa fa-user fa-lg"></i></a></span>
+                    <ul class="sub-icon1 list">
+                        <li><h3>user</h3></li>
+                        {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
+                            <li><a class="list-group-item" href="{#{ path('user_updated') }#}">&nbsp; info</a></li>
+                            <li><a class="list-group-item" href="{#{ path('user_command') }#}">&nbsp; command</a></li>
+                            <li><a class="list-group-item" href="{#{ path('vente_user') }#}">&nbsp; sell</a></li>
+                            <li><a class="list-group-item" href="#">&nbsp; Settings</a></li>
+                            <li><a href="{{ path('cms_messagerie_inbox') }}">&nbsp; Messagerie</a></li>
+                            <li><a href="">Déconnexion</a></li>
+                        {%  else %}
+                            <li><center><a class="btn btn-primary btn-large" href="{{ path('fos_user_security_login') }}">Log In</a></center></li>
+                            <li><center><a class="btn btn-primary btn-large" href="{{ path('fos_user_registration_register') }}">Sign Up</a></center></li>
+                            <li><center>~~ or ~~</center></li>
+                            <li>
+                                <center>
+                                    <a class="btn btn-primary btn-large" href="{{ path('hwi_oauth_service_redirect', {'service': 'facebook' }) }}" alt="{{ 'registration.facebook.submit'|trans }}">
+                                            facebook
+                                    </a>
+                                </center>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+            <ul><li><a href="#">User</a></li></ul>
+            <ul><li><span class='other'></span></li></ul>
+            <ul class="icon1 sub-icon1 profile_img">
+                <li><span class="active-icon icon geoloc"><a><i class="fa fa-shopping-cart fa-lg"></i></a></span>
+                    <ul class="sub-icon1 list">
+                        <li><h3>No Products</h3><a href=""></a></li>
+                        <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul><li><a href="#">Cart(0)</a></li></ul>
+        </div>
+    </div>
+    <div class="clear"></div>
+</div>
+</div>
+</div>
+
+{% block minimenu %}
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<!--link rel="stylesheet" href="css/common.min.css"-->
+<link rel="stylesheet" href="css/circle-menu.min.css">
+
+<nav id="c-circle-nav" class="c-circle-nav" style="display:none;">
+    <button id="c-circle-nav__toggle" class="c-circle-nav__toggle">
+        <span>Toggle</span>
+    </button>
+    <ul class="c-circle-nav__items">
+        <li class="c-circle-nav__item">
+            <a href="#" class="c-circle-nav__link">
+                <img src="img/house.svg" alt="">
+            </a>
+        </li>
+        <li class="c-circle-nav__item">
+            <a href="#" class="c-circle-nav__link">
+                <img src="img/shopping63.svg" alt="" class="svg">
+            </a>
+        </li>
+        <li class="c-circle-nav__item">
+            <a href="#" class="c-circle-nav__link">
+                <img src="img/pin.svg" alt="">
+            </a>
+        </li>
+        <li class="c-circle-nav__item">
+            <a class="c-circle-nav__link sh">
+                <img src="img/search.svg" alt="">
+            </a>
+        </li>
+        <li class="c-circle-nav__item">
+            <a href="#" class="c-circle-nav__link">
+                <img src="img/tools.svg" alt="">
+            </a>
+        </li>
+    </ul>
+</nav>
+{% endblock %}
