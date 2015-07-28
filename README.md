@@ -6,6 +6,9 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+dev version    : dev-v0.0.28
+ajout produit à vendre
+
 dev version    : dev-v0.0.27
 gestion des commandes
 
