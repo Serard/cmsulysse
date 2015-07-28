@@ -1,11 +1,11 @@
-<table class="table table-hover">
+<table>
 
     <thead>
         <tr>
-            <th>Object :</th>
-            <th>De :</th>
-            <th>Le :</th>
-            <th>Nombre de Messages</th>
+            <th>Object</th>
+            <th>Heure</th>
+            <th>Date</th>
+            <th>Messages</th>
             <th>Dernier Message</th>
             <th>Actions</th>
         </tr>
@@ -36,7 +36,12 @@
                 </td>
                 <td>
                     {% if thread.lastMessage %}
-                        {{  thread.lastMessage.createdAt|date }} <br/>par {{ thread.lastMessage.sender|e }}
+                        <a href="{{ url('cms_messagerie_thread_view', {'threadId': thread.id}) }}#message_{{ thread.lastMessage.id }}" title="{% trans from 'FOSMessageBundle' %}goto_last{% endtrans %}">
+                            →
+                        </a>
+                        {% trans with {'%date%': thread.lastMessage.createdAt|date} from 'FOSMessageBundle' %}on{% endtrans %}
+                        <br />
+                        {% trans with {'%sender%': thread.lastMessage.sender|e } from 'FOSMessageBundle' %}by{% endtrans %}
                     {% else %}
                         ----
                     {% endif %}
@@ -45,13 +50,13 @@
                     {% if fos_message_can_delete_thread(thread) %}
                         {% if fos_message_deleted_by_participant(thread) %}
                             {% set formAction %}{{ url('cms_messagerie_thread_undelete', {'threadId': thread.id}) }}{% endset %}
-                            {% set submitValue %}Retirer de l'archive{% endset %}
+                            {% set submitValue %}retirer de l'archive{% endset %}
                         {% else %}
                             {% set formAction %}{{ url('cms_messagerie_thead_delete', {'threadId': thread.id}) }}{% endset %}
-                            {% set submitValue %}Archivé{% endset %}
+                            {% set submitValue %}archivé{% endset %}
                         {% endif %}
                         <form action="{{ formAction }}" method="post">
-                                <input class="btn btn-warning" type="submit" value="{{ submitValue }}" />
+                                <input type="submit" value="{{ submitValue }}" />
                         </form>
                     {% endif %}
                 </td>
@@ -60,7 +65,7 @@
     {% else %}
         <tr>
             <td colspan="6">
-               Pas de Messages
+                no_thread.
             </td>
         </tr>
     {% endif %}

@@ -17,13 +17,6 @@
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}
-        <style>
-
-            .fwslider{
-                margin-top: 20px !important;
-            }
-
-        </style>
 
             {% block stylesheets %}
                 {%  render(controller('CmsUlysseBundle:Header:custom')) %}
@@ -213,22 +206,7 @@
         {% block header %}
             {%  include ':include:header.html.twig' %}
         {% endblock header %}
-        <section class="body">
-            {%  block slide %}{%  endblock %}
-            <div class="wrap">
-                <div class="section group">
-                    <div class="colonneA">
-                        {# render(controller('CmsUlysseBundle:Col:left')) #}
-                    </div>
-
         {% block body %}{% endblock body %}
-
-                    <div class="colonneC">
-                        {#  render(controller('CmsUlysseBundle:Col:right')) #}
-                    </div>
-                </div>
-            </div>
-        </section>
         {% block footer %}
             {%  include ':include:footer.html.twig' %}
         {% endblock footer %}
@@ -240,46 +218,11 @@
 
         {% block javas %}
             {% javascripts
-                'js/masonry/masonry.min.js'
-                'js/masonry/main.js'
-
+                'js/iconMenu.js'
                 output='js/compiled/app.js' %}
             <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
-        <script>
-            $(function(){
-                $('.header-bottom').data('size','big');
-            });
 
-            $(window).scroll(function(){
-                if($(document).scrollTop() > 0)
-                {
-                    if($('.header-bottom').data('size') == 'big')
-                    {
-                        $('.header-bottom').data('size','small');
-                        $('.header-bottom').stop().animate({
-                            height:'120px',
-                            zIndex: 999,
-                            top:'0'
-                        },200);
-                    }
-                }
-                else
-                {
-                    if($('.header-bottom').data('size') == 'small')
-                    {
-                        $('.header-bottom').data('size','big');
-                        $('.header-bottom').stop().animate({
-                            height:'200px',
-                            zIndex: 0,
-                            top: '30px'
-                        },400);
-                    }
-                }
-            });
-
-
-        </script>
     </body>
 </html>

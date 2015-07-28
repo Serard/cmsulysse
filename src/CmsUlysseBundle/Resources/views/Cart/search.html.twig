@@ -1,41 +1,32 @@
-
-                {% for userproduct in products %}
-                    {% if loop.index == 1 or (loop.index - 1) is divisible by(3) %}
-                        <div class="top-box">
-                    {% endif %}
-                    <div class="card col_1_of_3 span_1_of_3">
-                        <a >
-                            <div class="inner_content clearfix">
-                                <div class="product_image" style="background: url();">
-                                </div>
-                                <div class="sale-box"></div>
-                                <div class="price">
-                                    <div class="cart-left">
-                                        <p class="title"id="name{{ userproduct.id }}">{{ userproduct.product.name }}</p>
-                                        <div class="price1">
-                                            <span class="actual"id="price{{ userproduct.id }}">{{ userproduct.price|number_format(2, '.',',') }}</span>
-                                        </div>
-                                    </div>
-                                    <div id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez atteind la quantité maximum de ce produit</div>
-                                    <div id="seller{{ userproduct.id }}" style="display: none;">{{ userproduct.user.lastname }} {{ userproduct.user.firstname }}</div>
-                                    <div id="stock{{ userproduct.id }}" style="display: none;">{{ userproduct.qty }}</div>
-                                    <div id="description{{ userproduct.id }}" style="display: none;">{{ userproduct.product.description }}</div>
-                                    {% if userproduct.qty != 0 %}
-                                        <div onclick="addCart({{ userproduct.id }});" class="icon cart-right"></div>
-                                    {% else %}
-                                        Produit épuisé
-                                    {% endif %}
-                                    {% if id is defined %}
-                                        <p id="categid" style="display:none;">{{ id }}</p>
-                                    {% endif %}
-                                    <div class="clear"></div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                        {% if loop.index is divisible by(3) %}
-                        </div>
-                        <div class="clear"></div>
+        <h1>Liste des produits {{ category }}</h1>
+        <table>
+            <tr>
+                <th>Nom</th>
+                <th>Description</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Vendeur</th>
+                <th>Action</th>
+            </tr>
+            {% for userproduct in products %}
+                <tr>
+                    <td id="name{{ userproduct.id }}">{{ userproduct.product.name }}</td>
+                    <td id="description{{ userproduct.id }}">{{ userproduct.product.description }}</td>
+                    <td id="price{{ userproduct.id }}">{{ userproduct.price }}</td>
+                    <td id="stock{{ userproduct.id }}">{{ userproduct.qty }}</td>
+                    <td id="seller{{ userproduct.id }}">{{ userproduct.user.lastname }} {{ userproduct.user.firstname }}</td>
+                    <td>{% if userproduct.qty != 0 %}
+                            <button onclick="addCart({{ userproduct.id }});">Ajouter</button>
+                        {% else %}
+                            Produit épuisé
                         {% endif %}
-                {%  endfor %}
+                    </td>
+                    <td id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez atteind la quantité maximum de ce produit</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ path('user_cart') }}"> Mon panier</a>
+        {% if id is defined %}
+            <p id="categid" style="display:none;">{{ id }}</p>
+        {% endif %}
+

@@ -80,7 +80,8 @@ class MessageController extends BaseController
             $subject = $thread->getSubject();
             $receipients = $thread->getOtherParticipants($user);
             $receipient = $receipients[0];
-            $this->mailNewThread($user, $receipient, $subject, $message);
+            $this->contactAdmin($user, $subject,$body);
+            $this->mailNewThread($user, $receipient, $subject, $body);
 
             return new RedirectResponse($this->container->get('router')->generate('cms_messagerie_thread_view', array(
                 'threadId' => $threadId
@@ -156,13 +157,13 @@ class MessageController extends BaseController
         );
     }
 
-    public function mailNewThread(User $user, User $recipient, $subject, $message)
+    public function mailNewThread(User $user, User $recipient, $subject, $body)
     {
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($user->getEmail())
             ->setTo($recipient->getEmail())
-            ->setBody($this->container->get('templating')->render('CmsUlysseBundle:Mailing:newThread.txt.twig', array('message' => $message)), 'text/html');
+            ->setBody("Body or not body !!! ");
 
         $this->container->get('mailer')->send($message);
         return $this;

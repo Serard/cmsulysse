@@ -12,7 +12,7 @@
                                 <ul>
                                     {% for categ_down in categs_down %}
                                         {% if  categ_down.categup.id == category.id %}
-                                            <li><a href="{{ path('market_cart') }}category/{{ categ_down.id }}">{{ categ_down.name }}</a></li>
+                                            <li>{{ categ_down.name }}</li>
                                         {% endif %}
                                     {% endfor %}
                                 </ul>

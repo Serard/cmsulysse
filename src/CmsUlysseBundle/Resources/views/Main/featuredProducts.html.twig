@@ -5,7 +5,7 @@
         <div class="card col_1_of_3 span_1_of_3">
             <a href="{{ path('product_view', {id: product.minPrice.id}) }}">
                 <div class="inner_content clearfix">
-                    <div class="product_image" style="background: url();">
+                    <div class="product_image" style="background: url({{ asset(product.picture) }});">
                     </div>
                     <div class="sale-box"></div>
                     <div class="price">

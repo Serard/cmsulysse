@@ -60,9 +60,11 @@ class Product
     private $usersProducts;
 
     /**
-     * @ORM\OneToMany(targetEntity="Picture", mappedBy="product", cascade={"persist"})
+     * @var string
+     *
+     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
      */
-    private $pictures;
+    private $picture;
 
     /**
      * @var bool
@@ -86,25 +88,11 @@ class Product
      */
     private $tmpImage;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="is_valid", type="boolean", nullable=false)
-     */
-    private $isValid=false;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="State", inversedBy="commands")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
-     */
-    private $state;
-
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->usersProducts = new ArrayCollection();
         $this->specifications = new ArrayCollection();
-        $this->products = new ArrayCollection();
     }
 
     public function __toString()
@@ -186,35 +174,6 @@ class Product
         $this->specifications->removeElement($specification);
     }
 
-    public function addPicture(Picture $picture)
-    {
-        $this->pictures[] = $picture;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPictures()
-    {
-        return $this->pictures;
-    }
-
-    /**
-     * @param $pictures
-     * @return $this
-     */
-    public function setPictures($pictures)
-    {
-        $this->pictures = $pictures;
-
-        return $this;
-    }
-
-    public function removePicture(Picture $picture)
-    {
-        $this->pictures->removeElement($picture);
-    }
-
     /**
      * @param Category $category
      */
@@ -222,6 +181,7 @@ class Product
     {
         $this->categories[] = $category;
     }
+
 
     /**
      * Remove Categories
@@ -290,9 +250,116 @@ class Product
         return $this;
     }
 
-    public function isValid()
+
+    /**
+     * Set picture
+     *
+     * @param string $picture
+     * @return Product
+     */
+    public function setPicture($picture)
     {
-        return $this->valid;
+        $this->picture = $picture;
+
+        return $this;
+    }
+
+    /**
+     * Get picture
+     *
+     * @return string
+     */
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    public function setFile(UploadedFile $file = null)
+    {
+        $this->file = $file;
+
+        if (isset($this->picture)) {
+            $this->tmpImage = $this->picture;
+            $this->picture = null;
+        } else {
+            $this->picture = 'création';
+        }
+
+        return $this;
+    }
+
+
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null !== $this->getFile()) {
+            $image = sha1(uniqid('img_'));
+            $this->setPicture($image . '.' . $this->getFile()->guessExtension());
+        }
+    }
+
+    /**
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
+     */
+    public function upload()
+    {
+        if (null === $this->getFile()) {
+            return;
+        }
+
+        $this->getFile()->move($this->getUploadRootDir(), $this->getPicture());
+
+        if (isset($this->tmpImage)) {
+            unlink($this->getUploadDir().'/'.$this->tmpImage);
+            $this->tmpImage = null;
+        }
+    }
+
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload()
+    {
+        if (($file = $this->getAbsolutePath())) {
+            unlink($file);
+        }
+    }
+
+    public function getAbsolutePath()
+    {
+        if (null === $this->getPicture()) {
+            return;
+        }
+        return $this->getUploadRootDir() . '/' . $this->getPicture();
+    }
+
+    public function getWebPath()
+    {
+        if (null === $this->getPicture()) {
+            return;
+        }
+        return $this->getUploadDir() . '/' . $this->getPicture();
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__ . '/../../../web/' . $this->getUploadDir();
+    }
+
+
+    protected function getUploadDir()
+    {
+        return 'upload/pictures/products';
     }
 
     public function getMinPrice()

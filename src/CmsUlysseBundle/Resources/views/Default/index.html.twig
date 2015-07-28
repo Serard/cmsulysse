@@ -1,20 +1,28 @@
 {% extends "::base.html.twig" %}
 
 {% block title %}HomePage{% endblock %}
-{%  block slide %}
-    {% include 'CmsUlysseBundle:Main:slider.html.twig' with { 'slides': slides } only  %}
-{% endblock %}
+
 {% block body %}
 
 {#paginator#}
 
+    {# include 'CmsUlysseBundle:Main:slider.html.twig' with { 'slides': slides } only  #}
+<section class="body">
+    <div class="wrap">
+        <div class="section group">
+            <div class="colonneA">
+                testL
+            </div>
             <div class="colonneB">
-                <section id="response"></section>
                 {%  include 'CmsUlysseBundle:Main:featuredProducts.html.twig' with { 'category': products } only  %}
                 {%  include 'CmsUlysseBundle:Main:newProducts.html.twig' with { 'category': products } only  %}
-
             </div>
-
+            <div class="colonneC">
+                testR
+            </div>
+        </div>
+    </div>
+</section>
 
 {% endblock %}
 

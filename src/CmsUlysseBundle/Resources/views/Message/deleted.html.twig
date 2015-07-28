@@ -1,17 +1,9 @@
-{% set context = is_granted('ROLE_ADMIN') ?  ":Admin:base.html.twig" :  ':include:message_layout.html.twig' %}
-{% extends context %}
+{% extends ':include:message_layout.html.twig' %}
 
-{% if is_granted('ROLE_ADMIN')  %}
-    {% block body_content %}
-        <a href="#"><strong>Archives</strong></a>
+{% block fos_message_content %}
 
-        <hr>
-        {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+<h2>Discussions Archivées</h2>
 
-    {% endblock %}
-{% else %}
-    {% block fos_message_content %}
-        <h2>Discussions Archivées</h2>
-        {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
-    {% endblock %}
-{% endif %}
+    {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
+
+{% endblock %}
