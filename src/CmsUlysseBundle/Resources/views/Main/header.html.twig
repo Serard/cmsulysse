@@ -121,9 +121,9 @@
 </div>
 
 {% block minimenu %}
-<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}">
 <!--link rel="stylesheet" href="css/common.min.css"-->
-<link rel="stylesheet" href="css/circle-menu.min.css">
+<link rel="stylesheet" href="{{ asset('css/circle-menu.min.css') }}">
 
 <nav id="c-circle-nav" class="c-circle-nav" style="display:none;">
     <button id="c-circle-nav__toggle" class="c-circle-nav__toggle">
@@ -132,27 +132,27 @@
     <ul class="c-circle-nav__items">
         <li class="c-circle-nav__item">
             <a href="#" class="c-circle-nav__link">
-                <img src="img/house.svg" alt="">
+                <img src="{{ asset('img/house.svg') }}" alt="">
             </a>
         </li>
         <li class="c-circle-nav__item">
             <a href="#" class="c-circle-nav__link">
-                <img src="img/shopping63.svg" alt="" class="svg">
+                <img src="{{ asset('img/shopping63.svg') }}" alt="" class="svg">
             </a>
         </li>
         <li class="c-circle-nav__item">
             <a href="#" class="c-circle-nav__link">
-                <img src="img/pin.svg" alt="">
+                <img src="{{ asset('img/pin.svg') }}" alt="">
             </a>
         </li>
         <li class="c-circle-nav__item">
             <a class="c-circle-nav__link sh">
-                <img src="img/search.svg" alt="">
+                <img src="{{ asset('img/search.svg') }}" alt="">
             </a>
         </li>
         <li class="c-circle-nav__item">
             <a href="#" class="c-circle-nav__link">
-                <img src="img/tools.svg" alt="">
+                <img src="{{ asset('img/tools.svg') }}" alt="">
             </a>
         </li>
     </ul>

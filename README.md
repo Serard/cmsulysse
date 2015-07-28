@@ -6,6 +6,13 @@ dev     : correspond à la branche de dev
 
 master version : v0.0
 
+master version : v1.0.1
+First version stable
+
+
+dev version : dev-v1.1.1
+Bug fixing :: design assets url
+
 dev version : dev-v1.1.0
 update admin and messagerie/contact
 

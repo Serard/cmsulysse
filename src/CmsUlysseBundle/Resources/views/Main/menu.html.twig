@@ -3,7 +3,7 @@
         <li class="active grid"><a href="/">Home</a></li>
 
         {% for category in categories %}
-            <li><a class="color{{ category.id }}" href="#">{{ category.name }}</a>
+            <li><a class="color{{ category.id }}" href="{{ path('market_cart') }}category/{{ category.id }}">{{ category.name }}</a>
                 <div class="megapanel">
                     <div class="row">
                         <div class="col1">

@@ -49,13 +49,13 @@
         %}
         <script type="text/javascript" src="{{ asset_url }}"></script>
 
-        <script type="text/javascript" src="js/megamenu.js"></script>
+        <script type="text/javascript" src="{{ asset('js/megamenu.js') }}"></script>
         <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-        <script src="js/jquery-ui.min.js"></script>
-        <script src="js/css3-mediaqueries.js"></script>
-        <script src="js/fwslider.js"></script>
+        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('js/css3-mediaqueries.js') }}"></script>
+        <script src="{{ asset('js/fwslider.js') }}"></script>
         <!--end slider -->
-        <script src="js/jquery.easydropdown.js"></script>
+        <script src="{{ asset('js/jquery.easydropdown.js') }}"></script>
 
         {% endjavascripts %}
         <script>
@@ -237,7 +237,7 @@
 
                     <div class="colonneB">
                         <section id="response"></section>
-        {% block body %}{% endblock body %}
+                        {% block body %}{% endblock body %}
                     </div>
 
                     <div class="colonneC">
@@ -286,7 +286,7 @@
                         $('#c-circle-nav').fadeIn( "slow" );
 
                         $('.tag-list').fadeOut( 100 );
-                        $('h2').fadeOut( "slow" );
+                        $('h2').fadeOut( 100 );
                         $('.menu').stop().animate({
                             marginLeft: '10%'
                         },200);
@@ -359,15 +359,6 @@
 
         </script>
         <!--/* mini menu */-->
-        <script src="js/circleMenu.min.js"></script>
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-            ga('create', 'UA-34160351-1', 'auto');
-            ga('send', 'pageview');
-        </script>
-        <!-- /EXTERNAL SCRIPTS -->
+        <script src="{{ asset('js/circleMenu.min.js') }}"></script>
     </body>
 </html>

@@ -10,11 +10,14 @@
             z-index: 0 !important;
         }
 
-        html, body {
+        body{
             height: 100%;
             background-color: #4CB1CA;
             font-family: "Roboto Slab", serif;
-            color: white;
+        }
+
+        body label{
+            color: #FFF;
         }
 
         .preload * {
@@ -98,7 +101,6 @@
             transform-origin: 0% 0%;
             transition: all 1s cubic-bezier(0.06, 0.63, 0, 1);
             backface-visibility: hidden;
-            z-index: 999;
         }
         .login--toggle-container .js-toggle-login {
             font-size: 4em;
@@ -128,12 +130,15 @@
             transform: perspective(1000px) rotateY(0deg);
             background-color: #4CB1CA;
         }
+        #route{
+            width: 284px;
+        }
     </style>
 <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form-group">
 <div class='preload login--container'>
     <div class='login--form'>
         <div class='login--username-container'>
-        <h2>Inscription</h2>
+        <h2 style="color:#FFFFFF">Inscription</h2>
         <fieldset>
             {{ form_row(form.lastname) }}
             {{ form_row(form.firstname) }}
@@ -144,8 +149,8 @@
         <div class='login--password-container'>
         <fieldset>
             <div class="form-group">
-                <label class="col-sm-4 control-label">Address</label>
-                <div class="col-sm-8">
+                <label class="control-label">Address</label>
+                <div class="">
                     <input id="user_input_autocomplete_address"
                            class="form-control" placeholder="Start typing your address...">
                 </div>
@@ -984,6 +989,32 @@
             padding: 45px 30px 15px;
         }
     }
+    .flag-dropdown{
+        border-radius: 2px !important;
+        padding: 8px 0px !important;
+        margin-top: 2px !important;
+        background: rgb(255, 255, 255) !important;
+    }
+    .selected-flag{
+        border-radius: 2px !important;
+    }
+    .arrowParent{
+        padding: 8px 0px !important;
+        background: rgb(168, 168, 168) !important;
+    }
+    .codeCountry{
+        margin-top: -6px !important;
+    }
+    #fos_user_registration_form_tel{
+        margin-left: 70px !important;
+        width: 208px !important;
+    }
+    .flag-dropdown{
+        margin-left: -6px;
+    }
+    #fos_user_registration_form_email{
+        width: 284px;
+    }
     </style>
     <div class="click-anim"><figure class="hungry" style="background-color:#FF99CC"><div class="eye"></div><div class="eye"></div><div class=""></div><div class="mouth "></div></figure></div><div class="shadow"></div>
     </section>
@@ -1011,17 +1042,17 @@
     <!-- Include Google Maps JS API -->
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&amp;key=AIzaSyDiLbha2ADV-c4IjSgjFFCj01FcwrOHteI"></script>
     <!-- Custom JS code to bind to Autocomplete API -->
-    <script src="/js/api_google_map/autocomplete.js"></script>
+    <script src="{{ asset('/js/api_google_map/autocomplete.js') }}"></script>
 
-    <script src='/js/intlTellnput.js'></script>
+    <script src="{{ asset('/js/intlTellnput.js') }}"></script>
     <script>
         var allCountriesA;
     </script>
-    <script src="/js/utils.js"></script>
+    <script src="{{ asset('/js/utils.js') }}"></script>
     <script>
-        var utilsScriptUrl = '/js/utils.js';
+        var utilsScriptUrl = "{{ asset('/js/utils.js') }}";
     </script>
-    <script src="/js/defaultCountrylp.js"></script>
+    <script src="{{ asset('/js/defaultCountrylp.js') }}"></script>
     <script>
 
         verifPhone(10);
