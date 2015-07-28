@@ -191,7 +191,7 @@ class HeaderController extends Controller
         $background_color_body=($background_color_body == '' && $global_color != '')? hex2rgba($background_color_body,$global_color,true):$background_color_body;
         $background_color_body=(trim($background_color_body)==''||strtoupper($background_color_body[0])=='R')?$background_color_body:hex2rgba($background_color_body);
 
-        $settings_background_img_body='/'.$site->getWebPath();
+        $settings_background_img_body=($site->getWebPath())?'/'.$site->getWebPath():'';
         $color_text_body='';
         $color_text_body=($color_text_body == '' && $global_color != '')? hex2rgba($color_text_body,$global_color,false):$color_text_body;
         $color_text_body=(trim($color_text_body)==''||strtoupper($color_text_body[0])=='R')?$color_text_body:hex2rgba($color_text_body);
