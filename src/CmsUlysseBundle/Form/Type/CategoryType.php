@@ -20,7 +20,7 @@ class CategoryType extends AbstractType
                                               'query_builder' => function (\CmsUlysseBundle\Entity\CategoryRepository $r) {
                     return $r->findCategsUpForm();
                 }))
-            ->add('btn', 'submit', array('label' => 'Envoyer', 'attr'=> array('class' => 'btn btn-primary')));
+            ->add('btn', 'submit', array('label' => 'Envoyer'));
 
         return $builder;
     }

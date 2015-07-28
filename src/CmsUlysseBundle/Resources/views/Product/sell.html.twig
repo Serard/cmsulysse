@@ -1,0 +1,33 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Vendre ce produit{% endblock %}
+
+{% block body %}
+
+    <h1>Vendre ce produit</h1>
+    <table class="table">
+        <tr>
+            <th>Nom</th>
+            <th>Description</th>
+            <th>Catégories</th>
+            <th>Caractéristiques</th>
+        </tr>
+        <tr>
+            <td>{{ product.name }}</td>
+            <td>{{ product.description }}</td>
+            <td>
+                {% for categorie in product.categories %}
+                    {{ categorie.name }} (catégorie mère : {{ categorie.categup.name }})
+                {% endfor %}
+            </td>
+            <td>
+                <ul>
+                    {% for specification in product.specifications %}
+                        <li>{{ specification.name }} : {{ specification.content }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+    </table>
+    {{ form(form) }}
+{% endblock %}

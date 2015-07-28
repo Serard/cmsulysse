@@ -25,8 +25,8 @@ class LoadSettingsData  extends AbstractFixture implements OrderedFixtureInterfa
             ->setCorpsColonnes(1)
             ->setBestProduct(true)
             ->setCmActive(true)
-            ->setCommunityManagement('Qui a touché à mon code ? Ça marchait très bien hier')
-            ->setSlider(true);
+            ->setSlider(true)
+            ->setCommunityManagement('Qui a touché à mon code ? Ça marchait très bien hier');
 
         $slide = new Slider();
         $slide->setName('Super Slider');

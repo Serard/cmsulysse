@@ -5,12 +5,15 @@
 {% block body %}
 
 <h1>Welcome to the Product:add page</h1>
-    <form action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
+    <form action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form">
         <section>
             {{ form_row(form.name) }}
         </section>
         <section>
             {{ form_row(form.description) }}
+        </section>
+        <section>
+            {{ form_row(form.file) }}
         </section>
         <section>
             {{ form_row(form.categories) }}
@@ -26,13 +29,6 @@
                         <div onclick='deleteSpecForm({{ delete }});' >Supprimer</div>
                     </div>
                     {% set delete = delete + 1 %}
-                {% endfor %}
-            </ul>
-        </section>
-        <section>
-            <ul class="pictures" data-prototype="{{ form_widget(form.pictures.vars.prototype)|e }}">
-                {% for picture in form.pictures %}
-                    <li>{{ form_row(picture.file) }}</li>
                 {% endfor %}
             </ul>
         </section>
@@ -79,23 +75,5 @@
         }
 
     </script>
-    <script>
-        var collectionHolderPicture = $('ul.pictures');
-        var $addPictLink = $('<a href="#">Ajouter une photo</a>');
 
-        var $newLink = $('<li></li>').append($addPictLink);
-        jQuery(document).ready(function() {
-            collectionHolderPicture.append($newLink);
-            $addPictLink.on('click', function(e) {
-                e.preventDefault();
-                addSpecForm(collectionHolderPicture, $newLink);
-            });
-        });
-        function addSpecForm(collectionHolderPicture, $newLink) {
-            var proto = collectionHolderPicture.attr('data-prototype');
-            var newFormFile = proto.replace(/__name__/g, collectionHolderPicture.children().length);
-            var $newFormLi = $('<li></li>').append(newFormFile);
-            $newLink.before($newFormLi);
-        }
-    </script>
 {% endblock %}

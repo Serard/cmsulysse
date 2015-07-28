@@ -4,25 +4,27 @@
 
 {% block body_content %}
     <h1>Liste des catégories</h1>
-    <ul class="col-lg-6">
+    <ul>
         {% for category in categories %}
             <li>
-                <h2>{{ category.name }}</h2><a href="{{ path('categ_update_admin', {'id': category.id}) }}">Modifier</a>
-                <ul class="list-group">
+                <h1>{{ category.id }}</h1>
+                <h2>{{ category.name }}</h2>
+                <p>
+                    <a href="{{ path('categ_update_admin', {'id': category.id}) }}">Modifier</a>
+                </p>
+                <ul>
                     {% for categ_down in categs_down %}
                         {% if  categ_down.categup.id == category.id %}
-                            <li class="list-group-item" style="padding-bottom: 10px">
-                                {{ categ_down.name }}
-                                <span style="background-color: white; padding: 0px; margin-bottom: 0px;" class="badge">
-                                    <a href="{{ path('categ_update_admin', {'id': categ_down.id}) }}">Modifier</a>
-                                    <a href="{{ path('category_delete', {'id': categ_down.id}) }}">Supprimer</a>
-                                </span>
-                            </li>
+                            <li>{{ categ_down.name }}</li>
+                            <p>
+                                <a href="{{ path('categ_update_admin', {'id': categ_down.id}) }}">Modifier</a>
+                                <a href="{{ path('category_delete', {'id': categ_down.id}) }}">Supprimer</a>
+                            </p>
                         {% endif %}
                     {% endfor %}
                 </ul>
             </li>
         {% endfor %}
     </ul>
-    <a class="btn btn-primary" href="{{ path('categ_add_admin') }}"> Ajouter une catégorie</a>
+    <a href="{{ path('categ_add_admin') }}"> Ajouter une catégorie</a>
 {% endblock %}

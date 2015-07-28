@@ -36,3 +36,5 @@ security:
         - { path: ^/admin/*, role: ROLE_ADMIN }
 
         - { path: ^/,  role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/commanduser, role: ROLE_USER }
+        - { path: ^/commandseller, role: ROLE_USER }

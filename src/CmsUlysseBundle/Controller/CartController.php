@@ -183,6 +183,8 @@ class CartController extends Controller
         $repo = $em->getRepository('CmsUlysseBundle:UserProduct');
         $products = json_decode($request->cookies->get('cart'));
 
+        $sellers = array();
+
         if ($products) {
             foreach ($products as $product) {
                 $dbproduct = $repo->find($product->id);
@@ -192,6 +194,18 @@ class CartController extends Controller
                     $product->price = $dbproduct->getPrice();
                     $product->stock = $dbproduct->getQty();
                     $product->seller = $dbproduct->getUser()->getFirstname() . ' ' . $dbproduct->getUser()->getLastName();
+
+                    $trouve = false;
+                    foreach ($sellers as $seller) {
+                        if ($seller === $dbproduct->getUser()->getId()) {
+                            $trouve = true;
+                            break;
+                        }
+                    }
+
+                    if (!$trouve) {
+                        $sellers[] = $dbproduct->getUser()->getId();
+                    }
                 }
             }
         }
@@ -202,38 +216,56 @@ class CartController extends Controller
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isValid()) {
+            foreach ($sellers as $seller) {
+                $userLivraison = $form->getData();
+                $repository = $em->getRepository('CmsUlysseBundle:State');
+                $state = $repository->find(1);
+                $commandProducts = array();
 
-            $userLivraison = $form->getData();
-            $repository = $em->getRepository('CmsUlysseBundle:State');
-            $state = $repository->find(1);
-            $commandProducts = array();
-
-            $command = new Command();
-            $command
-                ->setLastname($userLivraison->getLastname())
-                ->setFirstname($userLivraison->getFirstname())
-                ->setAddress($userLivraison->getAddress())
-                ->setCity($userLivraison->getCity())
-                ->setPostalcode($userLivraison->getPostalcode())
-                ->setState($state)
-                ->setSendAt(new \DateTime())
-                ->setUser($user)
-            ;
-
-            foreach($products as $product){
-                $userProduct = $repo->find($product->id);
-                $commandProduct = new CommandUserProduct();
-                $commandProduct
-                    ->setCommand($command)
-                    ->setProduct($userProduct)
-                    ->setQty($product->price)
+                $command = new Command();
+                $command
+                    ->setLastname($userLivraison->getLastname())
+                    ->setFirstname($userLivraison->getFirstname())
+                    ->setAddress($userLivraison->getAddress())
+                    ->setCity($userLivraison->getCity())
+                    ->setPostalcode($userLivraison->getPostalcode())
+                    ->setTel($userLivraison->getTel())
+                    ->setState($state)
+                    ->setAmount(0)
+                    ->setSendAt(new \DateTime())
+                    ->setUser($user)
                 ;
-                $commandProducts[] = $commandProduct;
-            }
 
-            $session = new Session();
-            $session->set('commandProducts', $commandProducts);
-            $session->set('command', $command);
+                $em->persist($command);
+                $em->flush();
+
+                $amount = 0;
+
+                foreach($products as $product){
+                    $userProduct = $repo->find($product->id);
+                    if ($userProduct->getUser()->getId() === $seller) {
+                        $commandProduct = new CommandUserProduct();
+                        $commandProduct
+                            ->setCommand($command)
+                            ->setProduct($userProduct)
+                            ->setQty($product->qty)
+                        ;
+                        $userProduct->setQty($product->stock - $product->qty);
+
+                        $em->persist($userProduct);
+                        $em->persist($commandProduct);
+
+                        $amount = $amount + $product->price;
+                    }
+                }
+
+                $command->setAmount($amount);
+                $em->persist($command);
+                $em->flush();
+            }
+            setcookie('cart');
+            unset($_COOKIE['cart']);
+            return $this->redirect($this->generateUrl('commands_user'));
         }
 
         return array(

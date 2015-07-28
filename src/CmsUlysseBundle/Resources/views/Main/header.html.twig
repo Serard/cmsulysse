@@ -1,4 +1,4 @@
-<div class=" header header-bottom">
+<div class=" header header-bottom" style="position:fixed;width: 100%;height:200px;zIndex:999;top: 30px;">
     <div class="wrap">
         <div class="header-bottom-left">
             <div class="logo">
@@ -119,3 +119,42 @@
 </div>
 </div>
 </div>
+
+{% block minimenu %}
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<!--link rel="stylesheet" href="css/common.min.css"-->
+<link rel="stylesheet" href="css/circle-menu.min.css">
+
+<nav id="c-circle-nav" class="c-circle-nav" style="display:none;">
+    <button id="c-circle-nav__toggle" class="c-circle-nav__toggle">
+        <span>Toggle</span>
+    </button>
+    <ul class="c-circle-nav__items">
+        <li class="c-circle-nav__item">
+            <a href="#" class="c-circle-nav__link">
+                <img src="img/house.svg" alt="">
+            </a>
+        </li>
+        <li class="c-circle-nav__item">
+            <a href="#" class="c-circle-nav__link">
+                <img src="img/shopping63.svg" alt="" class="svg">
+            </a>
+        </li>
+        <li class="c-circle-nav__item">
+            <a href="#" class="c-circle-nav__link">
+                <img src="img/pin.svg" alt="">
+            </a>
+        </li>
+        <li class="c-circle-nav__item">
+            <a class="c-circle-nav__link sh">
+                <img src="img/search.svg" alt="">
+            </a>
+        </li>
+        <li class="c-circle-nav__item">
+            <a href="#" class="c-circle-nav__link">
+                <img src="img/tools.svg" alt="">
+            </a>
+        </li>
+    </ul>
+</nav>
+{% endblock %}
