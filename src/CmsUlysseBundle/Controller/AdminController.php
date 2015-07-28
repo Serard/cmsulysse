@@ -41,11 +41,10 @@ class AdminController extends Controller
     {
         $repo = $this->getDoctrine()->getManager()->getRepository('CmsUlysseBundle:Category');
         $categories = $repo->findAll();
-        $repository = $this->getDoctrine()->getManager()->getRepository('CmsUlysseBundle:UserProduct');
-        $userProducts = $repository->findAll();
+        $products = $this->getReposProduct()->findAll();
 
         return array(
-            'userProducts' => $userProducts,
+            'products' => $products,
             'categories' => $categories,
             'context' => 'list_product'
         );

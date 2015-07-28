@@ -34,3 +34,7 @@ hwi_oauth_connect:
 
 facebook_login:
     pattern: /login/check-facebook
+
+lexik_translation_edition:
+    resource: "@LexikTranslationBundle/Resources/config/routing.yml"
+    prefix:   /translations

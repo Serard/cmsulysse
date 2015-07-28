@@ -11,7 +11,7 @@ parameters:
 
 framework:
     #esi:             ~
-    #translator:      { fallbacks: ["%locale%"] }
+    translator:      { fallbacks: fr }
     secret:          "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
@@ -95,3 +95,8 @@ fos_message:
     thread_class: CmsUlysseBundle\Entity\Thread
     message_class: CmsUlysseBundle\Entity\Message
 
+lexik_translation:
+    fallback_locale: fr      # (required) default locale to use
+    managed_locales: [fr, en]    # (required) locales that the bundle have to manage
+    grid_input_type: text     # define field type used in the grid (text|textarea)
+    grid_toggle_similar: false  # if "true", on the grid if a locale colunm is shown/hidden then similar locales columns will be shown/hidden too.
