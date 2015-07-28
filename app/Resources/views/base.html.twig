@@ -19,8 +19,23 @@
         {% endblock %}
         <style>
 
-            .grid-item { width: 200px; }
-            .grid-item--width2 { width: 400px; }
+            .fwslider{
+                margin-top: 20px !important;
+            }
+            #c-circle-nav__toggle{
+                transform: scale(0.65);
+                -webkit-transform: scale(0.65);
+            }
+            .svg path {
+                fill: #FFF !important;
+            }
+            .svg{
+                height:100%;
+                width:100%;
+                padding: 18% 18%;
+                margin-top:-2%
+            }
+
 
         </style>
 
@@ -212,7 +227,22 @@
         {% block header %}
             {%  include ':include:header.html.twig' %}
         {% endblock header %}
+        <section class="body">
+            {%  block slide %}{%  endblock %}
+            <div class="wrap">
+                <div class="section group">
+                    <div class="colonneA">
+                        {# render(controller('CmsUlysseBundle:Col:left')) #}
+                    </div>
+
         {% block body %}{% endblock body %}
+
+                    <div class="colonneC">
+                        {#  render(controller('CmsUlysseBundle:Col:right')) #}
+                    </div>
+                </div>
+            </div>
+        </section>
         {% block footer %}
             {%  include ':include:footer.html.twig' %}
         {% endblock footer %}
@@ -221,6 +251,8 @@
 
         {% block modal %}
         {% endblock %}
+
+        {% block minimenu %}{% endblock %}
 
         {% block javas %}
             {% javascripts
@@ -231,6 +263,112 @@
             <script src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
+        <script>
+            /* scroll header*/
+            $(function(){
+                $('.header-bottom').data('size','big');
+            });
 
+            $(window).scroll(function(){
+                if($(document).scrollTop() > 0)
+                {
+                    if($('.header-bottom').data('size') == 'big')
+                    {
+                        $('.header-bottom').data('size','small');
+                        $('.header-bottom').stop().animate({
+                            height:'120px',
+                            zIndex: 999,
+                            top:'0'
+                        },200);
+                        $('#c-circle-nav').fadeIn( "slow" );
+
+                        $('.tag-list').fadeOut( 100 );
+                        $('h2').fadeOut( "slow" );
+                        $('.menu').stop().animate({
+                            marginLeft: '10%'
+                        },200);
+                        $('.search').fadeOut("slow");
+
+                    }
+                }
+                else
+                {
+                    if($('.header-bottom').data('size') == 'small')
+                    {
+                        $('.header-bottom').data('size','big');
+                        $('.header-bottom').stop().animate({
+                            height:'200px',
+                            zIndex: 999,
+                            top: '30px'
+                        },400);
+                        $('.search').stop().animate({
+                            width: '50px',
+                            marginLeft: '0'
+                        },200);
+                        $('.search').fadeIn("slow");
+                        $('.menu').stop().animate({
+                            marginLeft: '0'
+                        },200);
+                        $('#c-circle-nav').fadeOut( "slow" );
+                        $('.tag-list').fadeIn( "slow" );
+                        $('h2').fadeIn( "slow" );
+                    }
+                }
+            });
+            $('.sh').click(function(){
+                $('.search').focus().toggle();
+                $('.search').stop().animate({
+                    width: '120px',
+                    marginLeft: '200px'
+                },200);
+            });
+
+            /* svg */
+            jQuery('img.svg').each(function(){
+                var $img = jQuery(this);
+                var imgID = $img.attr('id');
+                var imgClass = $img.attr('class');
+                var imgURL = $img.attr('src');
+
+                jQuery.get(imgURL, function(data) {
+                    // Get the SVG tag, ignore the rest
+                    var $svg = jQuery(data).find('svg');
+
+                    // Add replaced image's ID to the new SVG
+                    if(typeof imgID !== 'undefined') {
+                        $svg = $svg.attr('id', imgID);
+                    }
+                    // Add replaced image's classes to the new SVG
+                    if(typeof imgClass !== 'undefined') {
+                        $svg = $svg.attr('class', imgClass+' replaced-svg');
+                    }
+
+                    // Remove any invalid XML tags as per http://validator.w3.org
+                    $svg = $svg.removeAttr('xmlns:a');
+
+                    // Replace image with new SVG
+                    $img.replaceWith($svg);
+
+                }, 'xml');
+
+            });
+
+
+        </script>
+        <!--/* mini menu */-->
+        <script src="js/circleMenu.min.js"></script>
+
+        <!-- EXTERNAL SCRIPTS FOR CALLMENICK.COM, PLEASE DO NOT INCLUDE -->
+        <script src="js/githubIcons.js"></script>
+        <script src="js/carbonAd.js"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+            ga('create', 'UA-34160351-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+        <!-- /EXTERNAL SCRIPTS -->
     </body>
 </html>

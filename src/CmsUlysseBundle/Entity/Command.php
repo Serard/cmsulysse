@@ -4,6 +4,7 @@ namespace CmsUlysseBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Command
@@ -62,6 +63,18 @@ class Command
      * @ORM\Column(name="city", type="string", length=255)
      */
     private $city;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tel", type="string", length=255, nullable=true)
+     * @Assert\Regex(
+     *     pattern= "/^((\+|00)33\s?|0)[1-9](\s?\d{2}){4}$/",
+     *     match=true,
+     *     message="Rentrer un numéro de téléphone correct"
+     * )
+     */
+    private $tel;
 
     /**
      * @var \DateTime
@@ -192,7 +205,7 @@ class Command
      */
     public function getAddress()
     {
-        return $this->adress;
+        return $this->address;
     }
 
     /**
@@ -309,6 +322,29 @@ class Command
     }
 
     /**
+     * Set tel
+     *
+     * @param string $tel
+     * @return User
+     */
+    public function setTel($tel)
+    {
+        $this->tel = $tel;
+
+        return $this;
+    }
+
+    /**
+     * Get tel
+     *
+     * @return string
+     */
+    public function getTel()
+    {
+        return $this->tel;
+    }
+
+    /**
      * Add products
      *
      * @param CommandUserProduct $products
@@ -316,7 +352,7 @@ class Command
      */
     public function addProduct(CommandUserProduct $products)
     {
-        $this->products[] = $products;
+        $this->commandUserProducts[] = $products;
 
         return $this;
     }
@@ -328,7 +364,7 @@ class Command
      */
     public function removeProduct(CommandUserProduct $products)
     {
-        $this->products->removeElement($products);
+        $this->commandUserProducts->removeElement($products);
     }
 
     /**
@@ -338,7 +374,7 @@ class Command
      */
     public function getProducts()
     {
-        return $this->products;
+        return $this->commandUserProducts;
     }
 
 }

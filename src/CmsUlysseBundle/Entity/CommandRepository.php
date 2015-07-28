@@ -12,4 +12,29 @@ use Doctrine\ORM\EntityRepository;
  */
 class CommandRepository extends EntityRepository
 {
+    public function findUserCommands($id)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->where('c.user = :id')
+           ->setParameter('id', $id)
+           ->orderBy('c.sendAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findSellerCommands($id)
+    {
+        $qb = $this->createQueryBuilder('c');
+        $qb->join('c.commandUserProducts', 'cup')
+           ->addSelect('cup')
+           ->join('cup.product', 'up')
+           ->addSelect('up')
+           ->join('up.user', 'u')
+           ->addSelect('u')
+           ->where('u.id = :id')
+           ->setParameter('id', $id)
+           ->orderBy('c.sendAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
 }

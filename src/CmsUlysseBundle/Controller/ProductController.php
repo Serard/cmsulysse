@@ -16,6 +16,7 @@ class ProductController extends Controller
 {
     /**
      * @Route("/product", name="product_list")
+     *
      * @Template()
      */
     public function indexAction()
@@ -124,17 +125,5 @@ class ProductController extends Controller
         return $this->redirect($this->generateUrl("product_list"));
 
     }
-
-    /**
-     * @Route("/product/search")
-     * @Template()
-     */
-    public function searchAction(Request $request)
-    {
-        //$research = $_POST['suguest'];
-
-        //retrun $id;
-    }
-
 
 }

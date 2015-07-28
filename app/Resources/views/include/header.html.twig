@@ -1,4 +1,4 @@
-<div class="body header-top">
+<div class="body header-top" >
     <div class="wrap">
         <div class="header-top-left">
             <div class="clear"></div>
@@ -9,16 +9,19 @@
                     <li><a href="{{ path('index_admin') }}">Config du site</a></li>
                 {% endif %}
                 {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-                <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
+                    <li><a href="{{ path('commands_user') }}">Mes Achats</a></li>
+                    <li><a href="{{ path('commands_seller') }}">Mes Ventes</a></li>
+                    <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                 {%  else %}
-                <li><a href="{{ path('fos_user_security_login') }}">Log In</a></li> |
-                <li><a href="{{ path('fos_user_registration_register') }}">Sign Up</a></li>
+                    <li><a href="{{ path('fos_user_security_login') }}">Log In</a></li> |
+                    <li><a href="{{ path('fos_user_registration_register') }}">Sign Up</a></li>
                 {% endif %}
             </ul>
         </div>
         <div class="clear"></div>
     </div>
 </div>
+<div style="padding-bottom: 194px;" class='.header'></div>
 
 {% block headerContent %}
     {%  render(controller('CmsUlysseBundle:Header:list')) %}

@@ -18,7 +18,7 @@ class CommandType extends AbstractType
             ->add('postal_code', null, array('label' => 'Code postal'))
             ->add('city', null, array('label' => 'Ville'))
             ->add('tel', null, array('label' => 'Téléphone'))
-            ->add('btn', 'submit', array('label' => 'Payer'))
+            ->add('btn', 'submit', array('label' => 'Valider'))
         ;
         return $builder;
     }

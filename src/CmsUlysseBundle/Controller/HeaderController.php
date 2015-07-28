@@ -168,7 +168,7 @@ class HeaderController extends Controller
         }
         /* custom style header*/
         $background_color_header='';
-        $background_color_header=($background_color_header == '' && $global_color != '')? hex2rgba($background_color_header,$global_color,false,'#FFFFFF'):$background_color_header;
+        $background_color_header=($background_color_header == '' && $global_color != '')? hex2rgba($background_color_header,$global_color,false):$background_color_header;
         $background_color_header=(trim($background_color_header)==''||strtoupper($background_color_header[0])=='R')?$background_color_header:hex2rgba($background_color_header);
 
         $background_img_header='';
