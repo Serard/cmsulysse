@@ -67,8 +67,11 @@ class MessageController extends BaseController
      */
     public function newThreadAction()
     {
+        $user = $this->container->get('security.context')->getToken()->getUser();
         $form = $this->container->get('fos_message.new_thread_form.factory')->create();
         $formHandler = $this->container->get('fos_message.new_thread_form.handler');
+
+        $data = $form->getData();
 
         if ($message = $formHandler->process($form)) {
 
@@ -88,6 +91,7 @@ class MessageController extends BaseController
         }
 
         return array(
+            'user' => $user,
             'form' => $form->createView(),
             'data' => $form->getData()
         );
@@ -167,5 +171,41 @@ class MessageController extends BaseController
         $this->container->get('mailer')->send($message);
         return $this;
     }
+
+
+
+
+/**
+ * @Route("/contact/{id}", name="cms_messagerie_contact")
+ * @Template("CmsUlysseBundle:Message:contact.html.twig")
+ */
+public function contactAction(User $user)
+{
+    $form = $this->container->get('fos_message.new_thread_form.factory')->create();
+    $formHandler = $this->container->get('fos_message.new_thread_form.handler');
+
+    if ($message = $formHandler->process($form)) {
+
+        $threadId = $message->getThread()->getId();
+
+        $thread = $message->getThread();
+        $user = $thread->getCreatedBy();
+        $body = $thread->getFirstMessage();
+        $subject = $thread->getSubject();
+        $receipients = $thread->getOtherParticipants($user);
+        $receipient = $receipients[0];
+        $this->mailNewThread($user, $receipient, $subject, $thread, $message);
+
+        return new RedirectResponse($this->container->get('router')->generate('cms_messagerie_thread_view', array(
+            'threadId' => $threadId
+        )));
+    }
+
+    return array(
+        'user' => $user,
+        'form' => $form->createView(),
+        'data' => $form->getData()
+    );
+}
 
 }

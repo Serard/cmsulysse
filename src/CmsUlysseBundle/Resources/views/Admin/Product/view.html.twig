@@ -6,7 +6,7 @@
     <h1 style="color: #003366">Produit : {{ product.name }}</h1>
 
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-8">
             <div style="color: dimgrey">
                 {{ product.description }}
             </div>
@@ -15,13 +15,7 @@
                 <img style="height: 200px;" src="{{ asset(picture.getWebPath())}}" />
             {% endfor %}
         </div>
-        <div class="well well-lg col-lg-4">
-            <p>Vendu par : toto</p>
-            <p>Au pris de : 10 euros</p>
-            <p>Quantité : 55 </p>
-            <a class="btn btn-success" href="" >Contacter</a>
-        </div>
-    </div>
+
 
     {% if product.specifications | length > 0  %}
         <div class="col-lg-6">
@@ -46,4 +40,15 @@
             </table>
         </div>
     {% endif %}
+    </div>
+    <div class="row">
+        {% for userProduct in userProducts %}
+            <div class="well well-lg col-lg-4">
+                <p>Vendu par : {{ userProduct.user.firstName }} {{ userProduct.user.lastName }}</p>
+                <p>Prix: {{ userProduct.price }}</p>
+                <p>Quantité : {{ userProduct.qty }} </p>
+                <a class="btn btn-success" href="{{ path('cms_messagerie_contact', {'id': userProduct.user.id}) }}" >Contacter</a>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
