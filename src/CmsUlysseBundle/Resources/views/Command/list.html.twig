@@ -1,0 +1,79 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ title }}</h1>
+    <p>Liste des status</p>
+    <ul>
+    {% for state in states %}
+        <li>{{ loop.index }} . {{ state.name }}</li>
+    {% endfor %}
+    </ul>
+    <br>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <td>Adresse de livraison</td>
+            <th>Prix</th>
+            <th>
+                {% if title == 'Mes Achats' %}
+                    Vendeur / Numéro
+                {% else %}
+                    Acheteur / Numéro
+                {% endif %}
+            </th>
+            <th>Statut</th>
+            <th>Action</th>
+            <th></th>
+        </tr>
+        {% for command in commands %}
+            <tr>
+                <td>{{ command.id }}</td>
+                <td>{{ command.lastname }} {{ command.firstname }} {{ command.address }} {{ command.postalcode }} {{ command.city }}</td>
+                <td>{{ command.amount }} €</td>
+                <td>{{ users[loop.index - 1] }} / {{ numbers[loop.index - 1] }}</td>
+                <td>{{ command.sendAt | date("d/m/Y")}} : {{ command.state.name }}</td>
+                <td>
+                    {% if title == 'Mes Achats' %}
+                        {% if command.state.id == 1 %}
+                            <form action="{{ path('command_buy') }}" method="POST">
+                                <input type="hidden" name="id" value="{{ command.id }}">
+                                <input type="submit" class="btn btn-warning" value="J'ai payé">
+                            </form>
+                        {% elseif command.state.id == 2 %}
+                            <p>En attente d'envoie</p>
+                        {% elseif command.state.id == 3 %}
+                            <form action="{{ path('command_received') }}" method="POST">
+                                <input type="hidden" name="id" value="{{ command.id }}">
+                                <input type="submit" class="btn btn-success" value="J'ai reçu">
+                            </form>
+                        {% else %}
+                            <p>Commande reçue</p>
+                        {% endif %}
+                    {% else %}
+                        {% if command.state.id == 1 %}
+                            <p>En attente de paiement</p>
+                        {% elseif command.state.id == 2 %}
+                            <form action="{{ path('command_send') }}" method="POST">
+                                <input type="hidden" name="id" value="{{ command.id }}">
+                                <input type="submit" class="btn btn-warning" value="J'ai envoyé">
+                            </form>
+                        {% elseif command.state.id == 3 %}
+                            <p>En attente de reçu</p>
+                        {% else %}
+                            <p>Commande reçue</p>
+                        {% endif %}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if title == 'Mes Achats' %}
+                        <a href="{{ path('command_user_view', {'id': command.id}) }}" class="btn btn-info">Détail</a>
+                    {% else %}
+                        <a href="{{ path('command_seller_view', {'id': command.id}) }}" class="btn btn-info">Détail</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

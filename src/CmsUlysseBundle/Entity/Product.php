@@ -72,6 +72,28 @@ class Product
     private $valid;
 
     /**
+     * @Assert\File(
+     *     maxSize = "1024k",
+     *
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png", "image/gif"},
+     *     mimeTypesMessage = "Choisissez un fichier image valide"
+     * )
+     */
+    private $file;
+
+    /**
+     * @var string
+     */
+    private $tmpImage;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_valid", type="boolean", nullable=false)
+     */
+    private $isValid=false;
+
+    /**
      * @ORM\ManyToOne(targetEntity="State", inversedBy="commands")
      * @ORM\JoinColumn(name="state_id", referencedColumnName="id")
      */
@@ -250,7 +272,7 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return $valid
      */
     public function getValid()
     {
@@ -259,7 +281,7 @@ class Product
 
     /**
      * @param $valid
-     * @return $this
+     * @return Product
      */
     public function setValid($valid)
     {
