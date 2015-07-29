@@ -17,6 +17,8 @@ class SiteType extends AbstractType
             ->add('body_color')
             ->add('header_color')
             ->add('icone_color')
+            ->add('text_color_body')
+            ->add('text_color_header')
             ->add('footer')
             ->add('position_menu','choice', array(
                 'choices' => array(
