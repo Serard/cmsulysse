@@ -38,3 +38,6 @@ body{
 .btn{
     z-index: 0 !important;
 }
+.product_image{
+    background-size: cover !important;
+}
