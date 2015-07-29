@@ -7,7 +7,7 @@
         <div class="inner_content clearfix">
             <a href="{{ path('product_user_view', {id: userproduct.id}) }}">
                 <div class="product_image"
-                    {% for picture in product.pictures %}
+                    {% for picture in userproduct.product.pictures %}
                         {% if loop.index ==1 %}
                             style="background: url({{ asset(picture.getWebPath()) }});">
                         {% endif %}

@@ -38,12 +38,11 @@
                     <ul class="sub-icon1 list">
                         <li><h3>user</h3></li>
                         {% if is_granted("IS_AUTHENTICATED_REMEMBERED")%}
-                            <li><a class="list-group-item" href="{#{ path('user_updated') }#}">&nbsp; info</a></li>
-                            <li><a class="list-group-item" href="{#{ path('user_command') }#}">&nbsp; command</a></li>
-                            <li><a class="list-group-item" href="{#{ path('vente_user') }#}">&nbsp; sell</a></li>
-                            <li><a class="list-group-item" href="#">&nbsp; Settings</a></li>
+                            <li><a class="list-group-item" href="{{ path('user_update') }}">&nbsp; Infos Personnelles</a></li>
+                            <li><a class="list-group-item" href="{{ path('commands_user') }}">&nbsp; Suivie de mes commandes</a></li>
+                            <li><a class="list-group-item" href="{{ path('commands_seller') }}">&nbsp; Suivie de mes ventes</a></li>
                             <li><a class="list-group-item" href="{{ path('cms_messagerie_inbox') }}">&nbsp;Messagerie</a></li>
-                            <li><a href="">Déconnexion</a></li>
+                            <li><a class="list-group-item" href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                         {%  else %}
                             <li><center><a class="btn btn-primary btn-large" href="{{ path('fos_user_security_login') }}">Log In</a></center></li>
                             <li><center><a class="btn btn-primary btn-large" href="{{ path('fos_user_registration_register') }}">Sign Up</a></center></li>
@@ -86,30 +85,38 @@
     </button>
     <ul class="c-circle-nav__items">
         <li class="c-circle-nav__item">
-            <a href="#" class="c-circle-nav__link">
+            <a href="{{ path('home') }}" class="c-circle-nav__link">
                 <img src="{{ asset('img/house.svg') }}" alt="">
             </a>
         </li>
         <li class="c-circle-nav__item">
-            <a href="#" class="c-circle-nav__link">
+            <a href="{{ path('user_product_list') }}" class="c-circle-nav__link">
                 <img src="{{ asset('img/shopping63.svg') }}" alt="" class="svg">
             </a>
         </li>
         <li class="c-circle-nav__item">
-            <a href="#" class="c-circle-nav__link">
+            <a href="{{ path('commands_user') }}" class="c-circle-nav__link">
                 <img src="{{ asset('img/pin.svg') }}" alt="">
             </a>
         </li>
         <li class="c-circle-nav__item">
-            <a class="c-circle-nav__link sh">
+            <a href="commands_seller" class="c-circle-nav__link sh">
                 <img src="{{ asset('img/search.svg') }}" alt="">
             </a>
         </li>
-        <li class="c-circle-nav__item">
-            <a href="#" class="c-circle-nav__link">
-                <img src="{{ asset('img/tools.svg') }}" alt="">
-            </a>
-        </li>
+        {% if is_granted('ROLE_ADMIN') %}
+            <li class="c-circle-nav__item">
+                <a href="{{ path('index_admin') }}" class="c-circle-nav__link">
+                    <img src="{{ asset('img/tools.svg') }}" alt="">
+                </a>
+            </li>
+        {% else %}
+            <li class="c-circle-nav__item">
+                <a href="{{ path('contact_admin') }}" class="c-circle-nav__link">
+                    <img src="{{ asset('img/tools.svg') }}" alt="">
+                </a>
+            </li>
+        {% endif %}
     </ul>
 </nav>
 {% endblock %}

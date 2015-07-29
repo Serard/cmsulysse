@@ -3,14 +3,77 @@
 {% block title %}CmsUlysseBundle:User:update{% endblock %}
 
 {% block body %}
-<h1>Welcome to the User:update page</h1>
-    {% for label,messages in app.session.flashbag.all %}
-        {% for message in messages %}
-            <div class="alert alert-{{ label }}" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {{ form(form) }}
-    <a href="{{ path('user_homepage') }}"> Retour</a>
+    <a href="#"><strong> Modifier votre compte</strong></a>
+    <hr>
+    <div class="row col-lg-8">
+        <form class="form-horizontal" action="{{ path('product_add_admin') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
+            <section class="form-group">
+                {{ form_label(form.email, "Email", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.email, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.email) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.firstname, "Prénom", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.firstname) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.lastname, "Nom", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.lastname) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.address, "Adresse", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.address, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.address) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.postal_code, "Code Postale", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.postal_code, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.postal_code) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.city, "Ville", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.city, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.city) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.tel, "Téléphone", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.tel, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.tel) }}
+            </section>
+            <br>
+            <a href="#"><strong> Modifier le mot de passe</strong></a>
+            <hr>
+            {% for pass in form.plainPassword %}
+                <section class="form-group">
+                    {{ form_label(pass, null, {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                    <div class="col-sm-10">
+                        {{ form_widget(pass, {'attr': {'class': 'form-control'}} ) }}
+                    </div>
+                    {{ form_errors(pass) }}
+                </section>
+            {% endfor %}
+
+            {{ form_rest(form) }}
+            <br>
+            <a class="btn btn-warning" href="{{ path('home') }}"> Retour</a>
+
+        </form>
+    </div>
+
 {% endblock %}
