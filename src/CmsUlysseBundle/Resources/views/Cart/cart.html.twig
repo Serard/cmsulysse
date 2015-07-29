@@ -44,11 +44,62 @@
 
     <button id="command" onclick="formOrder();" class="btn btn-success">Commander</button>
 
-    <div id="order" style="display:none">
-        <h1>Adresse de Livraison:</h1>
-        {{ form(form) }}
+
+    <div id="order" class="col-lg-6" style="display:none">
+        <h1 style="color: #003366;">Adresse de Livraison:</h1>
+        <hr>
+        <form class="form-horizontal" action="{{ path('user_cart') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
+            <section class="form-group">
+                {{ form_label(form.lastname, "Nom", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.lastname) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.firstname, "Prénom", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.firstname) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.address, "Adresse", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.address, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.address) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.postal_code, "Code Postal", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.postal_code, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.postal_code) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.city, "Ville", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.city, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.city) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.tel, "Ville", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.tel, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.tel) }}
+            </section>
+            {{ form_widget(form.btn) }}
+            <div style="display: none">
+                {{ form_row(form) }}
+            </div>
+            <a class="btn btn-warning" href="{{ path('home') }}">Retour</a>
+        </form>
+
     </div>
 
-    <a href="{{ path('home') }}">Retour</a>
+
 
 {% endblock %}

@@ -38,6 +38,9 @@ body{
 .btn{
     z-index: 0 !important;
 }
+
 .product_image{
     background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
 }

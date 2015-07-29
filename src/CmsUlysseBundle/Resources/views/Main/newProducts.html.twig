@@ -6,7 +6,14 @@
         <div class="chg card col_1_of_3 span_1_of_3">
                 <div class="inner_content clearfix">
                     <a href="{{ path('product_user_view', {id: product.minPrice.id}) }}">
-                        <div class="product_image" style="background: url('http://bliister.com/upload/thumb/no_img.jpg');">
+                        <div class="product_image"
+                            {% for picture in product.pictures %}
+                                {% if loop.index ==1 %}
+                                 style="background: url({{ asset(picture.getWebPath()) }});">
+                                {% endif %}
+                            {% else %}
+                                 style="background: url('http://bliister.com/upload/thumb/no_img.jpg');">
+                            {% endfor %}
                         </div>
                     </a>
                     <div class="sale-box"><span class="on_sale title_shop">New</span></div>
