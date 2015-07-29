@@ -3,13 +3,21 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block body %}
-    <h1>{{ title }}</h1>
-    <p>Liste des status</p>
-    <ul>
-    {% for state in states %}
-        <li>{{ loop.index }} . {{ state.name }}</li>
-    {% endfor %}
-    </ul>
+    <h1 style="color: #003366">{{ title }}</h1>
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-2">
+            <p>Liste des status</p>
+        </div>
+        <div class="col-lg-3">
+            <ul class="list-group">
+                {% for state in states %}
+                    <li>{{ loop.index }} . {{ state.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
     <br>
     <table class="table">
         <tr>
