@@ -14,7 +14,10 @@ class SiteType extends AbstractType
             ->add('name')
             ->add('slogan')
             ->add('file')
-            ->add('theme_color')
+            ->add('body_color')
+            ->add('header_color')
+            ->add('icone_color')
+            ->add('footer')
             ->add('position_menu','choice', array(
                 'choices' => array(
                     '0' => 'haut de la page',

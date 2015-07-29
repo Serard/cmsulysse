@@ -67,11 +67,14 @@
                     {% endif %}
                 </td>
                 <td>
+                    {% set idUser =  idUsers[loop.index - 1] %}
                     {% if title == 'Mes Achats' %}
                         <a href="{{ path('command_user_view', {'id': command.id}) }}" class="btn btn-info">Détail</a>
                     {% else %}
                         <a href="{{ path('command_seller_view', {'id': command.id}) }}" class="btn btn-info">Détail</a>
                     {% endif %}
+                    <a class="btn btn-primary" href="{{ path('cms_messagerie_contact', {'id': idUser }) }}">Contacter</a>
+
                 </td>
             </tr>
         {% endfor %}

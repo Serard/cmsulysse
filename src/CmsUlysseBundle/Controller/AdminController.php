@@ -6,6 +6,7 @@ use CmsUlysseBundle\Entity\Product;
 use CmsUlysseBundle\Entity\Site;
 use CmsUlysseBundle\Entity\Slider;
 use CmsUlysseBundle\Form\Type\AdminProductType;
+use CmsUlysseBundle\Form\Type\CommunityManagerType;
 use CmsUlysseBundle\Form\Type\SliderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -103,13 +104,27 @@ class AdminController extends Controller
      * @Route("/modules", name="modules_admin")
      * @Template("CmsUlysseBundle:Admin:Module/index.html.twig")
      */
-    public function modulesAction()
+    public function modulesAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CmsUlysseBundle:Site');
         $site = $repository->findOneBy(array());
 
-        return array('site' => $site);
+        $form = $this->createForm(new CommunityManagerType(), $site);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $slider = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($slider);
+            $em->flush();
+        }
+
+        return array(
+            'site' => $site,
+            'form' => $form->createView(),
+        );
     }
 
     /**
@@ -180,6 +195,18 @@ class AdminController extends Controller
     public function activeBestProductAction(Site $site)
     {
         $site->setBestProduct(!$site->getBestProduct());
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('modules_admin');
+    }
+
+    /**
+     * @Route("/config/communityManager/{id}/edit", name="active_cm_admin")
+     * @Template()
+     */
+    public function activeCmAction(Site $site)
+    {
+        $site->setCmActive(!$site->getCmActive());
         $this->getDoctrine()->getManager()->flush();
 
         return $this->redirectToRoute('modules_admin');

@@ -34,4 +34,20 @@ class UserProductRepository extends EntityRepository
 
         return $qb->getQuery()->getResult();
     }
+
+    public function findBestProduct($limit = 10)
+    {
+        $qb = $this->createQueryBuilder('u');
+        $qb->join('u.product', 'p')
+            ->addSelect('p')
+            ->leftJoin('up.commands', 'cd')
+            ->andWhere("up.id is not null")
+            ->groupBy('p')
+            ->orderBy(count('p'))
+        ;
+
+        if($limit != null){
+            $qb->setMaxResults($limit);
+        }
+    }
 }

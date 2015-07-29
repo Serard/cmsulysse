@@ -130,7 +130,7 @@ class HeaderController extends Controller
 
 
 
-        $global_color = $siteVal['themeColor'];//'#00007A';
+        $global_color = $siteVal['bodyColor'];//'#00007A';
 
 
         /* custom style colonne*/

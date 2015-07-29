@@ -179,7 +179,6 @@ class CartController extends Controller
     public function cartAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
         $repo = $em->getRepository('CmsUlysseBundle:UserProduct');
         $products = json_decode($request->cookies->get('cart'));
 
@@ -217,6 +216,7 @@ class CartController extends Controller
 
         if ($request->isMethod('POST') && $form->isValid()) {
             foreach ($sellers as $seller) {
+
                 $userLivraison = $form->getData();
                 $repository = $em->getRepository('CmsUlysseBundle:State');
                 $state = $repository->find(1);
@@ -243,7 +243,7 @@ class CartController extends Controller
 
                 foreach($products as $product){
                     $userProduct = $repo->find($product->id);
-                    if ($userProduct->getUser()->getId() === $seller) {
+                    if ($userProduct->getUser()->getId() == $seller) {
                         $commandProduct = new CommandUserProduct();
                         $commandProduct
                             ->setCommand($command)
@@ -258,7 +258,6 @@ class CartController extends Controller
                         $amount = $amount + $product->price;
                     }
                 }
-
                 $command->setAmount($amount);
                 $em->persist($command);
                 $em->flush();

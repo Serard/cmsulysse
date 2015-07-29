@@ -11,7 +11,8 @@
 {% else %}
     {% block fos_message_content %}
 
-    <h2>Messages Envoyés</h2>
+        <h2 style="color: #003366;">Messages Envoyés</h2>
+        <hr>
 
     {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
 

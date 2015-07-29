@@ -17,27 +17,54 @@ class LoadProductCategoriesData extends AbstractFixture implements OrderedFixtur
         $productCategories = array(
             array(
                 'product' => $this->getReference('product-Iphone 1'),
-                'category' => $this->getReference('category-Apple'),
+                'category' => $this->getReference('category-Iphone'),
+            ),
+            array(
+                'product' => $this->getReference('product-Iphone 1'),
+                'category' => $this->getReference('category-Téléphone'),
             ),
             array(
                 'product' => $this->getReference('product-Iphone 2'),
-                'category' => $this->getReference('category-Apple'),
+                'category' => $this->getReference('category-Iphone'),
+            ),
+            array(
+                'product' => $this->getReference('product-Iphone 2'),
+                'category' => $this->getReference('category-Téléphone'),
             ),
             array(
                 'product' => $this->getReference('product-Iphone 3'),
-                'category' => $this->getReference('category-Apple'),
+                'category' => $this->getReference('category-Iphone'),
+            ),
+
+            array(
+                'product' => $this->getReference('product-Iphone 3'),
+                'category' => $this->getReference('category-Téléphone'),
             ),
             array(
                 'product' => $this->getReference('product-Iphone 4'),
-                'category' => $this->getReference('category-Apple'),
+                'category' => $this->getReference('category-Iphone'),
+            ),
+
+            array(
+                'product' => $this->getReference('product-Iphone 4'),
+                'category' => $this->getReference('category-Téléphone'),
             ),
             array(
                 'product' => $this->getReference('product-Iphone 5 S'),
-                'category' => $this->getReference('category-Apple'),
+                'category' => $this->getReference('category-Iphone'),
+            ),
+
+            array(
+                'product' => $this->getReference('product-Iphone 5 S'),
+                'category' => $this->getReference('category-Téléphone'),
             ),
             array(
                 'product' => $this->getReference('product-Iphone 6'),
-                'category' => $this->getReference('category-Apple'),
+                'category' => $this->getReference('category-Iphone'),
+            ),
+            array(
+                'product' => $this->getReference('product-Iphone 6'),
+                'category' => $this->getReference('category-Téléphone'),
             ),
             array(
                 'product' => $this->getReference('product-Un amour de jeunesse'),

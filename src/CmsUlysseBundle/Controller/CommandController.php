@@ -27,10 +27,12 @@ class CommandController extends Controller
 
         $users   = array();
         $numbers = array();
+        $idUsers  = array();
         foreach ($commands as $command) {
             foreach ($command->getProducts()->getValues() as $product) {
                 $users   [] = $product->getProduct()->getUser()->getFirstName().' '.$product->getProduct()->getUser()->getLastName();
                 $numbers [] = $product->getProduct()->getUser()->getTel();
+                $idUsers      [] = $product->getProduct()->getUser()->getId();
                 break;
             }
         }
@@ -41,6 +43,7 @@ class CommandController extends Controller
             'commands' => $commands,
             'users'    => $users,
             'numbers'  => $numbers,
+            'idUsers'   => $idUsers,
         );
     }
 
@@ -100,9 +103,11 @@ class CommandController extends Controller
 
         $users   = array();
         $numbers = array();
+        $idUsers     = array();
         foreach ($commands as $command) {
             $users   [] = $command->getUser()->getFirstName().' '.$command->getUser()->getLastName();
             $numbers [] = $command->getUser()->getTel();
+            $idUsers[] = $command->getUser()->getId();
         }
 
         return array(
@@ -111,6 +116,7 @@ class CommandController extends Controller
             'commands' => $commands,
             'users'    => $users,
             'numbers'  => $numbers,
+            'idUsers'  => $idUsers,
         );
     }
 

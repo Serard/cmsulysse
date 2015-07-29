@@ -376,5 +376,4 @@ class Command
     {
         return $this->commandUserProducts;
     }
-
 }
