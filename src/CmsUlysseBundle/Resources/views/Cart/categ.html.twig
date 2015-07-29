@@ -116,37 +116,6 @@
             setCookie('cart',JSON.stringify(cart),3);
         };
 
-        var url      = '{{ path('search_cart') }}';
-        var redirUrl = '{{ path('market_cart') }}';
-
-
-        var search = {};
-        search.attribute = document.getElementById('search');
-
-
-        search.request = function(data){$.post( url, data ,function(response) {
-                document.getElementById('results').innerHTML = response;
-            })
-            .done(function() {
-                console.log( "second success" );
-            })
-            .fail(function() {
-                console.log( "error" );
-            })
-            .always(function() {
-                console.log( "complete" );
-             })
-            .complete(function() {
-                console.log("second complete");
-            });
-        };
-
-        $(search.attribute).keyup(function() {
-            var data={};
-            data.search= search.attribute.value;
-            search.request(data);
-        });
-
         $('select').change(function(){
             var category = $("select option:selected").text();
             var id = document.getElementById(category).getAttribute("name");

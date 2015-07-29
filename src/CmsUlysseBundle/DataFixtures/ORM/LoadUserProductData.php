@@ -80,6 +80,20 @@ class LoadUserProductData extends AbstractFixture implements OrderedFixtureInter
                 'qty' => 6,
                 'state' => true,
             ),
+            array(
+                'product' => $this->getReference('product-La boite à musique'),
+                'user' => $this->getReference('stephane.erard@free.fr'),
+                'price' => 15,
+                'qty' => 80,
+                'state' => true,
+            ),
+            array(
+                'product' => $this->getReference('product-Un amour de jeunesse'),
+                'user' => $this->getReference('stephane.erard@free.fr'),
+                'price' => 15,
+                'qty' => 80,
+                'state' => true,
+            ),
         );
 
         $this->persistUserProducts($UserProducts, $manager);

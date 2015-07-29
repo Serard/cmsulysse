@@ -189,19 +189,21 @@ class ProductController extends Controller
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('CmsUlysseBundle:Product');
         $product = $repo->find($request->get('id'));
-        $user = $this->container->get('security.context')->getToken()->getUser();
 
         $form = $this->createForm(new UserProductType(), new UserProduct());
         $form->add('btn', 'submit', array('label' => 'Valider'));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->container->get('security.context')->getToken()->getUser();
             $userProduct = $form->getData();
             $userProduct->setUser($user)
                         ->setProduct($product);
 
             $em->persist($userProduct);
             $em->flush();
+
+            return $this->redirect($this->generateUrl('user_product_list'));
         }
 
         return array(

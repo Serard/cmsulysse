@@ -71,7 +71,6 @@ class CartController extends Controller
 
         $products = array();
         if ($categories) {
-            $save = array();
             foreach($categories as $entity) {
                 $dbproducts = $em->getRepository('CmsUlysseBundle:UserProduct')
                                  ->findSearchProducts(null, $entity->getId());
@@ -210,8 +209,7 @@ class CartController extends Controller
         }
         $user = $this->get('security.context')->getToken()->getUser();
 
-        $userType = new CommandType();
-        $form = $this->createForm($userType, $user);
+        $form = $this->createForm(new CommandType(), $user);
         $form->handleRequest($request);
 
         if ($request->isMethod('POST') && $form->isValid()) {
