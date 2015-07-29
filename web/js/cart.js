@@ -131,6 +131,6 @@ $('select').change(function(){
     if (id == "0") {
         location.href=redirUrl;
     } else {
-        location.href=redirUrl+'category/'+id;
+        location.href=redirUrl+'market/category/'+id;
     }
 })
