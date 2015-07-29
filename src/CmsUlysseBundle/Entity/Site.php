@@ -152,6 +152,13 @@ class Site
      */
     private $footer;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nuggets", type="boolean")
+     */
+    private $nuggets;
+
     public function __toString()
     {
         return $this->getName();
@@ -542,4 +549,21 @@ class Site
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getNuggets()
+    {
+        return $this->nuggets;
+    }
+
+    /**
+     * @param $nuggets
+     * @return $this
+     */
+    public function setNuggets($nuggets)
+    {
+        $this->nuggets = $nuggets;
+        return $this;
+    }
 }
