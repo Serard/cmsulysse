@@ -5,8 +5,8 @@
 {% block body %}
     <h1 style="color: #003366;">Mes produits</h1>
     <hr>
-    <a href="{{ path('product_list') }}" type="button" class="btn btn-primary">Liste des produits à vendre</a>
-    <a href="{{ path('product_add') }}" type="button" class="btn btn-primary">Ajouter un Produit à vendre</a>
+    <a href="{{ path('product_list') }}" type="button" class="btn btn-info">Liste des produits à vendre</a>
+    <a href="{{ path('product_add') }}" type="button" class="btn btn-info">Ajouter un Produit à vendre</a>
 
 
     {{ include('CmsUlysseBundle:Cart:search.html.twig', {'products' : products}) }}
