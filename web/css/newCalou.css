@@ -38,3 +38,20 @@ body{
 .btn{
     z-index: 0 !important;
 }
+.header-bottom-right{
+    width: calc(100% - 58% - 25px);
+}
+#select{
+    display: none;
+    visibility: hidden;
+}
+.search:hover #select
+,.search:focus #select
+,.search:active #select
+,#select:hover
+,#select:active
+,#select:focus
+{
+    display: block;
+    visibility: visible;
+}
