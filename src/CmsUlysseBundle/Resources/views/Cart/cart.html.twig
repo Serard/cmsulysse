@@ -99,7 +99,12 @@
         </form>
 
     </div>
+    <script>
+        var cart = getCookie('cart')!="" ? JSON.parse(getCookie('cart')) : new Array();
 
-
+        for(var i = 0; i < cart.length; i++) {
+            updateCart(cart[i].id);
+        };
+    </script>
 
 {% endblock %}
