@@ -1,0 +1,36 @@
+{% extends ":Admin:base.html.twig" %}
+
+{% block body_content %}
+    <a href="#"><strong>Liste des Utilisateurs</strong></a>
+
+    <hr>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Role</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Ville/Pays</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            <tr>
+                <th>{{ user.id }}</td>
+                <th>{% for role in user.roles %}{{ role }} {% endfor %}</th>
+                <td>{{ user.firstName }}</td>
+                <td>{{ user.lastName }}</td>
+                <td>{{ user.city }} / {{ user.country }}</td>
+                <td>
+                    <a href="{{ path('user_view', {'id': user.id }) }}" class="btn btn-primary">Voir</a>
+                    <a href="{{ path('desactive_user', {'id': user.id }) }}" class="btn btn-warning">
+                        {{ user.isEnabled ? 'Désactiver' : 'Réactiver' }}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
