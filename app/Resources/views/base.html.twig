@@ -52,7 +52,9 @@
             body{
                 color:black;
             }
-
+            .btn{
+                z-index: 0 !important;
+            }
 
         </style>
 
@@ -249,7 +251,7 @@
             <div class="wrap">
                 <div class="section group">
                     <div class="colonneA">
-                        <div id="in" style="padding-top:1px"></div>
+                        <div id="in" style="padding:2px 10px 10px 10px"></div>
 
                         <script>
                             $(document).ready(function(){
@@ -265,7 +267,7 @@
                         {% block body %}{% endblock body %}
                     </div>
 
-                    <div class="colonneC" style="padding-top:1px">
+                    <div class="colonneC" style="padding:2px 10px 10px 10px">
 
                         <h2>New</h2>
                         <div id="in"></div>
@@ -281,7 +283,7 @@
             </div>
         </section>
         {% block footer %}
-            {%  include ':include:footer.html.twig' %}
+            {%  render(controller('CmsUlysseBundle:Header:foot')) %}
         {% endblock footer %}
 
         {% block javascripts %}{% endblock javascripts%}
