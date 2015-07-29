@@ -1,7 +1,7 @@
-<section id="feature">
+<section id="feature" style="padding-top:5px" >
 
 {% for titleC, products in category %}
-       <h2 class="head">{{ titleC }}</h2>
+      <h2 class="head" style="display:block">{{ titleC }}</h2>
        <div class="top-box">
         {% for product in products %}
         <div class="chg card col_1_of_3 span_1_of_3">
@@ -28,4 +28,5 @@
         <div class="clear"></div>
     </div>
 {%  endfor %}
+
 </section>

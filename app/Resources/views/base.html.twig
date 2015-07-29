@@ -18,7 +18,21 @@
             {% endstylesheets %}
         {% endblock %}
         <style>
-
+            .colonneA .chg.card.col_1_of_3.span_1_of_3{
+                display: block !important;
+                width:100%;
+                padding:0 0 15px 0;
+                margin: 0 0 20px 0;
+            }
+            .colonneC .chg.card.col_1_of_3.span_1_of_3{
+                display: block !important;
+                width:100%;
+                padding:0 0 15px 0;
+                margin: 0 0 20px 0;
+            }
+            .input{
+                color:black !important;
+            }
             .fwslider{
                 margin-top: 20px !important;
             }
@@ -34,6 +48,9 @@
                 width:100%;
                 padding: 18% 18%;
                 margin-top:-2%
+            }
+            body{
+                color:black;
             }
 
 
@@ -232,9 +249,11 @@
             <div class="wrap">
                 <div class="section group">
                     <div class="colonneA">
+                        <div id="in" style="padding-top:1px"></div>
+
                         <script>
                             $(document).ready(function(){
-                                $( "#feature" ).clone().appendTo( $( ".colonneA" ));
+                                $( "#feature" ).clone().prependTo( $( ".colonneA #in" ));
                                 $(".colonneA>#feature>.chg").className="chg card col_1_of_1 span_1_of_1";
                             })
                         </script>
@@ -242,15 +261,17 @@
                     </div>
 
                     <div class="colonneB">
-                        <section id="response"></section>
+                        <section id="response" ></section>
                         {% block body %}{% endblock body %}
                     </div>
 
-                    <div class="colonneC">
+                    <div class="colonneC" style="padding-top:1px">
 
+                        <h2>New</h2>
+                        <div id="in"></div>
                         <script>
                             $(document).ready(function(){
-                                $( "#feature" ).clone().appendTo( $( ".colonneC" ));
+                                $( "#feature" ).clone().prependTo( $( ".colonneC" ));
                                 $(".colonneC>#new>.chg").className="chg card col_1_of_1 span_1_of_1";
                             });
 
@@ -299,7 +320,7 @@
                         $('#c-circle-nav').fadeIn( "slow" );
 
                         $('.tag-list').fadeOut( 100 );
-                        $('h2').fadeOut( 100 );
+                        $('.logo h2').fadeOut( 100 );
                         $('.menu').stop().animate({
                             marginLeft: '10%'
                         },200);
