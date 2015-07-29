@@ -17,20 +17,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User extends BaseUser implements ParticipantInterface
 {
-    public function __construct()
-    {
-        parent::__construct();
-
-        $generator = new SecureRandom();
-
-        $this->enabled = true;
-        $this->expired = false;
-        $this->roles = array('ROLE_USER');
-        $this->salt = hash('sha256', $generator->nextBytes(64));
-        $this->isActive = true;
-    }
-
-
     /**
      * @var $facebookId
      * @ORM\Column(name="facebook_id", type="string", length=255, nullable=true)
@@ -127,6 +113,19 @@ class User extends BaseUser implements ParticipantInterface
      */
     private $isActive;
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        $generator = new SecureRandom();
+
+        $this->enabled = true;
+        $this->expired = false;
+        $this->roles = array('ROLE_USER');
+        $this->salt = hash('sha256', $generator->nextBytes(64));
+        $this->isActive = true;
+    }
+
     /**
      * Get id
      *
@@ -213,7 +212,6 @@ class User extends BaseUser implements ParticipantInterface
     {
         return $this->lastname;
     }
-
 
     /**
      * @param $lastname
@@ -400,7 +398,6 @@ class User extends BaseUser implements ParticipantInterface
 
         return $this;
     }
-
 
     /**
      * @param Array

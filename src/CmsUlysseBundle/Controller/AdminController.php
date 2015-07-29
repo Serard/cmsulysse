@@ -5,6 +5,7 @@ namespace CmsUlysseBundle\Controller;
 use CmsUlysseBundle\Entity\Product;
 use CmsUlysseBundle\Entity\Site;
 use CmsUlysseBundle\Entity\Slider;
+use CmsUlysseBundle\Entity\User;
 use CmsUlysseBundle\Form\Type\AdminProductType;
 use CmsUlysseBundle\Form\Type\CommunityManagerType;
 use CmsUlysseBundle\Form\Type\SliderType;
@@ -222,4 +223,76 @@ class AdminController extends Controller
 
         return $this->redirectToRoute('modules_admin');
     }
+
+    /**
+     * @Route("/users", name="list_users")
+     * @Template("CmsUlysseBundle:Admin:User/list.html.twig")
+     */
+    public function listUserAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('CmsUlysseBundle:User');
+        $users = $repo->findAll();
+
+        return array('users' => $users);
+    }
+
+    /**
+     * @Route("/user/desactive/{id}", name="desactive_user")
+     * @Template()
+     */
+    public function desactiveUserAction(User $user)
+    {
+        $user->setEnabled(! $user->isEnabled());
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('list_users'));
+    }
+
+    /**
+     * @Route("/user/{id}", name="user_view")
+     * @Template("CmsUlysseBundle:Admin:User/view.html.twig")
+     */
+    public function viewUserAction(User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('CmsUlysseBundle:UserProduct');
+        $userProducts = $repo->findByUser($user);
+
+        return array(
+            'user' => $user,
+            'userProducts' => $userProducts
+        );
+    }
+
+    /**
+     * @Route("/user/promote/{id}", name="promote_user")
+     * @Template()
+     */
+    public function promoteUserAction(User $user)
+    {
+        $user->addRole('ROLE_ADMIN');
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('user_view', array('id' => $user->getId())));
+    }
+
+    /**
+     * @Route("/user/remove/{id}", name="remove_user")
+     * @Template()
+     */
+    public function removeUserAction(User $user)
+    {
+        $user->removeRole('ROLE_ADMIN');
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('user_view', array('id' => $user->getId())));
+    }
+
 }

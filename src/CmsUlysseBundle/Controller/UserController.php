@@ -115,5 +115,4 @@ class UserController extends Controller
         return $this;
     }
 
-
 }

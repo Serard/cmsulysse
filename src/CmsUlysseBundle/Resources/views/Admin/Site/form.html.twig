@@ -29,11 +29,25 @@
                 {{ form_errors(form.body_color) }}
             </section>
             <section class="form-group">
+                {{ form_label(form.text_color_body, "Couleur de police du body", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.text_color_body, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.text_color_body) }}
+            </section>
+            <section class="form-group">
                 {{ form_label(form.header_color, "Couleur du header", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
                 <div class="col-sm-10">
                     {{ form_widget(form.header_color, {'attr': {'class': 'form-control'}} ) }}
                 </div>
                 {{ form_errors(form.header_color) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.text_color_header, "Couleur de police du header", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.text_color_header, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.text_color_header) }}
             </section>
             <section class="form-group">
                 {{ form_label(form.icone_color, "Couleur des icones", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}

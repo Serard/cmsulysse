@@ -78,6 +78,32 @@ class Site
     private $iconeColor;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="text_color_body", type="string", length=255, nullable=true)
+     * @Assert\Regex(
+     *     pattern= "/^#(?:(?:[a-f\d]{3}){1,2})$/i",
+     *     match=true,
+     *     message="Le champ doit être sous forme #FFFFFF"
+     * )
+     *
+     */
+    private $textColorBody;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="text_color_header", type="string", length=255, nullable=true)
+     * @Assert\Regex(
+     *     pattern= "/^#(?:(?:[a-f\d]{3}){1,2})$/i",
+     *     match=true,
+     *     message="Le champ doit être sous forme #FFFFFF"
+     * )
+     *
+     */
+    private $textColorHeader;
+
+    /**
      * @var integer
      *
      * @ORM\Column(name="position_menu", type="boolean")
@@ -237,6 +263,41 @@ class Site
         $this->bodyColor = $bodyColor;
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getTextColorBody()
+    {
+        return $this->textColorBody;
+    }
+
+    /**
+     * @param string $textColorBody
+     */
+    public function setTextColorBody($textColorBody)
+    {
+        $this->textColorBody = $textColorBody;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTextColorHeader()
+    {
+        return $this->textColorHeader;
+    }
+
+    /**
+     * @param string $textColorHeader
+     */
+    public function setTextColorHeader($textColorHeader)
+    {
+        $this->textColorHeader = $textColorHeader;
+        return $this;
+    }
+
 
     /**
      * @return string

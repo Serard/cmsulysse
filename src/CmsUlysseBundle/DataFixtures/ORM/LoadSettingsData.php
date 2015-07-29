@@ -24,6 +24,8 @@ class LoadSettingsData  extends AbstractFixture implements OrderedFixtureInterfa
             ->setBodyColor('')
             ->setHeaderColor('')
             ->setIconeColor('')
+            ->setTextColorBody('')
+            ->setTextColorHeader('')
             ->setFooter('Hey c mon footer super génial')
             ->setCorpsColonnes(1)
             ->setBestProduct(true)
