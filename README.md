@@ -12,6 +12,9 @@ master version : v0.0
 
 
 --------------------------------
+dev version : dev-v1.1.8
+design for list product and link
+
 dev version : dev-v1.1.7
 design for my products
 
