@@ -17,8 +17,12 @@ class UserProductType extends  AbstractType
         return  $builder
             ->add('price')
             ->add('qty')
-            ->add('state', null, array('label' => 'Neuf', 'required' => false))
-            ;
+            ->add('state','choice', array(
+                'choices' => array(
+                    '0' => 'Occasion',
+                    '1' => 'Neuf'),
+                'label' => 'Neuf', 'required' => true)
+            );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

@@ -3,8 +3,62 @@
 {% block title %}CmsUlysseBundle:Product:view{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Product:view page</h1>
+
+    {% set product = userProduct.product %}
+
+    <h1 style="color: #003366">Produit : {{ product.name }}</h1>
+    <hr>
+    <div class="col-lg-10">
+
+        <div class="well well-lg" style="color: dimgrey">
+            <p><strong>Fiche Descriptive: </strong>
+                {{ product.description }}
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                {% for picture in product.pictures %}
+                    <img style="height: 200px;" src="{{ asset(picture.getWebPath())}}" />
+                {% else %}
+                    <img style="height: 200px;" src="http://bliister.com/upload/thumb/no_img.jpg">
+                {% endfor %}
+            </div>
+            <div class="well well-lg col-lg-4" style="color: dimgrey">
+                <p>Prix: {{ userProduct.price }} €</p>
+                <p>Quantité : {{ userProduct.qty }}</p>
+                <p>Etat : {{ userProduct.state ? 'Neuf' : 'Occasion' }}</p>
+                <p>Vendu par {{ userProduct.user.firstName }} {{ userProduct.user.lastName }} à {{ userProduct.user.city }}</p>
+            </div>
+        </div>
+        <br>
+        {% if app.user != userProduct.user %}
+            <a class="btn btn-primary" href="">Ajout au Panier</a>
+        {% endif %}
 
 
+        {% if product.specifications | length > 0  %}
+
+                <hr>
+                <h2 style="color: #003366">Spécifications</h2>
+
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Content</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for specification in product.specifications %}
+                        <tr>
+                            <td>{{ specification.name }}</td>
+                            <td>{{ specification.content }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+        {% endif %}
+    </div>
 
 {% endblock %}

@@ -310,8 +310,6 @@ class HeaderController extends Controller
         $repository = $em->getRepository('CmsUlysseBundle:Site');
         $site = $repository->findOneBy(array());
 
-
-
         return $this->render('CmsUlysseBundle:Main:header.html.twig',  array(
                 'site'  => $site,
             )
