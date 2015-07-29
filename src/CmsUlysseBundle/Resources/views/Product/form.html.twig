@@ -3,9 +3,199 @@
 {% block title %}CmsUlysseBundle:Product:add{% endblock %}
 
 {% block body %}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<h1>Welcome to the Product:add page</h1>
+        html, body {
+            height: 100%;
+            font-family: "Roboto Slab", serif;
+            background-color: #4CB1CA;
+        }
+        .body{
+            color: white;
+        }
+        .body input{
+            color: #000000;
+        }
+
+
+        body label{
+            color: #FFF;
+        }
+
+        .preload * {
+            transition: none !important;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            font-size: small;
+            text-transform: uppercase;
+            font-size: 0.7em;
+            margin-bottom: 0.35em;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            border: none;
+            padding: 0.5em;
+            border-radius: 2px;
+            margin-bottom: 0.5em;
+            color: #333;
+        }
+        input[type="text"]:focus, input[type="password"]:focus {
+            outline: none;
+            box-shadow: inset -1px -1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        button {
+            padding-left: 1.5em;
+            padding-right: 1.5em;
+            padding-bottom: 0.5em;
+            padding-top: 0.5em;
+            border: none;
+            border-radius: 2px;
+            background-color: #7E5AF1;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+            color: white;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
+        }
+
+        button {
+            padding-left: 1.5em;
+            padding-right: 1.5em;
+            padding-bottom: 0.5em;
+            padding-top: 0.5em;
+            border: none;
+            border-radius: 2px;
+            background-color: #7DB122;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+            color: white;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.45);
+        }
+
+        small {
+            font-size: 1em;
+        }
+
+        .login--login-submit {
+            float: right;
+        }
+
+        .login--container {
+            width: 600px;
+            background-color: #4CB1CA;
+            margin: 0 auto;
+            position: relative;
+            top: 25%;
+        }
+
+        .login--toggle-container {
+            position: absolute;
+            background-color: #4CB1CA;
+            right: 0;
+            line-height: 2.5em;
+            width: 50%;
+            height: 550px;
+            text-align: right;
+            cursor: pointer;
+            transform: perspective(1000px) translateZ(1px);
+            transform-origin: 0% 0%;
+            transition: all 1s cubic-bezier(0.06, 0.63, 0, 1);
+            backface-visibility: hidden;
+        }
+        .login--toggle-container .js-toggle-login {
+            font-size: 4em;
+            text-decoration: underline;
+        }
+        .login--active .login--toggle-container {
+            transform: perspective(1000px) rotateY(180deg);
+            background-color: #bc1012;
+        }
+
+        .login--username-container, .login--password-container {
+            float: left;
+            background-color: #4CB1CA;
+            width: 50%;
+            height: 550px;
+            padding: 0.5em;
+        }
+
+        .login--username-container {
+            transform-origin: 100% 0%;
+            transform: perspective(1000px) rotateY(180deg);
+            transition: all 1s cubic-bezier(0.06, 0.63, 0, 1);
+            background-color: #bc1012;
+            backface-visibility: hidden;
+        }
+        .login--active .login--username-container {
+            transform: perspective(1000px) rotateY(0deg);
+            background-color: #4CB1CA;
+        }
+        #route{
+            width: 284px;
+        }
+        .flag-dropdown * , .flag-dropdown{
+            color:#545454;
+        }
+        .round{
+            height: 25px;
+            border-radius: 12px;
+            background: #7DB122;
+            display:block;
+            margin-bottom: 5px;
+        }
+        .round:before{
+            content:'zoom';
+            display:inline-block;
+            width:65px;
+            margin-left: 120px;
+
+        }
+        .round>div{
+            display:none;
+        }
+        .round:hover,.round:active,.round:focus{
+            width: 100%;
+            height: 180px;
+            border-radius: 2px;
+            background: none;
+            display:block;
+        }
+
+        .round:hover:before,.round:focus:before,.round:active:before{
+            content:'';
+            display:none;
+            width:0;
+            margin-left: 0;
+        }
+        .round:hover>div,.round:active>div,.round:focus>div{
+                 display: block;
+         }
+        label, input, button, select{
+            display:block !important;
+            float:none !important;
+            z-index: 0 !important;
+            margin:2px !important;
+
+        }
+        select,input[placeholder]{
+            color:#545454;
+        }
+        .product_type_btn{
+            margin-left:45px;
+        }
+    </style>
+
     <form action="{{ path('product_add') }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
+    <div class='preload login--container'>
+        <div class='login--form'>
+            <div class='login--username-container'>
         <section>
             {{ form_row(form.name) }}
         </section>
@@ -15,6 +205,8 @@
         <section>
             {{ form_row(form.categories) }}
         </section>
+            </div>
+            <div class='login--password-container'>
         <section>
             <ul class="specifications" data-prototype="{{ form_widget(form.specifications.vars.prototype)|e }}">
                 {# itère sur chaque spec existantes #}
@@ -48,13 +240,39 @@
             {% endif %}
         </section>
         {{ form_rest(form) }}
+        </fieldset>
+        </div>
+        </div>
+        <div class='login--toggle-container'>
+            <br>
+            <br>
+            <br>
+            <br>
+            <small>Hey you,</small>
+            <div class='js-toggle-login'>Add Your Product</div>
+            <small>already</small>
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </div>
+        </div>
     </form>
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
     <script>
         var collectionHolder = $('ul.specifications');
-        var $addSpecLink = $('<a href="#">Ajouter une specification</a>');
+        var $addSpecLink = $('<a href="#" id="adds" onclick="roundAdd()" >Ajouter une specification</a>');
         var idadd = {{ delete }};
 
         var $newLinkLi = $('<li></li>').append($addSpecLink);
@@ -76,12 +294,10 @@
 
         function deleteSpecForm(id) {
             document.getElementById(id).remove();
-        }
+        };
 
-    </script>
-    <script>
         var collectionHolderPicture = $('ul.pictures');
-        var $addPictLink = $('<a href="#">Ajouter une photo</a>');
+        var $addPictLink = $('<a href="#" id="tof">Ajouter une photo</a>');
 
         var $newLink = $('<li></li>').append($addPictLink);
         jQuery(document).ready(function() {
@@ -97,5 +313,31 @@
             var $newFormLi = $('<li></li>').append(newFormFile);
             $newLink.before($newFormLi);
         }
+
+
+
+        var numG=0;
+            function roundAdd(){
+                if(numG){
+                    $('#product_type_specifications_'+numG).parent().toggleClass("round");
+                }
+                numG++;
+            }
+
+        (function () {
+            $('.login--container').removeClass('preload');
+            this.timer = window.setTimeout(function (_this) {
+                return function () {
+                    return $('.login--container').toggleClass('login--active');
+                };
+            }(this), 2000);
+            $('.js-toggle-login').click(function (_this) {
+                return function () {
+                    window.clearTimeout(_this.timer);
+                    $('.login--container').toggleClass('login--active');
+                    return $('.login--username-container input').focus();
+                };
+            }(this));
+        }.call(this));
     </script>
 {% endblock %}
