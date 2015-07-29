@@ -4,10 +4,16 @@ master  : correspond à la branche principale
 dev     : correspond à la branche de dev
 
 
-master version : v0.0
 
 master version : v1.0.1
 First version stable
+
+master version : v0.0
+
+
+--------------------------------
+dev version : dev-v1.1.5
+colonne feature & new
 
 dev version : dev-v1.1.4
 gestion mes userproduts
