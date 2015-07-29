@@ -12,6 +12,9 @@ master version : v0.0
 
 
 --------------------------------
+dev version : dev-v1.1-11
+update popow
+
 dev version : dev-v1.1-10
 produits phares
 
