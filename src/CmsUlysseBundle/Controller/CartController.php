@@ -255,7 +255,7 @@ class CartController extends Controller
                         $em->persist($userProduct);
                         $em->persist($commandProduct);
 
-                        $amount = $amount + $product->price;
+                        $amount = $amount + ($product->price * $product->qty);
                     }
                 }
 

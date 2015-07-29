@@ -5,6 +5,6 @@
 {% block body %}
     <h1>Mes produits</h1>
 
+    <a href="{{ path('product_list') }}" class="btn btn-primary">Vendre un nouveau produit</a>
     {{ include('CmsUlysseBundle:Cart:search.html.twig', {'products' : products}) }}
-    <a href="{{ path('product_list') }}" class="btn btn-template-main">Ajouter un nouveau produit</a>
 {% endblock %}
