@@ -138,6 +138,7 @@ class HeaderController extends Controller
 
         $nbColonne=$siteVal['corpsColonnes'];
 
+        $style.=($site->nuggets())?'#{display:none;}':'';
         $style.=($site->isSlider())?'#fwslider{display:none;}':'';
         //$style.=($site->bestProduct())?'#phare{display:none;}':'';
 
