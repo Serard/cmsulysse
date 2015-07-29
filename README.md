@@ -12,6 +12,9 @@ master version : v0.0
 
 
 --------------------------------
+dev version : dev-v1.1.6
+design for product view
+
 dev version : dev-v1.1.5
 colonne feature & new
 
