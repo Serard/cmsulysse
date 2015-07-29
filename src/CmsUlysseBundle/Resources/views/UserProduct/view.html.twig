@@ -1,11 +1,9 @@
 {% extends "::base.html.twig" %}
+{% set product = userProduct.product %}
+{% block title %} {{ product.name }}{% endblock %}
 
-{% block title %}CmsUlysseBundle:Product:view{% endblock %}
 
 {% block body %}
-
-    {% set product = userProduct.product %}
-
     <h1 style="color: #003366">Produit : {{ product.name }}</h1>
     <hr>
     <div class="col-lg-10">
@@ -32,7 +30,7 @@
         </div>
         <br>
         {% if app.user != userProduct.user %}
-            <a class="btn btn-primary" href="">Ajout au Panier</a>
+            <button onclick="addCart({{ userProduct.id }});" class="btn btn-info">Ajouter</button>
         {% endif %}
 
 
