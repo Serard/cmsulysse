@@ -49,11 +49,11 @@
             var redirUrl = '{{ path('market_cart') }}';
 
         </script>
-        
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
     </head>
-    <body>
+    <body class="body">
 
         {% block header %}
             {%  include ':include:header.html.twig' %}
@@ -64,11 +64,11 @@
             {%  block slide %}{%  endblock %}
 
             <div class="wrap">
-                <div class="section group">
+                <div class="section group body">
                     <div class="colonneA">
                         <div id="in" style="padding:2px 10px 10px 10px"></div>
                     </div>
-                    <div class="colonneB">
+                    <div class="colonneB body">
                         <section id="response" ></section>
                         <div class="clear"></div>
 
@@ -77,7 +77,7 @@
 
 
                     </div>
-                    <div class="colonneC" style="padding:2px 10px 10px 10px">
+                    <div class="colonneC body" style="padding:2px 10px 10px 10px">
                         <div id="in"  style="padding:2px 10px 10px 10px"></div>
                     </div>
                 </div>

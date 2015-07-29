@@ -13,4 +13,4 @@ $(document).ready(function(){
 
     $( "#feature" ).clone().prependTo( $( ".colonneC #in" ));
     $(".colonneC>#new>.chg").className="chg card col_1_of_1 span_1_of_1";
-})
+});

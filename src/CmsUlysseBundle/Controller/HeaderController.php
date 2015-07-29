@@ -12,31 +12,10 @@ class HeaderController extends Controller
 
     public function customAction()
     {
-
-
-        function toArray($obj)
-        {
-            if (is_object($obj)) $obj = (array)$obj;
-            if (is_array($obj)) {
-                $new = array();
-                foreach ($obj as $key => $val) {
-                    $tab=explode('CmsUlysseBundle\Entity\Site',substr($key,1));
-                    $valTb=substr($tab[1],1);
-                    $new[$valTb] = toArray($val);
-                }
-            } else {
-                $new = $obj;
-            }
-
-            return $new;
-        }
-
         $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CmsUlysseBundle:Site');
         $site = $repository->findOneBy(array());
-        $siteVal=toArray($site);
 
-        //var_dump($siteVal);
 
             $style='';
 
@@ -132,11 +111,11 @@ class HeaderController extends Controller
 
 
 
-        $global_color = $siteVal['bodyColor'];//'#00007A';
+        $global_color = $site->getBodyColor();//'#00007A';
 
         /* custom style colonne*/
 
-        $nbColonne=$siteVal['corpsColonnes'];
+        $nbColonne=$site->getCorpsColonnes();
 
 
         $style.=(!$site->getNuggets())?'#{display:none;}':'';
@@ -173,7 +152,7 @@ class HeaderController extends Controller
                 break;
         }
         /* custom style header*/
-        $background_color_header=$siteVal['headerColor'];
+        $background_color_header=$site->getHeaderColor();
         $background_color_header=($background_color_header == '' && $global_color != '')? hex2rgba($background_color_header,$global_color,false):$background_color_header;
         $background_color_header=(trim($background_color_header)==''||strtoupper($background_color_header[0])=='R')?$background_color_header:hex2rgba($background_color_header);
 
@@ -185,15 +164,25 @@ class HeaderController extends Controller
 
 
         $style.='.header{';
-        $style.=trim($background_color_header)==''?'':'background-color:'.$background_color_header.';';
-        $style.= trim($background_img_header)==''?'':'background-image:'.$background_img_header.';background-repeat:no-repeat;background-size:cover;';
-        $style.=trim($color_text_header)==''?'':'color:'.$color_text_header.';';
+        $style.=trim($background_color_header)==''?'':'background-color:'.$background_color_header.' !important;';
+        $style.= trim($background_img_header)==''?'':'background-image:'.$background_img_header.' !important;background-repeat:no-repeat;background-size:cover;';
+        $style.=trim($color_text_header)==''?'':'color:'.$color_text_header.' !important;';
+        $style.='}';
+
+        $background_color_header=$site->getHeaderColor();
+        $background_color_header=($background_color_header == '' && $global_color != '')? hex2rgba($background_color_header,$global_color,false):$background_color_header;
+        $background_color_header=(trim($background_color_header)==''||strtoupper($background_color_header[0])=='R')?$background_color_header:hex2rgba($background_color_header,false,'#000000');
+
+        $style.='.c-circle-nav__toggle.header, .c-circle-nav__toggle.header:hover{';
+        $style.=trim($background_color_header)==''?'':'background-color:'.$background_color_header.' !important;';
+        $style.= trim($background_img_header)==''?'':'background-image:'.$background_img_header.' !important;background-repeat:no-repeat;background-size:cover;';
+        $style.=trim($color_text_header)==''?'':'color:'.$color_text_header.' !important;';
         $style.='}';
 
 
 
         /* custom style body */
-        $background_color_body=$siteVal['bodyColor'];
+        $background_color_body=$site->getBodyColor();
         $background_color_body=($background_color_body == '' && $global_color != '')? hex2rgba($background_color_body,$global_color,true):$background_color_body;
         $background_color_body=(trim($background_color_body)==''||strtoupper($background_color_body[0])=='R')?$background_color_body:hex2rgba($background_color_body);
 
@@ -203,8 +192,8 @@ class HeaderController extends Controller
         $color_text_body=(trim($color_text_body)==''||strtoupper($color_text_body[0])=='R')?$color_text_body:hex2rgba($color_text_body);
 
         $style.='.body{';
-        $style.= trim($background_color_body)==''?'':'background-color:'.$background_color_body.';';
-        $style.= trim($settings_background_img_body)==''?'':'background-image:url('.$settings_background_img_body.');background-repeat:no-repeat;background-size:cover;';
+        $style.= trim($background_color_body)==''?'':'background-color:'.$background_color_body.' !important;';
+        $style.= trim($settings_background_img_body)==''?'':'background-image:url('.$settings_background_img_body.') !important;background-repeat:no-repeat;background-size:cover;';
         $style.=trim($color_text_body)==''?'':'color:'.$color_text_body.';';
         $style.='}';
         $style.='h2.head{';
@@ -213,7 +202,7 @@ class HeaderController extends Controller
 
 
         /* custom style head top */
-        $background_color_top='';
+        $background_color_top=$site->getBodyColor();
         $background_color_top=($background_color_top == '' && $global_color != '')? hex2rgba($background_color_top,$global_color,true):$background_color_top;
         $background_color_top=(trim($background_color_top)==''||strtoupper($background_color_top[0])=='R')?$background_color_top:hex2rgba($background_color_top);
 
@@ -223,19 +212,19 @@ class HeaderController extends Controller
         $color_text_top=(trim($color_text_top)==''||strtoupper($color_text_top[0])=='R')?$color_text_top:hex2rgba($color_text_top);
 
         $style.='.header-top{';
-        $style.= trim($background_color_top)==''?'':'background-color:'.$background_color_top.';';
-        $style.= trim($settings_background_img_top)==''?'':'background-image:'.$settings_background_img_top.';background-repeat:no-repeat;background-size:cover;';
+        $style.= trim($background_color_top)==''?'':'background-color:'.$background_color_top.' !important;';
+        $style.= trim($settings_background_img_top)==''?'':'background-image:'.$settings_background_img_top.' !important;background-repeat:no-repeat;background-size:cover;';
         $style.=trim($color_text_top)==''?'':'color:'.$color_text_top.';';
         $style.='}';
 
         $style.='.cssmenu ul li a, .cssmenu ul li a:hover{';
-        $style.= trim($background_color_top)==''?'':'background-color:'.$background_color_top.';';
+        $style.= trim($background_color_top)==''?'':'background-color:'.$background_color_top.' !important;';
         $style.=trim($color_text_top)==''?'':'color:'.$color_text_top.';';
         $style.='}';
 
         /* custom style footer */
 
-        $background_color_footer=$siteVal['headerColor'];
+        $background_color_footer=$site->getHeaderColor();
         $background_color_footer=($background_color_footer == '' && $global_color != '')? hex2rgba($background_color_footer,$global_color,false):$background_color_footer;
         $background_color_footer=(trim($background_color_footer)==''||strtoupper($background_color_footer[0])=='R')?$background_color_footer:hex2rgba($background_color_footer);
 
@@ -246,14 +235,14 @@ class HeaderController extends Controller
         $color_text_footer=(trim($color_text_footer)==''||strtoupper($color_text_footer[0])=='R')?$color_text_footer:hex2rgba($color_text_footer);
 
         $style.='.footer{';
-        $style.= trim($background_color_footer)==''?'':'background-color:'.$background_color_footer.';';
-        $style.= trim($background_img_footer)==''?'':'background-image:'.$background_img_footer.';background-repeat:no-repeat;background-size:cover;';
+        $style.= trim($background_color_footer)==''?'':'background-color:'.$background_color_footer.' !important;';
+        $style.= trim($background_img_footer)==''?'':'background-image:'.$background_img_footer.';background-repeat:no-repeat;background-size:cover !important;';
         $style.=trim($color_text_footer)==''?'':'color:'.$color_text_footer.';';
         $style.='}';
 
 
         /* custom style icon */
-        $background_icon=$siteVal['iconeColor'];
+        $background_icon=$site->getIconeColor();
         $background_icon=($background_icon == '' && $global_color != '')? hex2rgba($background_icon,$global_color,true):$background_icon;
         $background_icon=(trim($background_icon)==''||strtoupper($background_icon[0])=='R')?$background_icon:hex2rgba($background_icon);
 
@@ -261,22 +250,22 @@ class HeaderController extends Controller
         $color_icon=($color_icon == '' && $global_color != '')? hex2rgba($color_icon,$global_color,false):$color_icon;
         $color_icon=(trim($color_icon)==''||strtoupper($color_icon[0])=='R')?$color_icon:hex2rgba($color_icon);
 
-        $background_iconC='';
+        $background_iconC=$site->getIconeColor();
         $background_iconC=($background_iconC == '' && $global_color != '')? hex2rgba($background_iconC,$global_color,true):$background_iconC;
         $background_iconC=(trim($background_iconC)==''||strtoupper($background_iconC[0])=='R')?$background_iconC:hex2rgba($background_iconC);
 
 
         $style.='.header .icon  a  i.fa{';
-        $style.= trim($color_icon)==''?'':'color:'.$color_icon.';';
+        $style.= trim($color_icon)==''?'':'color:'.$color_icon.' !important;';
         $style.='}';
         $style.='.icon{';
-        $style.= trim($background_icon)==''?'':'background:'.$background_icon.';';
+        $style.= trim($background_icon)==''?'':'background:'.$background_icon.' !important;';
         $style.='}';
         $style.='.card .icon{';
-        $style.= trim($background_iconC)==''?'':'background:'.$background_iconC.' url(../../../images/cart2.png) no-repeat scroll 2px 0px;';
+        $style.= trim($background_iconC)==''?'':'background:'.$background_iconC.' url(../../../images/cart2.png) no-repeat scroll 2px 0px !important;';
         $style.='}';
         $style.='.card span.actual{';
-        $style.= trim($background_iconC)==''?'':'color:'.$background_iconC.';';
+        $style.= trim($background_iconC)==''?'':'color:'.$background_iconC.' !important;';
         $style.='}';
 
 
