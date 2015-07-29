@@ -37,4 +37,15 @@
             </div>
         </div>
     </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><h4>Bonhomme Nuggets</h4></div>
+        <div class="panel-body">
+            <div class="col-lg-2">
+                <p>Activé:  {{ site.nuggets  ? 'oui' : 'non' }}</p>
+                <a class="btn btn-primary" href="{{ path('active_nuggets', {'id': site.id}) }}">
+                    {{ site.nuggets  ? 'Désactiver' : 'Activer' }}
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}

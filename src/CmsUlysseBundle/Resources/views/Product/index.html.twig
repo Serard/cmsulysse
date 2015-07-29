@@ -3,39 +3,39 @@
 {% block title %}Liste des produits à vendre{% endblock %}
 
 {% block body %}
-    <h1>Liste des produits à vendre</h1>
+    <h1 style="color: #003366">Liste des produits à vendre</h1>
+    <hr>
+    <a href="{{ path('user_product_list') }}" class="btn btn-info" style="z-index: 0;">Mes produits</a>
+    <a href="{{ path('product_add') }}"  class="btn btn-info">Ajouter un produit à la vente</a>
+
     <section>
-        <a href="{{ path('user_product_list') }}" class="btn btn-info" style="z-index: 0;">Mes produits</a>
-        <div>
-            <input type="text" placeholder="search" class="" style="width: 250px; border: 1px solid #545454;margin:5px 0 5px -2px;">
-            <a href="{{ path('product_add') }}" class="create">+</a>
-        </div>
-        <h2 class="head" style="display:block">Liste des produits à vendre</h2>
-        <div class="top-box">
-            {% for product in products %}
-                <div id="{{ product.id }}" class="chg card col_1_of_3 span_1_of_3">
+        {% for product in products %}
+            {% if loop.index == 1 or (loop.index - 1) is divisible by(3) %}
+                <div class="top-box">
+            {% endif %}
+            <div id="{{ product.id }}" class="chg card col_1_of_3 span_1_of_3">
+                <div class="inner_content clearfix">
                     <a href="{{ path('product_view', {id: product.id}) }}">
-                        <div class="inner_content clearfix">
-                            <div class="product_image" style="background: url();">
-                            </div>
-                            <div class="sale-box"></div>
-                            <div class="price">
-                                <div class="cart-left">
-                                    <p class="title">{{ product.name }}</p>
-
-                                </div>
-                                    <section style="display: block;width: 120px;overflow: hidden; float: right;margin-top:-50px;text-align: right;">
-                                        <a href="{{ path('product_view', {'id': product.id}) }}" class="btn btn-default zoom" style="z-index: 0; display: inline-block; float: none;margin: 5px;">Voir</a>
-                                        <a href="{{ path('product_sell', {'id': product.id}) }}" class="btn btn-success" style="z-index: 0; display: inline-block; float: none;margin: 5px;">Vendre</a>
-                                    </section>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
+                        <div class="product_image" style="background: url();"></div>
                     </a>
+                    <div class="sale-box"></div>
+                    <div class="price">
+                        <div class="cart-left">
+                            <a href="{{ path('product_view', {id: product.id}) }}">
+                                <p class="title">{{ product.name }}</p>
+                            </a>
+                        </div>
+                        <section style="display: block;width: 120px;overflow: hidden; float: right;margin-top:-50px;text-align: right;">
+                            <a href="{{ path('product_sell', {'id': product.id}) }}" class="btn btn-success" style="z-index: 0; display: inline-block; float: none;margin: 5px;">Vendre</a>
+                        </section>
+                        <div class="clear"></div>
+                    </div>
                 </div>
-
-            {%  endfor %}
-            <div class="clear"></div>
-        </div>
+            </div>
+            {% if loop.index is divisible by(3) %}
+                </div>
+                <div class="clear"></div>
+            {% endif %}
+        {%  endfor %}
     </section>
 {%  endblock %}

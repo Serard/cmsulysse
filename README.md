@@ -12,6 +12,18 @@ master version : v0.0
 
 
 --------------------------------
+dev version : dev-v1.1.9
+add nuggets
+
+dev version : dev-v1.1.8
+design for list product and link
+
+dev version : dev-v1.1.7
+design for my products
+
+dev version : dev-v1.1.6
+design for product view
+
 dev version : dev-v1.1.5
 colonne feature & new
 

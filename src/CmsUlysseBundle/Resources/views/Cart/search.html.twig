@@ -4,15 +4,18 @@
                         <div class="top-box">
                     {% endif %}
                     <div class="card col_1_of_3 span_1_of_3">
-                        <a>
-                            <div class="inner_content clearfix">
+                        <div class="inner_content clearfix">
+                                <a href="{{ path('product_user_view', {id: userproduct.id}) }}">
                                     <div class="product_image">
                                         {#<img width="300px" src="{{ asset(pictures.getWebPath())}}" alt="" />#}
                                     </div>
+                                </a>
                                 <div class="sale-box"></div>
                                 <div class="price">
                                     <div class="cart-left">
+                                        <a href="{{ path('product_user_view', {id: userproduct.id}) }}">
                                         <p class="title"id="name{{ userproduct.id }}">{{ userproduct.product.name }}</p>
+                                            </a>
                                         <div class="price1">
                                             <span class="actual"id="price{{ userproduct.id }}">{{ userproduct.price|number_format(2, '.',',') }}</span>
                                         </div>
@@ -43,7 +46,6 @@
                                     <div class="clear"></div>
                                 </div>
                             </div>
-                        </a>
                     </div>
 
                         {% if loop.index is divisible by(3) %}
