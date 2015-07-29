@@ -86,7 +86,15 @@ class UserProductController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('CmsUlysseBundle:UserProduct');
-        $products = $repo->findByProduct($userProduct->getProduct());
+        $productsdb = $repo->findByProduct($userProduct->getProduct());
+        $products = array();
+        foreach ($productsdb as $product) {
+            if ($product->getId() != $userProduct->getId()) {
+                $products [] = $product;
+            }
+        }
+
+
 
         return array(
             'userProduct' => $userProduct,
