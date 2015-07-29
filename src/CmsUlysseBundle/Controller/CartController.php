@@ -272,6 +272,38 @@ class CartController extends Controller
     }
 
     /**
+     * @Route("/widget", name="widget")
+     * @Template()
+     */
+    public function widgetAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('CmsUlysseBundle:UserProduct');
+        $products = json_decode($request->cookies->get('cart'));
+
+        $total = 0;
+
+        if ($products) {
+            foreach ($products as $product) {
+                $dbproduct = $repo->find($product->id);
+                if ($dbproduct) {
+                    $product->name = $dbproduct->getProduct()->getName();
+                    $product->description = $dbproduct->getProduct()->getDescription();
+                    $product->price = $dbproduct->getPrice();
+                    $product->stock = $dbproduct->getQty();
+                    $product->seller = $dbproduct->getUser()->getFirstname() . ' ' . $dbproduct->getUser()->getLastName();
+                    $total = $total + ($product->price * $product->qty);
+                }
+            }
+        }
+
+        return array(
+            'products' => $products,
+            'total'    => $total,
+        );
+    }
+
+    /**
      * @return $this
      */
     public function successAction()
