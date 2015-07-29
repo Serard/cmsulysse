@@ -21,7 +21,6 @@ class DefaultController extends Controller
         $repo = $em->getRepository('CmsUlysseBundle:Slider');
         $slider = $repo->findOneBy(array(), null, 1);
 
-        $em = $this->getDoctrine()->getManager();
         $repository = $em->getRepository('CmsUlysseBundle:Product');
 
         $products = array();
@@ -40,11 +39,14 @@ class DefaultController extends Controller
             if(count($productsNewCount)) $newProducts[$category->getName()] = $productsNewCount;
         }
 
-            return array(
-                'products' => $products,
-                'newProduct' => $newProducts,
-                'slides' => $slider->getPictures()
+        $best = $em->getRepository('CmsUlysseBundle:UserProduct')->findBest();
 
-            );
+        return array(
+            'products'   => $products,
+            'newProducts' => $newProducts,
+            'slides'     => $slider->getPictures(),
+            'best'       => $best,
+
+        );
     }
 }

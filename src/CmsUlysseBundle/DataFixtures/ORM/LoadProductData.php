@@ -20,7 +20,7 @@ class LoadProductData  extends AbstractFixture implements OrderedFixtureInterfac
             array(
                 'name' => 'Iphone 1',
                 'description' => 'Smartphone de haute gamme',
-                'valid' => false,
+                'valid' => true,
             ),
             array(
                 'name' => 'Iphone 2',
@@ -46,7 +46,7 @@ class LoadProductData  extends AbstractFixture implements OrderedFixtureInterfac
                 'name' => 'Iphone 6',
                 'description' => 'Smartphone de haute gamme, avec un appareil photo
                  de haute qualité et un écran incurvé pour une meilleure prise en main',
-                'valid' => false,
+                'valid' => true,
             ),
             array(
                 'name' => 'Un amour de jeunesse',
