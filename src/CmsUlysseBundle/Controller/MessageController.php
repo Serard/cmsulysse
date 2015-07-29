@@ -112,7 +112,6 @@ class MessageController extends BaseController
                 'threadId' => $message->getThread()->getId()
             )));
         }
-
         return array(
             'form' => $form->createView(),
             'thread' => $thread
@@ -172,40 +171,60 @@ class MessageController extends BaseController
         return $this;
     }
 
+    public function mailAdmin(User $user, $recipients, $subject, $thread, $message)
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject($subject)
+            ->setFrom($user->getEmail())
+            ->setBody($this->container->get('templating')->render('CmsUlysseBundle:Mailing:newThread.txt.twig', array('thread' => $thread, 'message' => $message)), 'text/html');
 
+        $emails = array();
+        foreach($recipients as $recipient){
+            $emails[] = $recipient->getEmail();
+        }
+        $message->setTo($emails);
 
-
+        $this->container->get('mailer')->send($message);
+        return $this;
+    }
 /**
  * @Route("/contact/{id}", name="cms_messagerie_contact")
  * @Template("CmsUlysseBundle:Message:contact.html.twig")
  */
-public function contactAction(User $user)
-{
-    $form = $this->container->get('fos_message.new_thread_form.factory')->create();
-    $formHandler = $this->container->get('fos_message.new_thread_form.handler');
+    public function contactAction(User $user)
+    {
+        $form = $this->container->get('fos_message.new_thread_form.factory')->create();
+        $formHandler = $this->container->get('fos_message.new_thread_form.handler');
 
-    if ($message = $formHandler->process($form)) {
+        if ($message = $formHandler->process($form)) {
 
-        $threadId = $message->getThread()->getId();
+            $threadId = $message->getThread()->getId();
 
-        $thread = $message->getThread();
-        $user = $thread->getCreatedBy();
-        $body = $thread->getFirstMessage();
-        $subject = $thread->getSubject();
-        $receipients = $thread->getOtherParticipants($user);
-        $receipient = $receipients[0];
-        $this->mailNewThread($user, $receipient, $subject, $thread, $message);
+            $thread = $message->getThread();
+            $user = $thread->getCreatedBy();
+            $body = $thread->getFirstMessage();
+            $subject = $thread->getSubject();
+            $receipients = $thread->getOtherParticipants($user);
+            $receipient = $receipients[0];
+            $this->mailNewThread($user, $receipient, $subject, $thread, $message);
 
-        return new RedirectResponse($this->container->get('router')->generate('cms_messagerie_thread_view', array(
-            'threadId' => $threadId
-        )));
+            return new RedirectResponse($this->container->get('router')->generate('cms_messagerie_thread_view', array(
+                'threadId' => $threadId
+            )));
+        }
+        return array(
+            'user' => $user,
+            'form' => $form->createView(),
+            'data' => $form->getData()
+        );
     }
-
-    return array(
-        'user' => $user,
-        'form' => $form->createView(),
-        'data' => $form->getData()
-    );
-}
-
+    /**
+     * @Route("/admin-contact", name="cms_messagerie_contact_admin")
+     * @Template("CmsUlysseBundle:Message:contact_admin.html.twig")
+     */
+    public function contactAdminAction()
+    {
+        return array(
+        );
+    }
 }

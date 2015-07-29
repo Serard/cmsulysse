@@ -41,7 +41,7 @@ class Site
     /**
      * @var string
      *
-     * @ORM\Column(name="theme_color", type="string", length=255, nullable=true)
+     * @ORM\Column(name="body_color", type="string", length=255, nullable=true)
      * @Assert\Regex(
      *     pattern= "/^#(?:(?:[a-f\d]{3}){1,2})$/i",
      *     match=true,
@@ -49,7 +49,33 @@ class Site
      * )
      *
      */
-    private $themeColor;
+    private $bodyColor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="header_color", type="string", length=255, nullable=true)
+     * @Assert\Regex(
+     *     pattern= "/^#(?:(?:[a-f\d]{3}){1,2})$/i",
+     *     match=true,
+     *     message="Le champ doit être sous forme #FFFFFF"
+     * )
+     *
+     */
+    private $headerColor;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="icone_color", type="string", length=255, nullable=true)
+     * @Assert\Regex(
+     *     pattern= "/^#(?:(?:[a-f\d]{3}){1,2})$/i",
+     *     match=true,
+     *     message="Le champ doit être sous forme #FFFFFF"
+     * )
+     *
+     */
+    private $iconeColor;
 
     /**
      * @var integer
@@ -119,6 +145,13 @@ class Site
      */
     private $communityManagement;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="footer", type="string")
+     */
+    private $footer;
+
     public function __toString()
     {
         return $this->getName();
@@ -127,7 +160,7 @@ class Site
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -150,7 +183,7 @@ class Site
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -173,7 +206,7 @@ class Site
     /**
      * Get slogan
      *
-     * @return string 
+     * @return string
      */
     public function getSlogan()
     {
@@ -181,26 +214,78 @@ class Site
     }
 
     /**
-     * Set themeColor
-     *
-     * @param string $themeColor
-     * @return Site
+     * @return string
      */
-    public function setThemeColor($themeColor)
+    public function getBodyColor()
     {
-        $this->themeColor = $themeColor;
+        return $this->bodyColor;
+    }
+
+    /**
+     * @param $bodyColor
+     * @return $this
+     */
+    public function setBodyColor($bodyColor)
+    {
+        $this->bodyColor = $bodyColor;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getHeaderColor()
+    {
+        return $this->headerColor;
+    }
+
+    /**
+     * @param $headerColor
+     * @return $this
+     */
+    public function setHeaderColor($headerColor)
+    {
+        $this->headerColor = $headerColor;
 
         return $this;
     }
 
     /**
-     * Get themeColor
-     *
-     * @return string 
+     * @return string
      */
-    public function getThemeColor()
+    public function getIconeColor()
     {
-        return $this->themeColor;
+        return $this->iconeColor;
+    }
+
+    /**
+     * @param $iconeColor
+     * @return $this
+     */
+    public function setIconeColor($iconeColor)
+    {
+        $this->iconeColor = $iconeColor;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFooter()
+    {
+        return $this->footer;
+    }
+
+    /**
+     * @param $footer
+     * @return $this
+     */
+    public function setFooter($footer)
+    {
+        $this->footer = $footer;
+
+        return $this;
     }
 
     /**

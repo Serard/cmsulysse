@@ -13,9 +13,9 @@
 {% else %}
 
     {% block fos_message_content %}
-        <h2>Boite de Réception</h2>
+        <h2 style="color: #003366;">Boite de Réception</h2>
+        <hr>
         {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
-
     {% endblock %}
 
 {% endif %}

@@ -33,26 +33,47 @@ class UserProductController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('CmsUlysseBundle:UserProduct');
-        $repository = $em->getRepository('CmsUlysseBundle:Product');
         $userProduct = $repo->find($request->get('id'));
-        $product = $repository->find($userProduct->getProduct()->getId());
-        $user = $this->container->get('security.context')->getToken()->getUser();
 
         $form = $this->createForm(new UserProductType(), $userProduct);
         $form->add('btn', 'submit', array('label' => 'Valider'));
         $form->handleRequest($request);
 
-        $formProduct = $this->createForm(new AdminProductType(), $product);
-        $formProduct->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($form->getData());
+            $em->flush();
 
+            return $this->redirect($this->generateUrl('user_product_list'));
         }
 
         return array(
-            'form'    => $form->createView(),
-            'formProduct' => $formProduct->createView(),
+            'form' => $form->createView(),
         );
     }
 
+    /**
+     * @Route("/user/product/description/{id}", name="product_user_description")
+     * @Template("CmsUlysseBundle:UserProduct:form.html.twig")
+     */
+    public function descriptionAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('CmsUlysseBundle:Product');
+        $product = $repo->find($request->get('id'));
+
+        $form = $this->createForm(new AdminProductType(), $product);
+        $form->add('valid', null, array('label' => 'Validé : ', 'required' => false, 'disabled' => true));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($form->getData());
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('user_product_list'));
+        }
+
+        return array(
+            'form' => $form->createView(),
+        );
+    }
 }

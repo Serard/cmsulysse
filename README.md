@@ -9,6 +9,9 @@ master version : v0.0
 master version : v1.0.1
 First version stable
 
+dev version : dev-v1.1.4
+gestion mes userproduts
+
 dev version : dev-v1.1.3
 update userproduct
 

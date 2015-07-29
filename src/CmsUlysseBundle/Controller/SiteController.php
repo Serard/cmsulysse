@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Class SiteController
  * @package CmsUlysseBundle\Controller
- * @Route("/settings")
+ * @Route("/admin/settings")
  */
 class SiteController extends Controller
 {

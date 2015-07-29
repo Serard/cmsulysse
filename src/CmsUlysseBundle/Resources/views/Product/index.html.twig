@@ -5,18 +5,18 @@
 {% block body %}
 <h1>Liste des produits à vendre</h1>
     <section>
+        <a href="{{ path('user_product_list') }}" class="btn btn-info">Mes produits</a>
         <header>
             <input type="text" placeholder="search" class="search">
             <a href="{{ path('product_add') }}" class="create">+</a>
         </header>
         {% for product in products %}
-        <article id="{{ product.id }}" class="card">
-                <h2>{{ product.name }}</h2>
+            <article id="{{ product.id }}" class="card">
+            <h2>{{ product.name }}</h2>
             <a href="{{ path('product_view', {'id': product.id}) }}" class="zoom">Voir</a>
             <a href="{{ path('product_sell', {'id': product.id}) }}" class="btn btn-success">Vendre</a>
         </article>
         {% endfor %}
-        <a href="{{ path('user_product_list') }}" class="btn btn-info">Mes produits</a>
     </section>
 
     <script>
