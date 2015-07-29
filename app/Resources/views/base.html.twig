@@ -17,7 +17,7 @@
                 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Exo+2"/>
             {% endstylesheets %}
         {% endblock %}
-        <linl rel='stylesheet' href='http://fonts.googleapis.com/css?family=Exo+2'/>
+        <linl rel='stylesheet' href='http://fonts.googleapis.com/css?family=Exo+2' />
         <link rel="stylesheet" href="{{ asset('css/newCalou.css') }}" />
 
             {% block stylesheets %}
@@ -36,6 +36,7 @@
                 'js/scrollCalou.js'
                 'js/search.js'
                 'js/cart.js'
+                'js/colLandR.js'
                 %}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
@@ -45,11 +46,10 @@
             /* variable global */
             var urlCart = '{{ path('user_cart') }}';
             var url      = '{{ path('search_cart') }}';
-            var redirUrl = '{{ path('home') }}';
+            var redirUrl = '{{ path('market_cart') }}';
 
         </script>
-
-        <script src="{{ asset('js/circleMenu.min.js') }}"></script>
+        
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
     </head>

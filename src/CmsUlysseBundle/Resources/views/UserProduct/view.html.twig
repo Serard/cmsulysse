@@ -57,6 +57,75 @@
                 </table>
 
         {% endif %}
+        {% if products %}
+            <h1 style="color: #003366">Autre(s) Vendeur(s)</h1>
+            <hr>
+            {% for userproduct in products %}
+                {% if loop.index == 1 or (loop.index - 1) is divisible by(3) %}
+                    <div class="top-box">
+                {% endif %}
+                <div class="card col_1_of_3 span_1_of_3">
+                    <div class="inner_content clearfix">
+                        <a href="{{ path('product_user_view', {id: userproduct.id}) }}">
+                            <div class="product_image"
+                                    {% for picture in product.pictures %}
+                                    {% if loop.index ==1 %}
+                                 style="background: url({{ asset(picture.getWebPath()) }});">
+                                {% endif %}
+                                {% else %}
+                                    style="background: url('http://bliister.com/upload/thumb/no_img.jpg');">
+                                {% endfor %}
+                            </div>
+                        </a>
+                        <div class="sale-box"></div>
+                        <div class="price">
+                            <div class="cart-left">
+                                <a href="{{ path('product_user_view', {id: userproduct.id}) }}">
+                                    <p class="title"id="name{{ userproduct.id }}">{{ userproduct.product.name }}</p>
+                                </a>
+                                <div class="price1">
+                                    <span class="actual"id="price{{ userproduct.id }}">{{ userproduct.price|number_format(2, '.',',') }} : {{ userproduct.state ? 'Neuf' : 'Occasion' }}</span>
+                                </div>
+                            </div>
+                            <div id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez atteind la quantité maximum de ce produit</div>
+                            <div id="seller{{ userproduct.id }}" style="display: none;">{{ userproduct.user.lastname }} {{ userproduct.user.firstname }}</div>
+                            <div id="stock{{ userproduct.id }}" style="display: none;">{{ userproduct.qty }}</div>
+                            <div id="description{{ userproduct.id }}" style="display: none;">{{ userproduct.product.description }}</div>
+
+
+                            {% if app.user.id is defined and userproduct.user.id == app.user.id  %}
+                                <section style="display: block;width: 120px;overflow: hidden; float: right;margin-top:-80px;text-align: right;">
+                                    <a href="{{ path('product_user_update', {'id': userproduct.id}) }}" class="btn btn-success" style="z-index: 0; display: inline-block; float: none;margin: 5px;">Modifier</a>
+                                    {% if userproduct.product.valid == 0 %}
+                                        <a href="{{ path('product_user_description', {'id': userproduct.product.id}) }}" class="btn btn-warning" style="z-index: 0; display: inline-block; float: none;margin: 5px" >Description</a>
+                                    {% else %}
+                                        <a href="{{ path('product_user_description', {'id': userproduct.product.id}) }}" class="btn btn-warning" style="z-index: 0; display: inline-block; float: none;margin: 5px" disabled>Description</a>
+                                    {% endif %}
+                                </section>
+                            {% else %}
+                                {% if userproduct.qty != 0 %}
+                                    <div onclick="addCart({{ userproduct.id }});" class="icon cart-right"></div>
+                                {% else %}
+                                    Produit épuisé
+                                {% endif %}
+                                {% if id is defined %}
+                                    <p id="categid" style="display:none;">{{ id }}</p>
+                                {% endif %}
+                            {% endif %}
+
+
+
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </div>
+
+                {% if loop.index is divisible by(3) %}
+                    </div>
+                    <div class="clear"></div>
+                {% endif %}
+        {% endfor %}
+        {% endif %}
     </div>
 
 {% endblock %}

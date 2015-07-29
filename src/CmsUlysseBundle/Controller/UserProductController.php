@@ -84,6 +84,13 @@ class UserProductController extends Controller
     public function viewAction(UserProduct $userProduct)
     {
 
-        return array('userProduct' => $userProduct);
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('CmsUlysseBundle:UserProduct');
+        $products = $repo->findByProduct($userProduct->getProduct());
+
+        return array(
+            'userProduct' => $userProduct,
+            'products'    => $products,
+        );
     }
 }

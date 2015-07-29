@@ -12,6 +12,12 @@ master version : v0.0
 
 
 --------------------------------
+dev version : dev-v1.1.17
+autre(s) vendeur(s) détail userproduct
+
+dev version : dev-v1.1.16
+add picture in card and form command
+
 dev version : dev-v1.1.15
 re-size card
 
