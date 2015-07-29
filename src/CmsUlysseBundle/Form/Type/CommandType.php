@@ -12,13 +12,19 @@ class CommandType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('lastname', null, array('label' => 'Nom'))
+            ->add('lastname', null, array(
+                'label' => 'Nom',
+                'label_attr' => array('class' => '')
+            ))
             ->add('firstname', null, array('label' => 'Prénom'))
             ->add('address', null, array('label' => 'Adresse'))
             ->add('postal_code', null, array('label' => 'Code postal'))
             ->add('city', null, array('label' => 'Ville'))
             ->add('tel', null, array('label' => 'Téléphone'))
-            ->add('btn', 'submit', array('label' => 'Valider'))
+            ->add('btn', 'submit', array(
+                'label' => 'Valider',
+                'attr' => array('class' => 'btn btn-primary')
+            ))
         ;
         return $builder;
     }

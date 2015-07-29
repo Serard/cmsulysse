@@ -4,14 +4,26 @@
        <div class="top-box">
         {% for product in products %}
         <div class="chg card col_1_of_3 span_1_of_3">
-            <a href="{{ path('product_user_view', {id: product.minPrice.id}) }}">
                 <div class="inner_content clearfix">
-                    <div class="product_image" style="background: url();">
-                    </div>
+                    <a href="{{ path('product_user_view', {id: product.minPrice.id}) }}">
+                        <div class="product_image"
+                            {% for picture in product.pictures %}
+                                {% if loop.index ==1 %}
+                                 style="background: url({{ asset(picture.getWebPath()) }});">
+                                {% endif %}
+                            {% else %}
+                                 style="background: url('http://bliister.com/upload/thumb/no_img.jpg');">
+                            {% endfor %}
+                        </div>
+                    </a>
                     <div class="sale-box"><span class="on_sale title_shop">New</span></div>
                     <div class="price">
                         <div class="cart-left">
-                            <p class="title">{{ product.name }}</p>
+                            <p class="title">
+                                <a href="{{ path('product_user_view', {id: product.minPrice.id}) }}">
+                                {{ product.name }}
+                                </a>
+                            </p>
                             <div class="price1">
                                 <span class="actual">{{ product.minPrice.price|number_format(2, '.',',') }}</span>
                             </div>
@@ -20,7 +32,6 @@
                         <div class="clear"></div>
                     </div>
                 </div>
-            </a>
         </div>
 
     {%  endfor %}
