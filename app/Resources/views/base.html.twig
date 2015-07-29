@@ -232,7 +232,13 @@
             <div class="wrap">
                 <div class="section group">
                     <div class="colonneA">
-                        {# render(controller('CmsUlysseBundle:Col:left')) #}
+                        <script>
+                            $(document).ready(function(){
+                                $( "#feature" ).clone().appendTo( $( ".colonneA" ));
+                                $(".colonneA>#feature>.chg").className="chg card col_1_of_1 span_1_of_1";
+                            })
+                        </script>
+
                     </div>
 
                     <div class="colonneB">
@@ -241,7 +247,14 @@
                     </div>
 
                     <div class="colonneC">
-                        {#  render(controller('CmsUlysseBundle:Col:right')) #}
+
+                        <script>
+                            $(document).ready(function(){
+                                $( "#feature" ).clone().appendTo( $( ".colonneC" ));
+                                $(".colonneC>#new>.chg").className="chg card col_1_of_1 span_1_of_1";
+                            });
+
+                        </script>
                     </div>
                 </div>
             </div>

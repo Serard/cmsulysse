@@ -10,7 +10,7 @@ class HeaderController extends Controller
 {
 
 
-    public function leftmAction()
+    public function leftMenuAction()
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -23,12 +23,6 @@ class HeaderController extends Controller
                 'categs_down' => $categs_down,
             )
         );
-
-
     }
 
-    public function rightAction()
-    {
-
-    }
 }
