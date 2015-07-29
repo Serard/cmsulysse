@@ -12,6 +12,9 @@ master version : v0.0
 
 
 --------------------------------
+dev version : dev-v1.1.19
+correctif affichage cart
+
 dev version : dev-v1.1.17
 autre(s) vendeur(s) détail userproduct
 
