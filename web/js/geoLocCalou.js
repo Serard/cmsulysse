@@ -1,20 +1,3 @@
-$('document').ready(function(){
-/**
- * Created with JetBrains PhpStorm.
- * User: Grizzly
- * Date: 29/07/15
- * Time: 13:20
- * To change this template use File | Settings | File Templates.
- */
-/*global variable*/
-var villeGeoLoc;
-var paysGeoLoc;
-var paysGeoLocISO;
-var attrMenuHeader='.tag-list .other';//'.menu.header .other';
-var beginPos='<span class="icon geoloc"><a><i class="fa fa-map-marker fa-lg"></i></a></span><span class="descriptIcon">';
-var endPos='</span>';
-var GlobalOpenMenu='';
-
 /*cookie*/
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
@@ -33,8 +16,25 @@ function getCookie(cname) {
         if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
     }
     return "";
-
 }
+
+$('document').ready(function(){
+/**
+ * Created with JetBrains PhpStorm.
+ * User: Grizzly
+ * Date: 29/07/15
+ * Time: 13:20
+ * To change this template use File | Settings | File Templates.
+ */
+/*global variable*/
+var villeGeoLoc;
+var paysGeoLoc;
+var paysGeoLocISO;
+var attrMenuHeader='.tag-list .other';//'.menu.header .other';
+var beginPos='<span class="icon geoloc"><a><i class="fa fa-map-marker fa-lg"></i></a></span><span class="descriptIcon">';
+var endPos='</span>';
+var GlobalOpenMenu='';
+
 /*position*/
 function PositionAttribut(position)
 {
