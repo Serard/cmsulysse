@@ -17,382 +17,68 @@
                 <link rel="stylesheet" href="{{ asset_url }}" />
             {% endstylesheets %}
         {% endblock %}
-        <style>
-            .colonneA .chg.card.col_1_of_3.span_1_of_3{
-                display: block !important;
-                width:100%;
-                padding:0 0 15px 0;
-                margin: 0 0 20px 0;
-            }
-            .colonneC .chg.card.col_1_of_3.span_1_of_3{
-                display: block !important;
-                width:100%;
-                padding:0 0 15px 0;
-                margin: 0 0 20px 0;
-            }
-            .input{
-                color:black !important;
-            }
-            .fwslider{
-                margin-top: 20px !important;
-            }
-            #c-circle-nav__toggle{
-                transform: scale(0.65);
-                -webkit-transform: scale(0.65);
-            }
-            .svg path {
-                fill: #FFF !important;
-            }
-            .svg{
-                height:100%;
-                width:100%;
-                padding: 18% 18%;
-                margin-top:-2%
-            }
-            body{
-                color:black;
-            }
-            .btn{
-                z-index: 0 !important;
-            }
-
-        </style>
+        <link rel="stylesheet" href="{{ asset('css/newCalou.css') }}" />
 
             {% block stylesheets %}
                 {%  render(controller('CmsUlysseBundle:Header:custom')) %}
             {% endblock %}
 
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         {% javascripts output="js/compiled/main.js"
-        "js/jquery-2.1.4.min.js"
-        %}
-        <script type="text/javascript" src="{{ asset_url }}"></script>
-
-        <script type="text/javascript" src="{{ asset('js/megamenu.js') }}"></script>
-        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-        <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
-        <script src="{{ asset('js/css3-mediaqueries.js') }}"></script>
-        <script src="{{ asset('js/fwslider.js') }}"></script>
-        <!--end slider -->
-        <script src="{{ asset('js/jquery.easydropdown.js') }}"></script>
-
+            "js/jquery-2.1.4.min.js"
+            'js/jquery-ui.min.js'
+            'js/megamenu.js'
+            'js/css3-mediaqueries.js'
+            'js/fwslider.js'
+            'js/jquery.easydropdown.js'
+            'js/geoLocCalou.js'
+            'js/scrollCalou.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
-        <script>
-            /*global variable*/
-            var villeGeoLoc;
-            var paysGeoLoc;
-            var paysGeoLocISO;
-            var attrMenuHeader='.tag-list .other';//'.menu.header .other';
-            var beginPos='<span class="icon geoloc"><a><i class="fa fa-map-marker fa-lg"></i></a></span><span class="descriptIcon">';
-            var endPos='</span>';
-            var GlobalOpenMenu='';
 
-            /*cookie*/
-            function setCookie(cname, cvalue, exdays) {
-                var d = new Date();
-                d.setTime(d.getTime() + (exdays*24*60*60*1000));
-                var expires = "expires="+d.toUTCString();
-                document.cookie = cname + "=" + cvalue + "; " + expires;
-
-            }
-
-            function getCookie(cname) {
-                var name = cname + "=";
-                var ca = document.cookie.split(';');
-                for(var i=0; i<ca.length; i++) {
-                    var c = ca[i];
-                    while (c.charAt(0)==' ') c = c.substring(1);
-                    if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
-                }
-                return "";
-
-            }
-            /*position*/
-            function PositionAttribut(position)
-            {
-                this.latitude=position.coords.latitude;
-                this.longitude=position.coords.longitude;
-                this.accuracy=position.coords.accuracy;
-                this.altitude=position.coords.altitude;
-                this.altitudeAccuracy=position.coords.altitudeAccuracy;
-                this.heading=position.coords.heading;
-                this.speed=position.coords.speed;
-                this.timestamp=position.timestamp;
-            }
-            function printScreen(){
-                this.attr=attrMenuHeader;
-                this.content=beginPos+villeGeoLoc+'/'+paysGeoLoc+endPos;
-                console.log('test : '+this.attr +' , '+ this.content);
-                this.affiche=$(this.attr).html(this.content);
-            }
-            function GoogleApi(latitude,longitude)
-            {
-
-                var dataRequest;
-
-                this.output='json';
-                this.urlApi='https://maps.googleapis.com/maps/api/geocode/'+this.output+'?latlng=';
-                this.latitude=latitude;
-                this.longitude=longitude;
-                this.url=this.urlApi+this.latitude+','+this.longitude;
-                this.requestJson=function(){
-                    $.get(this.url, function(data){
-                        console.log(data);
-                        for (var i = 0; i < data.results.length; i++)
-                        {
-                            for (var z = 0; z< data.results[i].types.length; z++)
-                            {
-                                if(data.results[i].types[z] == 'locality'){
-
-                                    for (var y = 0; y < data.results[i].address_components.length;y++)
-                                    {
-                                        for (var x = 0; x < data.results[i].address_components[y].types.length;x++){
-                                            if( data.results[i].address_components[y].types[x] =='locality')
-                                            {
-                                                console.log('#' +i+ '#'+ z  + ' ' + data.results[i].address_components[y].long_name );
-                                                setCookie('villeGeoLoc',data.results[i].address_components[y].long_name,3);
-                                            }
-                                        }
-
-                                    }
-                                }
-                                if(data.results[i].types[z] == 'country'){
-                                    for (var y = 0; y < data.results[i].address_components.length;y++)
-                                    {
-                                        console.log('#' +i+ '#'+ z  + ' ' + data.results[i].address_components[y].long_name + ': ' + data.results[i].address_components[y].short_name);
-
-                                        setCookie('paysGeoLoc',data.results[i].address_components[y].long_name,3);
-                                        setCookie('paysGeoLocISO',data.results[i].address_components[y].short_name,3);
-                                    }
-                                }
-                            }
-                        }
-                    })
-                            .success(function(data){
-                                villeGeoLoc = getCookie('villeGeoLoc');
-                                paysGeoLoc = getCookie('paysGeoLoc');
-                                paysGeoLocISO =getCookie('paysGeoLocISO');
-                            })
-                            .complete(function(data){
-                                console.log('complited');
-                                printScreen();
-                            });
-
-                };
-            }
-
-            var Geoloc={
-                options : {
-                    enableHighAccuracy  : true,
-                    timeout             : 5000,
-                    maximumAge          : 0
-                },
-                success :function(pos)
-                {
-                    this.attributs = new PositionAttribut(pos);
-                    this.geoApi = new GoogleApi(this.attributs.latitude, this.attributs.longitude);
-                    this.geoApi.requestJson();
-                },
-                error:function(err)
-                {
-                    console.warn('ERROR(' + err.code + '): ' + err.message);
-                },
-                geoPos:function(c){
-                    navigator.geolocation.getCurrentPosition(this.success, this.error, this.options);
-                }
-            };
-            /* init Geo */
-            var whereAmI=Geoloc;
-
-            /*affiche Geo*/
-            if(navigator.geolocation){
-                whereAmI.geoPos();
-            }
-
-            /* icon menu */
-            function GlobalOpenMenuInit(){
-                if(GlobalOpenMenu!='' && x!=GlobalOpenMenu){
-                    GlobalOpenMenu.className='iconZoom off';
-                }
-            }
-
-            $('document').ready(function(){
-
-
-                $(attrMenuHeader).click(function(){
-                    whereAmI.geoPos();
-                    GlobalOpenMenu.className='iconZoom off';
-                    GlobalOpenMenu='';
-                    console.log('ok geoPos again');
-                });
-
-                $('.icon a').click(function(){
-                    x = $(this).parents('.icon').find( "div.iconZoom")[0];
-
-                    GlobalOpenMenuInit();
-
-                    x.className=(x.className=='iconZoom off')?'iconZoom on':'iconZoom off';
-                    console.log(x);
-                    console.log(GlobalOpenMenu );
-
-                    GlobalOpenMenu = x;
-                })
-
-            });
-
-        </script>
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+
         {% block header %}
             {%  include ':include:header.html.twig' %}
         {% endblock header %}
+
         <section class="body">
+
             {%  block slide %}{%  endblock %}
+
             <div class="wrap">
                 <div class="section group">
                     <div class="colonneA">
                         <div id="in" style="padding:2px 10px 10px 10px"></div>
-
-                        <script>
-                            $(document).ready(function(){
-                                $( "#feature" ).clone().prependTo( $( ".colonneA #in" ));
-                                $(".colonneA>#feature>.chg").className="chg card col_1_of_1 span_1_of_1";
-                            })
-                        </script>
-
                     </div>
-
                     <div class="colonneB">
                         <section id="response" ></section>
+
+
                         {% block body %}{% endblock body %}
+
+
                     </div>
-
                     <div class="colonneC" style="padding:2px 10px 10px 10px">
-                        <div id="in"></div>
-                        <script>
-                            $(document).ready(function(){
-                                $( "#feature" ).clone().prependTo( $( ".colonneC" ));
-                                $(".colonneC>#new>.chg").className="chg card col_1_of_1 span_1_of_1";
-                            });
-
-                        </script>
+                        <div id="in"  style="padding:2px 10px 10px 10px"></div>
                     </div>
                 </div>
             </div>
         </section>
+
         {% block footer %}
             {%  render(controller('CmsUlysseBundle:Header:foot')) %}
         {% endblock footer %}
 
         {% block javascripts %}{% endblock javascripts%}
 
-        {% block modal %}
-        {% endblock %}
+        {% block modal %}{% endblock %}
 
         {% block minimenu %}{% endblock %}
 
-        {% block javas %}
-            {% javascripts
-                'js/masonry/masonry.min.js'
-                'js/masonry/main.js'
-
-                output='js/compiled/app.js' %}
-            <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-        {% endblock %}
-        <script>
-            /* scroll header*/
-            $(function(){
-                $('.header-bottom').data('size','big');
-            });
-
-            $(window).scroll(function(){
-                if($(document).scrollTop() > 0)
-                {
-                    if($('.header-bottom').data('size') == 'big')
-                    {
-                        $('.header-bottom').data('size','small');
-                        $('.header-bottom').stop().animate({
-                            height:'120px',
-                            zIndex: 999,
-                            top:'0'
-                        },200);
-                        $('#c-circle-nav').fadeIn( "slow" );
-
-                        $('.tag-list').fadeOut( 100 );
-                        $('.logo h2').fadeOut( 100 );
-                        $('.menu').stop().animate({
-                            marginLeft: '10%'
-                        },200);
-                        $('.search').fadeOut("slow");
-
-                    }
-                }
-                else
-                {
-                    if($('.header-bottom').data('size') == 'small')
-                    {
-                        $('.header-bottom').data('size','big');
-                        $('.header-bottom').stop().animate({
-                            height:'200px',
-                            zIndex: 999,
-                            top: '30px'
-                        },400);
-                        $('.search').stop().animate({
-                            width: '50px',
-                            marginLeft: '0'
-                        },200);
-                        $('.search').fadeIn("slow");
-                        $('.menu').stop().animate({
-                            marginLeft: '0'
-                        },200);
-                        $('#c-circle-nav').fadeOut( "slow" );
-                        $('.tag-list').fadeIn( "slow" );
-                        $('h2').fadeIn( "slow" );
-                    }
-                }
-            });
-            $('.sh').click(function(){
-                $('.search').focus().toggle();
-                $('.search').stop().animate({
-                    width: '120px',
-                    marginLeft: '200px'
-                },200);
-            });
-
-            /* svg */
-            jQuery('img.svg').each(function(){
-                var $img = jQuery(this);
-                var imgID = $img.attr('id');
-                var imgClass = $img.attr('class');
-                var imgURL = $img.attr('src');
-
-                jQuery.get(imgURL, function(data) {
-                    // Get the SVG tag, ignore the rest
-                    var $svg = jQuery(data).find('svg');
-
-                    // Add replaced image's ID to the new SVG
-                    if(typeof imgID !== 'undefined') {
-                        $svg = $svg.attr('id', imgID);
-                    }
-                    // Add replaced image's classes to the new SVG
-                    if(typeof imgClass !== 'undefined') {
-                        $svg = $svg.attr('class', imgClass+' replaced-svg');
-                    }
-
-                    // Remove any invalid XML tags as per http://validator.w3.org
-                    $svg = $svg.removeAttr('xmlns:a');
-
-                    // Replace image with new SVG
-                    $img.replaceWith($svg);
-
-                }, 'xml');
-
-            });
-
-
-        </script>
-        <!--/* mini menu */-->
+        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
         <script src="{{ asset('js/circleMenu.min.js') }}"></script>
     </body>
 </html>

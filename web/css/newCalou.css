@@ -1,0 +1,40 @@
+/**
+*create by Navière Pascal
+*/
+.colonneA .chg.card.col_1_of_3.span_1_of_3{
+    display: block !important;
+    width:100%;
+    padding:0 0 15px 0;
+    margin: 0 0 20px 0;
+}
+.colonneC .chg.card.col_1_of_3.span_1_of_3{
+    display: block !important;
+    width:100%;
+    padding:0 0 15px 0;
+    margin: 0 0 20px 0;
+}
+.input{
+    color:black !important;
+}
+.fwslider{
+    margin-top: 20px !important;
+}
+#c-circle-nav__toggle{
+    transform: scale(0.65);
+    -webkit-transform: scale(0.65);
+}
+.svg path {
+    fill: #FFF !important;
+}
+.svg{
+    height:100%;
+    width:100%;
+    padding: 18% 18%;
+    margin-top:-2%
+}
+body{
+    color:black;
+}
+.btn{
+    z-index: 0 !important;
+}

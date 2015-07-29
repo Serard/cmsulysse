@@ -27,6 +27,7 @@ class LoadSettingsData  extends AbstractFixture implements OrderedFixtureInterfa
             ->setFooter('Hey c mon footer super génial')
             ->setCorpsColonnes(1)
             ->setBestProduct(true)
+            ->setNuggets(true)
             ->setCmActive(true)
             ->setCommunityManagement('Qui a touché à mon code ? Ça marchait très bien hier')
             ->setSlider(true);
