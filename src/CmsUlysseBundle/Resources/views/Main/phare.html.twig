@@ -1,4 +1,4 @@
-<div class="span_1_of_left">
+<div class="span_1_of_left" id="phare">
     <div class="top-border"> </div>
     <div class="border">
         <link href="{{ asset('default.css')}}" rel="stylesheet" type="text/css" media="all" />
@@ -12,7 +12,7 @@
         <div class="slider-wrapper theme-default">
             <div id="slider" class="nivoSlider">
                 {%  for phare in phares  %}
-                <img class="taboul" id="{{ phare.id  }}" src="{{ phare.image }}"  alt="" />
+                <img class="taboul" id="{{ phare[0].id  }}" src="http://bliister.com/upload/thumb/no_img.jpg"  alt="" />
                 {%  endfor  %}
             </div>
         </div>

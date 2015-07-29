@@ -35,19 +35,16 @@ class UserProductRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findBestProduct($limit = 10)
+    public function findBest($limit = 10)
     {
         $qb = $this->createQueryBuilder('u');
-        $qb->join('u.product', 'p')
-            ->addSelect('p')
-            ->leftJoin('up.commands', 'cd')
-            ->andWhere("up.id is not null")
-            ->groupBy('p')
-            ->orderBy(count('p'))
+        $qb->join('u.commands', 'c')
+           ->addSelect('c, SUM(c.qty) as somme')
+           ->groupBy('c.product')
+           ->orderBy('somme', 'DESC')
+           ->setMaxResults(10)
         ;
 
-        if($limit != null){
-            $qb->setMaxResults($limit);
-        }
+        return $qb->getQuery()->getResult();
     }
 }
