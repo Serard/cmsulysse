@@ -6,15 +6,19 @@
             padding: 0;
             box-sizing: border-box;
         }
-        fieldset, fieldset *, fieldset *>* {
-            z-index: 0 !important;
+
+        html, body {
+            height: 100%;
+            font-family: "Roboto Slab", serif;
+            background-color: #4CB1CA;
+        }
+        .body{
+            color: white;
+        }
+        .body input{
+            color: #000000;
         }
 
-        body{
-            height: 100%;
-            background-color: #4CB1CA;
-            font-family: "Roboto Slab", serif;
-        }
 
         body label{
             color: #FFF;
@@ -132,6 +136,9 @@
         }
         #route{
             width: 284px;
+        }
+        .flag-dropdown * , .flag-dropdown{
+            color:#545454;
         }
     </style>
 <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="form-group">

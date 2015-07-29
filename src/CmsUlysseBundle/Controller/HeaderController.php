@@ -141,7 +141,7 @@ class HeaderController extends Controller
 
             //'middle'
             case 1 :
-                $style .= ".colonneA{display:none;}";
+                $style .= ".colonneA{display:none;};";
                 $style .= ".colonneB{display:block;width:100%;}";
                 $style .= ".colonneC{display:none}";
                 break;
@@ -149,7 +149,7 @@ class HeaderController extends Controller
             //'middle&left'
             case 2 :
                 $style .= ".colonneA{display:inline-block;vertical-align:top;width: 250px;height:100%;}";
-                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - 250px - 4px);}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - 250px - 4px);} .colonneB #feature{display:none;}";
                 $style .= ".colonneC{display:none;}";
                 break;
 
@@ -157,12 +157,12 @@ class HeaderController extends Controller
             case 3 :
                 $style .= ".colonneA{display:none;}";
                 $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - (100% / 4) - 4px);}";
-                $style .= ".colonneC{display:inline-block;vertical-align:top;width:calc(100%  / 4);}";
+                $style .= ".colonneC{display:inline-block;vertical-align:top;width:calc(100%  / 4);} .colonneB #new{display:none;}";
                 break;
 
             default:
                 $style .= ".colonneA{display:inline-block;vertical-align:top;width: 250px;height:100%}";
-                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - 250px - ((100% - 250px) / 4) ) - 8px);}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - 250px - ((100% - 250px) / 4) ) - 8px);}.colonneB #feature{display:none;}.colonneB #new{display:none;}";
                 $style .= ".colonneC{display:inline-block;vertical-align:top;width:calc((100% - 250px) / 4);}";
                 break;
         }
@@ -191,7 +191,7 @@ class HeaderController extends Controller
         $background_color_body=($background_color_body == '' && $global_color != '')? hex2rgba($background_color_body,$global_color,true):$background_color_body;
         $background_color_body=(trim($background_color_body)==''||strtoupper($background_color_body[0])=='R')?$background_color_body:hex2rgba($background_color_body);
 
-        $settings_background_img_body='/'.$site->getWebPath();
+        $settings_background_img_body=($site->getWebPath())?'/'.$site->getWebPath():'';
         $color_text_body='';
         $color_text_body=($color_text_body == '' && $global_color != '')? hex2rgba($color_text_body,$global_color,false):$color_text_body;
         $color_text_body=(trim($color_text_body)==''||strtoupper($color_text_body[0])=='R')?$color_text_body:hex2rgba($color_text_body);

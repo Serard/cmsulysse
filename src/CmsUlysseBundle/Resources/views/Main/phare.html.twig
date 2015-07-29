@@ -1,0 +1,29 @@
+<div class="span_1_of_left">
+    <div class="top-border"> </div>
+    <div class="border">
+        <link href="{{ asset('default.css')}}" rel="stylesheet" type="text/css" media="all" />
+        <link href="{{ asset('nivo-slider.css') }}" rel="stylesheet" type="text/css" media="all" />
+        <script src="{{ asset('js/jquery.nivo.slider.js') }}"></script>
+        <script type="text/javascript">
+            $(window).load(function() {
+                $('#slider').nivoSlider();
+            });
+        </script>
+        <div class="slider-wrapper theme-default">
+            <div id="slider" class="nivoSlider">
+                {%  for phare in phares  %}
+                <img class="taboul" id="{{ phare.id  }}" src="{{ phare.image }}"  alt="" />
+                {%  endfor  %}
+            </div>
+        </div>
+        <div class="btn"><a onclick="checkout();">Check it Out</a></div>
+    </div>
+    <script>
+        function checkout(){
+            var id=$('.taboul').attr('id');
+            location.href='{{ path('market_cart') }}'+'product/'+id;
+        }
+
+    </script>
+</div>
+<div class="clear"></div>
