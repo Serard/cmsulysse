@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}CmsUlysseBundle:Product:view{% endblock %}
+{% block title %}{{ product.name }}{% endblock %}
 
 {% block body %}
     <h1 style="color: #003366">Produit : {{ product.name }}</h1>
@@ -22,7 +22,9 @@
                 </br>
             </div>
             <div class="col-lg-4">
-                <a href="" class="btn btn-primary">Vendre</a>
+                {% if product.valid %}
+                    <a href="{{ path('product_sell', {'id': product.id}) }}" class="btn btn-primary">Vendre</a>
+                {% endif %}
             </div>
             </div>
         {% if product.specifications | length > 0  %}

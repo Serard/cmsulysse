@@ -4,7 +4,8 @@
 
 {% block body %}
     <h1>Mon panier</h1>
-    <table>
+    <hr>
+    <table class="table">
         <tr>
             <th>Nom</th>
             <th>Description</th>
@@ -12,6 +13,7 @@
             <th>Quantité</th>
             <th>Vendeur</th>
             <th>Total</th>
+            <th></th>
         </tr>
         {% set totaux = 0 %}
         {% for userproduct in products %}
@@ -25,28 +27,29 @@
                 <td id="seller{{ userproduct.id }}">{{ userproduct.seller }}</td>
                 <td id="total{{ userproduct.id }}">
                 </td>
-                <td><input type="button" onclick="deleteCart({{ userproduct.id }});" value="Supprimer"/></td>
+                <td><input type="button" onclick="deleteCart({{ userproduct.id }});" value="Supprimer" class="btn btn-danger"/></td>
                 <td id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez atteind la quantité maximum de ce produit</td>
             </tr>
         {% endfor %}
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td id="totaux"></td>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th id="totaux"></th>
+            <th></th>
         </tr>
     </table>
 
-    <button id="command" onclick="formOrder();">Commander</button>
+    <button id="command" onclick="formOrder();" class="btn btn-success">Commander</button>
 
     <div id="order" style="display:none">
         <h1>Adresse de Livraison:</h1>
         {{ form(form) }}
     </div>
-
-    <a href="{{ path('market_cart') }}">Retour</a>
+    <a href="{{ path('home') }}" class="btn btn-info">Retour</a>
+    <hr>
     <script>
         var cart = getCookie('cart')!="" ? JSON.parse(getCookie('cart')) : new Array();
 
