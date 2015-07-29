@@ -12,6 +12,9 @@ master version : v0.0
 
 
 --------------------------------
+dev version : dev-v1.1.18
+add gestion user and color text body and header
+
 dev version : dev-v1.1.17
 autre(s) vendeur(s) détail userproduct
 
