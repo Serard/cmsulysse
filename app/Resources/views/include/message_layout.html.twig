@@ -1,17 +1,14 @@
 {% extends "::base.html.twig" %}
 
 {% block body %}
-    <a href="#"><strong>Boite de Réception</strong></a>
-
-    <hr>
-    <div class="col-lg-6">
-        <ul>
-            <li><a href="{{ url('cms_messagerie_inbox') }}">Boite de réception</a></li>
-            <li><a href="{{ url('cms_messagerie_sent') }}">Messages Envoyés</a></li>
-            <li><a href="{{ url('cms_messagerie_deleted') }}">Archives</a></li>
-        </ul>
+    <div class="col-lg-3">
+        <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+            <a href="{{ url('cms_messagerie_inbox') }}" type="button" class="btn btn-default">Boite de Réception</a>
+            <a href="{{ url('cms_messagerie_sent') }}" type="button" class="btn btn-default">Messages Envoyés</a>
+            <a href="{{ url('cms_messagerie_deleted') }}" type="button" class="btn btn-default">Archives</a>
+        </div>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-8">
         {% block fos_message_content %}{% endblock %}
     </div>
 

@@ -10,8 +10,11 @@
         <ul class="list-group">
             <li class="list-group-item"><span class="badge">{{ site.name }}</span>Titre du site</li>
             <li class="list-group-item"><span class="badge">{{ site.slogan }}</span> Slogan</li>
-            <li class="list-group-item"><span class="badge" style="background:{{ site.themeColor }};">{{ site.themeColor }}</span> Thème Couleur</li>
+            <li class="list-group-item"><span class="badge" style="background:{{ site.bodyColor }};">{{ site.bodyColor }}</span>Couleur du body</li>
+            <li class="list-group-item"><span class="badge" style="background:{{ site.headerColor }};">{{ site.headerColor }}</span>Couleur du header</li>
+            <li class="list-group-item"><span class="badge" style="background:{{ site.iconeColor }};">{{ site.iconeColor }}</span>Couleur des icones</li>
             <li class="list-group-item"><span class="badge">{{ site.positionMenu == 1 ? 'A droite de la page' : 'En haut de la page'}}</span>Position du Menu</li>
+            <li class="list-group-item"><span class="badge">{{ site.footer }}</span> Footer</li>
             <li class="list-group-item">
                 <span class="badge">
                     {% if site.corpsColonnes == 1 %}
@@ -27,10 +30,10 @@
 
             <li class="list-group-item">
                 Image du fond d'écran
-                {% if site.background is defined and if site.background != null %}
+                {% if site.background is defined and site.background != null %}
                     <img style="margin-left: 50px; border-radius: 10%" width="300px" src="{{ asset(site.getWebPath())}}" alt="" />
+                    <a class="btn btn-primary" href="{{ path('remove_background_admin', {'id': site.id }) }}">Supprimer l'image</a>
                 {% endif %}
-                <a class="btn btn-primary" href="{{ path('remove_background_admin', {'id': site.id }) }}">Supprimer l'image</a>
             </li>
         </ul>
 

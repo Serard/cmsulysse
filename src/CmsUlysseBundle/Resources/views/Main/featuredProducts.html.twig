@@ -1,8 +1,10 @@
+<section id="feature">
+
 {% for titleC, products in category %}
-    <h2 class="head">{{ titleC }}</h2>
+       <h2 class="head">{{ titleC }}</h2>
        <div class="top-box">
         {% for product in products %}
-        <div class="card col_1_of_3 span_1_of_3">
+        <div class="chg card col_1_of_3 span_1_of_3">
             <a href="{{ path('product_view', {id: product.minPrice.id}) }}">
                 <div class="inner_content clearfix">
                     <div class="product_image" style="background: url();">
@@ -26,3 +28,4 @@
         <div class="clear"></div>
     </div>
 {%  endfor %}
+</section>

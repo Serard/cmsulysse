@@ -26,10 +26,15 @@
     <div class="panel panel-default">
         <div class="panel-heading"><h4>Community Manager</h4></div>
         <div class="panel-body">
-            <p>Activé:  {{ site.cmActive  ? 'oui' : 'non' }}</p>
-            <a class="btn btn-primary" href="">
-                {{ site.cmActive  ? 'Désactiver' : 'Activer' }}
-            </a>
+            <div class="col-lg-2">
+                <p>Activé:  {{ site.cmActive  ? 'oui' : 'non' }}</p>
+                <a class="btn btn-primary" href="{{ path('active_cm_admin', {'id': site.id}) }}">
+                    {{ site.cmActive  ? 'Désactiver' : 'Activer' }}
+                </a>
+            </div>
+            <div class="col-lg-10">
+                {{ form(form) }}
+            </div>
         </div>
     </div>
 {% endblock %}

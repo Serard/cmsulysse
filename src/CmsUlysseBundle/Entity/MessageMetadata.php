@@ -9,7 +9,7 @@ use FOS\MessageBundle\Entity\MessageMetadata as BaseMessageMetadata;
  * MessageMetadata
  *
  * @ORM\Table()
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="CmsUlysseBundle\Entity\MessageMetadataRepository")
  */
 class MessageMetadata extends BaseMessageMetadata
 {

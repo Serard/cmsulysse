@@ -22,11 +22,32 @@
                 {{ form_errors(form.slogan) }}
             </section>
             <section class="form-group">
-                {{ form_label(form.theme_color, "Thème Couleur", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                {{ form_label(form.body_color, "Couleur du body", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
                 <div class="col-sm-10">
-                    {{ form_widget(form.theme_color, {'attr': {'class': 'form-control'}} ) }}
+                    {{ form_widget(form.body_color, {'attr': {'class': 'form-control'}} ) }}
                 </div>
-                {{ form_errors(form.theme_color) }}
+                {{ form_errors(form.body_color) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.header_color, "Couleur du header", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.header_color, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.header_color) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.icone_color, "Couleur des icones", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.icone_color, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.icone_color) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.footer, "Footer", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.footer, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.footer) }}
             </section>
             <section class="form-group">
                 {{ form_label(form.position_menu, "Position du Menu", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}

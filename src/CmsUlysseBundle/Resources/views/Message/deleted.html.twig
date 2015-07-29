@@ -11,7 +11,8 @@
     {% endblock %}
 {% else %}
     {% block fos_message_content %}
-        <h2>Discussions Archivées</h2>
+        <h2 style="color: #003366;">Discussions Archivées</h2>
+        <hr>
         {% include 'CmsUlysseBundle:Message:threads_list.html.twig' with {'threads': threads} %}
     {% endblock %}
 {% endif %}
