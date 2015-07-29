@@ -76,4 +76,14 @@ class UserProductController extends Controller
             'form' => $form->createView(),
         );
     }
+
+    /**
+     * @Route("/user/product/{id}", name="product_user_view")
+     * @Template("CmsUlysseBundle:UserProduct:view.html.twig")
+     */
+    public function viewAction(UserProduct $userProduct)
+    {
+
+        return array('userProduct' => $userProduct);
+    }
 }

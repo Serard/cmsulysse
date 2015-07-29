@@ -212,7 +212,14 @@ class AdminController extends Controller
         return $this->redirectToRoute('modules_admin');
     }
 
+    /* @Route("/config/nuggets/{id}/edit", name="active_nuggets")
+    * @Template()
+    */
+    public function active_nuggets(Site $site)
+    {
+        $site->setNuggets(!$site->getNuggets());
+        $this->getDoctrine()->getManager()->flush();
 
-
-
+        return $this->redirectToRoute('modules_admin');
+    }
 }

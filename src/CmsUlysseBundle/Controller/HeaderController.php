@@ -36,6 +36,8 @@ class HeaderController extends Controller
         $site = $repository->findOneBy(array());
         $siteVal=toArray($site);
 
+        //var_dump($siteVal);
+
             $style='';
 
 
@@ -132,10 +134,13 @@ class HeaderController extends Controller
 
         $global_color = $siteVal['bodyColor'];//'#00007A';
 
-
         /* custom style colonne*/
 
         $nbColonne=$siteVal['corpsColonnes'];
+
+        $style.=($site->nuggets())?'#{display:none;}':'';
+        $style.=($site->isSlider())?'#fwslider{display:none;}':'';
+        //$style.=($site->bestProduct())?'#phare{display:none;}':'';
 
         switch ($nbColonne) {
 
@@ -148,8 +153,8 @@ class HeaderController extends Controller
 
             //'middle&left'
             case 2 :
-                $style .= ".colonneA{display:inline-block;vertical-align:top;width: 250px;height:100%;}";
-                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - 250px - 4px);} .colonneB #feature{display:none;}";
+                $style .= ".colonneA{display:inline-block;vertical-align:top;width:calc(100% / 4);height:100%;}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - (100% / 4) - 4px);} .colonneB #feature{display:none;}";
                 $style .= ".colonneC{display:none;}";
                 break;
 
@@ -161,13 +166,13 @@ class HeaderController extends Controller
                 break;
 
             default:
-                $style .= ".colonneA{display:inline-block;vertical-align:top;width: 250px;height:100%}";
-                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - 250px - ((100% - 250px) / 4) ) - 8px);}.colonneB #feature{display:none;}.colonneB #new{display:none;}";
-                $style .= ".colonneC{display:inline-block;vertical-align:top;width:calc((100% - 250px) / 4);}";
+                $style .= ".colonneA{display:inline-block;vertical-align:top;width:calc(100% / 5);height:100%;}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - (100% / 5) - (100% / 5) - 8px);}.colonneB #feature{display:none;}.colonneB #new{display:none;}";
+                $style .= ".colonneC{display:inline-block;vertical-align:top;width:calc(100% / 5)}";
                 break;
         }
         /* custom style header*/
-        $background_color_header='';
+        $background_color_header=$siteVal['headerColor'];
         $background_color_header=($background_color_header == '' && $global_color != '')? hex2rgba($background_color_header,$global_color,false):$background_color_header;
         $background_color_header=(trim($background_color_header)==''||strtoupper($background_color_header[0])=='R')?$background_color_header:hex2rgba($background_color_header);
 
@@ -187,7 +192,7 @@ class HeaderController extends Controller
 
 
         /* custom style body */
-        $background_color_body='';
+        $background_color_body=$siteVal['bodyColor'];
         $background_color_body=($background_color_body == '' && $global_color != '')? hex2rgba($background_color_body,$global_color,true):$background_color_body;
         $background_color_body=(trim($background_color_body)==''||strtoupper($background_color_body[0])=='R')?$background_color_body:hex2rgba($background_color_body);
 
@@ -229,7 +234,7 @@ class HeaderController extends Controller
 
         /* custom style footer */
 
-        $background_color_footer='';
+        $background_color_footer=$siteVal['headerColor'];
         $background_color_footer=($background_color_footer == '' && $global_color != '')? hex2rgba($background_color_footer,$global_color,false):$background_color_footer;
         $background_color_footer=(trim($background_color_footer)==''||strtoupper($background_color_footer[0])=='R')?$background_color_footer:hex2rgba($background_color_footer);
 
@@ -247,7 +252,7 @@ class HeaderController extends Controller
 
 
         /* custom style icon */
-        $background_icon='';
+        $background_icon=$siteVal['iconeColor'];
         $background_icon=($background_icon == '' && $global_color != '')? hex2rgba($background_icon,$global_color,true):$background_icon;
         $background_icon=(trim($background_icon)==''||strtoupper($background_icon[0])=='R')?$background_icon:hex2rgba($background_icon);
 
@@ -256,7 +261,7 @@ class HeaderController extends Controller
         $color_icon=(trim($color_icon)==''||strtoupper($color_icon[0])=='R')?$color_icon:hex2rgba($color_icon);
 
         $background_iconC='';
-        $background_iconC=($background_iconC == '' && $global_color != '')? hex2rgba($background_iconC,$global_color,true, '#7DB122'):$background_iconC;
+        $background_iconC=($background_iconC == '' && $global_color != '')? hex2rgba($background_iconC,$global_color,true):$background_iconC;
         $background_iconC=(trim($background_iconC)==''||strtoupper($background_iconC[0])=='R')?$background_iconC:hex2rgba($background_iconC);
 
 
@@ -310,10 +315,23 @@ class HeaderController extends Controller
         $repository = $em->getRepository('CmsUlysseBundle:Site');
         $site = $repository->findOneBy(array());
 
-
-
         return $this->render('CmsUlysseBundle:Main:header.html.twig',  array(
                 'site'  => $site,
+            )
+        );
+    }
+
+    public function footAction()
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $repository = $em->getRepository('CmsUlysseBundle:Site');
+        $site = $repository->findOneBy(array());
+
+           $CM= ($site->getCmActive())?$site->getCommunityManagement():'';
+        return $this->render('CmsUlysseBundle:Main:footer.html.twig',  array(
+                'footer'  => $site->getFooter(),
+                'cm' => $CM
             )
         );
     }

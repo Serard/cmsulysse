@@ -51,9 +51,12 @@ class ProductController extends Controller
                     $product->removeSpecification($specification);
                 }
             }
-            foreach($product->getPictures() as $picture){
-                $picture->setProduct($product);
+            if($product->getPictures()){
+                foreach($product->getPictures() as $picture){
+                    $picture->setProduct($product);
+                }
             }
+
             foreach($product->getSpecifications() as $specification){
                 $specification->setProduct($product);
             }
