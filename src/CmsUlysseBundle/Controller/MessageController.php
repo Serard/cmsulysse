@@ -218,13 +218,4 @@ class MessageController extends BaseController
             'data' => $form->getData()
         );
     }
-    /**
-     * @Route("/admin-contact", name="cms_messagerie_contact_admin")
-     * @Template("CmsUlysseBundle:Message:contact_admin.html.twig")
-     */
-    public function contactAdminAction()
-    {
-        return array(
-        );
-    }
 }

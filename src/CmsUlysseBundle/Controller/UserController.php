@@ -58,6 +58,44 @@ class UserController extends Controller
             );
     }
 
+    /**
+     * @Route("/contact-admin", name="contact_admin")
+     * @Template("CmsUlysseBundle:User:contactAdmin.html.twig")
+     */
+    public function contactAdminAction(Request $request)
+    {
+        $form = $this->createFormBuilder()
+            ->add('objet', 'text', array('required' => true))
+            ->add('message', 'textarea', array('required' => true))
+            ->add('envoyer', 'submit', array(
+                'attr' => array('class' => 'btn btn-primary'),
+                'label' => false))
+            ->getForm();
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $message = $form->getData();
+            $user = $this->get('security.context')->getToken()->getUser();
+            $message['sender'] = $user;
+
+            $mail = \Swift_Message::newInstance()
+                ->setSubject($message['message'])
+                ->setFrom($user->getEmail())
+                ->setTo('pauline.rdc@gmail.com')
+                ->setBody($this->renderView(
+                    'CmsUlysseBundle:Mailing:contactAdmin.txt.twig',
+                    array('message' => $message))
+                );
+
+            $this->get('mailer')->send($mail);
+
+            return($this->redirect($this->generateUrl('home')));
+        }
+        return array(
+            'form' => $form->createView()
+        );
+    }
+
     public function contactAction(User $user, $subject, $body)
     {
         $em = $this->getDoctrine()->getManager();
@@ -76,4 +114,6 @@ class UserController extends Controller
 
         return $this;
     }
+
+
 }

@@ -24,54 +24,11 @@
 
         <div class="search">
             <input id='search' type="text" name="s" class="textbox" placeholder="Search" >
+            <div id="TargetSelect"></div>
             <script>
-                /* search */
-
-                var search = {};
-                search.attribute = document.getElementById('search');
-                var url      = '{{ path('search_cart') }}';
-
-
-                search.request = function(data){$.post( url, data ,function(response) {
-                    document.getElementById('response').innerHTML = response;
-                })
-                        .done(function() {
-                            console.log( "second success" );
-                        })
-                        .fail(function() {
-                            console.log( "error" );
-                        })
-                        .always(function() {
-                            console.log( "complete" );
-                        })
-                        .complete(function() {
-                            console.log("second complete");
-                        });
-                };
-
-                $(search.attribute).keyup(function() {
-                    var data={};
-                    data.search= search.attribute.value;
-                    console.log(data);
-                    search.request(data);
-                });
-
-                $('select').change(function(){
-                    var category = $("select option:selected").text();
-                    var id = document.getElementById(category).getAttribute("name");
-                    if (id == "0") {
-                        location.href=redirUrl;
-                    } else {
-                        location.href=redirUrl+'category/'+id;
-                    }
-                })
-
-
-
-
+                $( "#select" ).appendTo( $( "#TargetSelect" ));
             </script>
         </div>
-
 
         <div class="tag-list">
 
