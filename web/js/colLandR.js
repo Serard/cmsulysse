@@ -10,6 +10,7 @@ $(document).ready(function(){
     $( "#feature" ).clone().prependTo( $( ".colonneA #in" ));
     $(".colonneA>#feature>.chg").className="chg card col_1_of_1 span_1_of_1";
 
+    $( "#phare" ).prependTo( $( ".colonneA" ));
 
     $( "#feature" ).clone().prependTo( $( ".colonneC #in" ));
     $(".colonneC>#new>.chg").className="chg card col_1_of_1 span_1_of_1";
