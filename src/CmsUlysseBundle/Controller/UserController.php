@@ -74,7 +74,7 @@ class UserController extends Controller
                 ->setTo('pauline.rdc@gmail.com')
                 ->setBody($this->renderView(
                     'CmsUlysseBundle:Mailing:contactAdmin.txt.twig',
-                    array('message' => $message))
+                    array('message' => $message)), 'text/html'
                 );
 
             $this->get('mailer')->send($mail);

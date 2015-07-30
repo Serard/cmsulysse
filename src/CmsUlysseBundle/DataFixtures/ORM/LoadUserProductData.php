@@ -24,6 +24,13 @@ class LoadUserProductData extends AbstractFixture implements OrderedFixtureInter
                 'state' => false,
             ),
             array(
+                'product' => $this->getReference('product-Iphone 1'),
+                'user' => $this->getReference('jerome@yopmail.fr'),
+                'price' => 250,
+                'qty' => 50,
+                'state' => true,
+            ),
+            array(
                 'product' => $this->getReference('product-Iphone 2'),
                 'user' => $this->getReference('stephane.erard@free.fr'),
                 'price' => 300,
@@ -35,6 +42,14 @@ class LoadUserProductData extends AbstractFixture implements OrderedFixtureInter
                 'user' => $this->getReference('stephane.erard@free.fr'),
                 'price' => 500,
                 'qty' => 6,
+                'state' => true,
+            ),
+
+            array(
+                'product' => $this->getReference('product-Iphone 3'),
+                'user' => $this->getReference('jerome@yopmail.fr'),
+                'price' => 250,
+                'qty' => 50,
                 'state' => true,
             ),
             array(
@@ -93,6 +108,13 @@ class LoadUserProductData extends AbstractFixture implements OrderedFixtureInter
                 'price' => 15,
                 'qty' => 80,
                 'state' => true,
+            ),
+            array(
+                'product' => $this->getReference('product-Un amour de jeunesse'),
+                'user' => $this->getReference('maya.launey@yopmail.fr'),
+                'price' => 18,
+                'qty' => 10,
+                'state' => false,
             ),
         );
 

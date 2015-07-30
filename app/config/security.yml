@@ -38,6 +38,7 @@ security:
         - { path: ^/commanduser, role: ROLE_USER }
         - { path: ^/commandseller, role: ROLE_USER }
         - { path: ^/user/product, role: ROLE_USER }
+        - { path: ^/product, role: ROLE_USER }
 
         - { path: ^/admin/*, role: ROLE_ADMIN }
 

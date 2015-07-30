@@ -1,578 +1,67 @@
 <div>
-    <!-- Wrapper 1  -->
-    <table style="background-color: rgb(35, 40, 43);" class="full" object="drag-module" c-style="BGImage" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-        <tbody style="background-image: url('https://notrecourbevoie.files.wordpress.com/2012/09/deco-laser-game.jpg'); background-position: center center; background-size: cover; background-repeat: repeat; background-color: rgb(35, 40, 43);margin:0;padding: 0;" align="center">
-        <!----------------Start Nav------------------>
-        <tr>
-            <td height="15" width="100%" colspan="3"></td>
+    <table style="border-collapse:collapse;border-spacing:0;color:#FFFFFF; font-family:'Open Sans',AppleSDGothicNeo-Medium,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13.5px;line-height:22px;background-image:url('bde.ecole-ipssi.net/mailbc.png');background-size:100% 100%; background-repeat:no-repeat;margin:0;padding:0" align="left" bgcolor="#62626e" border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr style="background:#427BBE">
+            <td style="width:6%;"></td>
+            <td style="width:88%;padding:5px 0px 6px 0px;">
+                <table style="border-collapse:collapse;border-spacing:0;color:#FFFFFF; font-family:'Open Sans',AppleSDGothicNeo-Medium,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:13.5px;line-height:22px;;margin:0;padding:0" align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td width="90px"></td>
+                        <td><strong style="padding:2%;">CMSULYSSE</strong></td>
+                    </tr>
+                </table>
+            <td style="width:6%;"></td>
         </tr>
-        <!------------------Logo--------------------->
         <tr>
-            <td  style="text-align: left;" class="fullCenter" valign="middle">
-                <a href="#">
-                    <img src="http://bde.ecole-ipssi.net/img/mail2/beapix2.png" alt="" border="0" height="42"/>
-                </a>
+            <td style="width:6%;"></td>
+            <td style="width:88%;padding:10px 20px 20px 20px;"></td>
+            <td style="width:6%;"></td>
+        </tr>
+        <tr>
+            <td style="width:6%;"></td>
+            <td style="width:88%; padding: 0 10px 10px 10px; font-size:18px;">
+                <center><strong>Vous avez un nouveau Message de </strong>  {{ message.sender.firstName }} {{ message.sender.lastName }}</center>
             </td>
-            <!-----------------Space------------------->
-            <td width="350">
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <td style="width:6%;"></td>
+        </tr>
+        <tr>
+            <td style="width:6%;"></td>
+            <td style="width:88%; padding: 0 10px 10px 10px">
+                <center>Envoyé le  {{ "now"|date }}</center>
             </td>
-            <!----------------- Button ----------------->
-            <td>
-                <div c-style="whiteButtons" style="background-color:#ffffff; font-size: 12px; color: #030303; font-family: Helvetica, Arial, sans-serif; line-height: 16px; vertical-align: middle; padding: 3px 15px; border-radius: 20px; text-transform: uppercase; margin-right: 5px;"  align="right" bgcolor="#ffffff" height="12" valign="middle">
-                    <span style="font-family: 'proxima_novasemibold', Helvetica; font-weight: normal;">
-                        <a href="https://docs.google.com/forms/d/1H5ZaQtHOwso7FSzIpHx7chFqdWG0X3XmrYwtYLBgzpQ/viewform?usp=send_form" style="color: #030303; text-decoration: none;" class="hover" object="link-editable">Newsletter</a>
-                    </span>
-                </div>
+            <td style="width:6%;"></td>
+        </tr>
+        <tr>
+            <td style="width:6%;"></td>
+            <td style="width:88%; padding: 0 10px 10px 10px">
+                <center>Objet :   {{ message.objet }}</center>
             </td>
-        </tr>
-        <!-- Space -->
-        <tr>
-            <td height="15" width="100%" colspan="3"></td>
-        </tr>
-        <!------------------lineOneTitle----------------->
-        <tr>
-            <td style="text-align: center; font-family: Helvetica,Arial,sans-serif; font-size: 20px; color: rgb(255, 255, 255); line-height: 30px;" class="fullCenter" t-style="whiteText" valign="middle" width="100%" colspan="3">
-                <p>
-                    <span style="font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal;">LE 24 JUILLET 2014</span>
-                </p>
-            </td>
-        </tr>
-        <!-- Space -->
-        <tr>
-            <td height="1" width="100%" colspan="3"></td>
-        </tr>
-        <!------------------middleOneTitle--------------->
-        <tr>
-            <td style="text-align: center; font-family: Helvetica,Arial,sans-serif; font-size: 65px; color: rgb(255, 255, 255); line-height: 72px; font-weight: bold; text-transform: uppercase; letter-spacing: 10px; word-break: break-all;" t-style="whiteText" valign="middle" width="100%" colspan="3">
-                <p>
-                    <span style="font-family: 'proxima_nova_rgbold', Helvetica; font-weight: normal;">
-                        {{ message.objet }}
-                    </span>
-                </p>
-            </td>
-        </tr>
-        <!-- Space -->
-        <tr>
-            <td height="1" width="100%" colspan="3"></td>
+            <td style="width:6%;"></td>
         </tr>
 
-        <!-- Space -->
         <tr>
-            <td height="8" width="100%" colspan="3"></td>
-        </tr>
-        <!----------------- Button Center ----------------->
-        <tr>
-            <td colspan="3" align="center" >
-                        <span style="border-radius: 30px; padding: 10px 30px; font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal; color: rgb(255, 255, 255); background-color: rgb(28, 186, 200);" t-style="whiteText" align="center" bgcolor="#1cbac8">
-                            <a href="https://www.lepotcommun.fr/billet/lt8b1gjh#/?tab=1" style="color: rgb(255, 255, 255); font-size: 18px; text-decoration: none; line-height: 34px; width: 100%;" t-style="whiteText" object="link-editable">
-                                Billeterie
-                            </a>
-                        </span>
+            <td style="width:6%;"></td>
+            <td style="width:88%; padding:10px">
+                <br/>
+                {{ message.message | nl2br}}
+                <br/><br/>
+                <br/><br/>
             </td>
-        </tr>
-        <!-- Space -->
-        <tr>
-            <td height="15" width="100%" colspan="3"></td>
+            <td style="width:6%;"></td>
         </tr>
 
-        </tbody>
+
+        <tr style="background:#427BBE" bgcolor="#427BBE" width="100%">
+            <td style="width:6%;"></td>
+            <td style="width:88%;height:20px;">
+                Pour répondre à sa demande venez vous connecter sur votre messagerie <a href="">CmsUlysse</a>
+            </td>
+            <td style="width:6%;"></td>
+        </tr>
+
+        <tr style="background:#427BBE">
+            <td style="width:6%;"></td>
+            <td style="width:88%;height:25px"></td>
+            <td style="width:6%;"></td>
+        </tr>
     </table>
-    <!-- Wrapper 2 -->
-    <table style="background-color: rgb(255, 255, 255);margin:0;" class="full" object="drag-module" c-style="bgcolor" cellpadding="0" cellspacing="0" align="center" border="0" width="100%" >
-        <tbody><tr>
-            <td align="center" valign="top" width="100%">
-                <div>
-
-                    <!-- Wrapper -->
-                    <table class="mobile" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                        <tbody><tr>
-                            <td align="center">
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="30" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                                <!-- Wrapper -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                    <tbody><tr>
-                                        <td align="center" width="100%">
-
-                                            <!-- Centered Title -->
-                                            <table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="fullCenter" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                                <tbody><tr>
-                                                    <td style="text-align: center; font-family: Helvetica,Arial,sans-serif; font-size: 26px; color: rgb(48, 48, 48); line-height: 32px; font-weight: bold;" t-style="headlines" class="fullCenter" valign="middle" width="100%">
-                                                        <p object="text-editable"><!--[if !mso]><!--><span style="font-family: 'proxima_novasemibold', Helvetica; font-weight: normal;"><!--<![endif]--><singleline>Les BeApiSummers d&eacute;barquent en Force !</singleline><!--[if !mso]><!--></span><!--<![endif]--></p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td height="30" width="100%"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: center; font-family: Helvetica,Arial,sans-serif; font-size: 15px; color: rgb(125, 125, 125); line-height: 22px;" class="fullCenter" t-style="textColor"  valign="middle" width="100%">
-                                                        <p object="text-editable">
-                                                        <span style="font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal;">
-                                                            <p>Pr&eacute;parer vous &agrave; vivre un &eacute;t&eacute; de folie avec nous, votre BDE !!</p>
-                                                            <p>Rendez - vous <strong>vendredi 24 Juillet 2014</strong>, pour le premier gros &eacute;vent de l'&eacute;t&eacute;</p>
-                                                            <p><strong>"Laser Game all mightnight". </strong></p>
-                                                            <p>De 19h &agrave; 23h non-stop laser game illimit&eacute;s et entierement privatis&eacute; pour cette &eacute;vent. Ramenez qui vous voulez, fr&egrave;res, soeur, oncle, parents, tous vos potos<p/>
-                                                            <p><strong>- <a href="https://www.lepotcommun.fr/billet/lt8b1gjh#/?tab=1">22 &euro; par personne paiement online only</a> -</strong></p>
-                                                            <p>au <strong>cybergame</strong> de courbevoie : 47 - 51 avenue de l'Europe, 92400 Courbevoie<br/><small>metro1 / RER A / tramway /train ligne L jusqu'&agrave; La D&eacute;fense puis le bus 178 de la d&eacute;fense jusqu'&agrave; Europe(11min - 8 arr&ecirc;ts)</small></p>
-                                                        </span>
-                                                        </p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td height="40" width="100%"></td>
-                                                </tr>
-
-                                                </tbody></table>
-
-                                        </td>
-                                    </tr>
-                                    </tbody></table><!-- End Wrapper 2 -->
-
-                            </td>
-                        </tr>
-                        </tbody></table><!-- End Wrapper -->
-
-                </div>
-            </td>
-        </tr>
-        </tbody></table><!-- Wrapper 2 -->
-
-
-    <!-- Wrapper 2 -->
-    <table class="full" object="drag-module" c-style="greyBG" cellpadding="0" cellspacing="0" align="center" bgcolor="#f5f5f5" border="0" width="600">
-        <tbody><tr>
-            <td align="center" valign="top" width="100%">
-                <div>
-
-                    <!-- Wrapper -->
-                    <table class="mobile" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                        <tbody><tr>
-                            <td align="center">
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="25" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                                <!-- Wrapper -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                    <tbody><tr>
-                                        <td width="100%">
-
-                                            <!-- Centered Title -->
-                                            <table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="fullCenter" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                                <tbody><tr>
-                                                    <td style="text-align: center; font-family: Helvetica,Arial,sans-serif; font-size: 14px; color: rgb(28, 186, 200); line-height: 22px; font-weight: bold; text-transform: uppercase;" t-style="blueText" class="fullCenter" valign="middle" width="100%">
-                                                        <p object="text-editable"><!--[if !mso]><!--><span style="font-family: 'proxima_novasemibold', Helvetica; font-weight: normal;"><!--<![endif]--><singleline>En Bref</singleline><!--[if !mso]><!--></span><!--<![endif]--></p>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td align="center" width="100%">
-
-                                                        <table cellpadding="0" cellspacing="0" align="center" border="0" width="100">
-                                                            <tbody><tr>
-                                                                <td style="border-bottom: 1px solid rgb(229, 229, 229); color: rgb(186, 186, 186);" t-style="textColor" align="center" height="1" width="100"></td>
-                                                            </tr>
-                                                            </tbody></table>
-
-                                                    </td>
-                                                </tr>
-                                                </tbody></table>
-
-                                        </td>
-                                    </tr>
-                                    </tbody></table><!-- End Wrapper 2 -->
-
-
-                            </td>
-                        </tr>
-                        </tbody></table><!-- End Wrapper -->
-
-                </div>
-            </td>
-        </tr>
-        </tbody></table><!-- Wrapper 2 -->
-
-    <!-- Wrapper 2 -->
-    <table class="full" object="drag-module" c-style="greyBG" cellpadding="0" cellspacing="0" align="center" bgcolor="#f5f5f5" border="0" width="600">
-        <tbody><tr>
-            <td align="center" valign="top" width="100%">
-                <div>
-
-                    <!-- Wrapper -->
-                    <table class="mobile" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                        <tbody><tr>
-                            <td align="center">
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="25" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                                <!-- Wrapper -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                    <tbody><tr>
-                                        <td width="100%">
-
-                                            <!-- Centered Title -->
-                                            <table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; -webkit-border-radius: 5px; -moz-border-radius: 5px; border-radius: 5px;" class="fullCenter" cellpadding="0" cellspacing="0" align="center" bgcolor="#ffffff" border="0" width="580">
-                                                <tbody><tr>
-                                                    <td height="40" width="100%"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: center;" class="fullCenter" object="image-editable" valign="top" width="100%">
-                                                        <a href="#"><img src="http://rocketway.net/themebuilder/products/templates/escape/images/quote.png" alt="" editable="true"  border="0" width="21">
-                                                        </a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td height="35" width="100%"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: center; font-family: Helvetica,Arial,sans-serif; font-size: 15px; color: rgb(186, 186, 186); line-height: 24px; padding-left: 30px; padding-right: 30px;" class="fullCenter" t-style="textColor" valign="top" width="100%">
-                                                        <p object="text-editable"><!--[if !mso]><!--><span style="font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal;"><!--<![endif]--><singleline>Pr&egrave;s pour nous suivre tout l'&eacute;t&eacute;! :D On s'est donn&eacute; beaucoup de mal pour vous organiser les BeApiSummers! Alors j'esp&egrave;re que vous allez autant vous amus&eacute; que nous quand on l'a pr&eacute;par&eacute;.</singleline><!--[if !mso]><!--></span><!--<![endif]--></p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td height="35" width="100%"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="textLeft" width="100%">
-
-                                                        <table c-style="greyBG" cellpadding="0" cellspacing="0" align="left" bgcolor="#f5f5f5" border="0" width="100%">
-                                                            <tbody><tr>
-                                                                <td width="30"></td>
-                                                                <td style="line-height: 1px;" valign="top">
-                                                                    <img src="http://rocketway.net/themebuilder/products/templates/escape/images/tooth.png" alt="" editable="true" border="0" width="20">
-                                                                </td>
-                                                            </tr>
-                                                            </tbody></table>
-
-                                                    </td>
-                                                </tr>
-                                                </tbody></table>
-
-                                        </td>
-                                    </tr>
-                                    </tbody></table><!-- End Wrapper 2 -->
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="10" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                            </td>
-                        </tr>
-                        </tbody></table><!-- End Wrapper -->
-
-                </div>
-            </td>
-        </tr>
-        </tbody></table><!-- Wrapper 2 -->
-
-    <!-- Wrapper 2 -->
-    <table class="full" object="drag-module" c-style="greyBG" cellpadding="0" cellspacing="0" align="center" bgcolor="#f5f5f5" border="0" width="600">
-        <tbody><tr>
-            <td align="center" valign="top" width="100%">
-                <div>
-
-                    <!-- Wrapper -->
-                    <table class="mobile" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                        <tbody><tr>
-                            <td align="center">
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="10" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                                <!-- Wrapper -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                    <tbody><tr>
-                                        <td width="100%">
-
-                                            <!-- Avatar 72px 1 -->
-                                            <table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="fullCenter" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                                <tbody><tr>
-                                                    <td style="text-align: left; font-family: Helvetica,Arial,sans-serif; font-size: 17px; color: rgb(48, 48, 48); line-height: 24px;" t-style="headlines" valign="top" width="100%">
-                                                        <a href="https://fr.linkedin.com/in/pascalnaviere" style="text-decoration: none;" object="image-editable"><img src="https://lh3.googleusercontent.com/--p9sC-SnyFc/AAAAAAAAAAI/AAAAAAAAAnQ/jU3ll7ItMhY/s120-c/photo.jpg" alt="" editable="true"  align="left" border="0" width="62" style="border-radius:50%;"></a>
-                                                        &nbsp;&nbsp;
-
-                                                        <span object="text-editable"><!--[if !mso]><!--><span style="font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal;"><!--<![endif]--><singleline>Pascal Navi&egrave;re</singleline><!--[if !mso]><!--></span><!--<![endif]--></span>
-
-                                                        <br>
-
-                                                        &nbsp;&nbsp;
-                                                        <span object="text-editable" style="font-size: 14px!important; color: #868686;"><!--[if !mso]><!--><span style="font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal;"><!--<![endif]--><multiline>Pr&eacute;sident <a href="mailto:bde.ipf@gmail.com" object="link-editable" style="text-decoration: none; color: rgb(28, 186, 200);" t-style="blueText">de BeApi d'IPSSI</a></multiline><!--[if !mso]><!--></span><!--<![endif]--></span>
-                                                    </td>
-                                                </tr>
-                                                </tbody></table>
-
-                                        </td>
-                                    </tr>
-                                    </tbody></table><!-- End Wrapper 2 -->
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="20" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                            </td>
-                        </tr>
-                        </tbody></table><!-- End Wrapper -->
-
-                </div>
-            </td>
-        </tr>
-        </tbody></table><!-- Wrapper 2 -->
-
-    <!-- Wrapper 3 -->
-    <table class="full" object="drag-module" c-style="greyBG" cellpadding="0" cellspacing="0" align="center" bgcolor="#f5f5f5" border="0" width="600">
-        <tbody><tr>
-            <td align="center" valign="top" width="100%">
-                <div>
-
-                    <!-- Wrapper -->
-                    <table class="mobile" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                        <tbody><tr>
-                            <td align="center">
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="25" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                            </td>
-                        </tr>
-                        </tbody></table><!-- End Wrapper -->
-
-                </div>
-            </td>
-        </tr>
-        </tbody></table><!-- Wrapper 3 -->
-
-    <!-- Wrapper 3 -->
-    <table style="background-color: rgb(255, 255, 255);" class="full" object="drag-module" c-style="bgcolor" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-        <tbody><tr>
-            <td align="center" valign="top" width="100%">
-                <div>
-
-                    <!-- Wrapper -->
-                    <table class="mobile" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                        <tbody><tr>
-                            <td align="center">
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="50" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                            </td>
-                        </tr>
-                        </tbody></table><!-- End Wrapper -->
-
-                </div>
-            </td>
-        </tr>
-        </tbody></table><!-- Wrapper 3 -->
-
-    <!-- Wrapper 3 -->
-    <table style="background-color: rgb(255, 255, 255);" class="full" object="drag-module" c-style="bgcolor" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-        <tbody><tr>
-            <td align="center" valign="top" width="100%">
-                <div>
-
-                    <!-- Wrapper -->
-                    <table class="mobile" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                        <tbody><tr>
-                            <td align="center">
-
-
-                            </td>
-                        </tr>
-                        </tbody></table><!-- End Wrapper -->
-
-                </div>
-            </td>
-        </tr>
-        </tbody></table><!-- Wrapper 3 -->
-
-    <!-- Wrapper 2 -->
-    <table style="background-color: rgb(255, 255, 255);" class="full" object="drag-module" c-style="bgcolor" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-        <tbody><tr>
-            <td align="center" valign="top" width="100%">
-                <div>
-
-                    <!-- Wrapper -->
-                    <table class="mobile" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                        <tbody><tr>
-                            <td align="center">
-
-                                <!-- Logo Bottom -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="10" width="100%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="logo" align="center" valign="middle" width="100%">
-
-                                            <!-- Logo -->
-                                            <table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="fullCenter" cellpadding="0" cellspacing="0" align="center" border="0" width="138">
-                                                <tbody><tr>
-                                                    <td style="text-align: center;" class="fullCenter" object="image-editable" align="center" height="60" valign="middle" width="100%">
-                                                        <a href="http://bde.ecole-ipssi.net/#/info"><img editable="true" src="http://bde.ecole-ipssi.net/img/mail2/beapBLKix2.png" alt="" border="0" width="100%"></a>
-                                                    </td>
-                                                </tr>
-                                                </tbody></table>
-
-                                        </td>
-                                    </tr>
-                                    </tbody></table><!-- End Logo Bottom -->
-
-                            </td>
-                        </tr>
-                        </tbody></table><!-- End Wrapper -->
-
-                </div>
-            </td>
-        </tr>
-        </tbody></table><!-- Wrapper 2 -->
-
-    <!-- Wrapper 2 -->
-    <table style="background-color: rgb(255, 255, 255);" class="full" object="drag-module" c-style="bgcolor" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-        <tbody><tr >
-            <td align="center" valign="top" width="100%">
-                <div >
-
-                    <!-- Wrapper -->
-                    <table class="mobile" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                        <tbody><tr>
-                            <td align="center">
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="25" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                                <!-- Wrapper -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                    <tbody><tr>
-                                        <td align="center" width="100%">
-
-                                            <!-- Centered Title -->
-                                            <table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="fullCenter" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                                <tbody><tr>
-                                                    <td style="text-align: center; font-family: Helvetica,Arial,sans-serif; font-size: 14px; color: rgb(186, 186, 186); line-height: 22px;" class="fullCenter" t-style="textColor" valign="middle" width="100%">
-                                                        <p object="text-editable"><!--[if !mso]><!--><span style="font-family: 'proxima_nova_rgregular', Helvetica; font-weight: normal;"><!--<![endif]-->tu nous quittes d&eacute;j&agrave; ? tu peux te
-                                                <span style="color: rgb(28, 186, 200);" t-style="blueText">
-                                                <!--subscribe--><a href="https://docs.google.com/forms/d/1H5ZaQtHOwso7FSzIpHx7chFqdWG0X3XmrYwtYLBgzpQ/viewform?usp=send_form" style="text-decoration: none; color: rgb(28, 186, 200);" t-style="blueText" object="link-editable">d&eacute;sinscrire</a><!--unsub--></span>
-                                                 ou nous suivre sur nos communaut&eacute;s <!--[if !mso]><!--></span><!--<![endif]-->
-                                                        </p>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td height="25" width="100%"></td>
-                                                </tr>
-                                                </tbody></table>
-
-                                        </td>
-                                    </tr>
-                                    </tbody></table><!-- End Wrapper 2 -->
-
-                            </td>
-                        </tr>
-                        </tbody></table><!-- End Wrapper -->
-
-                </div>
-            </td>
-        </tr>
-        </tbody></table><!-- Wrapper 2 -->
-
-    <!-- Wrapper 2 -->
-    <table style="background-color: rgb(255, 255, 255);" class="full" object="drag-module" c-style="bgcolor" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-        <tbody><tr >
-            <td align="center" valign="top" width="100%">
-                <div >
-
-                    <!-- Wrapper -->
-                    <table class="mobile" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                        <tbody><tr>
-                            <td align="center">
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="25" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                                <!-- Wrapper -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                    <tbody><tr>
-                                        <td align="center" width="100%">
-
-                                            <!-- Social Media -->
-                                            <table style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="fullCenter" cellpadding="0" cellspacing="0" align="center" border="0" width="600">
-                                                <tbody><tr>
-                                                    <td style="text-align: center; font-family: Helvetica,Arial,sans-serif; font-size: 14px; color: rgb(186, 186, 186); line-height: 22px;" t-style="textColor"  valign="top" width="100%">
-
-                                                        &nbsp;&nbsp;
-                                                        <a href="https://www.facebook.com/pages/BeApi-Association-BDE-de-l%C3%A9cole-ipssi/671400072966652" style="text-decoration: none;" object="image-editable"><img editable="true" src="http://rocketway.net/themebuilder/products/templates/escape/images/social_icon2.png" alt=""  border="0" height="auto" width="15"></a>
-                                                        &nbsp;&nbsp;
-                                                        <a href="https://plus.google.com/communities/111412943397677778412" style="text-decoration: none;" object="image-editable"><img editable="true" src="http://rocketway.net/themebuilder/products/templates/escape/images/social_icon3.png" alt=""  border="0" height="auto" width="15"></a>
-                                                        &nbsp;&nbsp;
-                                                        <a href="https://twitter.com/beapi_bde" style="text-decoration: none;" object="image-editable"><img editable="true" src="http://rocketway.net/themebuilder/products/templates/escape/images/social_icon4.png" alt=""  border="0" height="auto" width="15"></a>
-                                                        &nbsp;&nbsp;
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td height="25" width="100%"></td>
-                                                </tr>
-                                                </tbody></table>
-
-                                        </td>
-                                    </tr>
-                                    </tbody></table><!-- End Wrapper 2 -->
-
-                                <!-- Space -->
-                                <table class="full" cellpadding="0" cellspacing="0" align="center" border="0" width="100%">
-                                    <tbody><tr>
-                                        <td height="35" width="100%"></td>
-                                    </tr>
-                                    <tr>
-                                        <td height="1" width="100%"></td>
-                                    </tr>
-                                    </tbody></table><!-- End Space -->
-
-                            </td>
-                        </tr>
-                        </tbody></table><!-- End Wrapper -->
-
-                </div>
-            </td>
-        </tr>
-        </tbody></table><!-- Wrapper 2 -->
 </div>
