@@ -274,9 +274,15 @@ class Product
             if($minPrice === 0 || $userProduct->getPrice()>$minPrice){
                 $minPrice = $userProduct->getPrice();
                 $id = $userProduct->getId();
+                $Qty = $userProduct->getQty();
+                $user = $userProduct->getUser();
             }
         }
 
-        return array('price'=>$minPrice,'id'=>$id);
+        return array(
+            'price'=>$minPrice,
+            'id'=>$id,
+            'qty'=>$Qty,
+            'user'=>$user);
     }
 }

@@ -4,8 +4,7 @@
 
 {% block body %}
 
-    <div id="results">
         <h1>Liste des produits {{ category }}</h1>
-            {% include 'CmsUlysseBundle:Cart:search.html.twig' with { ' products': products }  %}
-    </div>
+        {% include 'CmsUlysseBundle:Cart:search.html.twig' with { ' products': products }  %}
+
 {% endblock %}

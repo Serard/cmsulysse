@@ -65,10 +65,77 @@
                 <li><span class="active-icon icon geoloc"><a><i class="fa fa-shopping-cart fa-lg"></i></a></span>
                     <ul class="sub-icon1 list">
                         {% render(controller('CmsUlysseBundle:Cart:widget')) %}
+                        <center>
+                            <a href="{{ path('user_cart') }}" class="btn btn-success"> Mon panier</a>
+                        </center>
                     </ul>
                 </li>
             </ul>
-            <ul><li><a href="#">Cart(0)</a></li></ul>
+            <ul><li><a id="cardAff" href="#">Cart(0)</a></li></ul>
+<style>
+    .sub-icon1.list table{
+        width: 320px;
+        overflow: hidden;
+        display: block;
+    }
+    .sub-icon1.list table >tbody{
+        width: 320px;
+        overflow: hidden;
+        display: block;
+    }
+
+    .sub-icon1.list table >tbody>tr{
+        width: 320px;
+        overflow: hidden;
+        display: block;
+    }
+    .sub-icon1.list table > tbody > tr >th:nth-of-type(5){
+        display: none;
+    }
+    .sub-icon1.list table > tbody > tr >th:nth-of-type(6){
+        display: none;
+    }
+    .sub-icon1.list table > tbody > tr >th:nth-of-type(7){
+        display: none;
+    }
+    .sub-icon1.list table > tbody > tr >td:nth-of-type(5){
+        display: none;
+    }
+    .sub-icon1.list table > tbody > tr >td:nth-of-type(6){
+        display: none;
+    }
+
+    .sub-icon1.list table > tbody > tr >th, .sub-icon1.list table >tbody>tr> td{
+        display: inline-block;
+        width: calc(100% / 4 - 8px);
+        box-sizing: padding-box;
+        padding:5px;
+        font-size: 10px;
+
+    }
+
+</style>
+            <script>
+                setInterval(
+                        cartNb()
+                        , 900);
+
+                function cartNb(){
+                    Json= getCookie('cart')!="" ? JSON.parse(getCookie('cart')) : new Array();
+                    //console.log('json'+Json);
+                    var totaux=0;
+                    for (i=0;i<Json.length;i++){
+                        totaux += Json[i].qty;
+                        // console.log('qty:'+Json[i].qty);
+                        // console.log('toto'+totaux);
+                    }
+                    $('#cardAff').html('Cart('+totaux+')');
+                    if('Cart('+totaux+')'==$('#cardAff').innerText || $('#cardAff').textContent){
+                        clearInterval(cartNb);
+                        console.log('end');
+                    }
+                }
+            </script>
         </div>
     </div>
     <div class="clear"></div>
@@ -128,4 +195,6 @@
         </li>
     </ul>
 </nav>
+    <script src="{{ asset('js/scrollCalou.js') }}"></script>
+
 {% endblock %}

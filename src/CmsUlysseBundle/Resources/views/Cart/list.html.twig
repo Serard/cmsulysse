@@ -3,47 +3,5 @@
 {% block title %}Market{% endblock %}
 
 {% block body %}
-    <input type="search" placeholder="search" id="search" name="search"/>
-    <select>
-        <option id="TOUS" name="0">TOUS</option>
-        {% for category in categories %}
-            <option id="{{ category.name }}" name="{{ category.id }}" class="optgroup">{{ category.name }}</option>
-            {{ category.name }}
-            {% for categ_down in categs_down %}
-                {% if  categ_down.categup.id == category.id %}
-                    <option id="{{ categ_down.name }}" name="{{ categ_down.id }}">{{ categ_down.name }}</option>
-                {% endif %}
-            {% endfor %}
-        {% endfor %}
-    </select>
-    <div id="results">
-        <h1>Liste des produits {{ category }}</h1>
-        <table>
-            <tr>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Quantité</th>
-                <th>Vendeur</th>
-                <th>Action</th>
-            </tr>
-            {% for userproduct in products %}
-                <tr>
-                    <td id="name{{ userproduct.id }}">{{ userproduct.product.name }}</td>
-                    <td id="description{{ userproduct.id }}">{{ userproduct.product.description }}</td>
-                    <td id="price{{ userproduct.id }}">{{ userproduct.price }}</td>
-                    <td id="stock{{ userproduct.id }}">{{ userproduct.qty }}</td>
-                    <td id="seller{{ userproduct.id }}">{{ userproduct.user.lastname }} {{ userproduct.user.firstname }}</td>
-                    <td>{% if userproduct.qty != 0 %}
-                            <button onclick="addCart({{ userproduct.id }});">Ajouter</button>
-                        {% else %}
-                            Produit épuisé
-                        {% endif %}
-                    </td>
-                    <td id="errorqty{{ userproduct.id }}" style="display:none;">Vous avez atteind la quantité maximum de ce produit</td>
-                </tr>
-            {% endfor %}
-        </table>
-        <a href="{{ path('user_cart') }}"> Mon panier</a>
-    </div>
+        {% include 'CmsUlysseBundle:Cart:search.html.twig' with { ' products': products }  %}
 {% endblock %}

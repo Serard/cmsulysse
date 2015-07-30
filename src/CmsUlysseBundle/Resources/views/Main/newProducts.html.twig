@@ -28,7 +28,14 @@
                                 <span class="actual">{{ product.minPrice.price|number_format(2, '.',',') }}</span>
                             </div>
                         </div>
-                        <div class="cart-right"></div>
+
+                        <div style="display: none" id="name{{ product.minPrice.id }}">{{ product.name }}</div>
+                        <div style="display: none" id="description{{ product.minPrice.id }}">{{ product.description }}</div>
+                        <div style="display: none" id="price{{ product.minPrice.id }}">{{ product.minPrice.price }}</div>
+                        <div style="display: none" id="stock{{ product.minPrice.id }}">{{  product.minPrice.qty }}</div>
+                        <div style="display: none" id="seller{{ product.minPrice.id }}">{{  product.minPrice.user  }}</div>
+
+                        <div class="icon cart-right" onclick="addCart({{ product.minPrice.id }})"></div>
                         <div class="clear"></div>
                     </div>
                 </div>
@@ -38,4 +45,5 @@
         <div class="clear"></div>
     </div>
 {%  endfor %}
+    <script src="{{ asset('js/cart.js') }}"></script>
 </section>

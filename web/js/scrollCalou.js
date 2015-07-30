@@ -44,7 +44,6 @@ $(window).scroll(function(){
                 top: '30px'
             },400);
             $('.search').stop().animate({
-                width: '50px',
                 marginLeft: '0'
             },200);
             $('.search').fadeIn("slow");
@@ -60,7 +59,6 @@ $(window).scroll(function(){
 $('.sh').click(function(){
     $('.search').focus().toggle();
     $('.search').stop().animate({
-        width: '120px',
         marginLeft: '200px'
     },200);
 });

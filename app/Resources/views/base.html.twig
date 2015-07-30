@@ -55,6 +55,12 @@
     </head>
     <body class="body">
 
+    <?php slot('javascript') ?>
+    <script type="text/javascript">
+        console.log('javascript @ bottom');
+    </script>
+    <?php end_slot() ?>
+
         {% block header %}
             {%  include ':include:header.html.twig' %}
         {% endblock header %}
@@ -94,7 +100,12 @@
 
         {% block minimenu %}{% endblock %}
 
-        <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+        <script>
+            $(document).ready(function(){$(this).scrollTop(0);});
+            $(document).ready(function(){$(".megamenu").megamenu();});
+
+
+        </script>
         <script src="{{ asset('js/circleMenu.min.js') }}"></script>
     </body>
 </html>
