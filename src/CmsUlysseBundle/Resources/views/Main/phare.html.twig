@@ -1,5 +1,5 @@
-<div class="span_1_of_left" id="phare">
-    <div class="top-border"> </div>
+<div id="phare">
+    <!--div class="top-border"> </div>
     <div class="border">
         <link href="{{ asset('css/default.css')}}" rel="stylesheet" type="text/css" media="all" />
         <link href="{{ asset('css/nivo-slider.css') }}" rel="stylesheet" type="text/css" media="all" />
@@ -24,6 +24,79 @@
             location.href='{{ path('market_cart') }}'+'product/'+id;
         }
 
-    </script>
+    </script-->
+<h1>Produits Phares</h1>
+
+    {% for userproduct in phares %}
+        {% if loop.index == 1 or (loop.index - 1) is divisible by(3) %}
+            <div class="top-box">
+        {% endif %}
+        <div class="card col_1_of_3 span_1_of_3">
+            <div class="inner_content clearfix">
+                <a href="{{ path('product_user_view', {id: userproduct[0].id}) }}">
+                    <div class="product_image"
+                            {% for picture in userproduct[0].product.pictures %}
+                            {% if loop.index ==1 %}
+                         style="background: url({{ asset(picture.getWebPath()) }});">
+                        {% endif %}
+                        {% else %}
+                            style="background: url('http://bliister.com/upload/thumb/no_img.jpg');">
+                        {% endfor %}
+                    </div>
+                </a>
+                <div class="sale-box"></div>
+                <div class="price">
+                    <div class="cart-left">
+                        <a href="{{ path('product_user_view', {id: userproduct[0].id}) }}">
+                            <p class="title"id="name{{ userproduct[0].id }}">{{ userproduct[0].product.name }}</p>
+                        </a>
+                        <div class="price1">
+                            <span class="actual"id="price{{ userproduct[0].id }}">{{ userproduct[0].price|number_format(2, '.',',') }}</span>
+                        </div>
+                    </div>
+                    <div id="errorqty{{ userproduct[0].id }}" style="display:none;">Vous avez atteind la quantité maximum de ce produit</div>
+                    <div id="seller{{ userproduct[0].id }}" style="display: none;">{{ userproduct[0].user.lastname }} {{ userproduct[0].user.firstname }}</div>
+                    <div id="stock{{ userproduct[0].id }}" style="display: none;">{{ userproduct[0].qty }}</div>
+                    <div id="description{{ userproduct[0].id }}" style="display: none;">{{ userproduct[0].product.description }}</div>
+
+
+                    {% if app.user.id is defined and userproduct[0].user.id == app.user.id  %}
+                        <section style="display: block;width: 120px;overflow: hidden; float: right;margin-top:-80px;text-align: right;">
+                            <a href="{{ path('product_user_update', {'id': userproduct[0].id}) }}" class="btn btn-success" style="z-index: 0; display: inline-block; float: none;margin: 5px;">Modifier</a>
+                            {% if userproduct[0].product.valid == 0 %}
+                                <a href="{{ path('product_user_description', {'id': userproduct[0].product.id}) }}" class="btn btn-warning" style="z-index: 0; display: inline-block; float: none;margin: 5px" >Description</a>
+                            {% else %}
+                                <a href="{{ path('product_user_description', {'id': userproduct[0].product.id}) }}" class="btn btn-warning" style="z-index: 0; display: inline-block; float: none;margin: 5px" disabled>Description</a>
+                            {% endif %}
+                        </section>
+                    {% else %}
+                        {% if userproduct[0].qty != 0 %}
+                            <div onclick="addCart({{ userproduct[0].id }});" class="icon cart-right"></div>
+                        {% else %}
+                            Produit épuisé
+                        {% endif %}
+                        {% if id is defined %}
+                            <p id="categid" style="display:none;">{{ id }}</p>
+                        {% endif %}
+                    {% endif %}
+
+
+
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+
+        {% if loop.index is divisible by(3) %}
+            </div>
+            <div class="clear"></div>
+        {% endif %}
+    {% endfor %}
+
+
+
+
+
+
 </div>
 <div class="clear"></div>

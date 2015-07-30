@@ -53,3 +53,11 @@ body{
     background-position: center center !important;
     background-repeat: no-repeat !important;
 }
+
+.colonneA #phare .card.col_1_of_3.span_1_of_3{
+    width: 100% !important;
+    box-sizing: padding-box;
+    display:block !important;
+margin-top: 10px;
+
+}
