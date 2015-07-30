@@ -1,6 +1,7 @@
 <?php
 namespace CmsUlysseBundle\Controller;
 
+use CmsUlysseBundle\Entity\Product;
 use CmsUlysseBundle\Entity\UserProduct;
 use CmsUlysseBundle\Form\Type\ProductType;
 use CmsUlysseBundle\Form\Type\AdminProductType;
@@ -55,7 +56,7 @@ class UserProductController extends Controller
      * @Route("/user/product/description/{id}", name="product_user_description")
      * @Template("CmsUlysseBundle:UserProduct:form.html.twig")
      */
-    public function descriptionAction(Request $request)
+    public function descriptionAction(Product $product,Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('CmsUlysseBundle:Product');
@@ -74,6 +75,7 @@ class UserProductController extends Controller
 
         return array(
             'form' => $form->createView(),
+            'product' => $product,
         );
     }
 

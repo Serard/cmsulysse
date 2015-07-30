@@ -29,5 +29,38 @@
             </td>
         </tr>
     </table>
-    {{ form(form) }}
+    <div class="col-lg-4">
+        <form class="form-horizontal" action="{{ path('product_sell', {'id': product.id }) }}" method="POST" {{ form_enctype(form) }} class="form-horizontal">
+
+            <section class="form-group">
+                {{ form_label(form.price, "Prix", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.price, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.price) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.qty, "Quantité", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.qty, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.qty) }}
+            </section>
+            <section class="form-group">
+                {{ form_label(form.state, "State", {'label_attr': {'class': 'col-sm-2 control-label'}} ) }}
+                <div class="col-sm-10">
+                    {{ form_widget(form.state, {'attr': {'class': 'form-control'}} ) }}
+                </div>
+                {{ form_errors(form.state) }}
+            </section>
+
+            {{ form_widget(form.btn, {'attr': {'class': 'btn btn-primary'}} ) }}
+
+            <div style="display: none">
+                {{ form_row(form) }}
+            </div>
+        </form>
+    </div>
+
+
 {% endblock %}
