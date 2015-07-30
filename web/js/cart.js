@@ -5,7 +5,28 @@
  * Time: 14:29
  * To change this template use File | Settings | File Templates.
  */
+
 ;
+var goAAo=0;
+function popinHi(msg){
+    if(goAAo==0){
+        $('.c-mask').addClass('is-active');
+        $('#questionnaire').addClass('is-active');
+        $('#questionnaire p').html('<center>'+msg+'</center>');
+        goAAo=1;
+    }else{
+        $('.c-mask').removeClass('is-active');
+        $('#questionnaire').removeClass('is-active');
+        goAAo=0;
+        $('#questionnaire p').html();
+    }
+
+};
+$('.c-mask').click(function(){
+    $('#questionnaire').removeClass('is-active');
+    goAAo=0;
+    $('#questionnaire p').html();
+});
 var cart = getCookie('cart')!="" ? JSON.parse(getCookie('cart')) : new Array();
 
 for(var i = 0; i < cart.length; i++) {
@@ -106,7 +127,7 @@ function addCart(id){
     var seller = don.innertText || don.textContent;
 
     console.log(seller);
-
+    var msgStatus="vous venez d'ajouter un produit à votre pannier";
     for(var i = 0; i < cart.length; i++) {
         if (cart[i].id == id) {
             cart[i].name        = name;
@@ -115,7 +136,7 @@ function addCart(id){
             if (cart[i].qty < stock) {
                 cart[i].qty = cart[i].qty + 1;
             } else {
-                document.getElementById('errorqty'+id).style.display="block";
+                msgStatus="produit épuisé";
             }
             cart[i].stock  = stock;
             cart[i].seller = seller;
@@ -128,7 +149,7 @@ function addCart(id){
     }
 
     setCookie('cart',JSON.stringify(cart),3);
-
+    popinHi(msgStatus);
     cartNb(cart);
 };
 

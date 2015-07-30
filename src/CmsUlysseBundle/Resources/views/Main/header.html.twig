@@ -203,5 +203,163 @@
     </ul>
 </nav>
     <script src="{{ asset('js/scrollCalou.js') }}"></script>
+    <style>
+        #questionnaire h2{
+            text-align: center;
+        }
+        #questionnaire ul {
+            margin: 50px auto;
+            width:800px;
+        }
+        #questionnaire ul li a {
+            color: #fff;
+        }
+
+        #questionnaire ul li{
+            width: 100px;
+            display: inline-block;
+            text-align: center;
+            margin: 20px;
+            line-height:100px;
+            border-radius: 50%;
+            background: #0d4783
+        }
+        #questionnaire	{
+            width: 85%;
+            padding: 2%;
+            margin: 30px 3%;
+        }
+        #questionnaire{
+            display: none;
+            position:absolute;
+            z-index: 0;
+            background:white;
+        }
+        #questionnaire.is-active{
+            display: block;
+            z-index: 998;
+        }
+    </style>
+
+            <div id="questionnaire" >
+                <strong style="cursor:pointer;display: block;width: 100%; text-align: right;" onclick="popinHi('msg')">x</strong>
+                <p style="cursor:pointer;" onclick="popinHi('msg')"></p>
+                <h2>Partagez nos bons plans à vos amis !</h2>
+                <section id="partage">
+                    <ul>
+                        <li>
+                            <a href=
+                               "https://www.facebook.com/sharer/sharer.php
+								?u="
+                               onclick="
+									javascript:window.open
+									(this.href + encodeURIComponent(window.location),
+									'',
+									'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+									return false;"
+                               title="share on facebook">
+                                facebook
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="https://plus.google.com/share?
+								url="
+                               onclick="
+									javascript:window.open
+									(this.href + encodeURIComponent(window.location),
+									'',
+									'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+									return false;"
+                               title="share on google +">
+
+                                google+
+                            </a>
+                        </li>
+                        <li>
+                            <a href="
+								https://twitter.com/share?
+								text=CmsUlysse%20Soyez%20le%20plus%20rapide%20a%20participer%20a%20pour%20participer%20à%20nos%20ventes%20privée
+								&url="
+                               onclick="
+									javascript:window.open
+									(this.href + encodeURIComponent(window.location),
+									'',
+									'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+									return false;"
+                               title="share on twitter">
+
+                                twitter
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="
+								http://blogger.com/blog-this.g?
+								t=Soyez%20le%20plus%20rapide%20a%20participer%20a%20pour%20participer%20à%20nos%20ventes%20privée
+								&n=titlename
+								&u="
+                               onclick="
+									javascript:window.open
+									(this.href + encodeURIComponent(window.location),
+									'',
+									'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+									return false;"
+                               title="share on blogger">
+
+                                blogger
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.linkedin.com/shareArticle
+									?mini=true
+									&ro=false
+									&title=CMS Ulysse | le cms de vente facile
+									&summary=Soyez le plus rapide à participer à pour participer à nos ventes privée
+									&source=cmsulysse
+									&url="
+                               onclick="
+									javascript:window.open
+									(this.href + encodeURIComponent(window.location),
+									'',
+									'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');
+									return false;"
+                               title="share on linkedin">
+                                linkedIn
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </section>
+    </div>
+    <script>
+        var goAAo=0;
+        function popinHi(msg){
+            if(goAAo==0){
+                $('.c-mask').addClass('is-active');
+                $('#questionnaire').addClass('is-active');
+                $('#questionnaire p').html(msg);
+                goAAo=1;
+            }else{
+                $('.c-mask').removeClass('is-active');
+                $('#momodal').removeClass('is-active');
+                goAAo=0;
+                $(#questionnaire p').html();
+            }
+
+        };
+
+        $('.c-mask').click(function(){
+            $('#questionnaire').removeClass('is-active');
+            goAAo=0;
+            $('#questionnaire p').html();
+        });
+        $('#questionnaire p').click(function(){
+            $('#questionnaire').removeClass('is-active');
+            goAAo=0;
+            $('#questionnaire p').html();
+        });
+    </script>
 
 {% endblock %}
