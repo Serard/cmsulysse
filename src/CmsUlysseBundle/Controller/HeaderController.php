@@ -134,7 +134,7 @@ class HeaderController extends Controller
             //'middle&left'
             case 2 :
                 $style .= ".colonneA{display:inline-block;vertical-align:top;width:calc(100% / 4);height:100%;}";
-                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - (100% / 4) - 4px);} .colonneB #feature{display:none;}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - (100% / 4) - 4px);} .colonneB #feature,.colonneB #phare{display:none;}";
                 $style .= ".colonneC{display:none;}";
                 break;
 
@@ -147,7 +147,7 @@ class HeaderController extends Controller
 
             default:
                 $style .= ".colonneA{display:inline-block;vertical-align:top;width:calc(100% / 5);height:100%;}";
-                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - (100% / 5) - (100% / 5) - 8px);}.colonneB #feature{display:none;}.colonneB #new{display:none;}";
+                $style .= ".colonneB{display:inline-block;vertical-align:top;width:calc(100% - (100% / 5) - (100% / 5) - 8px);}.colonneB #feature,.colonneB #phare{display:none;}.colonneB #new{display:none;}";
                 $style .= ".colonneC{display:inline-block;vertical-align:top;width:calc(100% / 5)}";
                 break;
         }

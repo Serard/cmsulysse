@@ -1,6 +1,11 @@
 /**
 *create by Navière Pascal
 */
+.colonneA #phare{
+    width: 80% !important;
+    margin-left: 10px !important;
+    margin-top: 10px !important;
+}
 .colonneA .chg.card.col_1_of_3.span_1_of_3{
     display: block !important;
     width:100%;
