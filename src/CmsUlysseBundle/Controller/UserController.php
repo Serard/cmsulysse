@@ -25,7 +25,7 @@ class UserController extends Controller
         $user = $repo->find($id);
 
         if (!$user) {
-            return $this->redirect($this->generateUrl("user_homepage"));
+            return $this->redirect($this->generateUrl("home"));
         }
 
         $userType = new UserType();
@@ -47,16 +47,6 @@ class UserController extends Controller
                 'form' => $form->createView()
             );    }
 
-    /**
-     * @Route("/", name="user_homepage")
-     * @Template()
-     */
-    public function indexAction()
-    {
-        return array(
-
-            );
-    }
 
     /**
      * @Route("/contact-admin", name="contact_admin")

@@ -6,20 +6,14 @@
     <div class="card col_1_of_3 span_1_of_3">
         <div class="inner_content clearfix">
             <a href="{{ path('product_user_view', {id: userproduct.id}) }}">
-
                 <div class="product_image"
-                     {% if product.pictures is defined %}
-                     {% for picture in product.pictures %}
+                    {% for picture in userproduct.product.pictures %}
                         {% if loop.index ==1 %}
                             style="background: url({{ asset(picture.getWebPath()) }});">
                         {% endif %}
                     {% else %}
                         style="background: url('http://bliister.com/upload/thumb/no_img.jpg');">
                     {% endfor %}
-                    {% else %}
-                        style="background: url('http://bliister.com/upload/thumb/no_img.jpg');">
-                    {% endif %}
-
                 </div>
             </a>
             <div class="sale-box"></div>
@@ -70,5 +64,3 @@
         <div class="clear"></div>
     {% endif %}
 {% endfor %}
-<script src="{{ asset('js/cart.js') }}"></script>
-

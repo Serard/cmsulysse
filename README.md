@@ -12,6 +12,12 @@ master version : v0.0
 
 
 --------------------------------
+dev version : dev-v1.1.21
+add redirect login if user eject
+
+dev version : dev-v1.1.20
+add form update user and link menu
+
 dev version : dev-v1.1.18
 add gestion user and color text body and header
 

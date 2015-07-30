@@ -21,15 +21,18 @@ class UserType extends AbstractType
                 'first_options' => array('label' => 'form.password'),
                 'second_options' => array('label' => 'form.password_confirmation'),
                 'invalid_message' => 'fos_user.password.mismatch',
-                'required' => false
+                'required' => false,
+                'attr' => array('class' => 'form-control'),
+                'label_attr' => array('class' => 'col-sm-2 control-label')
             ))
             ->add('address', null, array('label' => 'Adresse'))
             ->add('postal_code', null, array('label' => 'Code postal'))
             ->add('city', null, array('label' => 'Ville'))
             ->add('tel', null, array('label' => 'Téléphone'))
-            ->add('btn', 'submit', array('label' => 'Modifier'))
+            ->add('btn', 'submit', array(
+                'label' => 'Modifier',
+                'attr' => array('class' => 'btn btn-primary')))
         ;
-
         return $builder;
     }
 
